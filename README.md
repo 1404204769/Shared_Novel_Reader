@@ -1,0 +1,2 @@
+# Shared_Novel_Reader
+共享小说阅读器-是Novel_platform的客户端部分
