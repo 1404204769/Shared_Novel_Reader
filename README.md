@@ -8,6 +8,11 @@
 ## 依赖项
 > [中文数字转阿拉伯数字](https://github.com/JasonGrass/ChineseNumberConvert.git)
 
+> [RestSharp - Simple .NET REST Client](https://github.com/restsharp/RestSharp.git)
+
+> [log4net](https://logging.apache.org/log4net/download_log4net.html)<br>
+> [^_^]: 可以在Visual Studio 的NuGet包管理器中搜索log4net进行安装
+
 <br><br>
 ****
 <br><br>
