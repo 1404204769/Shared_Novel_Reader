@@ -38,7 +38,7 @@ namespace Shared_Novel_Reader.models
         /// <summary>
         /// 章节内容
         /// </summary>
-        private List<models.Content> ContentList;
+        public List<models.Content> ContentList;
         public void Push_Content(Content obj)
         {
             ContentList.Add(obj);

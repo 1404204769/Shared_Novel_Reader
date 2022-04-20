@@ -42,7 +42,7 @@ namespace Shared_Novel_Reader.models
         /// <summary>
         /// 分卷总数
         /// </summary>
-        private int Vol_Total_Num;
+        public int Vol_Total_Num;
 
         public void Push_Vol(Vol obj)
         {

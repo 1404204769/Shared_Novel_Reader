@@ -63,7 +63,7 @@ namespace Shared_Novel_Reader.models
         /// <summary>
         /// 分卷下的章节集合
         /// </summary>
-        private List<Chapter> Chapter_Array;
+        public List<Chapter> Chapter_Array;
         public void Push_Chapter(Chapter obj)
         {
             Chapter_Array.Add(obj);

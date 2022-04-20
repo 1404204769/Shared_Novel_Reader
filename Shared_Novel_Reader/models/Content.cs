@@ -17,7 +17,7 @@ namespace Shared_Novel_Reader.models
         {
             ContentArray = new List<string>();
             Version = 0;
-            Upload_Mark = Best_New = Personal_Make = false;
+            Upload_Mark = Best_New = Personal_Make = Temp_Make = false;
             Create_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             Update_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             Upload_Time = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
@@ -27,22 +27,40 @@ namespace Shared_Novel_Reader.models
         {
             ContentArray = new List<string>();
             Version = 0;
-            Upload_Mark = Best_New = Personal_Make = false;
+            Upload_Mark = Best_New = Personal_Make = Temp_Make = false;
             Create_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             Update_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             Upload_Time = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
             FromJson(ref obj);
         }
-        public Content(List<string> contentArray,int version = 0, bool upload_Mark = false, bool best_New = false, bool personal_Make = false)
+        public Content(List<string> contentArray,int version = 0, bool upload_Mark = false, bool best_New = false, bool personal_Make = false,bool temp_Make =false)
         {
             ContentArray = contentArray;
             Version = version;
             Upload_Mark = upload_Mark;
             Best_New = best_New;
             Personal_Make = personal_Make;
+            Temp_Make = temp_Make;
             Create_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             Update_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             Upload_Time = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        public Content(Content content)
+        {
+            ContentArray = new List<string>();
+            foreach (string s in content.ContentArray)
+            {
+                ContentArray.Add(s);
+            }
+            Version = content.Version;
+            Upload_Mark = content.Upload_Mark;
+            Best_New = content.Best_New;
+            Personal_Make = content.Personal_Make;
+            Temp_Make = content.Temp_Make;
+            Create_Time = content.Create_Time;
+            Update_Time = content.Update_Time;
+            Upload_Time = content.Upload_Time;
         }
 
         /// <summary>
@@ -69,6 +87,12 @@ namespace Shared_Novel_Reader.models
         /// 自定义标记,默认为false
         /// </summary>
         public bool Personal_Make { set; get; }
+
+
+        /// <summary>
+        /// 临时标记,默认为false
+        /// </summary>
+        public bool Temp_Make { set; get; }
 
         /// <summary>
         /// 创建时间,默认为当前时间
@@ -102,6 +126,7 @@ namespace Shared_Novel_Reader.models
             obj.Add("Upload_Mark", Upload_Mark);
             obj.Add("Best_New", Best_New);
             obj.Add("Personal_Make", Personal_Make);
+            obj.Add("Temp_Make", Temp_Make);
             return obj;
         }
 
@@ -150,6 +175,10 @@ namespace Shared_Novel_Reader.models
             if (obj.ContainsKey("Personal_Make"))
             {
                 this.Personal_Make = ((bool)obj["Personal_Make"]);
+            }
+            if (obj.ContainsKey("Temp_Make"))
+            {
+                this.Temp_Make = ((bool)obj["Temp_Make"]);
             }
         }
     }
