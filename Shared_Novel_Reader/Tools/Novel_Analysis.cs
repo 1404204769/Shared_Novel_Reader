@@ -1,15 +1,12 @@
 ﻿using log4net;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Shared_Novel_Reader.Tools
-{   
+{
     internal class Novel_Analysis
     {
         private static Tools.Dependence.ChineseNumberConvert.ChineseNumberConverter CNC = new Tools.Dependence.ChineseNumberConvert.ChineseNumberConverter();
@@ -29,7 +26,7 @@ namespace Shared_Novel_Reader.Tools
         public static bool Analysis_Local_Resource(out models.Book newBook, String path)
         {
             string err;
-            ILog log = LogManager.GetLogger(typeof(models.Book));
+            ILog log = LogManager.GetLogger(typeof(Novel_Analysis));
             if (String.IsNullOrEmpty(path))
             {
                 newBook = null;
@@ -114,6 +111,7 @@ namespace Shared_Novel_Reader.Tools
                                 newChapter = new models.Chapter();// 初始化章节信息
                             }
                             newChapter.ChapTitle = Text;// 设置标题
+                            newChapter.ChapNum = (int)chapnum;// 记录章节数
                             if (chapnum == 1 && num > 0)
                             {
                                 // 说明开了新的一卷
@@ -130,7 +128,8 @@ namespace Shared_Novel_Reader.Tools
                         }
                     }
                 }
-
+                newChapter.Push_Content(newContent);// 保存章节内容到Chapter中
+                newVol.Push_Chapter(newChapter);// 保存章节信息到卷中
                 newBook.Push_Vol(newVol);// 保存卷信息到书中
                 sr.Dispose();// 关闭sr 释放资源
             }
@@ -182,6 +181,229 @@ namespace Shared_Novel_Reader.Tools
             }
             return -1;
         }
+
+
+        /// <summary>
+        /// 比较 内容
+        /// </summary>
+        /// <param name="ExistContentList">已存在的内容列表</param>
+        /// <param name="newContentList">新增的章节列表</param>
+        /// <returns></returns>
+        public static bool CompareContent(ref List<models.Content> ExistContentList, in List<models.Content> newContentList)
+        {
+            ILog log = LogManager.GetLogger(typeof(Novel_Analysis));
+            // 开始循环搜索ContentList,找到基准内容(Temp_Make=false)
+
+            int Target = -1;// 标记目标位置
+            for(int i=0;i<ExistContentList.Count;i++)
+            {
+                if(!ExistContentList[i].Temp_Make)
+                {
+                    Target = i;
+                    break;
+                }
+            }
+
+            // 没找到基准内容
+            if(Target == -1)
+            {
+                log.Info("没找到基准内容");
+                return false;
+            }
+
+
+            // 开始比较内容
+            List<string> ExistContentArray = ExistContentList[Target].ContentArray;
+            List<string> NewContentArray = newContentList[0].ContentArray;
+
+            // 如果内容行数不一样，说明内容不一样
+            if(ExistContentArray.Count != NewContentArray.Count)
+            {
+                newContentList[0].Temp_Make = true;
+                models.Content newContent = new models.Content(newContentList[0]);
+                ExistContentList.Add(newContent);
+                return true;
+            }
+
+            // 否则开始比较内容
+            bool Same = true;
+            for(int i = 0; i < ExistContentArray.Count; i++)
+            {
+                if(ExistContentArray[i] != NewContentArray[i])
+                {
+                    Same = false;
+                    break;
+                }
+            }
+
+            // 说明内容不一样，则记录
+            if (!Same)
+            {
+                newContentList[0].Temp_Make = true;
+                models.Content newContent = new models.Content(newContentList[0]);
+                ExistContentList.Add(newContent);
+                return true;
+            }
+            return true;
+        }
+
+
+        /// <summary>
+        /// 比较 章节
+        /// </summary>
+        /// <param name="ExistChapterList">已存在的章节列表</param>
+        /// <param name="newChapterList">新增的章节列表</param>
+        /// <param name="CompareIndex">比较的下标</param>
+        /// <returns></returns>
+        public static bool CompareChapter(ref List<models.Chapter> ExistChapterList, in List<models.Chapter> newChapterList, in int CompareIndex)
+        {
+            ILog log = LogManager.GetLogger(typeof(Novel_Analysis));
+            /*
+             Chapter:
+                ContentList
+                ChapTitle
+                ChapNum
+             */
+            
+            // 比较章节 标题是否一致
+            if(ExistChapterList[CompareIndex].ChapNum != newChapterList[CompareIndex].ChapNum)
+            {
+                log.Info("章节数不同,无法比较(ExistChapNum : "+ ExistChapterList[CompareIndex].ChapNum + ",newChapNum : "+ newChapterList[CompareIndex].ChapNum + ")");
+                return false;
+            }
+            if (ExistChapterList[CompareIndex].ChapTitle != newChapterList[CompareIndex].ChapTitle)
+            {
+                log.Info("章节标题不同,无法比较(ExistChapTitle : " + ExistChapterList[CompareIndex].ChapTitle + ",newChapTitle : " + newChapterList[CompareIndex].ChapTitle + ")");
+                return false;
+            }
+
+            List<models.Content> existContentList = ExistChapterList[CompareIndex].ContentList;
+            List<models.Content> newContentList = newChapterList[CompareIndex].ContentList;
+            // 开始比较当前内容是否一致
+            if (!CompareContent(ref existContentList, in newContentList))
+            {
+                log.Info("章节(第" + ExistChapterList[CompareIndex].ChapNum + "章 : " + ExistChapterList[CompareIndex].ChapTitle + ")内容比较失败");
+                return false;
+            }
+
+
+            return true;
+        }
+
+
+        /// <summary>
+        /// 比较 卷
+        /// </summary>
+        /// <param name="ExistVolList">已存在的卷列表</param>
+        /// <param name="newVolList">新增的卷列表</param>
+        /// <param name="CompareIndex">比较的下标</param>
+        /// <returns></returns>
+        public static bool CompareVol(ref List<models.Vol> ExistVolList, in List<models.Vol> newVolList, in int CompareIndex)
+        {
+            ILog log = LogManager.GetLogger(typeof(Novel_Analysis));
+            /*
+             Vol:
+                Vol_Num
+                Chapter_Total_Num
+                Chapter_Array
+                Need_Upload
+                Exist_Upload
+             */
+            int CompareChapterNum = -1;// 需要比较的章节数
+            // 如果章节数不存在则直接复制过来
+            if (ExistVolList[CompareIndex].Chapter_Total_Num < newVolList[CompareIndex].Chapter_Total_Num)
+            {
+                // 将接下来要比较的卷数先记录下来
+                CompareChapterNum = ExistVolList[CompareIndex].Chapter_Total_Num;
+
+                // 开始把新增的卷直接加入
+                for (int i = CompareChapterNum; i < newVolList[CompareIndex].Chapter_Total_Num; i++)
+                {
+                    ExistVolList[CompareIndex].Push_Chapter(newVolList[CompareIndex].Chapter_Array[i]);
+                }
+
+            }
+            // 如果新卷的章节数数没有超过原卷,则所有章节都比较
+            else if (ExistVolList[CompareIndex].Chapter_Total_Num >= newVolList[CompareIndex].Chapter_Total_Num)
+            {
+                CompareChapterNum = newVolList[CompareIndex].Chapter_Total_Num;
+            }
+
+            // 开始循环判断章节数
+            for (int i = 0; i < CompareChapterNum; i++)
+            {
+                List<models.Chapter> existChapterList = ExistVolList[CompareIndex].Chapter_Array;
+                List<models.Chapter> newChapterList = newVolList[CompareIndex].Chapter_Array;
+                if (!CompareChapter(ref existChapterList, in newChapterList, in i))
+                {
+                    log.Info("第" + (CompareIndex + 1) + "卷第" + (i + 1) + "章比较失败");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// 比较解析图书,将新书的内容整合到旧书中
+        /// </summary>
+        /// <param name="oldBook"></param>
+        /// <param name="newBook"></param>
+        /// <returns></returns>
+        public static bool CompareBook(ref List<models.Book> BookList,in int TargetBook,in models.Book book)
+        {
+            ILog log = LogManager.GetLogger(typeof(Novel_Analysis));
+            // BookList[TargetBook]
+            /*
+             Book:
+                Book_Name
+                File_Path
+                Exist_Upload
+                Need_Upload
+                Vol_Array
+                Vol_Total_Num
+             */
+            int CompareVolNum = -1;// 需要比较的卷数
+            // 如果卷数不存在则直接将对应的新卷复制到原有的图书内
+            if (BookList[TargetBook].Vol_Total_Num < book.Vol_Total_Num)
+            {
+                // 将接下来要比较的卷数先记录下来
+                CompareVolNum = BookList[TargetBook].Vol_Total_Num;
+
+                // 开始把新增的卷直接加入
+                for(int i = CompareVolNum; i < book.Vol_Total_Num; i++)
+                {
+                    BookList[TargetBook].Push_Vol(book.Vol_Array[i]);
+                }
+
+            }
+            // 如果新书的卷数没有超过原书,则所有卷都比较
+            else if(BookList[TargetBook].Vol_Total_Num >= book.Vol_Total_Num)
+            {
+                CompareVolNum = book.Vol_Total_Num;
+            }
+
+            // 开始循环判断卷数
+            for(int i = 0; i < CompareVolNum;i++)
+            {
+                List<models.Vol> existVolList = BookList[TargetBook].Vol_Array;
+                List<models.Vol> newVolList = book.Vol_Array; 
+                if(!CompareVol(ref existVolList, in newVolList,in i))
+                {
+                    log.Info("第" + (i + 1) + "卷比较失败");
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+
+
+
+
+
+
 
     }
 }
