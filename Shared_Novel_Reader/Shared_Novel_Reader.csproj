@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.14\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -46,6 +49,7 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
@@ -69,6 +73,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -80,19 +85,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForm.cs">
+    <Compile Include="MyForm\FormBookShelf.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="MyForm\FormBookShelf.Designer.cs">
+      <DependentUpon>FormBookShelf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\FormPersonalData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\FormPersonalData.Designer.cs">
+      <DependentUpon>FormPersonalData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\FormResManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\FormResManage.Designer.cs">
+      <DependentUpon>FormResManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="models\Book.cs" />
     <Compile Include="models\Chapter.cs" />
     <Compile Include="models\Content.cs" />
+    <Compile Include="models\LocalBookShelf.cs" />
+    <Compile Include="models\User.cs" />
     <Compile Include="models\Vol.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Tools\API.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\BaiExpression.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\ChineseNumberChar.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\ChineseNumberConvertContext.cs" />
@@ -103,8 +135,22 @@
     <Compile Include="Tools\Dependence\ChineseNumberConvert\ShiExpression.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\WanExpression.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\YiExpression.cs" />
+    <Compile Include="Tools\MyClient.cs" />
+    <Compile Include="Tools\MyJson.cs" />
     <Compile Include="Tools\Novel_Analysis.cs" />
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="MyForm\FormBookShelf.resx">
+      <DependentUpon>FormBookShelf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\FormPersonalData.resx">
+      <DependentUpon>FormPersonalData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\FormResManage.resx">
+      <DependentUpon>FormResManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -115,7 +161,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -131,7 +181,28 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <Folder Include="Book\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart-bar.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Resources-Outlined.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close-bold.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\personal_Data.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Book.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="学习\示例.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
