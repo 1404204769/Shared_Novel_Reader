@@ -23,6 +23,7 @@ namespace Shared_Novel_Reader.MyForm
             InitializeComponent();
         }
 
+
         private void FormLogin_Load(object sender, EventArgs e)
         {
             InitialPosition = this.PictureLogo.Location;
@@ -60,6 +61,7 @@ namespace Shared_Novel_Reader.MyForm
             {
                 this.Dispose();
                 MessageBox.Show("登入成功");
+                
             }
         }
 

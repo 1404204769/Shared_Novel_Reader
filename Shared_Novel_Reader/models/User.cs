@@ -12,7 +12,7 @@ namespace Shared_Novel_Reader.models
     {
         private static ILog log = LogManager.GetLogger(typeof(User));
         
-        private static bool IsInit = false;
+        public static bool IsInit = false;
         
         public static int User_ID;
         public static string Name;

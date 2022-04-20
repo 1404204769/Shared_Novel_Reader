@@ -129,6 +129,7 @@
             this.BtnLogin.TabIndex = 0;
             this.BtnLogin.Text = "登入";
             this.BtnLogin.UseVisualStyleBackColor = true;
+            this.BtnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
             // 
             // TitlePanel
             // 
@@ -156,6 +157,7 @@
             this.BtnPersonalData.TabIndex = 2;
             this.BtnPersonalData.Text = "个人信息";
             this.BtnPersonalData.UseVisualStyleBackColor = true;
+            this.BtnPersonalData.Visible = false;
             this.BtnPersonalData.Click += new System.EventHandler(this.BtnPersonalData_Click);
             // 
             // BtnResManage
@@ -176,6 +178,7 @@
             this.BtnResManage.TabIndex = 1;
             this.BtnResManage.Text = "资源管理";
             this.BtnResManage.UseVisualStyleBackColor = true;
+            this.BtnResManage.Visible = false;
             this.BtnResManage.Click += new System.EventHandler(this.BtnResManage_Click);
             // 
             // BtnBookShelf
@@ -196,6 +199,7 @@
             this.BtnBookShelf.TabIndex = 0;
             this.BtnBookShelf.Text = "书架";
             this.BtnBookShelf.UseVisualStyleBackColor = true;
+            this.BtnBookShelf.Visible = false;
             this.BtnBookShelf.Click += new System.EventHandler(this.BtnBookShelf_Click);
             // 
             // TopPanel
@@ -263,7 +267,7 @@
             // LabelToolString
             // 
             this.LabelToolString.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.LabelToolString.BackColor = System.Drawing.Color.White;
+            this.LabelToolString.BackColor = System.Drawing.Color.Gray;
             this.LabelToolString.Location = new System.Drawing.Point(478, 0);
             this.LabelToolString.Name = "LabelToolString";
             this.LabelToolString.Size = new System.Drawing.Size(655, 60);
@@ -277,7 +281,7 @@
             // 
             this.MainPanel.BackColor = System.Drawing.Color.Silver;
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPanel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.MainPanel.ForeColor = System.Drawing.Color.Silver;
             this.MainPanel.Location = new System.Drawing.Point(250, 60);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(1150, 740);
