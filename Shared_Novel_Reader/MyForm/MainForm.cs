@@ -32,6 +32,20 @@ namespace Shared_Novel_Reader.MyForm
             UserPowerInit();
         }
 
+        public override void Refresh()
+        {
+            base.Refresh();
+            UserPowerInit();
+            if(!models.User.IsInit)
+            {
+                LabelWelcome.Text = "游客,请登入~";
+            }
+            else
+            {
+                LabelWelcome.Text = "欢迎登入~";
+            }
+        }
+
         public void UserPowerInit()
         {
             // 游客权限
@@ -240,6 +254,7 @@ namespace Shared_Novel_Reader.MyForm
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
+            Refresh();
             Form FormLogin = new FormLogin();
             DialogResult LoginRes = FormLogin.ShowDialog();
             Console.WriteLine("DialogResult : " + LoginRes.ToString());
@@ -247,6 +262,7 @@ namespace Shared_Novel_Reader.MyForm
             {
                 UserPowerInit();
                 BtnPersonalData.PerformClick();
+                Refresh();
             }
             else if(LoginRes == DialogResult.Cancel)
             {

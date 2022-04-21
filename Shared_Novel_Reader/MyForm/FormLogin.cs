@@ -121,6 +121,7 @@ namespace Shared_Novel_Reader.MyForm
 
         private void TextAccount_KeyPress(object sender, KeyPressEventArgs e)
         {
+            LabelAccountExplain.Visible = true;
             if (e.KeyChar == 0x20) e.KeyChar = (char)0;  //禁止空格键  
             if ((e.KeyChar == 0x2D) && (((TextBox)sender).Text.Length == 0)) return;   //处理负数  
             if (e.KeyChar > 0x20)
@@ -128,6 +129,7 @@ namespace Shared_Novel_Reader.MyForm
                 try
                 {
                     double.Parse(((TextBox)sender).Text + e.KeyChar.ToString());
+                    LabelAccountExplain.Visible = false;
                 }
                 catch
                 {
@@ -138,8 +140,16 @@ namespace Shared_Novel_Reader.MyForm
 
         private void TextPassword_KeyPress(object sender, KeyPressEventArgs e)
         {
+            LabelPasswordExplain.Visible = true;
             if(e.KeyChar != '\b' && !(e.KeyChar >= '0' && e.KeyChar <= '9') && !(e.KeyChar >= 'A' && e.KeyChar <= 'Z') && !(e.KeyChar >= 'a' && e.KeyChar <= 'z'))
+            {
                 e.KeyChar = (char)0;   //处理非法字符  
+            }
+            else
+            {
+                LabelPasswordExplain.Visible = false;
+            }
+            
         }
     }
 }

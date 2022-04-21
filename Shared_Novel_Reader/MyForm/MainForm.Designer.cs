@@ -50,11 +50,13 @@
             this.LabelToolString = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.TimerTopPanelTime = new System.Windows.Forms.Timer(this.components);
+            this.LabelWelcome = new System.Windows.Forms.Label();
             PictureLogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(PictureLogo)).BeginInit();
             this.SizePanel.SuspendLayout();
             this.LogoPanel.SuspendLayout();
             this.BtnPanel.SuspendLayout();
+            this.TitlePanel.SuspendLayout();
             this.TopPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -175,33 +177,38 @@
             // 
             // BtnRegister
             // 
+            this.BtnRegister.BackColor = System.Drawing.Color.Silver;
             this.BtnRegister.Dock = System.Windows.Forms.DockStyle.Right;
             this.BtnRegister.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.BtnRegister.FlatAppearance.BorderSize = 0;
-            this.BtnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRegister.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.BtnRegister.Location = new System.Drawing.Point(125, 0);
             this.BtnRegister.Margin = new System.Windows.Forms.Padding(0);
             this.BtnRegister.Name = "BtnRegister";
             this.BtnRegister.Size = new System.Drawing.Size(125, 50);
             this.BtnRegister.TabIndex = 1;
             this.BtnRegister.Text = "注册";
-            this.BtnRegister.UseVisualStyleBackColor = true;
+            this.BtnRegister.UseVisualStyleBackColor = false;
             // 
             // BtnLogin
             // 
+            this.BtnLogin.BackColor = System.Drawing.Color.Silver;
+            this.BtnLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BtnLogin.Dock = System.Windows.Forms.DockStyle.Left;
             this.BtnLogin.FlatAppearance.BorderSize = 0;
-            this.BtnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnLogin.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.BtnLogin.Location = new System.Drawing.Point(0, 0);
+            this.BtnLogin.Margin = new System.Windows.Forms.Padding(0);
             this.BtnLogin.Name = "BtnLogin";
             this.BtnLogin.Size = new System.Drawing.Size(125, 50);
             this.BtnLogin.TabIndex = 0;
             this.BtnLogin.Text = "登入";
-            this.BtnLogin.UseVisualStyleBackColor = true;
+            this.BtnLogin.UseVisualStyleBackColor = false;
             this.BtnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
             // 
             // TitlePanel
             // 
+            this.TitlePanel.Controls.Add(this.LabelWelcome);
             this.TitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TitlePanel.Location = new System.Drawing.Point(0, 150);
             this.TitlePanel.Name = "TitlePanel";
@@ -361,6 +368,18 @@
             this.TimerTopPanelTime.Interval = 1000;
             this.TimerTopPanelTime.Tick += new System.EventHandler(this.TimerTopPanelTime_Tick);
             // 
+            // LabelWelcome
+            // 
+            this.LabelWelcome.BackColor = System.Drawing.Color.LightSlateGray;
+            this.LabelWelcome.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LabelWelcome.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelWelcome.Location = new System.Drawing.Point(0, 0);
+            this.LabelWelcome.Name = "LabelWelcome";
+            this.LabelWelcome.Size = new System.Drawing.Size(250, 50);
+            this.LabelWelcome.TabIndex = 0;
+            this.LabelWelcome.Text = "游客,请登入~";
+            this.LabelWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -379,6 +398,7 @@
             this.SizePanel.ResumeLayout(false);
             this.LogoPanel.ResumeLayout(false);
             this.BtnPanel.ResumeLayout(false);
+            this.TitlePanel.ResumeLayout(false);
             this.TopPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -405,5 +425,6 @@
         private System.Windows.Forms.Button BtnAdminControl;
         private System.Windows.Forms.Button BtnBookPlatform;
         private System.Windows.Forms.Button BtnRootControl;
+        private System.Windows.Forms.Label LabelWelcome;
     }
 }

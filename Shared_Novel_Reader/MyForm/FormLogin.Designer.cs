@@ -140,9 +140,9 @@
             this.LabelAccountExplain.ForeColor = System.Drawing.Color.Red;
             this.LabelAccountExplain.Location = new System.Drawing.Point(335, 126);
             this.LabelAccountExplain.Name = "LabelAccountExplain";
-            this.LabelAccountExplain.Size = new System.Drawing.Size(179, 18);
+            this.LabelAccountExplain.Size = new System.Drawing.Size(197, 18);
             this.LabelAccountExplain.TabIndex = 9;
-            this.LabelAccountExplain.Text = "LabelAccountExplain";
+            this.LabelAccountExplain.Text = "请输入数字,最多十一位";
             this.LabelAccountExplain.Visible = false;
             // 
             // LabelPasswordExplain
@@ -151,9 +151,9 @@
             this.LabelPasswordExplain.ForeColor = System.Drawing.Color.Red;
             this.LabelPasswordExplain.Location = new System.Drawing.Point(335, 179);
             this.LabelPasswordExplain.Name = "LabelPasswordExplain";
-            this.LabelPasswordExplain.Size = new System.Drawing.Size(188, 18);
+            this.LabelPasswordExplain.Size = new System.Drawing.Size(152, 18);
             this.LabelPasswordExplain.TabIndex = 10;
-            this.LabelPasswordExplain.Text = "LabelPasswordExplain";
+            this.LabelPasswordExplain.Text = "请输入数字或字母";
             this.LabelPasswordExplain.Visible = false;
             // 
             // FormLogin
