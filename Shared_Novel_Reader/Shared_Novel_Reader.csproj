@@ -204,5 +204,14 @@
   <ItemGroup>
     <None Include="学习\示例.md" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BookPlatform.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\admin.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\root.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

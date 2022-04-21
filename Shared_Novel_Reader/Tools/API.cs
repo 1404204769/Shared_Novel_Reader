@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,7 +16,7 @@ namespace Shared_Novel_Reader.Tools
     internal class API
     {
         private static ILog log = LogManager.GetLogger(typeof(Tools.API));
-        public static bool Login(in int User_ID, in string User_Pwd)
+        public static bool Login(in int User_ID, in string User_Pwd,in CancellationToken CancelLogin)
         {
             // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
 
@@ -24,11 +25,11 @@ namespace Shared_Novel_Reader.Tools
             ReqJson.Add("User_Pwd", User_Pwd);
 
             int num = 0;
-            JObject res = MyClient.LoginRequests(ReqJson.ToString());
-            while ((res == null) && (num < 10))
+            JObject res = MyClient.LoginRequests(ReqJson.ToString(), CancelLogin);
+            while ((res == null) && (num < 10) && !CancelLogin.IsCancellationRequested)
             {
                 log.Info("第" + (++num) + "次重试");
-                res = MyClient.LoginRequests(ReqJson.ToString());
+                res = MyClient.LoginRequests(ReqJson.ToString(), CancelLogin);
             }
 
             if (res == null)

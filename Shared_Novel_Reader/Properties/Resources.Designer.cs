@@ -63,9 +63,29 @@ namespace Shared_Novel_Reader.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap admin {
+            get {
+                object obj = ResourceManager.GetObject("admin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Book {
             get {
                 object obj = ResourceManager.GetObject("Book", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap BookPlatform {
+            get {
+                object obj = ResourceManager.GetObject("BookPlatform", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,6 +126,16 @@ namespace Shared_Novel_Reader.Properties {
         internal static System.Drawing.Bitmap Resources_Outlined {
             get {
                 object obj = ResourceManager.GetObject("Resources-Outlined", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap root {
+            get {
+                object obj = ResourceManager.GetObject("root", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

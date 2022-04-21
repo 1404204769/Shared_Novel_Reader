@@ -224,6 +224,8 @@ namespace Shared_Novel_Reader.MyForm
             FormPersonalData.Dock = DockStyle.Fill;
             // this.MainPanel.Controls.Add(f);
             this.MainPanel.Tag = FormPersonalData;
+            FormPersonalData.Refresh();
+
             FormPersonalData.Show();
         }
 
@@ -234,10 +236,21 @@ namespace Shared_Novel_Reader.MyForm
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            Form f = new FormLogin();
-            f.ShowDialog();
-            this.MainPanel.Controls.Find("FormPersonalData", false)[0].Refresh();
-            BtnPersonalData.PerformClick();
+            Form FormLogin = new FormLogin();
+            DialogResult LoginRes = FormLogin.ShowDialog();
+            Console.WriteLine("DialogResult : " + LoginRes.ToString());
+            if (LoginRes == DialogResult.OK)
+            {
+                UserPowerInit();
+                BtnPersonalData.PerformClick();
+            }
+            else if(LoginRes == DialogResult.Cancel)
+            {
+                // 用户取消登入
+                Console.WriteLine("用户取消登入");
+            }
+            // 释放资源
+            FormLogin.Dispose();
         }
     }
 }

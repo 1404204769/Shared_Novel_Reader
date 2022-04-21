@@ -95,7 +95,7 @@ namespace Shared_Novel_Reader
         static void LoginTest()
         {
             ILog log = LogManager.GetLogger(typeof(Program));
-            Tools.API.Login(911220, "chentonlei");
+            // Tools.API.Login(911220, "chentonlei");
 
         }
         

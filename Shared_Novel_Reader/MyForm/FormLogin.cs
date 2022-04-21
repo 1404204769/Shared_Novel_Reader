@@ -13,6 +13,7 @@ namespace Shared_Novel_Reader.MyForm
 {
     public partial class FormLogin : Form
     {
+        private CancellationTokenSource CancelLoginControl = null;
 
         /// <summary>
         /// Logo初始位置
@@ -38,8 +39,10 @@ namespace Shared_Novel_Reader.MyForm
                 return;
             }
 
+
+            CancelLoginControl = new CancellationTokenSource();
             // 发送请求
-            var LoginResult = Task<bool>.Run(() => Tools.API.Login(Convert.ToInt32(TextAccount.Text), TextPassword.Text));
+            var LoginResult = Task<bool>.Run(() => Tools.API.Login(Convert.ToInt32(TextAccount.Text), TextPassword.Text, CancelLoginControl.Token));
 
             // 界面变化
             TimerLogoMove.Start();
@@ -53,15 +56,23 @@ namespace Shared_Novel_Reader.MyForm
 
             if (!await LoginResult)
             {
-                MessageBox.Show("登入失败,请重试", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                this.BtnCancelLogin.PerformClick();
+                if (CancelLoginControl.IsCancellationRequested)
+                {
+                    MessageBox.Show("登入失败,用户已取消", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("登入失败,请重试", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.BtnCancelLogin.PerformClick();
+                }
+                // 清除残留数据
                 this.BtnCancel.PerformClick();
             }
             else
             {
+                this.DialogResult = DialogResult.OK;
                 this.Dispose();
                 MessageBox.Show("登入成功");
-                
             }
         }
 
@@ -69,9 +80,8 @@ namespace Shared_Novel_Reader.MyForm
         {
             if(this.TextAccount.Text == "" && this.TextPassword.Text == "")
             {
-                this.OnClosed(e);
-                this.Dispose();
-                return;
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
             }
             this.TextAccount.Text = null;
             this.TextPassword.Text = null;
@@ -91,6 +101,13 @@ namespace Shared_Novel_Reader.MyForm
 
         private void BtnCancelLogin_Click(object sender, EventArgs e)
         {
+            // 先取消登入
+            if (!CancelLoginControl.IsCancellationRequested)
+            {
+                Console.WriteLine("开始准备取消登入");
+                CancelLoginControl.Cancel();
+                Console.WriteLine("取消登入完成");
+            }
 
             this.PictureLogo.Location = InitialPosition;
             this.BtnLogin.Visible = true;

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Shared_Novel_Reader.Tools
@@ -130,7 +131,7 @@ namespace Shared_Novel_Reader.Tools
         /// <param name="url">接口地址</param>
         /// <param name="jsonStr">Json数据</param>
         /// <returns></returns>
-        public static JObject LoginRequests(string jsonStr)
+        public static JObject LoginRequests(string jsonStr,in CancellationToken CancelLogin)
         {
             init();
             string url = "Gpi/Login";
@@ -148,7 +149,7 @@ namespace Shared_Novel_Reader.Tools
             // request.AddJsonBody(jobj);
             request.AddStringBody(jsonStr, DataFormat.Json);
             request.Timeout = TimeOut;
-            var response = client.ExecuteAsync(request);
+            var response = client.ExecuteAsync(request, CancelLogin);
 
             if (!CheckStatus(in response))
             {
