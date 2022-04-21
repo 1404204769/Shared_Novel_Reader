@@ -42,7 +42,7 @@ namespace Shared_Novel_Reader.MyForm
 
             CancelLoginControl = new CancellationTokenSource();
             // 发送请求
-            var LoginResult = Task<bool>.Run(() => Tools.API.Login(Convert.ToInt32(TextAccount.Text), TextPassword.Text, CancelLoginControl.Token));
+            var LoginResult = Task<bool>.Run(() => Tools.API.GPI.Login(Convert.ToInt32(TextAccount.Text), TextPassword.Text, CancelLoginControl.Token));
 
             // 界面变化
             TimerLogoMove.Start();

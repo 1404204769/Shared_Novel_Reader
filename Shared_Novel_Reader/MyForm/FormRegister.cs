@@ -128,7 +128,7 @@ namespace Shared_Novel_Reader.MyForm
 
             CancelRegisterControl = new CancellationTokenSource();
             // 发送请求
-            var RegisterResult = Task<bool>.Run(() => Tools.API.Register(this.UserID,this.Password,this.UserName,this.UserSex,CancelRegisterControl.Token));
+            var RegisterResult = Task<bool>.Run(() => Tools.API.GPI.Register(this.UserID,this.Password,this.UserName,this.UserSex,CancelRegisterControl.Token));
 
             if (!await RegisterResult)
             {

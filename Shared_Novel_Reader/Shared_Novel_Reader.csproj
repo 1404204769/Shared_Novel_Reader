@@ -85,6 +85,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyForm\AdminForm\FormResourceManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\FormResourceManagement.Designer.cs">
+      <DependentUpon>FormResourceManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\FormUserApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\FormUserApplication.Designer.cs">
+      <DependentUpon>FormUserApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\FormUserFeedback.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\FormUserFeedback.Designer.cs">
+      <DependentUpon>FormUserFeedback.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\FormUserManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\FormUserManagement.Designer.cs">
+      <DependentUpon>FormUserManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\FormAdminControl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,7 +172,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="Tools\API.cs" />
+    <Compile Include="Tools\API\Admin\User.cs" />
+    <Compile Include="Tools\API\GPI.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\BaiExpression.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\ChineseNumberChar.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\ChineseNumberConvertContext.cs" />
@@ -163,6 +188,18 @@
     <Compile Include="Tools\MyJson.cs" />
     <Compile Include="Tools\MyResponse.cs" />
     <Compile Include="Tools\Novel_Analysis.cs" />
+    <EmbeddedResource Include="MyForm\AdminForm\FormResourceManagement.resx">
+      <DependentUpon>FormResourceManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\AdminForm\FormUserApplication.resx">
+      <DependentUpon>FormUserApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\AdminForm\FormUserFeedback.resx">
+      <DependentUpon>FormUserFeedback.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\AdminForm\FormUserManagement.resx">
+      <DependentUpon>FormUserManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyForm\FormAdminControl.resx">
       <DependentUpon>FormAdminControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -204,6 +241,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Shared_Novel_Reader.models.Book.datasource" />
+    <None Include="Properties\DataSources\Shared_Novel_Reader.models.Chapter.datasource" />
+    <None Include="Properties\DataSources\Shared_Novel_Reader.models.Content.datasource" />
+    <None Include="Properties\DataSources\Shared_Novel_Reader.models.LocalBookShelf.datasource" />
+    <None Include="Properties\DataSources\Shared_Novel_Reader.models.User.datasource" />
+    <None Include="Properties\DataSources\Shared_Novel_Reader.models.Vol.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

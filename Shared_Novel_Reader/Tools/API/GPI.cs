@@ -1,21 +1,25 @@
 ﻿using log4net;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Shared_Novel_Reader.Tools
+namespace Shared_Novel_Reader.Tools.API
 {
     /// <summary>
     /// API接口
     /// </summary>
-    internal class API
+    internal class GPI
     {
-        private static ILog log = LogManager.GetLogger(typeof(Tools.API));
+        private static ILog log = LogManager.GetLogger(typeof(GPI));
+
+
+        /// <summary>
+        /// 登入接口
+        /// </summary>
+        /// <param name="User_ID">账号</param>
+        /// <param name="User_Pwd">密码</param>
+        /// <param name="CancelLogin">是否取消</param>
+        /// <returns></returns>
         public static bool Login(in int User_ID, in string User_Pwd,in CancellationToken CancelLogin)
         {
             // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
@@ -55,7 +59,15 @@ namespace Shared_Novel_Reader.Tools
             return true;
         }
 
-
+        /// <summary>
+        /// 注册接口
+        /// </summary>
+        /// <param name="User_ID">账号</param>
+        /// <param name="User_Pwd">密码</param>
+        /// <param name="User_Name">姓名</param>
+        /// <param name="User_Sex">性别</param>
+        /// <param name="CancelLogin">是否取消</param>
+        /// <returns></returns>
         public static bool Register(in int User_ID, in string User_Pwd, in string User_Name, in string User_Sex,in CancellationToken CancelLogin)
         {
             // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
@@ -96,5 +108,7 @@ namespace Shared_Novel_Reader.Tools
             MessageBox.Show("注册成功");
             return true;
         }
+
+
     }
 }

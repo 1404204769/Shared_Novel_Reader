@@ -121,7 +121,9 @@ namespace Shared_Novel_Reader.Tools
             if (IsInit) return;
             client = new RestClient(IP);
             client.UseJson();
-            IsInit = true;  
+            IsInit = true;
+            // 管理员权限
+            Authorization = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJMb2dpbl9TdGF0dXMiOiJhZG1pbiIsIlVzZXJfSUQiOiI5MTExMDgifQ.7ERq0WPlu6kVsBguiBQZny9F_lNkU4AGBUurazNwDrc";
         }
 
 
@@ -183,7 +185,7 @@ namespace Shared_Novel_Reader.Tools
         public static MyResponse PushRequests(string url, string jsonStr)
         {
             init();
-            if(!CheckOnline())return null;
+            // if(!CheckOnline())return null;
             log.Info("地址：" + url + "调用api json:" + jsonStr);
             string resResult = string.Empty;
 
@@ -211,15 +213,15 @@ namespace Shared_Novel_Reader.Tools
                 {
                     log.Info("调用推送数据接口异常:" + response.Result.ErrorMessage);
                 }
+
+                if(response.Result.Content != null)
+                    return new MyResponse(JObject.Parse(response.Result.Content));
                 return null;
             }
 
             /// RestClient _restClient = new RestClient(GatewayUrl + url);
 
-            resResult = response.Result.Content;
-            JObject res = JObject.Parse(resResult);
-
-            return new MyResponse(res);
+            return new MyResponse(JObject.Parse(response.Result.Content));
         }
 
 
