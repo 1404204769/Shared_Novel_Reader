@@ -254,7 +254,6 @@ namespace Shared_Novel_Reader.MyForm
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            Refresh();
             Form FormLogin = new FormLogin();
             DialogResult LoginRes = FormLogin.ShowDialog();
             Console.WriteLine("DialogResult : " + LoginRes.ToString());
@@ -374,6 +373,25 @@ namespace Shared_Novel_Reader.MyForm
             FormRootControl.Refresh();
 
             FormRootControl.Show();
+        }
+
+        private void BtnRegister_Click(object sender, EventArgs e)
+        {
+            Form FormRegister = new FormRegister();
+            DialogResult RegisterRes = FormRegister.ShowDialog();
+            Console.WriteLine("DialogResult : " + RegisterRes.ToString());
+            if (RegisterRes == DialogResult.OK)
+            {
+                // 注册成功则自动打开登入界面
+                BtnLogin.PerformClick();
+            }
+            else if (RegisterRes == DialogResult.Cancel)
+            {
+                // 用户取消登入
+                Console.WriteLine("用户取消注册");
+            }
+            // 释放资源
+            FormRegister.Dispose();
         }
     }
 }

@@ -129,6 +129,7 @@ namespace Shared_Novel_Reader.MyForm
                 try
                 {
                     double.Parse(((TextBox)sender).Text + e.KeyChar.ToString());
+                    // 输入正确则无需提示
                     LabelAccountExplain.Visible = false;
                 }
                 catch
@@ -147,6 +148,7 @@ namespace Shared_Novel_Reader.MyForm
             }
             else
             {
+                // 输入正确则无需提示
                 LabelPasswordExplain.Visible = false;
             }
             

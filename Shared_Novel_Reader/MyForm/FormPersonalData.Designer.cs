@@ -67,7 +67,7 @@
             this.LabelName.Name = "LabelName";
             this.LabelName.Size = new System.Drawing.Size(171, 56);
             this.LabelName.TabIndex = 4;
-            this.LabelName.Text = "姓名：";
+            this.LabelName.Text = "昵称：";
             // 
             // LabelStatus
             // 

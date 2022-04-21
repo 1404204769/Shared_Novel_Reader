@@ -58,9 +58,9 @@
             this.LabelAccount.AutoSize = true;
             this.LabelAccount.Location = new System.Drawing.Point(252, 100);
             this.LabelAccount.Name = "LabelAccount";
-            this.LabelAccount.Size = new System.Drawing.Size(80, 18);
+            this.LabelAccount.Size = new System.Drawing.Size(62, 18);
             this.LabelAccount.TabIndex = 1;
-            this.LabelAccount.Text = "用户名：";
+            this.LabelAccount.Text = "账户：";
             // 
             // LabelPassword
             // 
@@ -140,9 +140,9 @@
             this.LabelAccountExplain.ForeColor = System.Drawing.Color.Red;
             this.LabelAccountExplain.Location = new System.Drawing.Point(335, 126);
             this.LabelAccountExplain.Name = "LabelAccountExplain";
-            this.LabelAccountExplain.Size = new System.Drawing.Size(197, 18);
+            this.LabelAccountExplain.Size = new System.Drawing.Size(179, 18);
             this.LabelAccountExplain.TabIndex = 9;
-            this.LabelAccountExplain.Text = "请输入数字,最多十一位";
+            this.LabelAccountExplain.Text = "请输入数字,最多十位";
             this.LabelAccountExplain.Visible = false;
             // 
             // LabelPasswordExplain

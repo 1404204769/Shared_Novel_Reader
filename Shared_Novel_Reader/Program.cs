@@ -14,11 +14,12 @@ namespace Shared_Novel_Reader
         [STAThread]
         static void Main()
         {
+            // JsonTest();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
-             // reset();
-             // init();
+            // reset();
+            // init();
             /* LoginTest();
             MessageBox.Show(models.User.show());
             JObject obj = new JObject();
@@ -99,6 +100,14 @@ namespace Shared_Novel_Reader
 
         }
         
+        static void JsonTest()
+        {
+            string json =
+"{\"Data\":{\"Token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJMb2dpbl9TdGF0dXMiOiJ1c2VyIiwiVXNlcl9JRCI6IjkxMTIyMCJ9.zkRERegP0WiSKTI6eWe1Bj4I_atu3oCfpQH6SZrlFLk\",\"User_Data\":{\"Integral\":1043,\"Level\":1,\"Name\":\"陈彤磊\",\"Password\":\"chentonlei\",\"Power\":1,\"Sex\":\"男\",\"Status\":\"Normal\",\"Total_Integral\":1043,\"User_ID\":911220}},\"Message\":\"登入成功\",\"Result\":true}";
+
+            JObject res = JObject.Parse(json);
+            MessageBox.Show(res.ToString());
+        }
 
     }
 }

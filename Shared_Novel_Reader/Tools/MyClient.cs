@@ -37,12 +37,12 @@ namespace Shared_Novel_Reader.Tools
         /// 请求超时时间
         /// </summary>
         public static int TimeOut = 1000 * 5;
-        // public static string IP = "http://192.168.174.132:8080";
 
         /// <summary>
         /// 服务器IP地址
         /// </summary>
-        public static string IP = "http://47.98.122.86:8080";
+        // public static string IP = "http://47.98.122.86:8080";
+        public static string IP = "http://192.168.174.132:8080";
 
 
 
@@ -131,10 +131,9 @@ namespace Shared_Novel_Reader.Tools
         /// <param name="url">接口地址</param>
         /// <param name="jsonStr">Json数据</param>
         /// <returns></returns>
-        public static JObject LoginRequests(string jsonStr,in CancellationToken CancelLogin)
+        public static MyResponse NoTokenRequests(string url, string jsonStr,in CancellationToken CancelLogin)
         {
             init();
-            string url = "Gpi/Login";
             log.Info("地址：" + url + "调用api json:" + jsonStr);
             string resResult = string.Empty;
 
@@ -168,8 +167,8 @@ namespace Shared_Novel_Reader.Tools
 
             resResult = response.Result.Content;
             JObject res = JObject.Parse(resResult);
-
-            return res;
+            
+            return new MyResponse(res);
         }
 
 
@@ -181,7 +180,7 @@ namespace Shared_Novel_Reader.Tools
         /// <param name="url">接口地址</param>
         /// <param name="jsonStr">Json数据</param>
         /// <returns>失败则返回null</returns>
-        public static JObject PushRequests(string url, string jsonStr)
+        public static MyResponse PushRequests(string url, string jsonStr)
         {
             init();
             if(!CheckOnline())return null;
@@ -218,7 +217,9 @@ namespace Shared_Novel_Reader.Tools
             /// RestClient _restClient = new RestClient(GatewayUrl + url);
 
             resResult = response.Result.Content;
-            return JObject.Parse(resResult);
+            JObject res = JObject.Parse(resResult);
+
+            return new MyResponse(res);
         }
 
 

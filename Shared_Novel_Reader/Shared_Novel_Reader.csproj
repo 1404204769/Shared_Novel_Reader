@@ -115,6 +115,12 @@
     <Compile Include="MyForm\FormPersonalData.Designer.cs">
       <DependentUpon>FormPersonalData.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyForm\FormRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\FormRegister.Designer.cs">
+      <DependentUpon>FormRegister.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\FormResManage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +161,7 @@
     <Compile Include="Tools\Dependence\ChineseNumberConvert\YiExpression.cs" />
     <Compile Include="Tools\MyClient.cs" />
     <Compile Include="Tools\MyJson.cs" />
+    <Compile Include="Tools\MyResponse.cs" />
     <Compile Include="Tools\Novel_Analysis.cs" />
     <EmbeddedResource Include="MyForm\FormAdminControl.resx">
       <DependentUpon>FormAdminControl.cs</DependentUpon>
@@ -170,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\FormPersonalData.resx">
       <DependentUpon>FormPersonalData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\FormRegister.resx">
+      <DependentUpon>FormRegister.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\FormResManage.resx">
       <DependentUpon>FormResManage.cs</DependentUpon>

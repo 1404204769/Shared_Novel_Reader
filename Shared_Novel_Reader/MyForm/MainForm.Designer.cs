@@ -40,6 +40,7 @@
             this.BtnRegister = new System.Windows.Forms.Button();
             this.BtnLogin = new System.Windows.Forms.Button();
             this.TitlePanel = new System.Windows.Forms.Panel();
+            this.LabelWelcome = new System.Windows.Forms.Label();
             this.BtnPersonalData = new System.Windows.Forms.Button();
             this.BtnResManage = new System.Windows.Forms.Button();
             this.BtnBookShelf = new System.Windows.Forms.Button();
@@ -50,7 +51,6 @@
             this.LabelToolString = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.TimerTopPanelTime = new System.Windows.Forms.Timer(this.components);
-            this.LabelWelcome = new System.Windows.Forms.Label();
             PictureLogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(PictureLogo)).BeginInit();
             this.SizePanel.SuspendLayout();
@@ -189,6 +189,7 @@
             this.BtnRegister.TabIndex = 1;
             this.BtnRegister.Text = "注册";
             this.BtnRegister.UseVisualStyleBackColor = false;
+            this.BtnRegister.Click += new System.EventHandler(this.BtnRegister_Click);
             // 
             // BtnLogin
             // 
@@ -214,6 +215,18 @@
             this.TitlePanel.Name = "TitlePanel";
             this.TitlePanel.Size = new System.Drawing.Size(250, 50);
             this.TitlePanel.TabIndex = 1;
+            // 
+            // LabelWelcome
+            // 
+            this.LabelWelcome.BackColor = System.Drawing.Color.LightSlateGray;
+            this.LabelWelcome.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LabelWelcome.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelWelcome.Location = new System.Drawing.Point(0, 0);
+            this.LabelWelcome.Name = "LabelWelcome";
+            this.LabelWelcome.Size = new System.Drawing.Size(250, 50);
+            this.LabelWelcome.TabIndex = 0;
+            this.LabelWelcome.Text = "游客,请登入~";
+            this.LabelWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BtnPersonalData
             // 
@@ -367,18 +380,6 @@
             // 
             this.TimerTopPanelTime.Interval = 1000;
             this.TimerTopPanelTime.Tick += new System.EventHandler(this.TimerTopPanelTime_Tick);
-            // 
-            // LabelWelcome
-            // 
-            this.LabelWelcome.BackColor = System.Drawing.Color.LightSlateGray;
-            this.LabelWelcome.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LabelWelcome.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelWelcome.Location = new System.Drawing.Point(0, 0);
-            this.LabelWelcome.Name = "LabelWelcome";
-            this.LabelWelcome.Size = new System.Drawing.Size(250, 50);
-            this.LabelWelcome.TabIndex = 0;
-            this.LabelWelcome.Text = "游客,请登入~";
-            this.LabelWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainForm
             // 
