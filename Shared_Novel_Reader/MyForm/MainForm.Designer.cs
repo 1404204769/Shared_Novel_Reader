@@ -32,31 +32,45 @@
             System.Windows.Forms.PictureBox PictureLogo;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.SizePanel = new System.Windows.Forms.Panel();
+            this.BtnRootControl = new System.Windows.Forms.Button();
+            this.BtnAdminControl = new System.Windows.Forms.Button();
+            this.BtnBookPlatform = new System.Windows.Forms.Button();
             this.LogoPanel = new System.Windows.Forms.Panel();
             this.BtnPanel = new System.Windows.Forms.Panel();
             this.BtnRegister = new System.Windows.Forms.Button();
             this.BtnLogin = new System.Windows.Forms.Button();
             this.TitlePanel = new System.Windows.Forms.Panel();
-            this.TopPanel = new System.Windows.Forms.Panel();
-            this.LabelTime = new System.Windows.Forms.Label();
-            this.LabelToolString = new System.Windows.Forms.Label();
-            this.MainPanel = new System.Windows.Forms.Panel();
-            this.TimerTopPanelTime = new System.Windows.Forms.Timer(this.components);
-            this.BtnRootControl = new System.Windows.Forms.Button();
-            this.BtnAdminControl = new System.Windows.Forms.Button();
-            this.BtnBookPlatform = new System.Windows.Forms.Button();
             this.BtnPersonalData = new System.Windows.Forms.Button();
             this.BtnResManage = new System.Windows.Forms.Button();
             this.BtnBookShelf = new System.Windows.Forms.Button();
+            this.TopPanel = new System.Windows.Forms.Panel();
+            this.LabelTime = new System.Windows.Forms.Label();
             this.LabelAppTitle = new System.Windows.Forms.Label();
             this.BtnClose = new System.Windows.Forms.Button();
+            this.LabelToolString = new System.Windows.Forms.Label();
+            this.MainPanel = new System.Windows.Forms.Panel();
+            this.TimerTopPanelTime = new System.Windows.Forms.Timer(this.components);
             PictureLogo = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(PictureLogo)).BeginInit();
             this.SizePanel.SuspendLayout();
             this.LogoPanel.SuspendLayout();
             this.BtnPanel.SuspendLayout();
             this.TopPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(PictureLogo)).BeginInit();
             this.SuspendLayout();
+            // 
+            // PictureLogo
+            // 
+            PictureLogo.BackColor = System.Drawing.Color.DimGray;
+            PictureLogo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureLogo.BackgroundImage")));
+            PictureLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            PictureLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            PictureLogo.Location = new System.Drawing.Point(0, 0);
+            PictureLogo.Margin = new System.Windows.Forms.Padding(0);
+            PictureLogo.Name = "PictureLogo";
+            PictureLogo.Size = new System.Drawing.Size(250, 150);
+            PictureLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            PictureLogo.TabIndex = 0;
+            PictureLogo.TabStop = false;
             // 
             // SizePanel
             // 
@@ -73,6 +87,69 @@
             this.SizePanel.Name = "SizePanel";
             this.SizePanel.Size = new System.Drawing.Size(250, 740);
             this.SizePanel.TabIndex = 0;
+            // 
+            // BtnRootControl
+            // 
+            this.BtnRootControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtnRootControl.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnRootControl.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.BtnRootControl.FlatAppearance.BorderSize = 0;
+            this.BtnRootControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRootControl.Font = new System.Drawing.Font("华文新魏", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.BtnRootControl.ForeColor = System.Drawing.Color.White;
+            this.BtnRootControl.Image = global::Shared_Novel_Reader.Properties.Resources.root;
+            this.BtnRootControl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnRootControl.Location = new System.Drawing.Point(0, 635);
+            this.BtnRootControl.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnRootControl.Name = "BtnRootControl";
+            this.BtnRootControl.Size = new System.Drawing.Size(250, 60);
+            this.BtnRootControl.TabIndex = 7;
+            this.BtnRootControl.Text = "超级管理员";
+            this.BtnRootControl.UseVisualStyleBackColor = true;
+            this.BtnRootControl.Visible = false;
+            this.BtnRootControl.Click += new System.EventHandler(this.BtnRootControl_Click);
+            // 
+            // BtnAdminControl
+            // 
+            this.BtnAdminControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtnAdminControl.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnAdminControl.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.BtnAdminControl.FlatAppearance.BorderSize = 0;
+            this.BtnAdminControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAdminControl.Font = new System.Drawing.Font("华文新魏", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.BtnAdminControl.ForeColor = System.Drawing.Color.White;
+            this.BtnAdminControl.Image = global::Shared_Novel_Reader.Properties.Resources.admin;
+            this.BtnAdminControl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnAdminControl.Location = new System.Drawing.Point(0, 563);
+            this.BtnAdminControl.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnAdminControl.Name = "BtnAdminControl";
+            this.BtnAdminControl.Size = new System.Drawing.Size(250, 60);
+            this.BtnAdminControl.TabIndex = 6;
+            this.BtnAdminControl.Text = "管理员";
+            this.BtnAdminControl.UseVisualStyleBackColor = true;
+            this.BtnAdminControl.Visible = false;
+            this.BtnAdminControl.Click += new System.EventHandler(this.BtnAdminControl_Click);
+            // 
+            // BtnBookPlatform
+            // 
+            this.BtnBookPlatform.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtnBookPlatform.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnBookPlatform.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.BtnBookPlatform.FlatAppearance.BorderSize = 0;
+            this.BtnBookPlatform.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnBookPlatform.Font = new System.Drawing.Font("华文新魏", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.BtnBookPlatform.ForeColor = System.Drawing.Color.White;
+            this.BtnBookPlatform.Image = global::Shared_Novel_Reader.Properties.Resources.BookPlatform;
+            this.BtnBookPlatform.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnBookPlatform.Location = new System.Drawing.Point(0, 491);
+            this.BtnBookPlatform.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnBookPlatform.Name = "BtnBookPlatform";
+            this.BtnBookPlatform.Size = new System.Drawing.Size(250, 60);
+            this.BtnBookPlatform.TabIndex = 5;
+            this.BtnBookPlatform.Text = "图书平台";
+            this.BtnBookPlatform.UseVisualStyleBackColor = true;
+            this.BtnBookPlatform.Visible = false;
+            this.BtnBookPlatform.Click += new System.EventHandler(this.BtnBookPlatform_Click);
             // 
             // LogoPanel
             // 
@@ -130,134 +207,6 @@
             this.TitlePanel.Name = "TitlePanel";
             this.TitlePanel.Size = new System.Drawing.Size(250, 50);
             this.TitlePanel.TabIndex = 1;
-            // 
-            // TopPanel
-            // 
-            this.TopPanel.BackColor = System.Drawing.Color.Gray;
-            this.TopPanel.Controls.Add(this.LabelTime);
-            this.TopPanel.Controls.Add(this.LabelAppTitle);
-            this.TopPanel.Controls.Add(this.BtnClose);
-            this.TopPanel.Controls.Add(this.LabelToolString);
-            this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TopPanel.Location = new System.Drawing.Point(0, 0);
-            this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(1400, 60);
-            this.TopPanel.TabIndex = 1;
-            // 
-            // LabelTime
-            // 
-            this.LabelTime.Dock = System.Windows.Forms.DockStyle.Right;
-            this.LabelTime.Location = new System.Drawing.Point(1139, 0);
-            this.LabelTime.Name = "LabelTime";
-            this.LabelTime.Size = new System.Drawing.Size(201, 60);
-            this.LabelTime.TabIndex = 7;
-            this.LabelTime.Text = "Time";
-            this.LabelTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LabelTime.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseDown);
-            this.LabelTime.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseMove);
-            this.LabelTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseUp);
-            // 
-            // LabelToolString
-            // 
-            this.LabelToolString.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.LabelToolString.BackColor = System.Drawing.Color.Gray;
-            this.LabelToolString.Location = new System.Drawing.Point(478, 0);
-            this.LabelToolString.Name = "LabelToolString";
-            this.LabelToolString.Size = new System.Drawing.Size(655, 60);
-            this.LabelToolString.TabIndex = 6;
-            this.LabelToolString.Text = "   ";
-            this.LabelToolString.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseDown);
-            this.LabelToolString.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseMove);
-            this.LabelToolString.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseUp);
-            // 
-            // MainPanel
-            // 
-            this.MainPanel.BackColor = System.Drawing.Color.Silver;
-            this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPanel.ForeColor = System.Drawing.Color.Silver;
-            this.MainPanel.Location = new System.Drawing.Point(250, 60);
-            this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(1150, 740);
-            this.MainPanel.TabIndex = 2;
-            // 
-            // TimerTopPanelTime
-            // 
-            this.TimerTopPanelTime.Interval = 1000;
-            this.TimerTopPanelTime.Tick += new System.EventHandler(this.TimerTopPanelTime_Tick);
-            // 
-            // BtnRootControl
-            // 
-            this.BtnRootControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BtnRootControl.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnRootControl.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.BtnRootControl.FlatAppearance.BorderSize = 0;
-            this.BtnRootControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnRootControl.Font = new System.Drawing.Font("华文新魏", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.BtnRootControl.ForeColor = System.Drawing.Color.White;
-            this.BtnRootControl.Image = global::Shared_Novel_Reader.Properties.Resources.root;
-            this.BtnRootControl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnRootControl.Location = new System.Drawing.Point(0, 635);
-            this.BtnRootControl.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnRootControl.Name = "BtnRootControl";
-            this.BtnRootControl.Size = new System.Drawing.Size(250, 60);
-            this.BtnRootControl.TabIndex = 7;
-            this.BtnRootControl.Text = "超级管理员";
-            this.BtnRootControl.UseVisualStyleBackColor = true;
-            this.BtnRootControl.Visible = false;
-            // 
-            // BtnAdminControl
-            // 
-            this.BtnAdminControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BtnAdminControl.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnAdminControl.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.BtnAdminControl.FlatAppearance.BorderSize = 0;
-            this.BtnAdminControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnAdminControl.Font = new System.Drawing.Font("华文新魏", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.BtnAdminControl.ForeColor = System.Drawing.Color.White;
-            this.BtnAdminControl.Image = global::Shared_Novel_Reader.Properties.Resources.admin;
-            this.BtnAdminControl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnAdminControl.Location = new System.Drawing.Point(0, 563);
-            this.BtnAdminControl.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnAdminControl.Name = "BtnAdminControl";
-            this.BtnAdminControl.Size = new System.Drawing.Size(250, 60);
-            this.BtnAdminControl.TabIndex = 6;
-            this.BtnAdminControl.Text = "管理员";
-            this.BtnAdminControl.UseVisualStyleBackColor = true;
-            this.BtnAdminControl.Visible = false;
-            // 
-            // BtnBookPlatform
-            // 
-            this.BtnBookPlatform.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BtnBookPlatform.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnBookPlatform.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.BtnBookPlatform.FlatAppearance.BorderSize = 0;
-            this.BtnBookPlatform.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnBookPlatform.Font = new System.Drawing.Font("华文新魏", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.BtnBookPlatform.ForeColor = System.Drawing.Color.White;
-            this.BtnBookPlatform.Image = global::Shared_Novel_Reader.Properties.Resources.BookPlatform;
-            this.BtnBookPlatform.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnBookPlatform.Location = new System.Drawing.Point(0, 491);
-            this.BtnBookPlatform.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnBookPlatform.Name = "BtnBookPlatform";
-            this.BtnBookPlatform.Size = new System.Drawing.Size(250, 60);
-            this.BtnBookPlatform.TabIndex = 5;
-            this.BtnBookPlatform.Text = "图书平台";
-            this.BtnBookPlatform.UseVisualStyleBackColor = true;
-            this.BtnBookPlatform.Visible = false;
-            // 
-            // PictureLogo
-            // 
-            PictureLogo.BackColor = System.Drawing.Color.DimGray;
-            PictureLogo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureLogo.BackgroundImage")));
-            PictureLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            PictureLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            PictureLogo.Location = new System.Drawing.Point(0, 0);
-            PictureLogo.Margin = new System.Windows.Forms.Padding(0);
-            PictureLogo.Name = "PictureLogo";
-            PictureLogo.Size = new System.Drawing.Size(250, 150);
-            PictureLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            PictureLogo.TabIndex = 0;
-            PictureLogo.TabStop = false;
             // 
             // BtnPersonalData
             // 
@@ -322,6 +271,32 @@
             this.BtnBookShelf.Visible = false;
             this.BtnBookShelf.Click += new System.EventHandler(this.BtnBookShelf_Click);
             // 
+            // TopPanel
+            // 
+            this.TopPanel.BackColor = System.Drawing.Color.Gray;
+            this.TopPanel.Controls.Add(this.LabelTime);
+            this.TopPanel.Controls.Add(this.LabelAppTitle);
+            this.TopPanel.Controls.Add(this.BtnClose);
+            this.TopPanel.Controls.Add(this.LabelToolString);
+            this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.TopPanel.Location = new System.Drawing.Point(0, 0);
+            this.TopPanel.Name = "TopPanel";
+            this.TopPanel.Size = new System.Drawing.Size(1400, 60);
+            this.TopPanel.TabIndex = 1;
+            // 
+            // LabelTime
+            // 
+            this.LabelTime.Dock = System.Windows.Forms.DockStyle.Right;
+            this.LabelTime.Location = new System.Drawing.Point(1139, 0);
+            this.LabelTime.Name = "LabelTime";
+            this.LabelTime.Size = new System.Drawing.Size(201, 60);
+            this.LabelTime.TabIndex = 7;
+            this.LabelTime.Text = "Time";
+            this.LabelTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LabelTime.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseDown);
+            this.LabelTime.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseMove);
+            this.LabelTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseUp);
+            // 
             // LabelAppTitle
             // 
             this.LabelAppTitle.Dock = System.Windows.Forms.DockStyle.Left;
@@ -358,6 +333,34 @@
             this.BtnClose.UseVisualStyleBackColor = true;
             this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
+            // LabelToolString
+            // 
+            this.LabelToolString.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.LabelToolString.BackColor = System.Drawing.Color.Gray;
+            this.LabelToolString.Location = new System.Drawing.Point(478, 0);
+            this.LabelToolString.Name = "LabelToolString";
+            this.LabelToolString.Size = new System.Drawing.Size(655, 60);
+            this.LabelToolString.TabIndex = 6;
+            this.LabelToolString.Text = "   ";
+            this.LabelToolString.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseDown);
+            this.LabelToolString.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseMove);
+            this.LabelToolString.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseUp);
+            // 
+            // MainPanel
+            // 
+            this.MainPanel.BackColor = System.Drawing.Color.Silver;
+            this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainPanel.ForeColor = System.Drawing.Color.Silver;
+            this.MainPanel.Location = new System.Drawing.Point(250, 60);
+            this.MainPanel.Name = "MainPanel";
+            this.MainPanel.Size = new System.Drawing.Size(1150, 740);
+            this.MainPanel.TabIndex = 2;
+            // 
+            // TimerTopPanelTime
+            // 
+            this.TimerTopPanelTime.Interval = 1000;
+            this.TimerTopPanelTime.Tick += new System.EventHandler(this.TimerTopPanelTime_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -372,11 +375,11 @@
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(PictureLogo)).EndInit();
             this.SizePanel.ResumeLayout(false);
             this.LogoPanel.ResumeLayout(false);
             this.BtnPanel.ResumeLayout(false);
             this.TopPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(PictureLogo)).EndInit();
             this.ResumeLayout(false);
 
         }

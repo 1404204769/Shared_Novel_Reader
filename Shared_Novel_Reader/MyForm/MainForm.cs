@@ -35,7 +35,7 @@ namespace Shared_Novel_Reader.MyForm
         public void UserPowerInit()
         {
             // 游客权限
-            if(!models.User.IsInit)
+            //if(!models.User.IsInit)
             {
                 BtnBookShelf.Visible = true;
                 BtnResManage.Visible = true;
@@ -43,22 +43,25 @@ namespace Shared_Novel_Reader.MyForm
             }
 
             // 用户权限
-            if(models.User.Power > 0)
+            //if(models.User.Power > 0)
             {
                 BtnPersonalData.Visible = true;
                 // 平台界面 包括论坛界面、在线看书界面
+                BtnBookPlatform.Visible = true;
             }
 
             // 管理员权限
-            if(models.User.Power > 10000)
+            //if(models.User.Power > 10000)
             {
                 // 管理员界面
+                BtnAdminControl.Visible = true;
             }
 
             // 超级管理员权限
-            if (models.User.Power > int.MaxValue)
+            //if (models.User.Power > int.MaxValue)
             {
                 // 超级管理员界面
+                BtnRootControl.Visible = true;
             }
 
         }
@@ -130,6 +133,7 @@ namespace Shared_Novel_Reader.MyForm
                 IsMove = false;//停止移动
             }
         }
+
 
         private void BtnBookShelf_Click(object sender, EventArgs e)
         {
@@ -251,6 +255,109 @@ namespace Shared_Novel_Reader.MyForm
             }
             // 释放资源
             FormLogin.Dispose();
+        }
+
+        private void BtnBookPlatform_Click(object sender, EventArgs e)
+        {
+            Form MainTagFrom = this.MainPanel.Tag as Form;
+            if (MainTagFrom != null)
+                MainTagFrom.Hide();
+
+            Form FormBookPlatform = null;
+            Control[] controls = this.MainPanel.Controls.Find("FormBookPlatform", false);
+            if (controls.Length == 0)
+            {
+                Console.WriteLine("控件中不存在FormBookPlatform");
+                Console.WriteLine("开始准备导入FormBookPlatform");
+                FormBookPlatform = new FormBookPlatform();
+                FormBookPlatform.TopLevel = false;
+                this.MainPanel.Controls.Add(FormBookPlatform);
+                controls = this.MainPanel.Controls.Find("FormBookPlatform", false);
+                if (controls.Length == 0)
+                {
+                    Console.WriteLine("导入FormBookPlatform失败");
+                    return;
+                }
+                Console.WriteLine("导入FormBookPlatform成功");
+            }
+            else
+                FormBookPlatform = controls[0] as Form;
+
+            FormBookPlatform.Dock = DockStyle.Fill;
+            // this.MainPanel.Controls.Add(f);
+            this.MainPanel.Tag = FormBookPlatform;
+            FormBookPlatform.Refresh();
+
+            FormBookPlatform.Show();
+
+        }
+
+        private void BtnAdminControl_Click(object sender, EventArgs e)
+        {
+            Form MainTagFrom = this.MainPanel.Tag as Form;
+            if (MainTagFrom != null)
+                MainTagFrom.Hide();
+
+            Form FormAdminControl = null;
+            Control[] controls = this.MainPanel.Controls.Find("FormAdminControl", false);
+            if (controls.Length == 0)
+            {
+                Console.WriteLine("控件中不存在FormAdminControl");
+                Console.WriteLine("开始准备导入FormAdminControl");
+                FormAdminControl = new FormAdminControl();
+                FormAdminControl.TopLevel = false;
+                this.MainPanel.Controls.Add(FormAdminControl);
+                controls = this.MainPanel.Controls.Find("FormAdminControl", false);
+                if (controls.Length == 0)
+                {
+                    Console.WriteLine("导入FormAdminControl失败");
+                    return;
+                }
+                Console.WriteLine("导入FormAdminControl成功");
+            }
+            else
+                FormAdminControl = controls[0] as Form;
+
+            FormAdminControl.Dock = DockStyle.Fill;
+            // this.MainPanel.Controls.Add(f);
+            this.MainPanel.Tag = FormAdminControl;
+            FormAdminControl.Refresh();
+
+            FormAdminControl.Show();
+        }
+
+        private void BtnRootControl_Click(object sender, EventArgs e)
+        {
+            Form MainTagFrom = this.MainPanel.Tag as Form;
+            if (MainTagFrom != null)
+                MainTagFrom.Hide();
+
+            Form FormRootControl = null;
+            Control[] controls = this.MainPanel.Controls.Find("FormRootControl", false);
+            if (controls.Length == 0)
+            {
+                Console.WriteLine("控件中不存在FormRootControl");
+                Console.WriteLine("开始准备导入FormRootControl");
+                FormRootControl = new FormRootControl();
+                FormRootControl.TopLevel = false;
+                this.MainPanel.Controls.Add(FormRootControl);
+                controls = this.MainPanel.Controls.Find("FormRootControl", false);
+                if (controls.Length == 0)
+                {
+                    Console.WriteLine("导入FormRootControl失败");
+                    return;
+                }
+                Console.WriteLine("导入FormRootControl成功");
+            }
+            else
+                FormRootControl = controls[0] as Form;
+
+            FormRootControl.Dock = DockStyle.Fill;
+            // this.MainPanel.Controls.Add(f);
+            this.MainPanel.Tag = FormRootControl;
+            FormRootControl.Refresh();
+
+            FormRootControl.Show();
         }
     }
 }

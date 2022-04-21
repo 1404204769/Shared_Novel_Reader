@@ -23,12 +23,12 @@ namespace Shared_Novel_Reader.MyForm
             UserRefresh();
         }
 
-        public void UserRefresh()
+        public bool UserRefresh()
         {
             if(!models.User.IsInit)
             {
                 MessageBox.Show("用户未初始化,请重新登入", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return false;
             }
             this.LabelUserIDValue.Text = Convert.ToString(models.User.User_ID);
             this.LabelLevelValue.Text = Convert.ToString(models.User.Level);
@@ -38,7 +38,7 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelNameValue.Text = models.User.Name;
             this.LabelSexValue.Text = models.User.Sex;
             this.LabelStatusValue.Text = models.User.Status;
-            return;
+            return true;
         }
     }
 }
