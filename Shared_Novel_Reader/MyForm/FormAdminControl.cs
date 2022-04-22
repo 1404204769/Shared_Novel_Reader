@@ -15,6 +15,7 @@ namespace Shared_Novel_Reader.MyForm
     {
         private FormFilterUserManagement FilterUserList;
         private FormFilterUserFeedback FilterUserFeedback;
+        private FormFilterUserApplication FilterUserApplication;
         public FormAdminControl()
         {
             InitializeComponent();
@@ -147,7 +148,7 @@ namespace Shared_Novel_Reader.MyForm
             if (AdminTagFrom != null)
                 AdminTagFrom.Hide();
 
-            Form FormUserApplication = null;
+            FormUserApplication FormUserApplication = null;
             Control[] controls = this.AdminMainPanel.Controls.Find("FormUserApplication", false);
             if (controls.Length == 0)
             {
@@ -165,12 +166,52 @@ namespace Shared_Novel_Reader.MyForm
                 Console.WriteLine("导入FormUserApplication成功");
             }
             else
-                FormUserApplication = controls[0] as Form;
+                FormUserApplication = controls[0] as FormUserApplication;
 
             FormUserApplication.Dock = DockStyle.Fill;
             // this.MainPanel.Controls.Add(f);
             this.AdminMainPanel.Tag = FormUserApplication;
             FormUserApplication.Show();
+
+            // 展示前选择搜索范围
+            // 弹出确认框
+            FilterUserApplication = new FormFilterUserApplication();
+            // 初始化 如果上次有搜索则在这里恢复
+            FilterUserApplication.TextProviderID.Text = FormUserApplication.ProviderIDStr;
+            FilterUserApplication.TextProcessor.Text = FormUserApplication.ProcessorStr;
+            if (FormUserApplication.FinishStr == "")
+            {
+                FilterUserApplication.ComboBoxFinish.SelectedItem = "无";
+            }
+            else
+            {
+                FilterUserApplication.ComboBoxFinish.SelectedItem = FormUserApplication.FinishStr;
+            }
+            DialogResult res = FilterUserApplication.ShowDialog();
+
+            // 根据结果决定搜索范围   OK-FindAll   Yes-FindSome   Cancel-NoFInd
+            if (res == DialogResult.OK)
+            {
+                FormUserApplication.IsFindAll = true;
+                FormUserApplication.LoadApplication();
+                FormUserApplication.Show();
+            }
+            else if (res == DialogResult.Yes)
+            {
+                FormUserApplication.IsFindAll = false;
+                FormUserApplication.ProcessorStr = FilterUserApplication.TextProcessor.Text;
+                FormUserApplication.ProviderIDStr = FilterUserApplication.TextProviderID.Text;
+                FormUserApplication.FinishStr = FilterUserApplication.ComboBoxFinish.SelectedItem.ToString();
+
+                FormUserApplication.LoadApplication();
+                FormUserApplication.Show();
+            }
+            else
+            {
+                FormUserApplication.Hide();
+            }
+
+            FilterUserApplication.Dispose();
         }
 
         private void BtnUserFeedback_Click(object sender, EventArgs e)
