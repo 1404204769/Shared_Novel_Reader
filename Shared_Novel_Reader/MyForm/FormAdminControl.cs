@@ -13,10 +13,13 @@ namespace Shared_Novel_Reader.MyForm
 {
     public partial class FormAdminControl : Form
     {
+        private FormFilterUserManagement FilterUserList;
         public FormAdminControl()
         {
             InitializeComponent();
         }
+
+
 
         private void BtnUserManagement_Click(object sender, EventArgs e)
         {
@@ -24,7 +27,7 @@ namespace Shared_Novel_Reader.MyForm
             if (AdminTagFrom != null)
                 AdminTagFrom.Hide();
 
-            Form FormUserManagement = null;
+            FormUserManagement FormUserManagement = null;
             Control[] controls = this.AdminMainPanel.Controls.Find("FormUserManagement", false);
             if (controls.Length == 0)
             {
@@ -42,12 +45,67 @@ namespace Shared_Novel_Reader.MyForm
                 Console.WriteLine("导入FormUserManagement成功");
             }
             else
-                FormUserManagement = controls[0] as Form;
+            {
+                FormUserManagement = controls[0] as FormUserManagement;
+                /*
+                 * 删除原有的界面重新生成表单
+                FormUserManagement = controls[0] as FormUserManagement;
+                FormUserManagement.Dispose();
+                this.AdminMainPanel.Controls.RemoveByKey("FormUserManagement");
+                FormUserManagement = new FormUserManagement();
+                FormUserManagement.TopLevel = false;
+                this.AdminMainPanel.Controls.Add(FormUserManagement);
+                controls = this.AdminMainPanel.Controls.Find("FormUserManagement", false);
+                Console.WriteLine("导入FormUserManagement成功");
+                FormUserManagement = controls[0] as FormUserManagement;
+                */
+            }
+                
 
             FormUserManagement.Dock = DockStyle.Fill;
             // this.MainPanel.Controls.Add(f);
             this.AdminMainPanel.Tag = FormUserManagement;
-            FormUserManagement.Show();
+
+
+            // 展示前选择搜索范围
+            // 弹出确认框
+            FilterUserList = new FormFilterUserManagement();
+            // 初始化 如果上次有搜索则在这里恢复
+            FilterUserList.TextUserID.Text = FormUserManagement.UserIDStr;
+            FilterUserList.TextName.Text = FormUserManagement.UserNameStr;
+            if(FormUserManagement.UserSexStr == "")
+            {
+                FilterUserList.ComboBoxSex.SelectedItem = "无";
+            }
+            else
+            {
+                FilterUserList.ComboBoxSex.SelectedItem = FormUserManagement.UserSexStr;
+            }
+            DialogResult res = FilterUserList.ShowDialog();
+
+            // 根据结果决定搜索范围   OK-FindAll   Yes-FindSome   Cancel-NoFInd
+            if(res == DialogResult.OK)
+            {
+                FormUserManagement.IsFindAll = true;
+                FormUserManagement.LoadAllUser();
+                FormUserManagement.Show();
+            }
+            else if(res == DialogResult.Yes)
+            {
+                FormUserManagement.IsFindAll = false;
+                FormUserManagement.UserIDStr = FilterUserList.TextUserID.Text;
+                FormUserManagement.UserNameStr = FilterUserList.TextName.Text;
+                FormUserManagement.UserSexStr = FilterUserList.ComboBoxSex.SelectedItem.ToString();
+
+                FormUserManagement.LoadSomeUser();
+                FormUserManagement.Show();
+            }
+            else
+            {
+                FormUserManagement.Hide();
+            }
+
+            FilterUserList.Dispose();
         }
 
         private void BtnResourceManagement_Click(object sender, EventArgs e)

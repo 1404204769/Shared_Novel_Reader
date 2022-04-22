@@ -103,6 +103,12 @@
     <Compile Include="MyForm\AdminForm\FormUserFeedback.Designer.cs">
       <DependentUpon>FormUserFeedback.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyForm\AdminForm\FormFilterUserManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\FormFilterUserManagement.Designer.cs">
+      <DependentUpon>FormFilterUserManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\AdminForm\FormUserManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +194,9 @@
     <Compile Include="Tools\MyJson.cs" />
     <Compile Include="Tools\MyResponse.cs" />
     <Compile Include="Tools\Novel_Analysis.cs" />
+    <EmbeddedResource Include="MyForm\AdminForm\FormFilterUserManagement.resx">
+      <DependentUpon>FormFilterUserManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyForm\AdminForm\FormResourceManagement.resx">
       <DependentUpon>FormResourceManagement.cs</DependentUpon>
     </EmbeddedResource>

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.DataGridViewUser = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,7 +38,10 @@
             this.Integral = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total_Integral = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContextMenuStripFindUser = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUser)).BeginInit();
+            this.ContextMenuStripFindUser.SuspendLayout();
             this.SuspendLayout();
             // 
             // DataGridViewUser
@@ -55,6 +59,7 @@
             this.Integral,
             this.Total_Integral,
             this.Status});
+            this.DataGridViewUser.ContextMenuStrip = this.ContextMenuStripFindUser;
             this.DataGridViewUser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataGridViewUser.GridColor = System.Drawing.Color.Peru;
             this.DataGridViewUser.Location = new System.Drawing.Point(0, 0);
@@ -114,6 +119,21 @@
             this.Status.MinimumWidth = 8;
             this.Status.Name = "Status";
             // 
+            // ContextMenuStripFindUser
+            // 
+            this.ContextMenuStripFindUser.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.ContextMenuStripFindUser.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ReFind});
+            this.ContextMenuStripFindUser.Name = "ContextMenuStripFindUser";
+            this.ContextMenuStripFindUser.Size = new System.Drawing.Size(189, 34);
+            // 
+            // ReFind
+            // 
+            this.ReFind.Name = "ReFind";
+            this.ReFind.Size = new System.Drawing.Size(240, 30);
+            this.ReFind.Text = "重置查询范围";
+            this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
+            // 
             // FormUserManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -124,6 +144,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormUserManagement";
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUser)).EndInit();
+            this.ContextMenuStripFindUser.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -139,5 +160,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Integral;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total_Integral;
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuStripFindUser;
+        private System.Windows.Forms.ToolStripMenuItem ReFind;
     }
 }
