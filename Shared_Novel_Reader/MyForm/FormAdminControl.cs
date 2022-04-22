@@ -14,6 +14,7 @@ namespace Shared_Novel_Reader.MyForm
     public partial class FormAdminControl : Form
     {
         private FormFilterUserManagement FilterUserList;
+        private FormFilterUserFeedback FilterUserFeedback;
         public FormAdminControl()
         {
             InitializeComponent();
@@ -178,7 +179,7 @@ namespace Shared_Novel_Reader.MyForm
             if (AdminTagFrom != null)
                 AdminTagFrom.Hide();
 
-            Form FormUserFeedback = null;
+            FormUserFeedback FormUserFeedback = null;
             Control[] controls = this.AdminMainPanel.Controls.Find("FormUserFeedback", false);
             if (controls.Length == 0)
             {
@@ -196,12 +197,53 @@ namespace Shared_Novel_Reader.MyForm
                 Console.WriteLine("导入FormUserFeedback成功");
             }
             else
-                FormUserFeedback = controls[0] as Form;
+                FormUserFeedback = controls[0] as FormUserFeedback;
 
             FormUserFeedback.Dock = DockStyle.Fill;
             // this.MainPanel.Controls.Add(f);
             this.AdminMainPanel.Tag = FormUserFeedback;
             FormUserFeedback.Show();
+
+
+            // 展示前选择搜索范围
+            // 弹出确认框
+            FilterUserFeedback = new FormFilterUserFeedback();
+            // 初始化 如果上次有搜索则在这里恢复
+            FilterUserFeedback.TextProviderID.Text = FormUserFeedback.ProviderIDStr;
+            FilterUserFeedback.TextProcessor.Text = FormUserFeedback.ProcessorStr;
+            if (FormUserFeedback.FinishStr == "")
+            {
+                FilterUserFeedback.ComboBoxFinish.SelectedItem = "无";
+            }
+            else
+            {
+                FilterUserFeedback.ComboBoxFinish.SelectedItem = FormUserFeedback.FinishStr;
+            }
+            DialogResult res = FilterUserFeedback.ShowDialog();
+
+            // 根据结果决定搜索范围   OK-FindAll   Yes-FindSome   Cancel-NoFInd
+            if (res == DialogResult.OK)
+            {
+                FormUserFeedback.IsFindAll = true;
+                FormUserFeedback.LoadFeedback();
+                FormUserFeedback.Show();
+            }
+            else if (res == DialogResult.Yes)
+            {
+                FormUserFeedback.IsFindAll = false;
+                FormUserFeedback.ProcessorStr = FilterUserFeedback.TextProcessor.Text;
+                FormUserFeedback.ProviderIDStr = FilterUserFeedback.TextProviderID.Text;
+                FormUserFeedback.FinishStr = FilterUserFeedback.ComboBoxFinish.SelectedItem.ToString();
+
+                FormUserFeedback.LoadFeedback();
+                FormUserFeedback.Show();
+            }
+            else
+            {
+                FormUserFeedback.Hide();
+            }
+
+            FilterUserFeedback.Dispose();
         }
     }
 }

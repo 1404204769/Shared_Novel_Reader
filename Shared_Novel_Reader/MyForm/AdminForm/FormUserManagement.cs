@@ -38,6 +38,10 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
                 // 清除残留数据
                 MessageBox.Show("用户列表查询失败");
             }
+            else if (res.Data["UserList"].ToString() == "")
+            {
+                MessageBox.Show("用户列表为空");
+            }
             else
             {
 
@@ -91,6 +95,10 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             {
                 // 清除残留数据
                 MessageBox.Show("指定用户查询失败");
+            }
+            else if (res.Data["UserList"].ToString() == "")
+            {
+                MessageBox.Show("用户列表为空");
             }
             else
             {

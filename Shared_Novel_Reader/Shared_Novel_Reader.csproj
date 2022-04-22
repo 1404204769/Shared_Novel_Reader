@@ -85,6 +85,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyForm\AdminForm\FormFilterUserFeedback.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\FormFilterUserFeedback.Designer.cs">
+      <DependentUpon>FormFilterUserFeedback.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\AdminForm\FormResourceManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +184,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Tools\API\Admin\Feedback.cs" />
     <Compile Include="Tools\API\Admin\User.cs" />
     <Compile Include="Tools\API\GPI.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\BaiExpression.cs" />
@@ -194,6 +201,9 @@
     <Compile Include="Tools\MyJson.cs" />
     <Compile Include="Tools\MyResponse.cs" />
     <Compile Include="Tools\Novel_Analysis.cs" />
+    <EmbeddedResource Include="MyForm\AdminForm\FormFilterUserFeedback.resx">
+      <DependentUpon>FormFilterUserFeedback.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyForm\AdminForm\FormFilterUserManagement.resx">
       <DependentUpon>FormFilterUserManagement.cs</DependentUpon>
     </EmbeddedResource>

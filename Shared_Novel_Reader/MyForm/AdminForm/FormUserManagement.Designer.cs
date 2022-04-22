@@ -46,6 +46,8 @@
             // 
             // DataGridViewUser
             // 
+            this.DataGridViewUser.AllowUserToAddRows = false;
+            this.DataGridViewUser.AllowUserToDeleteRows = false;
             this.DataGridViewUser.AllowUserToOrderColumns = true;
             this.DataGridViewUser.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGridViewUser.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -64,6 +66,7 @@
             this.DataGridViewUser.GridColor = System.Drawing.Color.Peru;
             this.DataGridViewUser.Location = new System.Drawing.Point(0, 0);
             this.DataGridViewUser.Name = "DataGridViewUser";
+            this.DataGridViewUser.ReadOnly = true;
             this.DataGridViewUser.RowHeadersVisible = false;
             this.DataGridViewUser.RowHeadersWidth = 62;
             this.DataGridViewUser.RowTemplate.Height = 30;
@@ -76,48 +79,56 @@
             this.ID.HeaderText = "账号";
             this.ID.MinimumWidth = 8;
             this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
             // 
             // UserName
             // 
             this.UserName.HeaderText = "姓名";
             this.UserName.MinimumWidth = 8;
             this.UserName.Name = "UserName";
+            this.UserName.ReadOnly = true;
             // 
             // Sex
             // 
             this.Sex.HeaderText = "性别";
             this.Sex.MinimumWidth = 8;
             this.Sex.Name = "Sex";
+            this.Sex.ReadOnly = true;
             // 
             // Level
             // 
             this.Level.HeaderText = "等级";
             this.Level.MinimumWidth = 8;
             this.Level.Name = "Level";
+            this.Level.ReadOnly = true;
             // 
             // Power
             // 
             this.Power.HeaderText = "权限";
             this.Power.MinimumWidth = 8;
             this.Power.Name = "Power";
+            this.Power.ReadOnly = true;
             // 
             // Integral
             // 
             this.Integral.HeaderText = "积分";
             this.Integral.MinimumWidth = 8;
             this.Integral.Name = "Integral";
+            this.Integral.ReadOnly = true;
             // 
             // Total_Integral
             // 
             this.Total_Integral.HeaderText = "总积分";
             this.Total_Integral.MinimumWidth = 8;
             this.Total_Integral.Name = "Total_Integral";
+            this.Total_Integral.ReadOnly = true;
             // 
             // Status
             // 
             this.Status.HeaderText = "状态";
             this.Status.MinimumWidth = 8;
             this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
             // 
             // ContextMenuStripFindUser
             // 
@@ -130,7 +141,7 @@
             // ReFind
             // 
             this.ReFind.Name = "ReFind";
-            this.ReFind.Size = new System.Drawing.Size(240, 30);
+            this.ReFind.Size = new System.Drawing.Size(188, 30);
             this.ReFind.Text = "重置查询范围";
             this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
             // 
