@@ -40,6 +40,7 @@
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ContextMenuStripFindUser = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUser)).BeginInit();
             this.ContextMenuStripFindUser.SuspendLayout();
             this.SuspendLayout();
@@ -134,16 +135,24 @@
             // 
             this.ContextMenuStripFindUser.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.ContextMenuStripFindUser.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ReFind});
+            this.ReFind,
+            this.ViewDetails});
             this.ContextMenuStripFindUser.Name = "ContextMenuStripFindUser";
-            this.ContextMenuStripFindUser.Size = new System.Drawing.Size(189, 34);
+            this.ContextMenuStripFindUser.Size = new System.Drawing.Size(241, 97);
             // 
             // ReFind
             // 
             this.ReFind.Name = "ReFind";
-            this.ReFind.Size = new System.Drawing.Size(188, 30);
+            this.ReFind.Size = new System.Drawing.Size(240, 30);
             this.ReFind.Text = "重置查询范围";
             this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
+            // 
+            // ViewDetails
+            // 
+            this.ViewDetails.Name = "ViewDetails";
+            this.ViewDetails.Size = new System.Drawing.Size(240, 30);
+            this.ViewDetails.Text = "查看详情";
+            this.ViewDetails.Click += new System.EventHandler(this.ViewDetails_Click);
             // 
             // FormUserManagement
             // 
@@ -171,7 +180,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Integral;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total_Integral;
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
-        private System.Windows.Forms.ContextMenuStrip ContextMenuStripFindUser;
-        private System.Windows.Forms.ToolStripMenuItem ReFind;
+        public System.Windows.Forms.ContextMenuStrip ContextMenuStripFindUser;
+        public System.Windows.Forms.ToolStripMenuItem ReFind;
+        private System.Windows.Forms.ToolStripMenuItem ViewDetails;
     }
 }

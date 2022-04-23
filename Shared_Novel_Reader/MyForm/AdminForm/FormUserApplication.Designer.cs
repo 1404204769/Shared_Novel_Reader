@@ -42,9 +42,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DataGridViewUserApplication = new System.Windows.Forms.DataGridView();
-            this.ContextMenuStripFindUserApplication = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
-            this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.Upload_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.User_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Book_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,6 +52,9 @@
             this.Processor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Create_Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Update_Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContextMenuStripFindUserApplication = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUserApplication)).BeginInit();
             this.ContextMenuStripFindUserApplication.SuspendLayout();
             this.SuspendLayout();
@@ -110,29 +110,6 @@
             this.DataGridViewUserApplication.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DataGridViewUserApplication.Size = new System.Drawing.Size(1150, 690);
             this.DataGridViewUserApplication.TabIndex = 2;
-            // 
-            // ContextMenuStripFindUserApplication
-            // 
-            this.ContextMenuStripFindUserApplication.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.ContextMenuStripFindUserApplication.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ReFind,
-            this.ViewDetails});
-            this.ContextMenuStripFindUserApplication.Name = "ContextMenuStripFindUser";
-            this.ContextMenuStripFindUserApplication.Size = new System.Drawing.Size(189, 64);
-            // 
-            // ReFind
-            // 
-            this.ReFind.Name = "ReFind";
-            this.ReFind.Size = new System.Drawing.Size(188, 30);
-            this.ReFind.Text = "重置查询范围";
-            this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
-            // 
-            // ViewDetails
-            // 
-            this.ViewDetails.Name = "ViewDetails";
-            this.ViewDetails.Size = new System.Drawing.Size(188, 30);
-            this.ViewDetails.Text = "查看详情";
-            this.ViewDetails.Click += new System.EventHandler(this.ViewDetail);
             // 
             // Upload_ID
             // 
@@ -231,6 +208,29 @@
             this.Update_Time.Name = "Update_Time";
             this.Update_Time.ReadOnly = true;
             // 
+            // ContextMenuStripFindUserApplication
+            // 
+            this.ContextMenuStripFindUserApplication.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.ContextMenuStripFindUserApplication.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ReFind,
+            this.ViewDetails});
+            this.ContextMenuStripFindUserApplication.Name = "ContextMenuStripFindUser";
+            this.ContextMenuStripFindUserApplication.Size = new System.Drawing.Size(241, 97);
+            // 
+            // ReFind
+            // 
+            this.ReFind.Name = "ReFind";
+            this.ReFind.Size = new System.Drawing.Size(240, 30);
+            this.ReFind.Text = "重置查询范围";
+            this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
+            // 
+            // ViewDetails
+            // 
+            this.ViewDetails.Name = "ViewDetails";
+            this.ViewDetails.Size = new System.Drawing.Size(240, 30);
+            this.ViewDetails.Text = "查看详情";
+            this.ViewDetails.Click += new System.EventHandler(this.ViewDetail);
+            // 
             // FormUserApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -250,9 +250,9 @@
         #endregion
 
         private System.Windows.Forms.DataGridView DataGridViewUserApplication;
-        private System.Windows.Forms.ContextMenuStrip ContextMenuStripFindUserApplication;
-        private System.Windows.Forms.ToolStripMenuItem ReFind;
-        private System.Windows.Forms.ToolStripMenuItem ViewDetails;
+        public System.Windows.Forms.ContextMenuStrip ContextMenuStripFindUserApplication;
+        public System.Windows.Forms.ToolStripMenuItem ReFind;
+        public System.Windows.Forms.ToolStripMenuItem ViewDetails;
         private System.Windows.Forms.DataGridViewTextBoxColumn Upload_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn User_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Book_ID;

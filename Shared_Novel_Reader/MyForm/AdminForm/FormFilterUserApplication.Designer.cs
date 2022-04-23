@@ -171,6 +171,7 @@
             this.Controls.Add(this.LabelProcessor);
             this.Controls.Add(this.LabelProviderID);
             this.Name = "FormFilterUserApplication";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "用户申请查询";
             this.ResumeLayout(false);
             this.PerformLayout();

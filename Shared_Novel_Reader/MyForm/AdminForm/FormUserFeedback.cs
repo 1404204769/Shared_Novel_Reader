@@ -33,8 +33,8 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
         {
             JObject ReqJson = new JObject();
             JArray Filter = new JArray();
-            ReqJson["Limit"] = 1;
-            ReqJson["Offset"] = 1;
+            ReqJson["Limit"] = 0;
+            ReqJson["Offset"] = 0;
             ReqJson["Finish"] = false;
             ReqJson["Processor"] = "root";
             ReqJson["Provider_ID"] = 1;
@@ -154,32 +154,18 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
                 this.LoadFeedback();
                 this.Show();
             }
-            else
-            {
-
-            }
 
             FilterUserFeedback.Dispose();
         }
 
-        private void 查看详情ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewDetails_Click(object sender, EventArgs e)
         {
             int RowIndex = DataGridViewUserFeedback.CurrentRow.Index;
-            string[] RowData = new string[DataGridViewUserFeedback.ColumnCount];
+            string show = "";
             for (int i = 0; i < DataGridViewUserFeedback.ColumnCount; i++)
             {
-                RowData[i] = DataGridViewUserFeedback.Rows[RowIndex].Cells[i].Value.ToString();
+                show += DataGridViewUserFeedback.Columns[i].HeaderText.ToString() + " : " + (string)DataGridViewUserFeedback.Rows[RowIndex].Cells[i].Value + "\n";
             }
-            string show = "";
-            show += "反馈ID : " + RowData[0];
-            show += "\n反馈者ID : " + RowData[1];
-            show += "\n反馈类型 : " + RowData[2];
-            show += "\n反馈详情 : " + RowData[3];
-            show += "\n反馈状态 : " + RowData[4];
-            show += "\n是否处理 : " + RowData[5];
-            show += "\n处理者 : " + RowData[6];
-            show += "\n反馈时间 : " + RowData[7];
-            show += "\n处理时间 : " + RowData[8];
             MessageBox.Show(show);
         }
     }

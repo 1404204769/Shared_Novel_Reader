@@ -152,6 +152,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             {
                 this.IsFindAll = true;
                 this.LoadAllUser();
+                this.Show();
             }
             else if (res == DialogResult.Yes)
             {
@@ -161,13 +162,22 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
                 this.UserSexStr = FilterUserList.ComboBoxSex.SelectedItem.ToString();
 
                 this.LoadSomeUser();
-            }
-            else
-            {
-
+                this.Show();
             }
 
             FilterUserList.Dispose();
+        }
+
+        private void ViewDetails_Click(object sender, EventArgs e)
+        {
+            int RowIndex = DataGridViewUser.CurrentRow.Index;
+            string show = "";
+            for (int i = 0; i < DataGridViewUser.ColumnCount; i++)
+            {
+                show += DataGridViewUser.Columns[i].HeaderText.ToString() + " : " + (string)DataGridViewUser.Rows[RowIndex].Cells[i].Value + "\n";
+            }
+
+            MessageBox.Show(show);
         }
     }
 

@@ -31,8 +31,8 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
         {
             JObject ReqJson = new JObject();
             JArray Filter = new JArray();
-            ReqJson["Limit"] = 1;
-            ReqJson["Offset"] = 1;
+            ReqJson["Limit"] = 0;
+            ReqJson["Offset"] = 0;
             ReqJson["Finish"] = false;
             ReqJson["Processor"] = "root";
             ReqJson["Provider_ID"] = 1;
@@ -123,22 +123,12 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
         private void ViewDetail(object sender, EventArgs e)
         {
             int RowIndex = DataGridViewUserApplication.CurrentRow.Index;
-            string[] RowData = new string[DataGridViewUserApplication.ColumnCount];
+            string show = "";
             for (int i = 0; i < DataGridViewUserApplication.ColumnCount; i++)
             {
-                RowData[i] = (string)DataGridViewUserApplication.Rows[RowIndex].Cells[i].Value;
+                show += DataGridViewUserApplication.Columns[i].HeaderText.ToString() + " : " + (string)DataGridViewUserApplication.Rows[RowIndex].Cells[i].Value + "\n";
             }
-            string show = "";
-            show += "申请ID : " + RowData[0];
-            show += "\n申请者ID : " + RowData[1];
-            show += "\n关联图书ID : " + RowData[2];
-            show += "\n申请内容 : " + RowData[3];
-            show += "\n申请详情 : " + RowData[4];
-            show += "\n申请状态 : " + RowData[5];
-            show += "\n是否处理 : " + RowData[6];
-            show += "\n处理者 : " + RowData[7];
-            show += "\n申请时间 : " + RowData[8];
-            show += "\n处理时间 : " + RowData[9];
+            
             MessageBox.Show(show);
         }
 
@@ -176,10 +166,6 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
 
                 this.LoadApplication();
                 this.Show();
-            }
-            else
-            {
-
             }
 
             FilterUserApplication.Dispose();

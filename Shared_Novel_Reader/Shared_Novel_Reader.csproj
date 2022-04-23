@@ -85,6 +85,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyForm\AdminForm\FormFilterResourceManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\FormFilterResourceManagement.Designer.cs">
+      <DependentUpon>FormFilterResourceManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\AdminForm\FormFilterUserApplication.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,24 @@
     </Compile>
     <Compile Include="MyForm\AdminForm\FormUserManagement.Designer.cs">
       <DependentUpon>FormUserManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\Resource\FormBookAllChapter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\Resource\FormBookAllChapter.Designer.cs">
+      <DependentUpon>FormBookAllChapter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\Resource\FormChapterAllVersion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\Resource\FormChapterAllVersion.Designer.cs">
+      <DependentUpon>FormChapterAllVersion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\Resource\FormChapterContent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\AdminForm\Resource\FormChapterContent.Designer.cs">
+      <DependentUpon>FormChapterContent.cs</DependentUpon>
     </Compile>
     <Compile Include="MyForm\FormAdminControl.cs">
       <SubType>Form</SubType>
@@ -192,6 +216,7 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Tools\API\Admin\Application.cs" />
     <Compile Include="Tools\API\Admin\Feedback.cs" />
+    <Compile Include="Tools\API\Admin\Resource.cs" />
     <Compile Include="Tools\API\Admin\User.cs" />
     <Compile Include="Tools\API\GPI.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\BaiExpression.cs" />
@@ -208,6 +233,9 @@
     <Compile Include="Tools\MyJson.cs" />
     <Compile Include="Tools\MyResponse.cs" />
     <Compile Include="Tools\Novel_Analysis.cs" />
+    <EmbeddedResource Include="MyForm\AdminForm\FormFilterResourceManagement.resx">
+      <DependentUpon>FormFilterResourceManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyForm\AdminForm\FormFilterUserApplication.resx">
       <DependentUpon>FormFilterUserApplication.cs</DependentUpon>
     </EmbeddedResource>

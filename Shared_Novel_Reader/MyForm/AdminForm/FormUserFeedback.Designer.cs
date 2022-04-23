@@ -31,9 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DataGridViewUserFeedback = new System.Windows.Forms.DataGridView();
-            this.ContextMenuStripFindUserFeedback = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
-            this.查看详情ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Idea_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.User_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +40,9 @@
             this.Processor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Create_Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Update_Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContextMenuStripFindUserFeedback = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUserFeedback)).BeginInit();
             this.ContextMenuStripFindUserFeedback.SuspendLayout();
             this.SuspendLayout();
@@ -80,29 +80,6 @@
             this.DataGridViewUserFeedback.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DataGridViewUserFeedback.Size = new System.Drawing.Size(1150, 690);
             this.DataGridViewUserFeedback.TabIndex = 1;
-            // 
-            // ContextMenuStripFindUserFeedback
-            // 
-            this.ContextMenuStripFindUserFeedback.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.ContextMenuStripFindUserFeedback.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ReFind,
-            this.查看详情ToolStripMenuItem});
-            this.ContextMenuStripFindUserFeedback.Name = "ContextMenuStripFindUser";
-            this.ContextMenuStripFindUserFeedback.Size = new System.Drawing.Size(189, 64);
-            // 
-            // ReFind
-            // 
-            this.ReFind.Name = "ReFind";
-            this.ReFind.Size = new System.Drawing.Size(188, 30);
-            this.ReFind.Text = "重置查询范围";
-            this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
-            // 
-            // 查看详情ToolStripMenuItem
-            // 
-            this.查看详情ToolStripMenuItem.Name = "查看详情ToolStripMenuItem";
-            this.查看详情ToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
-            this.查看详情ToolStripMenuItem.Text = "查看详情";
-            this.查看详情ToolStripMenuItem.Click += new System.EventHandler(this.查看详情ToolStripMenuItem_Click);
             // 
             // Idea_ID
             // 
@@ -167,6 +144,29 @@
             this.Update_Time.Name = "Update_Time";
             this.Update_Time.ReadOnly = true;
             // 
+            // ContextMenuStripFindUserFeedback
+            // 
+            this.ContextMenuStripFindUserFeedback.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.ContextMenuStripFindUserFeedback.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ReFind,
+            this.ViewDetails});
+            this.ContextMenuStripFindUserFeedback.Name = "ContextMenuStripFindUser";
+            this.ContextMenuStripFindUserFeedback.Size = new System.Drawing.Size(241, 97);
+            // 
+            // ReFind
+            // 
+            this.ReFind.Name = "ReFind";
+            this.ReFind.Size = new System.Drawing.Size(240, 30);
+            this.ReFind.Text = "重置查询范围";
+            this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
+            // 
+            // ViewDetails
+            // 
+            this.ViewDetails.Name = "ViewDetails";
+            this.ViewDetails.Size = new System.Drawing.Size(240, 30);
+            this.ViewDetails.Text = "查看详情";
+            this.ViewDetails.Click += new System.EventHandler(this.ViewDetails_Click);
+            // 
             // FormUserFeedback
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -186,9 +186,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView DataGridViewUserFeedback;
-        private System.Windows.Forms.ContextMenuStrip ContextMenuStripFindUserFeedback;
-        private System.Windows.Forms.ToolStripMenuItem ReFind;
-        private System.Windows.Forms.ToolStripMenuItem 查看详情ToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Idea_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn User_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
@@ -198,5 +195,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Processor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Create_Time;
         private System.Windows.Forms.DataGridViewTextBoxColumn Update_Time;
+        public System.Windows.Forms.ContextMenuStrip ContextMenuStripFindUserFeedback;
+        public System.Windows.Forms.ToolStripMenuItem ReFind;
+        public System.Windows.Forms.ToolStripMenuItem ViewDetails;
     }
 }
