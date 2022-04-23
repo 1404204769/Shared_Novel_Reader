@@ -53,8 +53,9 @@
             this.Valid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
-            this.MyRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewAllVersion = new System.Windows.Forms.ToolStripMenuItem();
+            this.MyRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewChapter = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewResourceBookAllChapter)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -210,10 +211,11 @@
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ViewDetails,
+            this.ViewChapter,
             this.ViewAllVersion,
             this.MyRefresh});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(241, 127);
+            this.contextMenuStrip.Size = new System.Drawing.Size(241, 157);
             // 
             // ViewDetails
             // 
@@ -222,6 +224,13 @@
             this.ViewDetails.Text = "查看详情";
             this.ViewDetails.Click += new System.EventHandler(this.ViewDetails_Click);
             // 
+            // ViewAllVersion
+            // 
+            this.ViewAllVersion.Name = "ViewAllVersion";
+            this.ViewAllVersion.Size = new System.Drawing.Size(240, 30);
+            this.ViewAllVersion.Text = "查看历史版本";
+            this.ViewAllVersion.Click += new System.EventHandler(this.ViewAllVersion_Click);
+            // 
             // MyRefresh
             // 
             this.MyRefresh.Name = "MyRefresh";
@@ -229,12 +238,12 @@
             this.MyRefresh.Text = "刷新";
             this.MyRefresh.Click += new System.EventHandler(this.MyRefresh_Click);
             // 
-            // ViewAllVersion
+            // ViewChapter
             // 
-            this.ViewAllVersion.Name = "ViewAllVersion";
-            this.ViewAllVersion.Size = new System.Drawing.Size(240, 30);
-            this.ViewAllVersion.Text = "查看历史版本";
-            this.ViewAllVersion.Click += new System.EventHandler(this.ViewAllVersion_Click);
+            this.ViewChapter.Name = "ViewChapter";
+            this.ViewChapter.Size = new System.Drawing.Size(240, 30);
+            this.ViewChapter.Text = "查看章节内容";
+            this.ViewChapter.Click += new System.EventHandler(this.ViewChapter_Click);
             // 
             // FormBookAllChapter
             // 
@@ -243,7 +252,7 @@
             this.ClientSize = new System.Drawing.Size(928, 1144);
             this.Controls.Add(this.DataGridViewResourceBookAllChapter);
             this.Name = "FormBookAllChapter";
-            this.Text = "FormBookAllChapter";
+            this.Text = "查看图书所有章节";
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewResourceBookAllChapter)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -267,5 +276,6 @@
         private System.Windows.Forms.ToolStripMenuItem ViewDetails;
         private System.Windows.Forms.ToolStripMenuItem MyRefresh;
         private System.Windows.Forms.ToolStripMenuItem ViewAllVersion;
+        private System.Windows.Forms.ToolStripMenuItem ViewChapter;
     }
 }

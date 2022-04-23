@@ -9,9 +9,12 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
 {
     public partial class FormChapterAllVersion : Form
     {
+        string BookName;
         int BookID, PartNum, ChapterNum;
-        public FormChapterAllVersion(int Book_ID,int Part_Num,int Chapter_Num)
+        public FormChapterContent FormChapterContent = null;
+        public FormChapterAllVersion(string Book_Name,int Book_ID,int Part_Num,int Chapter_Num)
         {
+            BookName = Book_Name;
             BookID = Book_ID;
             PartNum = Part_Num;
             ChapterNum = Chapter_Num;
@@ -19,7 +22,13 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
             LoadChapterAllVersion();
         }
 
-
+        public void DisposeFormChapterContent()
+        {
+            if(FormChapterContent != null)
+            {
+                FormChapterContent.Dispose();
+            }
+        }
 
         /// <summary>
         /// 查询指定章节所有版本
@@ -70,7 +79,6 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
         private void GetChapterList(in JArray ChapterListJson, out string[][] ChapterListStr)
         {
             JObject MemoJson;
-            JArray ContentJson;
             ChapterListStr = new string[ChapterListJson.Count][];
 
             for (int i = 0; i < ChapterListJson.Count; i++)
@@ -86,17 +94,29 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
                         MemoJson = JObject.Parse(RowData[j]);
                         RowData[j] = MemoJson.ToString();
                     }
-                    else if (ColName == "Content")
-                    {
-                        ContentJson = (JArray)JsonConvert.DeserializeObject(RowData[j]);
-                        //ContentJson = JObject.Parse(RowData[j]).ToObject<JArray>();
-                        RowData[j] = ContentJson.ToString();
-                    }
                 }
                 ChapterListStr[i] = RowData;
             }
             return;
         }
+
+        private void ViewChapter_Click(object sender, EventArgs e)
+        {
+            // 获取当前行的下标
+            int RowIndex = DataGridViewResourceBookAllChapter.CurrentRow.Index;
+            BookID = Convert.ToInt32((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[0].Value);
+            PartNum = Convert.ToInt32((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[2].Value);
+            ChapterNum = Convert.ToInt32((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[3].Value);
+            // 展示前选择搜索范围
+            // 弹出确认框
+            DisposeFormChapterContent();
+
+            JArray ContentArray = (JArray)JsonConvert.DeserializeObject((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[5].Value);
+            string ChapterTitle = (string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[4].Value;
+            FormChapterContent = new FormChapterContent(BookName, PartNum, ChapterNum, ChapterTitle, ContentArray);
+            FormChapterContent.Visible = true;
+        }
+
         private void ViewDetails_Click(object sender, EventArgs e)
         {
             int RowIndex = DataGridViewResourceBookAllChapter.CurrentRow.Index;

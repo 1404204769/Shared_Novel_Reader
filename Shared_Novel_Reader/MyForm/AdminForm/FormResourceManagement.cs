@@ -27,6 +27,16 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             InitializeComponent();
         }
 
+        public void DisposeFormBookAllChapter()
+        {
+            if (FormBookAllChapter != null)
+            {
+                FormBookAllChapter.DisposeFormChapterAllVersion();
+                FormBookAllChapter.DisposeFormChapterContent();
+                FormBookAllChapter.Dispose();
+            }
+        }
+
         /// <summary>
         /// 查询所有
         /// </summary>
@@ -163,13 +173,13 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             // 获取当前行的下标
             int RowIndex = DataGridViewResourceBook.CurrentRow.Index;
             int BookID = Convert.ToInt32((string)DataGridViewResourceBook.Rows[RowIndex].Cells[0].Value);
+            string BookName = (string)DataGridViewResourceBook.Rows[RowIndex].Cells[1].Value;
+
             // 展示前选择搜索范围
             // 弹出确认框
-            if (FormBookAllChapter != null)
-            {
-                FormBookAllChapter.Dispose();
-            }
-            FormBookAllChapter = new FormBookAllChapter(BookID);
+            DisposeFormBookAllChapter();
+
+            FormBookAllChapter = new FormBookAllChapter(BookName,BookID);
             FormBookAllChapter.Visible = true;
         }
     }

@@ -10,12 +10,32 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
     public partial class FormBookAllChapter : Form
     {
         int BookID, PartNum, ChapterNum;
-        FormChapterAllVersion FormChapterAllVersion = null;
-        public FormBookAllChapter(int Book_ID)
+        string BookName;
+        public FormChapterAllVersion FormChapterAllVersion = null;// 章节版本
+        public FormChapterContent FormChapterContent = null;// 章节内容
+        public FormBookAllChapter(string Book_Name,int Book_ID)
         {
+            BookName = Book_Name;
             BookID = Book_ID;
             InitializeComponent();
             LoadBookAllChapter();
+        }
+
+        public void DisposeFormChapterAllVersion()
+        {
+            if(FormChapterAllVersion != null)
+            {
+                FormChapterAllVersion.DisposeFormChapterContent();
+                FormChapterAllVersion.Dispose();
+            }
+        }
+
+        public void DisposeFormChapterContent()
+        {
+            if (FormChapterContent != null)
+            {
+                FormChapterContent.Dispose();
+            }
         }
 
         /// <summary>
@@ -67,7 +87,6 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
         private void GetChapterList(in JArray ChapterListJson, out string[][] ChapterListStr)
         {
             JObject MemoJson;
-            JArray ContentJson;
             ChapterListStr = new string[ChapterListJson.Count][];
 
             for (int i = 0; i < ChapterListJson.Count; i++)
@@ -82,12 +101,6 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
                     {
                         MemoJson = JObject.Parse(RowData[j]);
                         RowData[j] = MemoJson.ToString();
-                    }
-                    else if(ColName == "Content")
-                    {
-                        ContentJson = (JArray)JsonConvert.DeserializeObject(RowData[j]);
-                        //ContentJson = JObject.Parse(RowData[j]).ToObject<JArray>();
-                        RowData[j] = ContentJson.ToString();
                     }
                 }
                 ChapterListStr[i] = RowData;
@@ -106,6 +119,23 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
             MessageBox.Show(show);
         }
 
+        private void ViewChapter_Click(object sender, EventArgs e)
+        {
+            // 获取当前行的下标
+            int RowIndex = DataGridViewResourceBookAllChapter.CurrentRow.Index;
+            BookID = Convert.ToInt32((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[0].Value);
+            PartNum = Convert.ToInt32((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[2].Value);
+            ChapterNum = Convert.ToInt32((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[3].Value);
+            // 展示前选择搜索范围
+            // 弹出确认框
+            DisposeFormChapterContent();
+            
+            JArray ContentArray = (JArray)JsonConvert.DeserializeObject((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[5].Value);
+            string ChapterTitle = (string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[4].Value;
+            FormChapterContent = new FormChapterContent(BookName, PartNum, ChapterNum,ChapterTitle, ContentArray);
+            FormChapterContent.Visible = true;
+        }
+
         private void MyRefresh_Click(object sender, EventArgs e)
         {
             LoadBookAllChapter();
@@ -120,11 +150,8 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
             ChapterNum = Convert.ToInt32((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[3].Value);
             // 展示前选择搜索范围
             // 弹出确认框
-            if (FormChapterAllVersion != null)
-            {
-                FormChapterAllVersion.Dispose();
-            }
-            FormChapterAllVersion = new FormChapterAllVersion(BookID, PartNum, ChapterNum);
+            DisposeFormChapterAllVersion();
+            FormChapterAllVersion = new FormChapterAllVersion(BookName,BookID, PartNum, ChapterNum);
             FormChapterAllVersion.Visible = true;
         }
     }
