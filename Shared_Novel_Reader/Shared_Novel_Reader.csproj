@@ -275,6 +275,9 @@
     <EmbeddedResource Include="MyForm\AdminForm\Resource\FormBookAllChapter.resx">
       <DependentUpon>FormBookAllChapter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\AdminForm\Resource\FormChapterAllVersion.resx">
+      <DependentUpon>FormChapterAllVersion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyForm\FormAdminControl.resx">
       <DependentUpon>FormAdminControl.cs</DependentUpon>
     </EmbeddedResource>

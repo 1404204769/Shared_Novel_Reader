@@ -54,6 +54,7 @@
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.MyRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewAllVersion = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewResourceBookAllChapter)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -107,7 +108,7 @@
             this.DataGridViewResourceBookAllChapter.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGridViewResourceBookAllChapter.RowTemplate.Height = 30;
             this.DataGridViewResourceBookAllChapter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridViewResourceBookAllChapter.Size = new System.Drawing.Size(928, 1157);
+            this.DataGridViewResourceBookAllChapter.Size = new System.Drawing.Size(928, 1144);
             this.DataGridViewResourceBookAllChapter.TabIndex = 4;
             // 
             // Book_ID
@@ -209,9 +210,10 @@
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ViewDetails,
+            this.ViewAllVersion,
             this.MyRefresh});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(241, 97);
+            this.contextMenuStrip.Size = new System.Drawing.Size(241, 127);
             // 
             // ViewDetails
             // 
@@ -227,11 +229,18 @@
             this.MyRefresh.Text = "刷新";
             this.MyRefresh.Click += new System.EventHandler(this.MyRefresh_Click);
             // 
+            // ViewAllVersion
+            // 
+            this.ViewAllVersion.Name = "ViewAllVersion";
+            this.ViewAllVersion.Size = new System.Drawing.Size(240, 30);
+            this.ViewAllVersion.Text = "查看历史版本";
+            this.ViewAllVersion.Click += new System.EventHandler(this.ViewAllVersion_Click);
+            // 
             // FormBookAllChapter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 1157);
+            this.ClientSize = new System.Drawing.Size(928, 1144);
             this.Controls.Add(this.DataGridViewResourceBookAllChapter);
             this.Name = "FormBookAllChapter";
             this.Text = "FormBookAllChapter";
@@ -257,5 +266,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem ViewDetails;
         private System.Windows.Forms.ToolStripMenuItem MyRefresh;
+        private System.Windows.Forms.ToolStripMenuItem ViewAllVersion;
     }
 }

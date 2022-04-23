@@ -2,12 +2,6 @@
 using Newtonsoft.Json.Linq;
 using Shared_Novel_Reader.Tools;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,20 +9,19 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
 {
     public partial class FormBookAllChapter : Form
     {
-        int BookID;
+        int BookID, PartNum, ChapterNum;
+        FormChapterAllVersion FormChapterAllVersion = null;
         public FormBookAllChapter(int Book_ID)
         {
             BookID = Book_ID;
             InitializeComponent();
-            LoadResourceBook();
+            LoadBookAllChapter();
         }
-
-
 
         /// <summary>
         /// 查询所有
         /// </summary>
-        private async void LoadResourceBook()
+        private async void LoadBookAllChapter()
         {
             JObject ReqJson = new JObject();
             ReqJson["SearchType"] = "Chapter";
@@ -61,7 +54,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
                 string[][] ChapterListStr;
                 JArray ChapterListJson = (JArray)res.Data["Chapter_List"];
                 // MessageBox.Show(ChapterListJson.ToString());
-                GetBookList(in ChapterListJson, out ChapterListStr);
+                GetChapterList(in ChapterListJson, out ChapterListStr);
                 for (int i = 0; i < ChapterListJson.Count; i++)
                 {
                     DataGridViewResourceBookAllChapter.Rows.Add(ChapterListStr[i]);
@@ -71,7 +64,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
         }
 
 
-        private void GetBookList(in JArray ChapterListJson, out string[][] ChapterListStr)
+        private void GetChapterList(in JArray ChapterListJson, out string[][] ChapterListStr)
         {
             JObject MemoJson;
             JArray ContentJson;
@@ -115,7 +108,24 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
 
         private void MyRefresh_Click(object sender, EventArgs e)
         {
-            LoadResourceBook();
+            LoadBookAllChapter();
+        }
+
+        private void ViewAllVersion_Click(object sender, EventArgs e)
+        {
+            // 获取当前行的下标
+            int RowIndex = DataGridViewResourceBookAllChapter.CurrentRow.Index;
+            BookID = Convert.ToInt32((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[0].Value);
+            PartNum = Convert.ToInt32((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[2].Value);
+            ChapterNum = Convert.ToInt32((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[3].Value);
+            // 展示前选择搜索范围
+            // 弹出确认框
+            if (FormChapterAllVersion != null)
+            {
+                FormChapterAllVersion.Dispose();
+            }
+            FormChapterAllVersion = new FormChapterAllVersion(BookID, PartNum, ChapterNum);
+            FormChapterAllVersion.Visible = true;
         }
     }
 }
