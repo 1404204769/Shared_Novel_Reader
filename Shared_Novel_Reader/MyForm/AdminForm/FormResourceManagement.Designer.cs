@@ -41,9 +41,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DataGridViewResourceBook = new System.Windows.Forms.DataGridView();
-            this.ContextMenuStripFindResourceBook = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
-            this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.Book_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Book_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,6 +50,10 @@
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Create_Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Update_Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContextMenuStripFindResourceBook = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewChapters = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewResourceBook)).BeginInit();
             this.ContextMenuStripFindResourceBook.SuspendLayout();
             this.SuspendLayout();
@@ -107,29 +108,6 @@
             this.DataGridViewResourceBook.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DataGridViewResourceBook.Size = new System.Drawing.Size(1150, 690);
             this.DataGridViewResourceBook.TabIndex = 3;
-            // 
-            // ContextMenuStripFindResourceBook
-            // 
-            this.ContextMenuStripFindResourceBook.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.ContextMenuStripFindResourceBook.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ReFind,
-            this.ViewDetails});
-            this.ContextMenuStripFindResourceBook.Name = "ContextMenuStripFindUser";
-            this.ContextMenuStripFindResourceBook.Size = new System.Drawing.Size(189, 64);
-            // 
-            // ReFind
-            // 
-            this.ReFind.Name = "ReFind";
-            this.ReFind.Size = new System.Drawing.Size(188, 30);
-            this.ReFind.Text = "重置查询范围";
-            this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
-            // 
-            // ViewDetails
-            // 
-            this.ViewDetails.Name = "ViewDetails";
-            this.ViewDetails.Size = new System.Drawing.Size(188, 30);
-            this.ViewDetails.Text = "查看详情";
-            this.ViewDetails.Click += new System.EventHandler(this.ViewDetails_Click);
             // 
             // Book_ID
             // 
@@ -218,6 +196,37 @@
             this.Update_Time.Name = "Update_Time";
             this.Update_Time.ReadOnly = true;
             // 
+            // ContextMenuStripFindResourceBook
+            // 
+            this.ContextMenuStripFindResourceBook.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.ContextMenuStripFindResourceBook.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ReFind,
+            this.ViewDetails,
+            this.ViewChapters});
+            this.ContextMenuStripFindResourceBook.Name = "ContextMenuStripFindUser";
+            this.ContextMenuStripFindResourceBook.Size = new System.Drawing.Size(241, 127);
+            // 
+            // ReFind
+            // 
+            this.ReFind.Name = "ReFind";
+            this.ReFind.Size = new System.Drawing.Size(240, 30);
+            this.ReFind.Text = "重置查询范围";
+            this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
+            // 
+            // ViewDetails
+            // 
+            this.ViewDetails.Name = "ViewDetails";
+            this.ViewDetails.Size = new System.Drawing.Size(240, 30);
+            this.ViewDetails.Text = "查看详情";
+            this.ViewDetails.Click += new System.EventHandler(this.ViewDetails_Click);
+            // 
+            // ViewChapters
+            // 
+            this.ViewChapters.Name = "ViewChapters";
+            this.ViewChapters.Size = new System.Drawing.Size(240, 30);
+            this.ViewChapters.Text = "查看章节信息";
+            this.ViewChapters.Click += new System.EventHandler(this.ViewChapters_Click);
+            // 
             // FormResourceManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -249,5 +258,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
         private System.Windows.Forms.DataGridViewTextBoxColumn Create_Time;
         private System.Windows.Forms.DataGridViewTextBoxColumn Update_Time;
+        private System.Windows.Forms.ToolStripMenuItem ViewChapters;
     }
 }

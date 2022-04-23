@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using Shared_Novel_Reader.MyForm.AdminForm.Resource;
 using Shared_Novel_Reader.Tools;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
 {
     public partial class FormResourceManagement : Form
     {
+        public FormBookAllChapter FormBookAllChapter = null;
         public bool IsFindAll = true;
         public string BookNameStr = String.Empty;
         public string AuthorStr = String.Empty;
@@ -77,7 +79,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
 
                 string[][] BookListStr;
                 JArray BookListJson = (JArray)res.Data["Book_List"];
-                MessageBox.Show(BookListJson.ToString());
+                // MessageBox.Show(BookListJson.ToString());
                 GetBookList(in BookListJson, out BookListStr);
                 for (int i = 0; i < BookListJson.Count; i++)
                 {
@@ -154,6 +156,21 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
                 show += DataGridViewResourceBook.Columns[i].HeaderText.ToString()  + " : " + (string)DataGridViewResourceBook.Rows[RowIndex].Cells[i].Value + "\n";
             }
             MessageBox.Show(show);
+        }
+
+        private void ViewChapters_Click(object sender, EventArgs e)
+        {
+            // 获取当前行的下标
+            int RowIndex = DataGridViewResourceBook.CurrentRow.Index;
+            int BookID = Convert.ToInt32((string)DataGridViewResourceBook.Rows[RowIndex].Cells[0].Value);
+            // 展示前选择搜索范围
+            // 弹出确认框
+            if (FormBookAllChapter != null)
+            {
+                FormBookAllChapter.Dispose();
+            }
+            FormBookAllChapter = new FormBookAllChapter(BookID);
+            FormBookAllChapter.Visible = true;
         }
     }
 }
