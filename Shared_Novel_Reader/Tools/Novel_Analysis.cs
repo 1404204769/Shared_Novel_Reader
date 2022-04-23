@@ -19,6 +19,25 @@ namespace Shared_Novel_Reader.Tools
         private static Regex BookNameRegex = new Regex(@"(?<BookName>[^<>/\\\|:""\*\?]+)\.\w+$");
         private static String Text { get; set; }// 内容
 
+
+
+
+        //定义一个函数，返回字符串中的汉字个数
+
+        public static int GetHanNumFromString(string str)
+        {
+            int count = 0;
+            Regex regex = new Regex(@"^[\u4E00-\u9FA5]{0,}$");
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (regex.IsMatch(str[i].ToString()))
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
         /// <summary>
         /// 加载本地资源文件并解析
         /// </summary>

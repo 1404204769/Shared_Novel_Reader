@@ -343,6 +343,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Book\" />
+    <Folder Include="MyForm\UserForm\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\chart-bar.ico" />

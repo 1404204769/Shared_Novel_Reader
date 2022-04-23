@@ -104,16 +104,19 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
         {
             JObject MemoJson;
             BookListStr = new string[BookListJson.Count][];
+            string[] ColName = new string[DataGridViewResourceBook.ColumnCount];
+            for (int i = 0; i < DataGridViewResourceBook.ColumnCount; i++)
+            {
+                ColName[i] = DataGridViewResourceBook.Columns[i].Name;
+            }
 
             for (int i = 0; i < BookListJson.Count; i++)
             {
-                string ColName;
                 string[] RowData = new string[DataGridViewResourceBook.ColumnCount];
                 for (int j = 0; j < DataGridViewResourceBook.ColumnCount; j++)
                 {
-                    ColName = DataGridViewResourceBook.Columns[j].Name.ToString();
-                    RowData[j] = BookListJson[i][ColName].ToString();
-                    if(ColName == "Memo")
+                    RowData[j] = BookListJson[i][ColName[j]].ToString();
+                    if(ColName[j] == "Memo")
                     {
                         MemoJson = JObject.Parse(RowData[j]);
                         RowData[j] = MemoJson.ToString();
@@ -161,9 +164,17 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
         {
             int RowIndex = DataGridViewResourceBook.CurrentRow.Index;
             string show = "";
+            string[] ColName = new string[DataGridViewResourceBook.ColumnCount];
+            string[] ColHead = new string[DataGridViewResourceBook.ColumnCount];
             for (int i = 0; i < DataGridViewResourceBook.ColumnCount; i++)
             {
-                show += DataGridViewResourceBook.Columns[i].HeaderText.ToString()  + " : " + (string)DataGridViewResourceBook.Rows[RowIndex].Cells[i].Value + "\n";
+                ColHead[i] = DataGridViewResourceBook.Columns[i].HeaderText.ToString();
+                ColName[i] = DataGridViewResourceBook.Columns[i].Name;
+
+            }
+            for (int i = 0; i < DataGridViewResourceBook.ColumnCount; i++)
+            {
+                show += ColHead[i] + " : " + (string)DataGridViewResourceBook.Rows[RowIndex].Cells[ColName[i]].Value + "\n";
             }
             MessageBox.Show(show);
         }

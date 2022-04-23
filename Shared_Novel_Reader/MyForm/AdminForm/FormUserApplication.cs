@@ -89,7 +89,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
 
                 string[][] ApplicationListStr;
                 JArray ApplicationListJson = (JArray)res.Data["ApplicationList"];
-                MessageBox.Show(ApplicationListJson.ToString());
+                // MessageBox.Show(ApplicationListJson.ToString());
                 GetApplicationList(in ApplicationListJson, out ApplicationListStr);
                 for (int i = 0; i < ApplicationListJson.Count; i++)
                 {
@@ -106,15 +106,27 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             ApplicationListStr = new string[ApplicationListJson.Count][];
 
 
+            string[] ColName = new string[DataGridViewUserApplication.ColumnCount];
+            for (int i = 0; i < DataGridViewUserApplication.ColumnCount; i++)
+            {
+                ColName[i] = DataGridViewUserApplication.Columns[i].Name;
+            }
 
             for (int i = 0; i < ApplicationListJson.Count; i++)
             {
                 MemoJson = JObject.Parse(ApplicationListJson[i]["Memo"].ToString());
-                string[] RowData = { Convert.ToString(ApplicationListJson[i]["Upload_ID"]),Convert.ToString(ApplicationListJson[i]["User_ID"]),
-                     Convert.ToString(ApplicationListJson[i]["Book_ID"]),(string)ApplicationListJson[i]["Content"],MemoJson["Explain"].ToString(),
-                    (string)ApplicationListJson[i]["Status"],Convert.ToString(ApplicationListJson[i]["IsManage"]),
-                    Convert.ToString(ApplicationListJson[i]["Processor"]),
-                    (string)ApplicationListJson[i]["Create_Time"],(string)ApplicationListJson[i]["Update_Time"]};
+
+                string[] RowData = new string[DataGridViewUserApplication.ColumnCount];
+                for (int j = 0; j < DataGridViewUserApplication.ColumnCount; j++)
+                {
+                    if (ColName[j] == "Memo")
+                    {
+                        RowData[j] = MemoJson["Explain"].ToString();
+                        continue;
+                    }
+                    RowData[j] = ApplicationListJson[i][ColName[j]].ToString();
+                }
+
                 ApplicationListStr[i] = RowData;
             }
             return;
@@ -124,11 +136,19 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
         {
             int RowIndex = DataGridViewUserApplication.CurrentRow.Index;
             string show = "";
+            string[] ColName = new string[DataGridViewUserApplication.ColumnCount];
+            string[] ColHead = new string[DataGridViewUserApplication.ColumnCount];
             for (int i = 0; i < DataGridViewUserApplication.ColumnCount; i++)
             {
-                show += DataGridViewUserApplication.Columns[i].HeaderText.ToString() + " : " + (string)DataGridViewUserApplication.Rows[RowIndex].Cells[i].Value + "\n";
+                ColHead[i] = DataGridViewUserApplication.Columns[i].HeaderText.ToString();
+                ColName[i] = DataGridViewUserApplication.Columns[i].Name;
+
             }
-            
+            for (int i = 0; i < DataGridViewUserApplication.ColumnCount; i++)
+            {
+                show += ColHead[i] + " : " + (string)DataGridViewUserApplication.Rows[RowIndex].Cells[ColName[i]].Value + "\n";
+            }
+
             MessageBox.Show(show);
         }
 

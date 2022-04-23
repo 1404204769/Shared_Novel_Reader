@@ -33,7 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DataGridViewChapterContent = new System.Windows.Forms.DataGridView();
             this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.toolStripTop = new System.Windows.Forms.ToolStrip();
             this.toolStripLabelBookName = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabelBookNameValue = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabelPartNum = new System.Windows.Forms.ToolStripLabel();
@@ -42,8 +42,16 @@
             this.toolStripLabelChapterNumValue = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabelChapterTitle = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabelChapterTitleValue = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripBottom = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabelRowNum = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabelRowNumValue = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabelChineseNum = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabelChineseNumValue = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabelVersion = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabelVersionValue = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewChapterContent)).BeginInit();
-            this.toolStrip.SuspendLayout();
+            this.toolStripTop.SuspendLayout();
+            this.toolStripBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // DataGridViewChapterContent
@@ -77,7 +85,7 @@
             this.DataGridViewChapterContent.RowTemplate.Height = 30;
             this.DataGridViewChapterContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DataGridViewChapterContent.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridViewChapterContent.Size = new System.Drawing.Size(928, 1115);
+            this.DataGridViewChapterContent.Size = new System.Drawing.Size(928, 1086);
             this.DataGridViewChapterContent.TabIndex = 0;
             // 
             // Content
@@ -93,10 +101,10 @@
             this.Content.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Content.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // toolStrip
+            // toolStripTop
             // 
-            this.toolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripTop.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStripTop.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabelBookName,
             this.toolStripLabelBookNameValue,
             this.toolStripLabelPartNum,
@@ -105,11 +113,11 @@
             this.toolStripLabelChapterNumValue,
             this.toolStripLabelChapterTitle,
             this.toolStripLabelChapterTitleValue});
-            this.toolStrip.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(928, 29);
-            this.toolStrip.TabIndex = 1;
-            this.toolStrip.Text = "toolStrip1";
+            this.toolStripTop.Location = new System.Drawing.Point(0, 0);
+            this.toolStripTop.Name = "toolStripTop";
+            this.toolStripTop.Size = new System.Drawing.Size(928, 29);
+            this.toolStripTop.TabIndex = 1;
+            this.toolStripTop.Text = "toolStrip1";
             // 
             // toolStripLabelBookName
             // 
@@ -165,19 +173,83 @@
             this.toolStripLabelChapterTitleValue.Text = "章节标题";
             this.toolStripLabelChapterTitleValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // toolStripBottom
+            // 
+            this.toolStripBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStripBottom.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStripBottom.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabelRowNum,
+            this.toolStripLabelRowNumValue,
+            this.toolStripLabelChineseNum,
+            this.toolStripLabelChineseNumValue,
+            this.toolStripLabelVersionValue,
+            this.toolStripLabelVersion});
+            this.toolStripBottom.Location = new System.Drawing.Point(0, 1115);
+            this.toolStripBottom.Name = "toolStripBottom";
+            this.toolStripBottom.Size = new System.Drawing.Size(928, 29);
+            this.toolStripBottom.TabIndex = 2;
+            this.toolStripBottom.Text = "toolStrip1";
+            // 
+            // toolStripLabelRowNum
+            // 
+            this.toolStripLabelRowNum.Name = "toolStripLabelRowNum";
+            this.toolStripLabelRowNum.Size = new System.Drawing.Size(50, 24);
+            this.toolStripLabelRowNum.Text = "行数:";
+            this.toolStripLabelRowNum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // toolStripLabelRowNumValue
+            // 
+            this.toolStripLabelRowNumValue.Name = "toolStripLabelRowNumValue";
+            this.toolStripLabelRowNumValue.Size = new System.Drawing.Size(46, 24);
+            this.toolStripLabelRowNumValue.Text = "行数";
+            this.toolStripLabelRowNumValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripLabelChineseNum
+            // 
+            this.toolStripLabelChineseNum.Name = "toolStripLabelChineseNum";
+            this.toolStripLabelChineseNum.Size = new System.Drawing.Size(50, 24);
+            this.toolStripLabelChineseNum.Text = "字数:";
+            this.toolStripLabelChineseNum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // toolStripLabelChineseNumValue
+            // 
+            this.toolStripLabelChineseNumValue.Name = "toolStripLabelChineseNumValue";
+            this.toolStripLabelChineseNumValue.Size = new System.Drawing.Size(46, 24);
+            this.toolStripLabelChineseNumValue.Text = "字数";
+            this.toolStripLabelChineseNumValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripLabelVersion
+            // 
+            this.toolStripLabelVersion.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabelVersion.Name = "toolStripLabelVersion";
+            this.toolStripLabelVersion.Size = new System.Drawing.Size(50, 24);
+            this.toolStripLabelVersion.Text = "版本:";
+            this.toolStripLabelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // toolStripLabelVersionValue
+            // 
+            this.toolStripLabelVersionValue.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabelVersionValue.Name = "toolStripLabelVersionValue";
+            this.toolStripLabelVersionValue.Size = new System.Drawing.Size(46, 24);
+            this.toolStripLabelVersionValue.Text = "版本";
+            this.toolStripLabelVersionValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // FormChapterContent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(928, 1144);
             this.Controls.Add(this.DataGridViewChapterContent);
-            this.Controls.Add(this.toolStrip);
+            this.Controls.Add(this.toolStripTop);
+            this.Controls.Add(this.toolStripBottom);
             this.Name = "FormChapterContent";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "查看章节内容";
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewChapterContent)).EndInit();
-            this.toolStrip.ResumeLayout(false);
-            this.toolStrip.PerformLayout();
+            this.toolStripTop.ResumeLayout(false);
+            this.toolStripTop.PerformLayout();
+            this.toolStripBottom.ResumeLayout(false);
+            this.toolStripBottom.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,7 +259,7 @@
 
         private System.Windows.Forms.DataGridView DataGridViewChapterContent;
         private System.Windows.Forms.DataGridViewTextBoxColumn Content;
-        private System.Windows.Forms.ToolStrip toolStrip;
+        private System.Windows.Forms.ToolStrip toolStripTop;
         private System.Windows.Forms.ToolStripLabel toolStripLabelPartNum;
         private System.Windows.Forms.ToolStripLabel toolStripLabelChapterNum;
         private System.Windows.Forms.ToolStripLabel toolStripLabelBookName;
@@ -196,5 +268,12 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabelPartNumValue;
         private System.Windows.Forms.ToolStripLabel toolStripLabelChapterTitle;
         private System.Windows.Forms.ToolStripLabel toolStripLabelChapterTitleValue;
+        private System.Windows.Forms.ToolStrip toolStripBottom;
+        private System.Windows.Forms.ToolStripLabel toolStripLabelRowNum;
+        private System.Windows.Forms.ToolStripLabel toolStripLabelRowNumValue;
+        private System.Windows.Forms.ToolStripLabel toolStripLabelChineseNum;
+        private System.Windows.Forms.ToolStripLabel toolStripLabelChineseNumValue;
+        private System.Windows.Forms.ToolStripLabel toolStripLabelVersionValue;
+        private System.Windows.Forms.ToolStripLabel toolStripLabelVersion;
     }
 }

@@ -47,7 +47,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
 
                 string[][] UserListStr;
                 JArray UserListJson = (JArray)res.Data["UserList"];
-                MessageBox.Show(UserListJson.ToString());
+                // MessageBox.Show(UserListJson.ToString());
                 GetUserList(in UserListJson, out UserListStr);
                 for (int i = 0; i < UserListJson.Count; i++)
                 {
@@ -104,7 +104,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             {
                 string[][] UserListStr;
                 JArray UserListJson = (JArray)res.Data["UserList"];
-                MessageBox.Show(UserListJson.ToString());
+                // MessageBox.Show(UserListJson.ToString());
                 GetUserList(in UserListJson, out UserListStr);
                 for (int i = 0; i < UserListJson.Count; i++)
                 {
@@ -118,15 +118,30 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
         private void GetUserList(in JArray UserListJson, out string[][] UserListStr)
         {
             UserListStr = new string[UserListJson.Count][];
-            
-            for(int i = 0;i < UserListJson.Count;i++)
+
+            string[] ColName = new string[DataGridViewUser.ColumnCount];
+            for (int i = 0; i < DataGridViewUser.ColumnCount; i++)
             {
-                string[] RowData = { Convert.ToString(UserListJson[i]["User_ID"]),(string)UserListJson[i]["Name"],
-                    (string)UserListJson[i]["Sex"],Convert.ToString(UserListJson[i]["Level"]),Convert.ToString(UserListJson[i]["Power"]),
-                Convert.ToString(UserListJson[i]["Integral"]),Convert.ToString(UserListJson[i]["Total_Integral"]),(string)UserListJson[i]["Status"]};
+                ColName[i] = DataGridViewUser.Columns[i].Name;
+            }
+
+            for (int i = 0;i < UserListJson.Count;i++)
+            {
+                string[] RowData = new string[DataGridViewUser.ColumnCount];
+                for (int j = 0; j < DataGridViewUser.ColumnCount; j++)
+                {
+                    if(ColName[j] == "User_Name")
+                    {
+                        RowData[j] = UserListJson[i]["Name"].ToString();
+                        continue;
+                    }
+                    RowData[j] = UserListJson[i][ColName[j]].ToString();
+                }
+               
                 UserListStr[i] = RowData;
             }
             return;
+
         }
 
         private void ReFind_Click(object sender, EventArgs e)
@@ -172,9 +187,17 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
         {
             int RowIndex = DataGridViewUser.CurrentRow.Index;
             string show = "";
+            string[] ColName = new string[DataGridViewUser.ColumnCount];
+            string[] ColHead = new string[DataGridViewUser.ColumnCount];
             for (int i = 0; i < DataGridViewUser.ColumnCount; i++)
             {
-                show += DataGridViewUser.Columns[i].HeaderText.ToString() + " : " + (string)DataGridViewUser.Rows[RowIndex].Cells[i].Value + "\n";
+                ColHead[i] = DataGridViewUser.Columns[i].HeaderText.ToString();
+                ColName[i] = DataGridViewUser.Columns[i].Name;
+
+            }
+            for (int i = 0; i < DataGridViewUser.ColumnCount; i++)
+            {
+                show += ColHead[i] + " : " + (string)DataGridViewUser.Rows[RowIndex].Cells[ColName[i]].Value + "\n";
             }
 
             MessageBox.Show(show);

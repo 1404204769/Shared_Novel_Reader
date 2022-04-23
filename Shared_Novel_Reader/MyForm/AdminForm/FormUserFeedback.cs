@@ -91,7 +91,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
 
                 string[][] FeedbackListStr;
                 JArray FeedbackListJson = (JArray)res.Data["FeedbackList"];
-                MessageBox.Show(FeedbackListJson.ToString());
+                // MessageBox.Show(FeedbackListJson.ToString());
                 GetFeedbackList(in FeedbackListJson, out FeedbackListStr);
                 for (int i = 0; i < FeedbackListJson.Count; i++)
                 {
@@ -106,14 +106,25 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
         {
             JObject MemoJson;
             FeedbackListStr = new string[FeedbackListJson.Count][];
+            string[] ColName = new string[DataGridViewUserFeedback.ColumnCount];
+            for (int i = 0; i < DataGridViewUserFeedback.ColumnCount; i++)
+            {
+                ColName[i] = DataGridViewUserFeedback.Columns[i].Name;
+            }
 
             for (int i = 0; i < FeedbackListJson.Count; i++)
             {
+                string[] RowData = new string[DataGridViewUserFeedback.ColumnCount];
                 MemoJson = JObject.Parse(FeedbackListJson[i]["Memo"].ToString());
-                string[] RowData = { Convert.ToString(FeedbackListJson[i]["Idea_ID"]),Convert.ToString(FeedbackListJson[i]["User_ID"]),
-                    (string)FeedbackListJson[i]["Type"],MemoJson["Content"].ToString(),(string)FeedbackListJson[i]["Status"],
-                    Convert.ToString(FeedbackListJson[i]["IsManage"]),Convert.ToString(FeedbackListJson[i]["Processor"]),
-                    (string)FeedbackListJson[i]["Create_Time"],(string)FeedbackListJson[i]["Update_Time"]};
+                for (int j = 0; j < DataGridViewUserFeedback.ColumnCount; j++)
+                {
+                    if (ColName[j] == "Memo")
+                    {
+                        RowData[j] = MemoJson["Content"].ToString();
+                        continue;
+                    }
+                    RowData[j] = FeedbackListJson[i][ColName[j]].ToString();
+                }
                 FeedbackListStr[i] = RowData;
             }
             return;
@@ -162,9 +173,17 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
         {
             int RowIndex = DataGridViewUserFeedback.CurrentRow.Index;
             string show = "";
+            string[] ColName = new string[DataGridViewUserFeedback.ColumnCount];
+            string[] ColHead = new string[DataGridViewUserFeedback.ColumnCount];
             for (int i = 0; i < DataGridViewUserFeedback.ColumnCount; i++)
             {
-                show += DataGridViewUserFeedback.Columns[i].HeaderText.ToString() + " : " + (string)DataGridViewUserFeedback.Rows[RowIndex].Cells[i].Value + "\n";
+                ColHead[i] = DataGridViewUserFeedback.Columns[i].HeaderText.ToString();
+                ColName[i] = DataGridViewUserFeedback.Columns[i].Name;
+
+            }
+            for (int i = 0; i < DataGridViewUserFeedback.ColumnCount; i++)
+            {
+                show += ColHead[i] + " : " + (string)DataGridViewUserFeedback.Rows[RowIndex].Cells[ColName[i]].Value + "\n";
             }
             MessageBox.Show(show);
         }

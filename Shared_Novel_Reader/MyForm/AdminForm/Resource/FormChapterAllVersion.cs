@@ -50,7 +50,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
 
 
             // 加载前把残留的数据删除
-            DataGridViewResourceBookAllChapter.Rows.Clear();
+            DataGridViewResourceChapterAllVersion.Rows.Clear();
 
             if (res == null || !res.Result)
             {
@@ -69,7 +69,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
                 GetChapterList(in ChapterListJson, out ChapterListStr);
                 for (int i = 0; i < ChapterListJson.Count; i++)
                 {
-                    DataGridViewResourceBookAllChapter.Rows.Add(ChapterListStr[i]);
+                    DataGridViewResourceChapterAllVersion.Rows.Add(ChapterListStr[i]);
                 }
                 MessageBox.Show("章节所有版本列表查询成功");
             }
@@ -80,16 +80,19 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
         {
             JObject MemoJson;
             ChapterListStr = new string[ChapterListJson.Count][];
+            string[] ColName = new string[DataGridViewResourceChapterAllVersion.ColumnCount];
+            for (int i = 0; i < DataGridViewResourceChapterAllVersion.ColumnCount; i++)
+            {
+                ColName[i] = DataGridViewResourceChapterAllVersion.Columns[i].Name;
+            }
 
             for (int i = 0; i < ChapterListJson.Count; i++)
             {
-                string ColName;
-                string[] RowData = new string[DataGridViewResourceBookAllChapter.ColumnCount];
-                for (int j = 0; j < DataGridViewResourceBookAllChapter.ColumnCount; j++)
+                string[] RowData = new string[DataGridViewResourceChapterAllVersion.ColumnCount];
+                for (int j = 0; j < DataGridViewResourceChapterAllVersion.ColumnCount; j++)
                 {
-                    ColName = DataGridViewResourceBookAllChapter.Columns[j].Name.ToString();
-                    RowData[j] = ChapterListJson[i][ColName].ToString();
-                    if (ColName == "Memo")
+                    RowData[j] = ChapterListJson[i][ColName[j]].ToString();
+                    if (ColName[j] == "Memo")
                     {
                         MemoJson = JObject.Parse(RowData[j]);
                         RowData[j] = MemoJson.ToString();
@@ -103,27 +106,35 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
         private void ViewChapter_Click(object sender, EventArgs e)
         {
             // 获取当前行的下标
-            int RowIndex = DataGridViewResourceBookAllChapter.CurrentRow.Index;
-            BookID = Convert.ToInt32((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[0].Value);
-            PartNum = Convert.ToInt32((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[2].Value);
-            ChapterNum = Convert.ToInt32((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[3].Value);
+            int RowIndex = DataGridViewResourceChapterAllVersion.CurrentRow.Index;
+            BookID = Convert.ToInt32((string)DataGridViewResourceChapterAllVersion.Rows[RowIndex].Cells[0].Value);
+            PartNum = Convert.ToInt32((string)DataGridViewResourceChapterAllVersion.Rows[RowIndex].Cells[2].Value);
+            ChapterNum = Convert.ToInt32((string)DataGridViewResourceChapterAllVersion.Rows[RowIndex].Cells[3].Value);
             // 展示前选择搜索范围
             // 弹出确认框
             DisposeFormChapterContent();
-
-            JArray ContentArray = (JArray)JsonConvert.DeserializeObject((string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[5].Value);
-            string ChapterTitle = (string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[4].Value;
-            FormChapterContent = new FormChapterContent(BookName, PartNum, ChapterNum, ChapterTitle, ContentArray);
+            int VersionNum = Convert.ToInt32((string)DataGridViewResourceChapterAllVersion.Rows[RowIndex].Cells[8].Value);
+            JArray ContentArray = (JArray)JsonConvert.DeserializeObject((string)DataGridViewResourceChapterAllVersion.Rows[RowIndex].Cells[5].Value);
+            string ChapterTitle = (string)DataGridViewResourceChapterAllVersion.Rows[RowIndex].Cells[4].Value;
+            FormChapterContent = new FormChapterContent(BookName, PartNum, ChapterNum, ChapterTitle, VersionNum,ContentArray);
             FormChapterContent.Visible = true;
         }
 
         private void ViewDetails_Click(object sender, EventArgs e)
         {
-            int RowIndex = DataGridViewResourceBookAllChapter.CurrentRow.Index;
+            int RowIndex = DataGridViewResourceChapterAllVersion.CurrentRow.Index;
             string show = "";
-            for (int i = 0; i < DataGridViewResourceBookAllChapter.ColumnCount; i++)
+            string[] ColName = new string[DataGridViewResourceChapterAllVersion.ColumnCount];
+            string[] ColHead = new string[DataGridViewResourceChapterAllVersion.ColumnCount];
+            for (int i = 0; i < DataGridViewResourceChapterAllVersion.ColumnCount; i++)
             {
-                show += DataGridViewResourceBookAllChapter.Columns[i].HeaderText.ToString() + " : " + (string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[i].Value + "\n";
+                ColHead[i] = DataGridViewResourceChapterAllVersion.Columns[i].HeaderText.ToString();
+                ColName[i] = DataGridViewResourceChapterAllVersion.Columns[i].Name;
+
+            }
+            for (int i = 0; i < DataGridViewResourceChapterAllVersion.ColumnCount; i++)
+            {
+                show += ColHead[i] + " : " + (string)DataGridViewResourceChapterAllVersion.Rows[RowIndex].Cells[ColName[i]].Value + "\n";
             }
             MessageBox.Show(show);
         }
