@@ -16,9 +16,9 @@ namespace Shared_Novel_Reader.models
     internal static class LocalBookShelf
     {
         static private string LocalResPath = Properties.Settings.Default.Local_Res_Path + "\\LocalRes.json";
-        static private List<Book> BookList = new List<Book>();
-        static private JObject LocalRes = new JObject();
-        static private JArray LocalResArray = new JArray();
+        static public List<Book> BookList = new List<Book>();
+        static public JObject LocalRes = new JObject();
+        static public JArray LocalResArray = new JArray();
 
         /// <summary>
         /// 打开并初始化本地书架
@@ -29,7 +29,6 @@ namespace Shared_Novel_Reader.models
             ILog log = LogManager.GetLogger(typeof(LocalBookShelf));
             if (!File.Exists(LocalResPath))
             {
-
                 log.Info(LocalResPath + "文件不存在,即将开始初始化");
                 if (!Config_init())
                 {

@@ -17,23 +17,11 @@ namespace Shared_Novel_Reader
             // JsonTest();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // Application.Run(new MyForm.AdminForm.FormResourceManagement());
-            Application.Run(new MainForm());
-            // reset();
-            // init();
-            /* LoginTest();
-            MessageBox.Show(models.User.show());
-            JObject obj = new JObject();
-            JObject res = Tools.MyClient.PushRequests("show", obj.ToString());
-            if (res == null)
-            {
-                MessageBox.Show("发生错误");
-            }
-            else
-            {
-                MessageBox.Show(res.ToString());
-            }*/
-            // Booktest();
+            Application.Run(new MyForm.FormBookShelf());
+            //Application.Run(new MainForm());
+            //reset();
+            //init();
+            //Booktest();
         }
 
         static void reset()
@@ -80,9 +68,10 @@ namespace Shared_Novel_Reader
             }
 
             models.Book book;
-            string path = "C:\\Users\\LZC\\Desktop\\测试文件\\2\\次元论坛.txt";
+            string path = "C:\\Users\\LZC\\大学\\毕业设计\\毕业设计-设计阶段\\客户端开发过程文件\\测试文件\\1\\次元论坛.txt";
             Tools.Novel_Analysis.Analysis_Local_Resource(out book,path);
-            models.LocalBookShelf.AddToBookshelf(book);
+            if(book != null)
+                models.LocalBookShelf.AddToBookshelf(book);
 
             if (!models.LocalBookShelf.close())
             {
