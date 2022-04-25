@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using log4net;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Shared_Novel_Reader.models
     /// </summary>
     internal class Vol
     {
-
+        ILog log = LogManager.GetLogger(typeof(Vol));
         /// <summary>
         /// 分卷类 初始化
         /// </summary>
@@ -23,6 +24,30 @@ namespace Shared_Novel_Reader.models
             Need_Upload = 0;
             Exist_Upload = 0;
             Chapter_Array = new List<Chapter>();
+        }
+
+        /// <summary>
+        /// 将章节内容标记为最新
+        /// </summary>
+        /// <returns></returns>
+        public bool MarkVol()
+        {
+            int size = this.Chapter_Array.Count;
+            for(int i = 0;i < Chapter_Array.Count;i++)
+            {
+                if(!Chapter_Array[i].MarkChapter())
+                {
+                    --size;
+                }
+            }
+            if(size != this.Chapter_Array.Count)
+            {
+                log.Info("将 第" + Vol_Num + "卷 标记为最新--->失败");
+                log.Info("预计标记最新章节数: " + this.Chapter_Array.Count + "\n实际标记最新章节数: " + size);
+                return false;
+            }
+            log.Info("将 第" + Vol_Num + "卷 标记为最新--->成功");
+            return true;
         }
 
         /// <summary>

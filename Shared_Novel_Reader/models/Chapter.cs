@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using log4net;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Shared_Novel_Reader.models
     /// </summary>
     internal class Chapter
     {
+        ILog log = LogManager.GetLogger(typeof(Chapter));
         /// <summary>
         /// 章节类 初始化
         /// </summary>
@@ -20,7 +22,26 @@ namespace Shared_Novel_Reader.models
         {
             ChapNum = 0;
             ChapTitle = "";
+            Create_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            Update_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            Upload_Time = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
             ContentList = new List<models.Content>();
+        }
+
+        /// <summary>
+        /// 将章节标记为最新
+        /// </summary>
+        /// <returns></returns>
+        public bool MarkChapter()
+        {
+            if (ContentList.Count != 1)
+            {
+                log.Info("将 第"+ ChapNum + "章\t"+ ChapTitle + "\t标记为最新--->失败");
+                return false;
+            }
+            ContentList[0].Best_New = true;
+            log.Info("将 第" + ChapNum + "章\t" + ChapTitle + "\t标记为最新--->成功");
+            return true;
         }
 
         /// <summary>
@@ -32,6 +53,9 @@ namespace Shared_Novel_Reader.models
             ChapNum = 0;
             ChapTitle = "";
             ContentList = new List<models.Content>();
+            Create_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            Update_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            Upload_Time = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
             FromJson(ref obj);
         }
 
@@ -54,6 +78,23 @@ namespace Shared_Novel_Reader.models
         /// </summary>
         public int ChapNum { get; set; }
 
+
+
+        /// <summary>
+        /// 创建时间,默认为当前时间
+        /// </summary>
+        private string Create_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+        /// <summary>
+        /// 更改时间,默认为当前时间
+        /// </summary>
+        private string Update_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+        /// <summary>
+        /// 上传时间,默认为时间最小值
+        /// </summary>
+        private string Upload_Time = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
+
         /// <summary>
         /// 返回Json格式的Chapter
         /// </summary>
@@ -69,6 +110,9 @@ namespace Shared_Novel_Reader.models
             obj.Add("ContentList", jArray);
             obj.Add("ChapTitle", ChapTitle);
             obj.Add("ChapNum", ChapNum);
+            obj.Add("Create_Time", Create_Time);
+            obj.Add("Update_Time", Update_Time);
+            obj.Add("Upload_Time", Upload_Time);
             return obj;
         }
 
@@ -98,6 +142,18 @@ namespace Shared_Novel_Reader.models
             if (obj.ContainsKey("ChapNum"))
             {
                 ChapNum = ((int)obj["ChapNum"]);
+            }
+            if (obj.ContainsKey("Create_Time"))
+            {
+                this.Create_Time = ((string)obj["Create_Time"]);
+            }
+            if (obj.ContainsKey("Update_Time"))
+            {
+                this.Update_Time = ((string)obj["Update_Time"]);
+            }
+            if (obj.ContainsKey("Upload_Time"))
+            {
+                this.Upload_Time = ((string)obj["Upload_Time"]);
             }
         }
     }

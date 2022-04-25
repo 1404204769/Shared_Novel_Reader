@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Shared_Novel_Reader.Tools
 {
@@ -216,7 +217,7 @@ namespace Shared_Novel_Reader.Tools
             int Target = -1;// 标记目标位置
             for(int i=0;i<ExistContentList.Count;i++)
             {
-                if(!ExistContentList[i].Temp_Make)
+                if(ExistContentList[i].Best_New)
                 {
                     Target = i;
                     break;
@@ -238,7 +239,7 @@ namespace Shared_Novel_Reader.Tools
             // 如果内容行数不一样，说明内容不一样
             if(ExistContentArray.Count != NewContentArray.Count)
             {
-                newContentList[0].Temp_Make = true;
+                newContentList[0].Best_New = false;
                 models.Content newContent = new models.Content(newContentList[0]);
                 ExistContentList.Add(newContent);
                 return true;
@@ -258,7 +259,7 @@ namespace Shared_Novel_Reader.Tools
             // 说明内容不一样，则记录
             if (!Same)
             {
-                newContentList[0].Temp_Make = true;
+                newContentList[0].Best_New = false;
                 models.Content newContent = new models.Content(newContentList[0]);
                 ExistContentList.Add(newContent);
                 return true;
@@ -338,6 +339,11 @@ namespace Shared_Novel_Reader.Tools
                 // 开始把新增的卷直接加入
                 for (int i = CompareChapterNum; i < newVolList[CompareIndex].Chapter_Total_Num; i++)
                 {
+                    if (!newVolList[CompareIndex].Chapter_Array[i].MarkChapter())
+                    {
+                        MessageBox.Show("新章节资源标记为最新资源失败");
+                        return false;
+                    }
                     ExistVolList[CompareIndex].Push_Chapter(newVolList[CompareIndex].Chapter_Array[i]);
                 }
 
@@ -392,6 +398,11 @@ namespace Shared_Novel_Reader.Tools
                 // 开始把新增的卷直接加入
                 for(int i = CompareVolNum; i < book.Vol_Total_Num; i++)
                 {
+                    if (!book.Vol_Array[i].MarkVol())
+                    {
+                        MessageBox.Show("新卷资源标记为最新资源失败");
+                        return false;
+                    }
                     BookList[TargetBook].Push_Vol(book.Vol_Array[i]);
                 }
 

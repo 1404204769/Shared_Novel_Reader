@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using log4net;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,37 @@ namespace Shared_Novel_Reader.models
     /// </summary>
     internal class Book
     {
+        ILog log = LogManager.GetLogger(typeof(Book));
         public Book()
         {
             Book_Name = "";
             File_Path = new List<string>();
             Vol_Total_Num = Need_Upload = Exist_Upload = 0;
             Vol_Array = new List<Vol>();
+        }
+
+        /// <summary>
+        /// 将图书标记为最新
+        /// </summary>
+        /// <returns></returns>
+        public bool MarkBook()
+        {
+            int size = this.Vol_Array.Count;
+            for (int i = 0; i < Vol_Array.Count; i++)
+            {
+                if (!Vol_Array[i].MarkVol())
+                {
+                    --size;
+                }
+            }
+            if (size != this.Vol_Array.Count)
+            {
+                log.Info("将图书 " + Book_Name + " 标记为最新--->失败");
+                log.Info("预计标记最新卷数: " + this.Vol_Array.Count + "\n实际标记最新卷数: " + size);
+                return false;
+            }
+            log.Info("将图书 " + Book_Name + " 标记为最新--->成功");
+            return true;
         }
 
         public Book(JObject obj)

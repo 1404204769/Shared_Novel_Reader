@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Shared_Novel_Reader.models
 {
@@ -265,13 +266,14 @@ namespace Shared_Novel_Reader.models
                     return false;
                 }
 
+
                 // 说明此图书不曾被解析过，需要解析后加入原有的图书中
                 if (!Tools.Novel_Analysis.CompareBook(ref BookList,in TargetBook,in book))
                 {
                     log.Info("图书资源整合失败");
                     return false;
                 }
-
+                BookList[TargetBook].File_Path.Add(book.File_Path[0]);
                 // 资源整合成功后,直接返回
                 return true;
             }
@@ -293,6 +295,11 @@ namespace Shared_Novel_Reader.models
 
             // 将数据添加到内存中
             LocalResArray.Add(jobj);
+            if(!book.MarkBook())
+            {
+                MessageBox.Show("图书资源初始化标记为最新资源失败");
+                return false;
+            }
             BookList.Add(book);
 
             // JToken oldBook = LocalRes.SelectToken("$.Book_Array[?(@.name=='张三')]");
