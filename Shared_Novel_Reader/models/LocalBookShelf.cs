@@ -94,7 +94,7 @@ namespace Shared_Novel_Reader.models
             if (removeNum < 0)
             {
                 log.Info("目标图书不在内存中");
-                return false;
+                return true;
             }
             JObject JBook = BookList[removeNum].toJson();
             if(!Tools.MyJson.JsonToFile(in JBook, Properties.Settings.Default.Local_Res_Path + "\\" + LinkNum + ".json"))

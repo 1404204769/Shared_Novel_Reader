@@ -123,7 +123,10 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 return;
             }
 
-            foreach(Content content in chapter.ContentList)
+            //this.DataGridViewContent.Rows[0].Cells[0].Value = chapter.ChapTitle;
+            string ChapterName = "第" + volnum + "卷" + "  第" + chapter.ChapNum + "章  " + chapter.ChapTitle;
+            this.DataGridViewContent.Columns[0].HeaderText = ChapterName;
+            foreach (Content content in chapter.ContentList)
             {
                 if (!content.Best_New) continue;
                 foreach (var str in content.ContentArray)
