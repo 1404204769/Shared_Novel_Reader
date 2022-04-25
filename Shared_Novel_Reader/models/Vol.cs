@@ -14,7 +14,7 @@ namespace Shared_Novel_Reader.models
     /// </summary>
     internal class Vol
     {
-
+        ILog log = LogManager.GetLogger(typeof(Vol));
         /// <summary>
         /// 分卷数
         /// </summary>
