@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Shared_Novel_Reader.models
 {
@@ -202,23 +203,7 @@ namespace Shared_Novel_Reader.models
             return true;
         }
 
-        /// <summary>
-        /// 比较后者是否在前者中存在
-        /// </summary>
-        /// <param name="File_Path">已存在的书的文件地址</param>
-        /// <param name="FilePath">新书的文件地址</param>
-        /// <returns>true 代表 后者存在于前者中</returns>
-        static public bool CompareFilePath(in List<string> File_Path,in string FilePath)
-        {
-            foreach (var filePath in File_Path)
-            {
-                if (filePath.Equals(FilePath))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+
 
         /// <summary>
         /// 将解析后的图书加入到书架中
@@ -259,19 +244,20 @@ namespace Shared_Novel_Reader.models
             if(TargetBook != -1)
             {
                 /// 检查此文件是否被解析过
-                if (CompareFilePath(BookList[TargetBook].File_Path, book.File_Path[0]))
+                if (BookList[TargetBook].CompareFilePath(book.File_Path[0]))
                 {
                     log.Info("此图书文件曾被解析过");
                     return false;
                 }
 
+
                 // 说明此图书不曾被解析过，需要解析后加入原有的图书中
-                if (!Tools.Novel_Analysis.CompareBook(ref BookList,in TargetBook,in book))
+                if (!BookList[TargetBook].CompareBook(in book))
                 {
                     log.Info("图书资源整合失败");
                     return false;
                 }
-
+                BookList[TargetBook].File_Path.Add(book.File_Path[0]);
                 // 资源整合成功后,直接返回
                 return true;
             }
@@ -293,6 +279,11 @@ namespace Shared_Novel_Reader.models
 
             // 将数据添加到内存中
             LocalResArray.Add(jobj);
+            if(!book.MarkBook())
+            {
+                MessageBox.Show("图书资源初始化标记为最新资源失败");
+                return false;
+            }
             BookList.Add(book);
 
             // JToken oldBook = LocalRes.SelectToken("$.Book_Array[?(@.name=='张三')]");

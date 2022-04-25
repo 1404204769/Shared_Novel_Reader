@@ -13,55 +13,6 @@ namespace Shared_Novel_Reader.models
     /// </summary>
     internal class Content
     {
-        public Content()
-        {
-            ContentArray = new List<string>();
-            Version = 0;
-            Upload_Mark = Best_New = Personal_Make = Temp_Make = false;
-            Create_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            Update_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            Upload_Time = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
-        }
-
-        public Content(JObject obj)
-        {
-            ContentArray = new List<string>();
-            Version = 0;
-            Upload_Mark = Best_New = Personal_Make = Temp_Make = false;
-            Create_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            Update_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            Upload_Time = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
-            FromJson(ref obj);
-        }
-        public Content(List<string> contentArray,int version = 0, bool upload_Mark = false, bool best_New = false, bool personal_Make = false,bool temp_Make =false)
-        {
-            ContentArray = contentArray;
-            Version = version;
-            Upload_Mark = upload_Mark;
-            Best_New = best_New;
-            Personal_Make = personal_Make;
-            Temp_Make = temp_Make;
-            Create_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            Update_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            Upload_Time = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
-        }
-
-        public Content(Content content)
-        {
-            ContentArray = new List<string>();
-            foreach (string s in content.ContentArray)
-            {
-                ContentArray.Add(s);
-            }
-            Version = content.Version;
-            Upload_Mark = content.Upload_Mark;
-            Best_New = content.Best_New;
-            Personal_Make = content.Personal_Make;
-            Temp_Make = content.Temp_Make;
-            Create_Time = content.Create_Time;
-            Update_Time = content.Update_Time;
-            Upload_Time = content.Upload_Time;
-        }
 
         /// <summary>
         /// 章节内容列表
@@ -69,47 +20,78 @@ namespace Shared_Novel_Reader.models
         public List<string> ContentArray { get; set; }
 
         /// <summary>
-        /// 版本号,默认为0
-        /// </summary>
-        public int Version { set; get; }
-
-        /// <summary>
-        /// 上传标记,默认为false
-        /// </summary>
-        public bool Upload_Mark { set; get; }
-
-        /// <summary>
         /// 最新版标记,默认为false
         /// </summary>
         public bool Best_New { set; get; }
 
-        /// <summary>
-        /// 自定义标记,默认为false
-        /// </summary>
-        public bool Personal_Make { set; get; }
-
 
         /// <summary>
-        /// 临时标记,默认为false
+        /// 新建实体时BestNew为false
         /// </summary>
-        public bool Temp_Make { set; get; }
+        public Content()
+        {
+            ContentArray = new List<string>();
+            Best_New = false;
+        }
+
+        public Content(JObject obj)
+        {
+            ContentArray = new List<string>();
+            Best_New = false;
+            FromJson(ref obj);
+        }
+        public Content(List<string> contentArray,  bool best_New = false )
+        {
+            ContentArray = contentArray;
+            Best_New = best_New;
+        }
 
         /// <summary>
-        /// 创建时间,默认为当前时间
+        /// 复制实体时将BestNew复制过来
         /// </summary>
-        private string Create_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        /// <param name="content"></param>
+        public Content(Content content)
+        {
+            ContentArray = new List<string>();
+            foreach (string s in content.ContentArray)
+            {
+                ContentArray.Add(s);
+            }
+            Best_New = content.Best_New;
+        }
+
+
 
         /// <summary>
-        /// 更改时间,默认为当前时间
+        /// 比较 内容
         /// </summary>
-        private string Update_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        /// <param name="newContent">已存在的内容</param>
+        /// <returns>true 表示内容存在差异，false表示内容相同</returns>
+        public bool CompareContent(ref Content newContent)
+        {
 
-        /// <summary>
-        /// 上传时间,默认为时间最小值
-        /// </summary>
-        private string Upload_Time = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
+            // 如果内容行数不一样，说明内容不一样
+            if (this.ContentArray.Count != newContent.ContentArray.Count)
+            {
+                newContent.Best_New = false;
+                return true;
+            }
 
-       
+            // 否则开始比较内容
+            for (int i = 0; i < this.ContentArray.Count; i++)
+            {
+                if (ContentArray[i] != newContent.ContentArray[i])
+                {
+                    newContent.Best_New = false;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
+
         /// <summary>
         /// 返回Json格式的Content
         /// </summary>
@@ -119,14 +101,7 @@ namespace Shared_Novel_Reader.models
             JObject obj = new JObject();
             JArray jArray = JArray.FromObject(ContentArray);
             obj.Add("ContentArray", jArray);
-            obj.Add("Version", Version);
-            obj.Add("Create_Time", Create_Time);
-            obj.Add("Update_Time", Update_Time);
-            obj.Add("Upload_Time", Upload_Time);
-            obj.Add("Upload_Mark", Upload_Mark);
             obj.Add("Best_New", Best_New);
-            obj.Add("Personal_Make", Personal_Make);
-            obj.Add("Temp_Make", Temp_Make);
             return obj;
         }
 
@@ -148,37 +123,9 @@ namespace Shared_Novel_Reader.models
                     this.ContentArray.Add(name);
                 }
             }
-            if (obj.ContainsKey("Version"))
-            {
-                this.Version = ((int)obj["Version"]);
-            }
-            if (obj.ContainsKey("Create_Time"))
-            {
-                this.Create_Time = ((string)obj["Create_Time"]);
-            }
-            if (obj.ContainsKey("Update_Time"))
-            {
-                this.Update_Time = ((string)obj["Update_Time"]);
-            }
-            if (obj.ContainsKey("Upload_Time"))
-            {
-                this.Upload_Time = ((string)obj["Upload_Time"]);
-            }
-            if(obj.ContainsKey("Upload_Mark"))
-            {
-                this.Upload_Mark = ((bool)obj["Upload_Mark"]);
-            }
             if(obj.ContainsKey("Best_New"))
             {
                 this.Best_New = ((bool)obj["Best_New"]);
-            }
-            if (obj.ContainsKey("Personal_Make"))
-            {
-                this.Personal_Make = ((bool)obj["Personal_Make"]);
-            }
-            if (obj.ContainsKey("Temp_Make"))
-            {
-                this.Temp_Make = ((bool)obj["Temp_Make"]);
             }
         }
     }
