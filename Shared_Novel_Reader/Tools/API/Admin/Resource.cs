@@ -11,10 +11,10 @@ namespace Shared_Novel_Reader.Tools.API.Admin
 {
     internal class Resource
     {
-        private static ILog log = LogManager.GetLogger(typeof(Feedback));
+        private static ILog log = LogManager.GetLogger(typeof(Resource));
 
         /// <summary>
-        /// 查询所有用户信息
+        /// 管理员查询所有资源信息
         /// </summary>
         /// <returns></returns>
         public static MyResponse FindResource(in JObject ReqJson)
@@ -51,5 +51,6 @@ namespace Shared_Novel_Reader.Tools.API.Admin
             MessageBox.Show("查询资源成功");
             return res;
         }
+
     }
 }

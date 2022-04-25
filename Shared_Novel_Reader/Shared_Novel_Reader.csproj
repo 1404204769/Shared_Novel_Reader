@@ -104,6 +104,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="models\InternetBookShelf.cs" />
     <Compile Include="MyForm\AdminForm\FormFilterResourceManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,6 +245,7 @@
     <Compile Include="Tools\API\Admin\Resource.cs" />
     <Compile Include="Tools\API\Admin\User.cs" />
     <Compile Include="Tools\API\GPI.cs" />
+    <Compile Include="Tools\API\User\Resource.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\BaiExpression.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\ChineseNumberChar.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\ChineseNumberConvertContext.cs" />

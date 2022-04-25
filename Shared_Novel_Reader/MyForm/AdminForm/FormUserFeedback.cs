@@ -88,7 +88,6 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             }
             else
             {
-
                 string[][] FeedbackListStr;
                 JArray FeedbackListJson = (JArray)res.Data["FeedbackList"];
                 // MessageBox.Show(FeedbackListJson.ToString());

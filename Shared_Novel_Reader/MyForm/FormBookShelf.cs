@@ -11,6 +11,10 @@ namespace Shared_Novel_Reader.MyForm
         {
             InitializeComponent();
             LoadLocalRes();
+            if(User.IsInit)
+            {
+                LoadInternetRes();
+            }
         }
 
         public void LoadLocalRes()
@@ -22,23 +26,40 @@ namespace Shared_Novel_Reader.MyForm
             }
             MessageBox.Show("书架打开成功");
 
-            this.DataGridView.Rows.Clear();
+            this.DataGridViewLocal.Rows.Clear();
             foreach (var book in LocalBookShelf.LocalResArray)
             {
                 string[] col = new string[5];
                 col[0] = (string)book["Book_Name"];
                 col[1] = (string)book["Link_Num"];
-                this.DataGridView.Rows.Add(col);
+                this.DataGridViewLocal.Rows.Add(col);
             }
         }
 
-        private void DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        /// <summary>
+        /// 加载网络图书
+        /// </summary>
+        public void LoadInternetRes()
         {
-            if(FormNovelReader!=null)
+        }
+
+        private void DataGridViewLocal_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (FormNovelReader != null)
             {
                 FormNovelReader.Dispose();
             }
-            FormNovelReader = new FormNovelReader(this.DataGridView.Rows[e.RowIndex].Cells[0].Value.ToString(), Convert.ToInt32(this.DataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()), true);
+            FormNovelReader = new FormNovelReader(this.DataGridViewLocal.Rows[e.RowIndex].Cells[0].Value.ToString(), Convert.ToInt32(this.DataGridViewLocal.Rows[e.RowIndex].Cells[1].Value.ToString()), true);
+            FormNovelReader.Show();
+        }
+
+        private void DataGridViewInternet_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (FormNovelReader != null)
+            {
+                FormNovelReader.Dispose();
+            }
+            FormNovelReader = new FormNovelReader(this.DataGridViewLocal.Rows[e.RowIndex].Cells[0].Value.ToString(), Convert.ToInt32(this.DataGridViewLocal.Rows[e.RowIndex].Cells[1].Value.ToString()), false);
             FormNovelReader.Show();
         }
     }

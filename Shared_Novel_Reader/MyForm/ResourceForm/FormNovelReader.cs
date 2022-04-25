@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
 using Shared_Novel_Reader.models;
+using Shared_Novel_Reader.Tools;
 
 namespace Shared_Novel_Reader.MyForm.ResourceForm
 {
@@ -13,14 +16,22 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
         public int Part_Num = 0;// 卷数
         public int Chapter_Num = 0;// 章节数
         public int BookTarget = -1;
-        public FormNovelReader(string bookname,int linknum,bool islocal)
+        public FormNovelReader(string bookname,int keyNum,bool islocal)
         {
             IsLocal = islocal;
             InitializeComponent();
-            LoadLocalBook(bookname, linknum);
+            if (islocal)
+                LoadLocalBook(bookname, keyNum);
+            else
+                LoadInternetBook(bookname, keyNum);
         }
 
 
+        /// <summary>
+        /// 加载本地图书
+        /// </summary>
+        /// <param name="bookname">书名</param>
+        /// <param name="linknum">保存的文件名</param>
         public void LoadLocalBook(string bookname, int linknum)
         {
             if (!IsLocal) return;
@@ -62,18 +73,98 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                     col[0] = ChapterName;
                     col[1] = Convert.ToString(vol.Vol_Num);
                     col[2] = Convert.ToString(chapter.ChapNum);
+                    col[3] = Convert.ToString(0);
+                    col[4] = Convert.ToString(chapter.ChapTitle);
                     this.DataGridViewList.Rows.Add(col);
                 }
             }
             this.DataGridViewList.Rows[0].Selected = true;
             int volNum = Convert.ToInt32(this.DataGridViewList.Rows[index].Cells[1].Value);
             int chapNum = Convert.ToInt32(this.DataGridViewList.Rows[index].Cells[2].Value);
-            LoadLocalContent(volNum, chapNum);
+            LoadContent(volNum, chapNum);
         }
 
 
         /// <summary>
-        /// 加载章节内容
+        /// 加载网络图书
+        /// </summary>
+        /// <param name="bookname">书名</param>
+        /// <param name="bookid">图书ID</param>
+        /// <param name="volNum">上次浏览的分卷数</param>
+        /// <param name="chapNum">上次浏览的章节数</param>
+        public async void LoadInternetBook(string bookname, int bookid,int volNum = 1,int chapNum = 1)
+        {
+            if (IsLocal) return;
+
+            JObject ReqJson = new JObject();
+            ReqJson["Book_Name"] = bookname;
+            ReqJson["Book_ID"] = bookid;
+            // 发送请求
+            var MenuResult = Task<MyResponse>.Run(() => Tools.API.User.Resource.SearchMenu(ReqJson));
+
+            MyResponse res = await MenuResult;
+            /// 返回格式
+            if (res == null || !res.Result)
+            {
+                // 清除残留数据
+                MessageBox.Show("在线图书章节列表查询失败");
+            }
+            else if (res.Data["ChapterList"].ToString() == "")
+            {
+                MessageBox.Show("在线图书章节为空");
+            }
+            else
+            {
+                JArray ChapterListJson = (JArray)res.Data["ChapterList"];
+                this.DataGridViewList.Rows.Clear();
+                int index = 0,num = 0;
+                foreach (var chapter in ChapterListJson)
+                {
+                    string[] col = new string[5];
+                    string ChapterName = chapter["VolNum"] + "\t第" + chapter["ChapterNum"] + "章\t" + chapter["ChapterTitle"];
+                    col[0] = ChapterName;
+                    col[1] = Convert.ToString(chapter["VolNum"]);
+                    col[2] = Convert.ToString(chapter["ChapterNum"]);
+                    col[3] = Convert.ToString(bookid);
+                    col[4] = Convert.ToString(chapter["ChapterTitle"]);
+                    this.DataGridViewList.Rows.Add(col);
+                    if((Convert.ToInt32(chapter["VolNum"]) == volNum)&& (Convert.ToInt32(chapter["VolNum"]) == chapNum))
+                    {
+                        index = num;
+                    }
+                    num++;
+                }
+                if(index >= this.DataGridViewList.Rows.Count)
+                {
+                    MessageBox.Show("指定章节超出索引范围");
+                    this.DataGridViewList.Rows[0].Selected = true;
+                    LoadLocalContent(Convert.ToInt32(this.DataGridViewList.Rows[0].Cells[1].Value), Convert.ToInt32(this.DataGridViewList.Rows[0].Cells[2].Value));
+                    return;
+                }
+                this.DataGridViewList.Rows[index].Selected = true;
+                LoadContent(volNum, chapNum, bookid);
+            }
+
+            // 给服务器发送请求
+        }
+
+        /// <summary>
+        /// 加载内容
+        /// </summary>
+        /// <param name="volnum">分卷数</param>
+        /// <param name="chapnum">章节数</param>
+        /// <param name="bookid">图书ID,在线阅读时需要的参数，默认为1</param>
+        /// <param name="chapTitle">章节标题,在线阅读时需要的参数，默认为空</param>
+        public void LoadContent(int volnum, int chapnum,int bookid = 1,string chapTitle = "")
+        {
+            if (IsLocal)
+                LoadLocalContent(volnum, chapnum);
+            else
+                LoadInternetContent(bookid,volnum, chapnum , chapTitle);
+        }
+
+        /// <summary>
+        /// 加载本地图书章节内容
         /// </summary>
         /// <param name="volnum">分卷数</param>
         /// <param name="chapnum">章节数</param>
@@ -141,12 +232,72 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             return;
         }
 
+        /// <summary>
+        /// 加载网络图书章节内容
+        /// </summary>
+        /// <param name="bookid">图书ID</param>
+        /// <param name="volnum">分卷数</param>
+        /// <param name="chapnum">章节数</param>
+        public async void LoadInternetContent(int bookid,int volnum, int chapnum, string chapTitle)
+        {
+            if (IsLocal) return;
+
+            JObject ReqJson = new JObject();
+            ReqJson["Book_ID"] = bookid;
+            ReqJson["Part_Num"] = volnum;
+            ReqJson["Chapter_Num"] = chapnum;
+
+
+            // 发送请求
+            var ContentResult = Task<MyResponse>.Run(() => Tools.API.User.Resource.SearchContent(ReqJson));
+
+            MyResponse res = await ContentResult;
+            /// 返回格式
+            if (res == null || !res.Result)
+            {
+                // 清除残留数据
+                MessageBox.Show("在线图书章节内容查询失败");
+                this.DataGridViewContent.Rows.Add("在线图书章节内容查询失败");
+                return;
+            }
+            else if (res.Data["ChapterContent"].ToString() == "")
+            {
+                MessageBox.Show("在线图书章节内容为空");
+                this.DataGridViewContent.Rows.Add("在线图书章节内容为空");
+                return;
+            }
+            else
+            {
+                JArray ContentArray = (JArray)res.Data["ChapterContent"];
+                this.DataGridViewContent.Rows.Clear();
+                //this.DataGridViewContent.Rows[0].Cells[0].Value = chapter.ChapTitle;
+                string ChapterName = "第" + volnum + "卷" + "  第" + chapnum + "章  " + chapTitle;
+                this.DataGridViewContent.Columns[0].HeaderText = ChapterName;
+                foreach (string content in ContentArray)
+                {
+                    this.DataGridViewContent.Rows.Add(content);
+                    Part_Num = volnum;
+                    Chapter_Num = chapnum;
+                }
+                return;
+
+            }
+
+
+            MessageBox.Show("章节最新内容资源不存在");
+            return;
+        }
+
+
+
         private void DataGridViewList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
             int volNum = Convert.ToInt32(this.DataGridViewList.Rows[index].Cells[1].Value);
             int chapNum = Convert.ToInt32(this.DataGridViewList.Rows[index].Cells[2].Value);
-            LoadLocalContent(volNum, chapNum);
+            int bookid = Convert.ToInt32(this.DataGridViewList.Rows[index].Cells[3].Value);
+            string chaptitle = Convert.ToString(this.DataGridViewList.Rows[index].Cells[4].Value);
+            LoadContent(volNum, chapNum, bookid, chaptitle);
         }
     }
 }

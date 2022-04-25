@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace Shared_Novel_Reader.models
 {
     /// <summary>
-    /// 书架类-静态类型
+    /// 本地资源书架类-静态类型
     /// </summary>
     internal static class LocalBookShelf
     {
