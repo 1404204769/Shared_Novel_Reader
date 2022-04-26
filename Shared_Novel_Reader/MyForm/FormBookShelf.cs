@@ -18,6 +18,14 @@ namespace Shared_Novel_Reader.MyForm
             LoadLocalRes();
             OpenInternetBookShelf();
         }
+
+
+
+
+
+
+
+
         private void FormBookShelf_FormClosed(object sender, FormClosedEventArgs e)
         {
             log.Info("调用了FormBookShelf_FormClosed函数");
@@ -73,11 +81,10 @@ namespace Shared_Novel_Reader.MyForm
         {
             if (!models.LocalBookShelf.open())
             {
-                log.Info("书架打开失败");
+                log.Info("本地书架打开失败");
                 return;
             }
-            log.Info("书架打开成功");
-
+            log.Info("本地书架打开成功");
             this.DataGridViewLocal.Rows.Clear();
             foreach (var book in LocalBookShelf.LocalResArray)
             {
@@ -86,6 +93,7 @@ namespace Shared_Novel_Reader.MyForm
                 col[1] = (string)book["Link_Num"];
                 this.DataGridViewLocal.Rows.Add(col);
             }
+            log.Info("本地书架加载成功");
         }
 
         /// <summary>
@@ -99,16 +107,16 @@ namespace Shared_Novel_Reader.MyForm
                 log.Info("网络书架打开失败");
                 return;
             }
-            log.Info("书架打开成功");
-
+            log.Info("网络书架打开成功");
             this.DataGridViewInternet.Rows.Clear();
             foreach (var book in InternetBookShelf.InternetResArray)
             {
                 string[] col = new string[2];
-                col[0] = (string)book["BookName"];
-                col[1] = Convert.ToString(book["BookID"]);
+                col[0] = (string)book["Book_Name"];
+                col[1] = Convert.ToString(book["Book_ID"]);
                 this.DataGridViewInternet.Rows.Add(col);
             }
+            log.Info("网络书架加载成功");
         }
 
         private void DataGridViewLocal_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -122,15 +130,45 @@ namespace Shared_Novel_Reader.MyForm
             FormNovelReader.Show();
         }
 
-        private void DataGridViewInternet_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
+            if (e.TabPage == this.tabPageInternetBook)
+            {
+                this.DataGridViewInternet.Rows.Clear();
+                foreach (var book in InternetBookShelf.InternetResArray)
+                {
+                    string[] col = new string[2];
+                    col[0] = (string)book["Book_Name"];
+                    col[1] = Convert.ToString(book["Book_ID"]);
+                    this.DataGridViewInternet.Rows.Add(col);
+                }
+                log.Info("网络书架刷新成功");
+            }
+            else if (e.TabPage == this.tabPageLocalBook)
+            {
+                this.DataGridViewLocal.Rows.Clear();
+                foreach (var book in LocalBookShelf.LocalResArray)
+                {
+                    string[] col = new string[5];
+                    col[0] = (string)book["Book_Name"];
+                    col[1] = (string)book["Link_Num"];
+                    this.DataGridViewLocal.Rows.Add(col);
+                }
+                log.Info("本地书架刷新成功");
+            }
+        }
+
+        private void DataGridViewInternet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
             if (FormNovelReader != null)
             {
                 FormNovelReader.Dispose();
             }
             FormNovelReader = new FormNovelReader(this.DataGridViewInternet.Rows[e.RowIndex].Cells[0].Value.ToString(), Convert.ToInt32(this.DataGridViewInternet.Rows[e.RowIndex].Cells[1].Value.ToString()), false);
+            //FormNovelReader = new FormNovelReader("次元论坛", 17, false);
             FormNovelReader.Show();
         }
-
     }
 }

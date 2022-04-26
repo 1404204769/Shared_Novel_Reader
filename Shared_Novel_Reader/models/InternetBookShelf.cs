@@ -14,6 +14,7 @@ namespace Shared_Novel_Reader.models
     /// </summary>
     internal class InternetBookShelf
     {
+        static public bool IsInit = false;
         static ILog log = LogManager.GetLogger(typeof(InternetBookShelf));
         static private string InternetResPath = Properties.Settings.Default.Local_Res_Path + "\\InternetRes.json";
         /// <summary>
@@ -71,12 +72,12 @@ namespace Shared_Novel_Reader.models
 
             // 设置校验条件
             Dictionary<string, JTokenType> usermap = new Dictionary<string, JTokenType>();
-            usermap.Add("UserID", JTokenType.Integer);
-            usermap.Add("BookArray", JTokenType.Array);
+            usermap.Add("User_ID", JTokenType.Integer);
+            usermap.Add("Book_Array", JTokenType.Array);
             // 设置校验条件
             Dictionary<string, JTokenType> map = new Dictionary<string, JTokenType>();
             map.Add("Book_Name", JTokenType.String);
-            map.Add("BookID", JTokenType.Integer);
+            map.Add("Book_ID", JTokenType.Integer);
 
             // 获取数组内容
             var users = from user in InternetRes["User_Array"] select JObject.FromObject(user);
@@ -88,7 +89,7 @@ namespace Shared_Novel_Reader.models
                     return false;
                 }
 
-                var books = from book in user["BookArray"] select JObject.FromObject(book);
+                var books = from book in user["Book_Array"] select JObject.FromObject(book);
                 foreach(var book in books)
                 {
                     if (!Tools.MyJson.CheckColAndTypeFromMap(in book, in map))
@@ -110,6 +111,7 @@ namespace Shared_Novel_Reader.models
         /// <returns></returns>
         static public bool open()
         {
+            if (IsInit) return true;
             if (!File.Exists(InternetResPath))
             {
                 log.Info(InternetResPath + "文件不存在,即将开始初始化");
@@ -142,18 +144,20 @@ namespace Shared_Novel_Reader.models
             var users = from user in InternetResUserArray select JObject.FromObject(user);
             foreach(var user in users)
             {
-                if(Convert.ToInt32( user["UserID"] ) == User.User_ID)
+                if(Convert.ToInt32( user["User_ID"] ) == User.User_ID)
                 {
-                    InternetResArray = (JArray)user["BookArray"];
+                    InternetResArray = (JArray)user["Book_Array"];
+                    IsInit = true;
                     return true;
                 }
             }
             log.Info("用户网络书架未找到,开始初始化网络书架");
             JObject newUser = new JObject();
-            newUser["UserID"] = User.User_ID;
-            newUser["BookArray"] = new JArray();
+            newUser["User_ID"] = User.User_ID;
+            newUser["Book_Array"] = new JArray();
             InternetResUserArray.Add(newUser);
             InternetResArray = new JArray();
+            IsInit = true;
             return true;
         }
 
@@ -166,10 +170,10 @@ namespace Shared_Novel_Reader.models
             int index = 0;
             for (; index < InternetResUserArray.Count; index++)
             {
-                if (Convert.ToInt32(InternetResUserArray[index]["UserID"]) != User.User_ID)
+                if (Convert.ToInt32(InternetResUserArray[index]["User_ID"]) != User.User_ID)
                     continue;
                 //保存书架信息
-                InternetResUserArray[index]["BookArray"] = InternetResArray;
+                InternetResUserArray[index]["Book_Array"] = InternetResArray;
                 break;
             }
 
@@ -206,7 +210,7 @@ namespace Shared_Novel_Reader.models
             // 检查图书是否已存在此纪录
             foreach (var book in InternetResArray)
             {
-                if(Convert.ToInt32( book["BookID"]) == bookid )
+                if(Convert.ToInt32( book["Book_ID"]) == bookid )
                 {
                     log.Info("此网络图书已在用户书架中");
                     return false;
@@ -214,11 +218,12 @@ namespace Shared_Novel_Reader.models
             }
 
             JObject jBook = new JObject();
-            jBook.Add("BookName", bookname);
-            jBook.Add("BookID", bookid);
+            jBook.Add("Book_Name", bookname);
+            jBook.Add("Book_ID", bookid);
 
             // 将图书记录保存到数组中
             InternetResArray.Add(jBook);
+            log.Info("网络图书加入用户书架成功");
 
             // JToken oldBook = LocalRes.SelectToken("$.Book_Array[?(@.name=='张三')]");
             return true;

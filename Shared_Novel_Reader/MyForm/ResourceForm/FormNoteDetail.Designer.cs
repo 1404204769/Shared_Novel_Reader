@@ -33,12 +33,14 @@
             this.labelContent = new System.Windows.Forms.Label();
             this.labelTitle = new System.Windows.Forms.Label();
             this.FlowLayoutPanelNoteComment = new System.Windows.Forms.FlowLayoutPanel();
+            this.LabelJoin = new System.Windows.Forms.Label();
             this.Panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // Panel
             // 
             this.Panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.Panel.Controls.Add(this.LabelJoin);
             this.Panel.Controls.Add(this.labelViewBook);
             this.Panel.Controls.Add(this.labelContent);
             this.Panel.Controls.Add(this.labelTitle);
@@ -55,11 +57,11 @@
             this.labelViewBook.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelViewBook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelViewBook.ForeColor = System.Drawing.Color.DarkCyan;
-            this.labelViewBook.Location = new System.Drawing.Point(1046, 48);
+            this.labelViewBook.Location = new System.Drawing.Point(912, 48);
             this.labelViewBook.Name = "labelViewBook";
             this.labelViewBook.Size = new System.Drawing.Size(80, 18);
             this.labelViewBook.TabIndex = 5;
-            this.labelViewBook.Text = "阅读图书";
+            this.labelViewBook.Text = "在线阅读";
             this.labelViewBook.Click += new System.EventHandler(this.labelViewBook_Click);
             // 
             // labelContent
@@ -93,6 +95,19 @@
             this.FlowLayoutPanelNoteComment.Size = new System.Drawing.Size(1150, 540);
             this.FlowLayoutPanelNoteComment.TabIndex = 1;
             // 
+            // LabelJoin
+            // 
+            this.LabelJoin.AutoSize = true;
+            this.LabelJoin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LabelJoin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LabelJoin.ForeColor = System.Drawing.Color.DarkCyan;
+            this.LabelJoin.Location = new System.Drawing.Point(1033, 48);
+            this.LabelJoin.Name = "LabelJoin";
+            this.LabelJoin.Size = new System.Drawing.Size(80, 18);
+            this.LabelJoin.TabIndex = 6;
+            this.LabelJoin.Text = "加入书架";
+            this.LabelJoin.Click += new System.EventHandler(this.LabelJoin_Click);
+            // 
             // FormNoteDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -116,5 +131,6 @@
         private System.Windows.Forms.Label labelViewBook;
         private System.Windows.Forms.Label labelContent;
         private System.Windows.Forms.Label labelTitle;
+        private System.Windows.Forms.Label LabelJoin;
     }
 }

@@ -283,7 +283,6 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
 
             }
 
-
             log.Info("章节最新内容资源不存在");
             return;
         }

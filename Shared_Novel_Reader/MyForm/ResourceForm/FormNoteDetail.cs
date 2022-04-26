@@ -1,5 +1,6 @@
 ﻿using log4net;
 using Newtonsoft.Json.Linq;
+using Shared_Novel_Reader.models;
 using Shared_Novel_Reader.Tools;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
 {
     public partial class FormNoteDetail : Form
     {
+        string BookName = string.Empty;
         FormNovelReader FormNovelReader =null;
         ILog log = LogManager.GetLogger(typeof(FormNoteDetail));
         public int NoteID = 0;
@@ -100,21 +102,49 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
 
         private void labelViewBook_Click(object sender, System.EventArgs e)
         {
-            Regex BookNameRegex = new Regex(@"(?<BookName>.*)\(.*\)");
-
-            Match match = BookNameRegex.Match(note.Title);
-            if(!match.Success)
+            if(BookName == string.Empty)
             {
-                log.Info("帖子标题无法提取出图书名称");
-                return;
+                Regex BookNameRegex = new Regex(@"(?<BookName>.*)\(.*\)");
+
+                Match match = BookNameRegex.Match(note.Title);
+                if (!match.Success)
+                {
+                    log.Info("帖子标题无法提取出图书名称");
+                    return;
+                }
+                BookName = match.Groups["BookName"].ToString();
             }
-            string bookname = match.Groups["BookName"].ToString();
             if (FormNovelReader != null)
             {
                 FormNovelReader.Dispose();
             }
-            FormNovelReader = new FormNovelReader(bookname,note.Book_ID, false);
+            FormNovelReader = new FormNovelReader(BookName, note.Book_ID, false);
             FormNovelReader.Show();
+        }
+
+        private void LabelJoin_Click(object sender, System.EventArgs e)
+        {
+            if (!InternetBookShelf.open())
+            {
+                log.Info("网络书架打开失败");
+                return;
+            }
+
+            if (BookName == string.Empty)
+            {
+                Regex BookNameRegex = new Regex(@"(?<BookName>.*)\(.*\)");
+
+                Match match = BookNameRegex.Match(note.Title);
+                if (!match.Success)
+                {
+                    log.Info("帖子标题无法提取出图书名称");
+                    return;
+                }
+                BookName = match.Groups["BookName"].ToString();
+            }
+
+            InternetBookShelf.AddToBookshelf(BookName, note.Book_ID);
+
         }
     }
 }
