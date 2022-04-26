@@ -258,13 +258,11 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 // 清除残留数据
                 MessageBox.Show("在线图书章节内容查询失败");
                 this.DataGridViewContent.Rows.Add("在线图书章节内容查询失败");
-                return;
             }
             else if (res.Data["ChapterContent"].ToString() == "")
             {
                 MessageBox.Show("在线图书章节内容为空");
                 this.DataGridViewContent.Rows.Add("在线图书章节内容为空");
-                return;
             }
             else
             {

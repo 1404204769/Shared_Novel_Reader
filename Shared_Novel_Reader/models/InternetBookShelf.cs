@@ -133,7 +133,7 @@ namespace Shared_Novel_Reader.models
                 return false;
             }
 
-            if (User.IsInit)
+            if (!User.IsInit)
             {
                 log.Info("用户还未登入，网络书架初始化失败");
                 return false;

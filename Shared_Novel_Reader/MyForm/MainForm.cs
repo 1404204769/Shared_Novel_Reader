@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,6 +7,7 @@ namespace Shared_Novel_Reader.MyForm
 {
     public partial class MainForm : Form
     {
+        ILog log = LogManager.GetLogger(typeof(MainForm));
         /// <summary>
         /// 窗体是否移动
         /// </summary>
@@ -28,8 +30,17 @@ namespace Shared_Novel_Reader.MyForm
 
         public MainForm()
         {
+            log.Info("调用了MainForm的构造函数");
             InitializeComponent();
             UserPowerInit();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            log.Info("调用了MainForm_FormClosed函数");
+            // 窗口关闭前先保存图书资源
+            CloseFormBookShelf();
+            this.Dispose();
         }
 
         public override void Refresh()
@@ -49,15 +60,16 @@ namespace Shared_Novel_Reader.MyForm
         public void UserPowerInit()
         {
             // 游客权限
-            //if(!models.User.IsInit)
-            {
-                BtnBookShelf.Visible = true;
-                BtnResManage.Visible = true;
-                // return;
-            }
 
+            BtnBookShelf.Visible = true;
+            BtnResManage.Visible = true;
+            BtnPersonalData.Visible = false;
+            BtnBookPlatform.Visible = false;
+            BtnAdminControl.Visible = false;
+            BtnRootControl.Visible = false;
+            if (!models.User.IsInit) return;
             // 用户权限
-            //if(models.User.Power > 0)
+            if(models.User.Power > 0)
             {
                 BtnPersonalData.Visible = true;
                 // 平台界面 包括论坛界面、在线看书界面
@@ -65,14 +77,14 @@ namespace Shared_Novel_Reader.MyForm
             }
 
             // 管理员权限
-            //if(models.User.Power > 10000)
+            if(models.User.Power > 10000)
             {
                 // 管理员界面
                 BtnAdminControl.Visible = true;
             }
 
             // 超级管理员权限
-            //if (models.User.Power > int.MaxValue)
+            if (models.User.Power > int.MaxValue)
             {
                 // 超级管理员界面
                 BtnRootControl.Visible = true;
@@ -155,7 +167,7 @@ namespace Shared_Novel_Reader.MyForm
             if (MainTagFrom != null)
                 MainTagFrom.Hide();
 
-            Form FormBookShelf = null;
+            FormBookShelf FormBookShelf = null;
             Control[] controls = this.MainPanel.Controls.Find("FormBookShelf", false);
             if (controls.Length == 0)
             {
@@ -173,12 +185,31 @@ namespace Shared_Novel_Reader.MyForm
                 Console.WriteLine("导入FormBookShelf成功");
             }
             else
-                FormBookShelf = controls[0] as Form;
+                FormBookShelf = controls[0] as FormBookShelf;
 
+            if(models.User.IsInit)
+                FormBookShelf.OpenInternetBookShelf();
             FormBookShelf.Dock = DockStyle.Fill;
             // this.MainPanel.Controls.Add(f);
             this.MainPanel.Tag = FormBookShelf;
             FormBookShelf.Show();
+        }
+
+        /// <summary>
+        /// 程序退出时调用,用于保存图书资源
+        /// </summary>
+        public void CloseFormBookShelf()
+        {
+            FormBookShelf FormBookShelf = null;
+            Control[] controls = this.MainPanel.Controls.Find("FormBookShelf", false);
+            // 说明书架已加载
+            if (controls.Length != 0)
+            {
+                FormBookShelf = controls[0] as FormBookShelf;
+                if (models.User.IsInit)
+                    FormBookShelf.closeInternetBookShelf();
+                FormBookShelf.closeLocalBookShelf();
+            }
         }
 
         private void BtnResManage_Click(object sender, EventArgs e)
@@ -219,7 +250,7 @@ namespace Shared_Novel_Reader.MyForm
             if (MainTagFrom != null)
                 MainTagFrom.Hide();
 
-            Form FormPersonalData = null;
+            FormPersonalData FormPersonalData = null;
             Control[] controls = this.MainPanel.Controls.Find("FormPersonalData", false);
             if (controls.Length == 0)
             {
@@ -237,7 +268,7 @@ namespace Shared_Novel_Reader.MyForm
                 Console.WriteLine("导入FormPersonalData成功");
             }
             else
-                FormPersonalData = controls[0] as Form;
+                FormPersonalData = controls[0] as FormPersonalData;
 
             FormPersonalData.Dock = DockStyle.Fill;
             // this.MainPanel.Controls.Add(f);
@@ -252,25 +283,6 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelTime.Text = DateTime.Now.ToString();
         }
 
-        private void BtnLogin_Click(object sender, EventArgs e)
-        {
-            Form FormLogin = new FormLogin();
-            DialogResult LoginRes = FormLogin.ShowDialog();
-            Console.WriteLine("DialogResult : " + LoginRes.ToString());
-            if (LoginRes == DialogResult.OK)
-            {
-                UserPowerInit();
-                BtnPersonalData.PerformClick();
-                Refresh();
-            }
-            else if(LoginRes == DialogResult.Cancel)
-            {
-                // 用户取消登入
-                Console.WriteLine("用户取消登入");
-            }
-            // 释放资源
-            FormLogin.Dispose();
-        }
 
         private void BtnBookPlatform_Click(object sender, EventArgs e)
         {
@@ -392,6 +404,39 @@ namespace Shared_Novel_Reader.MyForm
             }
             // 释放资源
             FormRegister.Dispose();
+        }
+
+        private void BtnLogin_Click(object sender, EventArgs e)
+        {
+            FormLogin FormLogin = new FormLogin();
+            DialogResult LoginRes = FormLogin.ShowDialog();
+            Console.WriteLine("DialogResult : " + LoginRes.ToString());
+            if (LoginRes == DialogResult.OK)
+            {
+                this.BtnLogin.Visible = false;
+                this.BtnRegister.Visible = false;
+                this.BtnLogout.Visible = true;
+                Refresh();
+                BtnPersonalData.PerformClick();
+            }
+            else if (LoginRes == DialogResult.Cancel)
+            {
+                // 用户取消登入
+                Console.WriteLine("用户取消登入");
+            }
+            // 释放资源
+            FormLogin.Dispose();
+        }
+        private void BtnLogout_Click(object sender, EventArgs e)
+        {
+            // 子窗口关闭前 用户退出前 先保存图书资源
+            CloseFormBookShelf();
+            models.User.Logout();
+            this.BtnLogin.Visible = true;
+            this.BtnRegister.Visible = true;
+            this.BtnLogout.Visible = false;
+            Refresh();
+            this.MainPanel.Controls.Clear();
         }
     }
 }

@@ -24,6 +24,22 @@ namespace Shared_Novel_Reader.models
         public static int Integral;
         public static int Total_Integral;
 
+        public static void Logout()
+        {
+            User_ID = 0;
+            Level = 0;
+            Power = 0;
+            Integral = 0;
+            Total_Integral = 0;
+            Name = "";
+            Password = "";
+            Status = "";
+            Sex = "";
+
+            IsInit = false;
+            return;
+        }
+
         public static bool Init(in JObject userJson)
         {
             // 设置校验条件

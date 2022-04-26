@@ -51,6 +51,7 @@
             this.LabelToolString = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.TimerTopPanelTime = new System.Windows.Forms.Timer(this.components);
+            this.BtnLogout = new System.Windows.Forms.Button();
             PictureLogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(PictureLogo)).BeginInit();
             this.SizePanel.SuspendLayout();
@@ -167,6 +168,7 @@
             // BtnPanel
             // 
             this.BtnPanel.BackColor = System.Drawing.Color.DimGray;
+            this.BtnPanel.Controls.Add(this.BtnLogout);
             this.BtnPanel.Controls.Add(this.BtnRegister);
             this.BtnPanel.Controls.Add(this.BtnLogin);
             this.BtnPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -381,6 +383,18 @@
             this.TimerTopPanelTime.Interval = 1000;
             this.TimerTopPanelTime.Tick += new System.EventHandler(this.TimerTopPanelTime_Tick);
             // 
+            // BtnLogout
+            // 
+            this.BtnLogout.BackColor = System.Drawing.Color.Red;
+            this.BtnLogout.Location = new System.Drawing.Point(23, 0);
+            this.BtnLogout.Name = "BtnLogout";
+            this.BtnLogout.Size = new System.Drawing.Size(206, 50);
+            this.BtnLogout.TabIndex = 2;
+            this.BtnLogout.Text = "注销";
+            this.BtnLogout.UseVisualStyleBackColor = false;
+            this.BtnLogout.Visible = false;
+            this.BtnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -395,6 +409,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(PictureLogo)).EndInit();
             this.SizePanel.ResumeLayout(false);
@@ -428,5 +443,6 @@
         private System.Windows.Forms.Button BtnBookPlatform;
         private System.Windows.Forms.Button BtnRootControl;
         private System.Windows.Forms.Label LabelWelcome;
+        private System.Windows.Forms.Button BtnLogout;
     }
 }

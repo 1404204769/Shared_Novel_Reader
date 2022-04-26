@@ -41,7 +41,6 @@ namespace Shared_Novel_Reader.models
         /// </summary>
         public List<Chapter> Chapter_Array;
 
-        ILog log = LogManager.GetLogger(typeof(Vol));
 
         /// <summary>
         /// 分卷类 初始化
