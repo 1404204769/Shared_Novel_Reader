@@ -28,23 +28,23 @@ namespace Shared_Novel_Reader.Tools.API.Admin
 
             if (res == null)
             {
-                MessageBox.Show("查询用户列表失败");
+                log.Info("查询用户列表失败");
                 return null;
             }
 
             if (res.Result == false)
             {
-                MessageBox.Show(res.Message);
+                log.Info(res.Message);
                 return null;
             }
 
             if (res.Data == null)
             {
-                MessageBox.Show("目前还没有用户注册");
+                log.Info("目前还没有用户注册");
                 return null;
             }
 
-            MessageBox.Show("查询用户列表成功");
+            log.Info("查询用户列表成功");
             return res;
         }
 
@@ -66,23 +66,23 @@ namespace Shared_Novel_Reader.Tools.API.Admin
 
             if (res == null)
             {
-                MessageBox.Show("查询指定用户列表失败");
+                log.Info("查询指定用户列表失败");
                 return null;
             }
 
             if (res.Result == false)
             {
-                MessageBox.Show(res.Message);
+                log.Info(res.Message);
                 return null;
             }
 
             if (res.Data == null)
             {
-                MessageBox.Show("未找到指定用户");
+                log.Info("未找到指定用户");
                 return null;
             }
 
-            MessageBox.Show("查询用户列表成功");
+            log.Info("查询用户列表成功");
             return res;
         }
     }

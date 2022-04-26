@@ -28,19 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LabelShow = new System.Windows.Forms.Label();
+            this.PanelNote = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // LabelShow
+            // PanelNote
             // 
-            this.LabelShow.AutoSize = true;
-            this.LabelShow.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelShow.ForeColor = System.Drawing.Color.Black;
-            this.LabelShow.Location = new System.Drawing.Point(348, 333);
-            this.LabelShow.Name = "LabelShow";
-            this.LabelShow.Size = new System.Drawing.Size(416, 56);
-            this.LabelShow.TabIndex = 3;
-            this.LabelShow.Text = "这是图书平台界面";
+            this.PanelNote.BackColor = System.Drawing.Color.White;
+            this.PanelNote.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelNote.Location = new System.Drawing.Point(0, 0);
+            this.PanelNote.Name = "PanelNote";
+            this.PanelNote.Size = new System.Drawing.Size(1150, 740);
+            this.PanelNote.TabIndex = 0;
             // 
             // FormBookPlatform
             // 
@@ -48,17 +46,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1150, 740);
-            this.Controls.Add(this.LabelShow);
+            this.Controls.Add(this.PanelNote);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormBookPlatform";
             this.Text = "FormBookPlatform";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label LabelShow;
+        private System.Windows.Forms.Panel PanelNote;
     }
 }

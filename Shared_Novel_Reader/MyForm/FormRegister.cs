@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +14,7 @@ namespace Shared_Novel_Reader.MyForm
 {
     public partial class FormRegister : Form
     {
-
+        ILog log = LogManager.GetLogger(typeof(FormRegister));
         /*
              "User_ID": 911123,
             "User_Name": "孙芳文",
@@ -99,7 +100,7 @@ namespace Shared_Novel_Reader.MyForm
         {
             LabelErrorExpain.Visible = false;
             string msg = "账户: " + UserID + "\n昵称: " + UserName +"\n性别: " + UserSex + "\n密码: " + TextPassword.Text + "\n确认密码: " + TextPasswordAgain.Text;
-            MessageBox.Show(msg);
+            log.Info(msg);
             // 先校验一遍数据是否合法
             if (TextPassword.Text != TextPasswordAgain.Text)
             {
@@ -173,7 +174,6 @@ namespace Shared_Novel_Reader.MyForm
             {
                 this.UserID = Convert.ToInt32(((TextBox)sender).Text);
             }
-            
         }
 
         private void TextName_TextChanged(object sender, EventArgs e)

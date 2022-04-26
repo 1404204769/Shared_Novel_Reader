@@ -133,7 +133,7 @@ namespace Shared_Novel_Reader.models
                 {
                     if (!newVol.Chapter_Array[i].MarkChapter())
                     {
-                        MessageBox.Show("新章节资源标记为最新资源失败");
+                        log.Info("新章节资源标记为最新资源失败");
                         return false;
                     }
                     this.Push_Chapter(newVol.Chapter_Array[i]);

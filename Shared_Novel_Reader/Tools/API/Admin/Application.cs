@@ -32,23 +32,23 @@ namespace Shared_Novel_Reader.Tools.API.Admin
 
             if (res == null)
             {
-                MessageBox.Show("查询用户申请失败");
+                log.Info("查询用户申请失败");
                 return null;
             }
 
             if (res.Result == false)
             {
-                MessageBox.Show(res.Message);
+                log.Info(res.Message);
                 return null;
             }
 
             if (res.Data == null)
             {
-                MessageBox.Show("目前还没有用户申请");
+                log.Info("目前还没有用户申请");
                 return null;
             }
 
-            MessageBox.Show("查询用户申请成功");
+            log.Info("查询用户申请成功");
             return res;
         }
     }

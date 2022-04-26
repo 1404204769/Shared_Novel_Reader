@@ -15,6 +15,7 @@ namespace Shared_Novel_Reader.models
     /// </summary>
     internal class Book
     {
+        ILog log = LogManager.GetLogger(typeof(Book));
         /// <summary>
         /// 图书名称
         /// </summary>
@@ -43,8 +44,6 @@ namespace Shared_Novel_Reader.models
         /// 此书的分卷集合
         /// </summary>
         public List<Vol> Vol_Array { get; set; }
-
-        ILog log = LogManager.GetLogger(typeof(Book));
 
 
         public Book()
@@ -147,7 +146,7 @@ namespace Shared_Novel_Reader.models
                 {
                     if (!book.Vol_Array[i].MarkVol())
                     {
-                        MessageBox.Show("新卷资源标记为最新资源失败");
+                        log.Info("新卷资源标记为最新资源失败");
                         return false;
                     }
                     this.Push_Vol(book.Vol_Array[i]);

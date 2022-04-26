@@ -144,8 +144,7 @@ namespace Shared_Novel_Reader.models
             {
                 if(Convert.ToInt32( user["UserID"] ) == User.User_ID)
                 {
-                    var books = from book in user["BookArray"] select JObject.FromObject(book);
-                    InternetResArray = (JArray)books;
+                    InternetResArray = (JArray)user["BookArray"];
                     return true;
                 }
             }

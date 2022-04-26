@@ -1,38 +1,33 @@
 ﻿using log4net;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 namespace Shared_Novel_Reader.Tools.API.User
 {
-    internal class Resource
+    internal class Note
     {
-        private static ILog log = LogManager.GetLogger(typeof(Resource));
+        private static ILog log = LogManager.GetLogger(typeof(Note));
 
         /// <summary>
         /// 查询图书资源的目录
         /// </summary>
         /// <param name="ResJson"></param>
         /// <returns></returns>
-        public static MyResponse SearchMenu(in JObject ReqJson)
+        public static MyResponse SearchNote(in JObject ReqJson)
         {
             // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
 
 
             int num = 0;
-            MyResponse res = MyClient.PushRequests("User/Resource/Search/Menu", ReqJson.ToString());
+            MyResponse res = MyClient.PushRequests("User/Resource/Search", ReqJson.ToString());
             while ((res == null) && (num < 10))
             {
                 log.Info("第" + (++num) + "次重试");
-                res = MyClient.PushRequests("User/Resource/Search/Menu", ReqJson.ToString());
+                res = MyClient.PushRequests("User/Resource/Search", ReqJson.ToString());
             }
 
             if (res == null)
             {
-                log.Info("查询资源失败");
+                log.Info("查询帖子资源失败");
                 return null;
             }
 
@@ -44,35 +39,38 @@ namespace Shared_Novel_Reader.Tools.API.User
 
             if (res.Data == null)
             {
-                log.Info("目前还没有资源");
+                log.Info("目前还没有帖子资源");
                 return null;
             }
 
-            log.Info("查询资源成功");
+            log.Info("查询帖子资源成功");
             return res;
 
         }
+
+
+
         /// <summary>
-        /// 查询图书章节内容
+        /// 查询帖子评论
         /// </summary>
         /// <param name="ResJson"></param>
         /// <returns></returns>
-        public static MyResponse SearchContent(in JObject ReqJson)
+        public static MyResponse SearchNoteComment(in JObject ReqJson)
         {
             // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
 
 
             int num = 0;
-            MyResponse res = MyClient.PushRequests("User/Resource/Search/Content", ReqJson.ToString());
+            MyResponse res = MyClient.PushRequests("User/Resource/Search/Comment", ReqJson.ToString());
             while ((res == null) && (num < 10))
             {
                 log.Info("第" + (++num) + "次重试");
-                res = MyClient.PushRequests("User/Resource/Search/Content", ReqJson.ToString());
+                res = MyClient.PushRequests("User/Resource/Search/Comment", ReqJson.ToString());
             }
 
             if (res == null)
             {
-                log.Info("查询章节内容资源失败");
+                log.Info("查询帖子评论失败");
                 return null;
             }
 
@@ -84,11 +82,11 @@ namespace Shared_Novel_Reader.Tools.API.User
 
             if (res.Data == null)
             {
-                log.Info("目前还没有章节内容资源");
+                log.Info("目前还没有帖子评论");
                 return null;
             }
 
-            log.Info("查询章节内容资源成功");
+            log.Info("查询帖子评论成功");
             return res;
 
         }

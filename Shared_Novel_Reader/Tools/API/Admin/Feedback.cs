@@ -33,17 +33,17 @@ namespace Shared_Novel_Reader.Tools.API.Admin
 
             if (res.Result == false)
             {
-                MessageBox.Show(res.Message);
+                log.Info(res.Message);
                 return null;
             }
 
             if (res.Data == null)
             {
-                MessageBox.Show("目前还没有用户反馈意见");
+                log.Info("目前还没有用户反馈意见");
                 return null;
             }
 
-            MessageBox.Show("查询用户意见成功");
+            log.Info("查询用户意见成功");
             return res;
         }
     }

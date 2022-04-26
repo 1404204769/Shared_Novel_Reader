@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using log4net;
+using Newtonsoft.Json.Linq;
 using Shared_Novel_Reader.Tools;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
 {
     public partial class FormUserApplication : Form
     {
+        ILog log = LogManager.GetLogger(typeof(FormUserApplication));
+
         public bool IsFindAll = true;
         public string ProviderIDStr = String.Empty;
         public string ProcessorStr = String.Empty;
@@ -78,24 +81,24 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             if (res == null || !res.Result)
             {
                 // 清除残留数据
-                MessageBox.Show("用户申请列表查询失败");
+                log.Info("用户申请列表查询失败");
             }
             else if (res.Data["ApplicationList"].ToString() == "")
             {
-                MessageBox.Show("用户申请列表为空");
+                log.Info("用户申请列表为空");
             }
             else
             {
 
                 string[][] ApplicationListStr;
                 JArray ApplicationListJson = (JArray)res.Data["ApplicationList"];
-                // MessageBox.Show(ApplicationListJson.ToString());
+                // log.Info(ApplicationListJson.ToString());
                 GetApplicationList(in ApplicationListJson, out ApplicationListStr);
                 for (int i = 0; i < ApplicationListJson.Count; i++)
                 {
                     DataGridViewUserApplication.Rows.Add(ApplicationListStr[i]);
                 }
-                MessageBox.Show("用户申请列表查询成功");
+                log.Info("用户申请列表查询成功");
             }
         }
 
@@ -149,7 +152,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
                 show += ColHead[i] + " : " + (string)DataGridViewUserApplication.Rows[RowIndex].Cells[ColName[i]].Value + "\n";
             }
 
-            MessageBox.Show(show);
+            log.Info(show);
         }
 
         private void ReFind_Click(object sender, EventArgs e)

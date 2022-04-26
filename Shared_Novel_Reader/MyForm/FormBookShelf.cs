@@ -47,7 +47,7 @@ namespace Shared_Novel_Reader.MyForm
             }
             else
             {
-                MessageBox.Show("网络书架关闭成功");
+                log.Info("网络书架关闭成功");
             }
             this.tabPageInternetBook.Parent = null;
             IsInternetBookShelfOpen = false;
@@ -60,11 +60,11 @@ namespace Shared_Novel_Reader.MyForm
         {
             if (!LocalBookShelf.close())
             {
-                MessageBox.Show("本地书架关闭失败");
+                log.Info("本地书架关闭失败");
             }
             else
             {
-                MessageBox.Show("本地书架关闭成功");
+                log.Info("本地书架关闭成功");
             }
         }
 
@@ -73,10 +73,10 @@ namespace Shared_Novel_Reader.MyForm
         {
             if (!models.LocalBookShelf.open())
             {
-                MessageBox.Show("书架打开失败");
+                log.Info("书架打开失败");
                 return;
             }
-            MessageBox.Show("书架打开成功");
+            log.Info("书架打开成功");
 
             this.DataGridViewLocal.Rows.Clear();
             foreach (var book in LocalBookShelf.LocalResArray)
@@ -96,10 +96,10 @@ namespace Shared_Novel_Reader.MyForm
             if (!User.IsInit) return;
             if (!InternetBookShelf.open())
             {
-                MessageBox.Show("网络书架打开失败");
+                log.Info("网络书架打开失败");
                 return;
             }
-            MessageBox.Show("书架打开成功");
+            log.Info("书架打开成功");
 
             this.DataGridViewInternet.Rows.Clear();
             foreach (var book in InternetBookShelf.InternetResArray)

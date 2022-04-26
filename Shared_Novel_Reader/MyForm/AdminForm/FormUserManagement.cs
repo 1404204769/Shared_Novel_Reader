@@ -4,11 +4,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using System;
+using log4net;
 
 namespace Shared_Novel_Reader.MyForm.AdminForm
 {
     public partial class FormUserManagement : Form
     {
+        ILog log = LogManager.GetLogger(typeof(FormUserManagement));
+
         public bool IsFindAll = true;
         public string UserIDStr = String.Empty;
         public string UserNameStr = String.Empty;
@@ -36,24 +39,24 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             if (res == null || !res.Result)
             {
                 // 清除残留数据
-                MessageBox.Show("用户列表查询失败");
+                log.Info("用户列表查询失败");
             }
             else if (res.Data["UserList"].ToString() == "")
             {
-                MessageBox.Show("用户列表为空");
+                log.Info("用户列表为空");
             }
             else
             {
 
                 string[][] UserListStr;
                 JArray UserListJson = (JArray)res.Data["UserList"];
-                // MessageBox.Show(UserListJson.ToString());
+                // log.Info(UserListJson.ToString());
                 GetUserList(in UserListJson, out UserListStr);
                 for (int i = 0; i < UserListJson.Count; i++)
                 {
                     DataGridViewUser.Rows.Add(UserListStr[i]);
                 }
-                MessageBox.Show("用户列表查询成功");
+                log.Info("用户列表查询成功");
             }
         }
 
@@ -76,7 +79,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             {
                 UserSexStr = "";
             }
-            MessageBox.Show("正在查询指定用户(ID:"+ UserID + ",Name:"+ UserNameStr + ",Sex:"+ UserSexStr + ")");
+            log.Info("正在查询指定用户(ID:"+ UserID + ",Name:"+ UserNameStr + ",Sex:"+ UserSexStr + ")");
 
             JObject ReqJson = new JObject();
             ReqJson["User_ID"] = UserID;
@@ -94,23 +97,23 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             if (res == null || !res.Result)
             {
                 // 清除残留数据
-                MessageBox.Show("指定用户查询失败");
+                log.Info("指定用户查询失败");
             }
             else if (res.Data["UserList"].ToString() == "")
             {
-                MessageBox.Show("用户列表为空");
+                log.Info("用户列表为空");
             }
             else
             {
                 string[][] UserListStr;
                 JArray UserListJson = (JArray)res.Data["UserList"];
-                // MessageBox.Show(UserListJson.ToString());
+                // log.Info(UserListJson.ToString());
                 GetUserList(in UserListJson, out UserListStr);
                 for (int i = 0; i < UserListJson.Count; i++)
                 {
                     DataGridViewUser.Rows.Add(UserListStr[i]);
                 }
-                MessageBox.Show("指定用户查询成功");
+                log.Info("指定用户查询成功");
             }
 
         }
@@ -200,7 +203,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
                 show += ColHead[i] + " : " + (string)DataGridViewUser.Rows[RowIndex].Cells[ColName[i]].Value + "\n";
             }
 
-            MessageBox.Show(show);
+            log.Info(show);
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using log4net;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
 {
     public partial class FormChapterContent : Form
     {
+        ILog log = LogManager.GetLogger(typeof(FormChapterContent));
         int PartNum, ChapterNum, VersionNum;
         string BookName,ChapterTitle;
         JArray ContentArray = null;
@@ -47,7 +49,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
             
             if (ContentArray == null || ContentArray.Count == 0)
             {
-                MessageBox.Show("章节内容为空");
+                log.Info("章节内容为空");
             }
             else
             {
@@ -56,7 +58,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
                     ChineseNum += Tools.Novel_Analysis.GetHanNumFromString(ContentArray[i].ToString());
                     DataGridViewChapterContent.Rows.Add(ContentArray[i].ToString());
                 }
-                MessageBox.Show("章节内容如下");
+                log.Info("章节内容如下");
             }
             this.toolStripLabelChineseNumValue.Text = Convert.ToString(ChineseNum);
         }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using log4net;
+using Newtonsoft.Json.Linq;
 using Shared_Novel_Reader.MyForm.AdminForm.Resource;
 using Shared_Novel_Reader.Tools;
 using System;
@@ -15,6 +16,8 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
 {
     public partial class FormResourceManagement : Form
     {
+        ILog log = LogManager.GetLogger(typeof(FormResourceManagement));
+
         public FormBookAllChapter FormBookAllChapter = null;
         public bool IsFindAll = true;
         public string BookNameStr = String.Empty;
@@ -78,24 +81,24 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             if (res == null || !res.Result)
             {
                 // 清除残留数据
-                MessageBox.Show("图书资源列表查询失败");
+                log.Info("图书资源列表查询失败");
             }
             else if (res.Data["Book_List"].ToString() == "")
             {
-                MessageBox.Show("图书资源列表为空");
+                log.Info("图书资源列表为空");
             }
             else
             {
 
                 string[][] BookListStr;
                 JArray BookListJson = (JArray)res.Data["Book_List"];
-                // MessageBox.Show(BookListJson.ToString());
+                // log.Info(BookListJson.ToString());
                 GetBookList(in BookListJson, out BookListStr);
                 for (int i = 0; i < BookListJson.Count; i++)
                 {
                     DataGridViewResourceBook.Rows.Add(BookListStr[i]);
                 }
-                MessageBox.Show("图书资源列表查询成功");
+                log.Info("图书资源列表查询成功");
             }
         }
 
@@ -176,7 +179,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             {
                 show += ColHead[i] + " : " + (string)DataGridViewResourceBook.Rows[RowIndex].Cells[ColName[i]].Value + "\n";
             }
-            MessageBox.Show(show);
+            log.Info(show);
         }
 
         private void ViewChapters_Click(object sender, EventArgs e)

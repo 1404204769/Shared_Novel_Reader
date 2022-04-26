@@ -17,8 +17,8 @@ namespace Shared_Novel_Reader
             // JsonTest();
              Application.EnableVisualStyles();
              Application.SetCompatibleTextRenderingDefault(false);
-            // Application.Run(new MyForm.FormBookShelf());
-            Application.Run(new MainForm());
+            // Application.Run(new MyForm.FormBookPlatform());
+             Application.Run(new MainForm());
             // reset();
             // init();
             // Booktest();

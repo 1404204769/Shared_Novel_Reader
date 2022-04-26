@@ -104,7 +104,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="models\Comment.cs" />
     <Compile Include="models\InternetBookShelf.cs" />
+    <Compile Include="models\Note.cs" />
     <Compile Include="MyForm\AdminForm\FormFilterResourceManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -231,6 +233,30 @@
     <Compile Include="models\LocalBookShelf.cs" />
     <Compile Include="models\User.cs" />
     <Compile Include="models\Vol.cs" />
+    <Compile Include="MyForm\ResourceForm\FormNoteComment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\ResourceForm\FormNoteComment.Designer.cs">
+      <DependentUpon>FormNoteComment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\ResourceForm\FormNoteDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\ResourceForm\FormNoteDetail.Designer.cs">
+      <DependentUpon>FormNoteDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\ResourceForm\FormNoteSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\ResourceForm\FormNoteSearch.Designer.cs">
+      <DependentUpon>FormNoteSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\ResourceForm\FormNoteRows.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\ResourceForm\FormNoteRows.Designer.cs">
+      <DependentUpon>FormNoteRows.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\ResourceForm\FormNovelReader.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -245,6 +271,7 @@
     <Compile Include="Tools\API\Admin\Resource.cs" />
     <Compile Include="Tools\API\Admin\User.cs" />
     <Compile Include="Tools\API\GPI.cs" />
+    <Compile Include="Tools\API\User\Note.cs" />
     <Compile Include="Tools\API\User\Resource.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\BaiExpression.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\ChineseNumberChar.cs" />
@@ -319,6 +346,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\ResourceForm\FormNoteComment.resx">
+      <DependentUpon>FormNoteComment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\ResourceForm\FormNoteDetail.resx">
+      <DependentUpon>FormNoteDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\ResourceForm\FormNoteSearch.resx">
+      <DependentUpon>FormNoteSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\ResourceForm\FormNoteRows.resx">
+      <DependentUpon>FormNoteRows.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\ResourceForm\FormNovelReader.resx">
       <DependentUpon>FormNovelReader.cs</DependentUpon>

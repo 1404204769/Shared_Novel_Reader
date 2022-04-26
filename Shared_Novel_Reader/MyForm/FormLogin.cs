@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using log4net;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,7 +10,7 @@ namespace Shared_Novel_Reader.MyForm
     public partial class FormLogin : Form
     {
         private CancellationTokenSource CancelLoginControl = null;
-
+        ILog log = LogManager.GetLogger(typeof(FormLogin));
         /// <summary>
         /// Logo初始位置
         /// </summary>
@@ -72,7 +68,7 @@ namespace Shared_Novel_Reader.MyForm
             {
                 this.DialogResult = DialogResult.OK;
                 this.Dispose();
-                MessageBox.Show("登入成功");
+                log.Info("登入成功");
             }
         }
 

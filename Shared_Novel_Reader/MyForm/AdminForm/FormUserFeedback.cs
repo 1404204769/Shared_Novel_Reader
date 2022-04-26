@@ -10,11 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Shared_Novel_Reader.Tools.API.Admin;
+using log4net;
 
 namespace Shared_Novel_Reader.MyForm.AdminForm
 {
     public partial class FormUserFeedback : Form
     {
+        ILog log = LogManager.GetLogger(typeof(FormUserFeedback));
+
         public bool IsFindAll = true;
         public string ProviderIDStr = String.Empty;
         public string ProcessorStr = String.Empty;
@@ -80,23 +83,23 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             if (res == null || !res.Result)
             {
                 // 清除残留数据
-                MessageBox.Show("用户意见列表查询失败");
+                log.Info("用户意见列表查询失败");
             }
             else if(res.Data["FeedbackList"].ToString() == "")
             {
-                MessageBox.Show("用户意见列表为空");
+                log.Info("用户意见列表为空");
             }
             else
             {
                 string[][] FeedbackListStr;
                 JArray FeedbackListJson = (JArray)res.Data["FeedbackList"];
-                // MessageBox.Show(FeedbackListJson.ToString());
+                // log.Info(FeedbackListJson.ToString());
                 GetFeedbackList(in FeedbackListJson, out FeedbackListStr);
                 for (int i = 0; i < FeedbackListJson.Count; i++)
                 {
                     DataGridViewUserFeedback.Rows.Add(FeedbackListStr[i]);
                 }
-                MessageBox.Show("用户意见列表查询成功");
+                log.Info("用户意见列表查询成功");
             }
         }
 
@@ -184,7 +187,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             {
                 show += ColHead[i] + " : " + (string)DataGridViewUserFeedback.Rows[RowIndex].Cells[ColName[i]].Value + "\n";
             }
-            MessageBox.Show(show);
+            log.Info(show);
         }
     }
 }

@@ -281,7 +281,7 @@ namespace Shared_Novel_Reader.models
             LocalResArray.Add(jobj);
             if(!book.MarkBook())
             {
-                MessageBox.Show("图书资源初始化标记为最新资源失败");
+                log.Info("图书资源初始化标记为最新资源失败");
                 return false;
             }
             BookList.Add(book);

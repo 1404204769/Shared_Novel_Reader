@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using log4net;
 using Newtonsoft.Json.Linq;
 using Shared_Novel_Reader.models;
 using Shared_Novel_Reader.Tools;
@@ -9,6 +10,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
 {
     public partial class FormNovelReader : Form
     {
+        ILog log = LogManager.GetLogger(typeof(FormNovelReader));
         public bool IsLocal = true;// 是否是本地资源
         public string Book_Name = "";// 书名
         public int Link_Num = 0;// 本地图书保存的名称
@@ -107,11 +109,11 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             if (res == null || !res.Result)
             {
                 // 清除残留数据
-                MessageBox.Show("在线图书章节列表查询失败");
+                log.Info("在线图书章节列表查询失败");
             }
             else if (res.Data["ChapterList"].ToString() == "")
             {
-                MessageBox.Show("在线图书章节为空");
+                log.Info("在线图书章节为空");
             }
             else
             {
@@ -136,7 +138,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 }
                 if(index >= this.DataGridViewList.Rows.Count)
                 {
-                    MessageBox.Show("指定章节超出索引范围");
+                    log.Info("指定章节超出索引范围");
                     this.DataGridViewList.Rows[0].Selected = true;
                     LoadLocalContent(Convert.ToInt32(this.DataGridViewList.Rows[0].Cells[1].Value), Convert.ToInt32(this.DataGridViewList.Rows[0].Cells[2].Value));
                     return;
@@ -172,7 +174,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
         {
             if(BookTarget == -1)
             {
-                MessageBox.Show("图书内容加载失败");
+                log.Info("图书内容加载失败");
                 return;
             }
             /// 能运行到这里说明在index位置就是需要的图书资源
@@ -180,37 +182,37 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             Book book = LocalBookShelf.BookList[BookTarget];
             if(book == null)
             {
-                MessageBox.Show("图书资源不存在");
+                log.Info("图书资源不存在");
                 return;
             }
 
             if(volnum > book.Vol_Array.Count)
             {
-                MessageBox.Show("分卷资源不存在");
+                log.Info("分卷资源不存在");
                 return;
             }
             Vol vol = book.Vol_Array[volnum - 1];
             if (vol == null)
             {
-                MessageBox.Show("分卷资源不存在");
+                log.Info("分卷资源不存在");
                 return;
             }
 
             if (chapnum > vol.Chapter_Array.Count)
             {
-                MessageBox.Show("章节资源不存在");
+                log.Info("章节资源不存在");
                 return;
             }
             Chapter chapter = vol.Chapter_Array[chapnum - 1];
             if (chapter == null)
             {
-                MessageBox.Show("章节资源不存在");
+                log.Info("章节资源不存在");
                 return;
             }
 
             if(chapter.ContentList.Count <= 0)
             {
-                MessageBox.Show("章节内容资源不存在");
+                log.Info("章节内容资源不存在");
                 return;
             }
 
@@ -228,7 +230,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 Chapter_Num = chapnum;
                 return;
             }
-            MessageBox.Show("章节最新内容资源不存在");
+            log.Info("章节最新内容资源不存在");
             return;
         }
 
@@ -256,12 +258,12 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             if (res == null || !res.Result)
             {
                 // 清除残留数据
-                MessageBox.Show("在线图书章节内容查询失败");
+                log.Info("在线图书章节内容查询失败");
                 this.DataGridViewContent.Rows.Add("在线图书章节内容查询失败");
             }
             else if (res.Data["ChapterContent"].ToString() == "")
             {
-                MessageBox.Show("在线图书章节内容为空");
+                log.Info("在线图书章节内容为空");
                 this.DataGridViewContent.Rows.Add("在线图书章节内容为空");
             }
             else
@@ -282,7 +284,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             }
 
 
-            MessageBox.Show("章节最新内容资源不存在");
+            log.Info("章节最新内容资源不存在");
             return;
         }
 

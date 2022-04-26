@@ -29,7 +29,7 @@ namespace Shared_Novel_Reader.Tools
             set
             {
                 Authorization = value;
-                MessageBox.Show("用户凭证更新为 : " + Authorization);
+                log.Info("用户凭证更新为 : " + Authorization);
             }
         }
 
@@ -123,7 +123,7 @@ namespace Shared_Novel_Reader.Tools
             client.UseJson();
             IsInit = true;
             // 管理员权限
-            Authorization = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJMb2dpbl9TdGF0dXMiOiJhZG1pbiIsIlVzZXJfSUQiOiI5MTExMDgifQ.7ERq0WPlu6kVsBguiBQZny9F_lNkU4AGBUurazNwDrc";
+            // Authorization = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJMb2dpbl9TdGF0dXMiOiJhZG1pbiIsIlVzZXJfSUQiOiI5MTExMDgifQ.7ERq0WPlu6kVsBguiBQZny9F_lNkU4AGBUurazNwDrc";
         }
 
 

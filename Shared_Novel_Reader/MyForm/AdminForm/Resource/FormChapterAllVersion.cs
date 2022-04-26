@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using log4net;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Shared_Novel_Reader.Tools;
 using System;
@@ -9,6 +10,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
 {
     public partial class FormChapterAllVersion : Form
     {
+        ILog log = LogManager.GetLogger(typeof(FormChapterAllVersion));
         string BookName;
         int BookID, PartNum, ChapterNum;
         public FormChapterContent FormChapterContent = null;
@@ -55,23 +57,23 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
             if (res == null || !res.Result)
             {
                 // 清除残留数据
-                MessageBox.Show("章节所有版本列表查询失败");
+                log.Info("章节所有版本列表查询失败");
             }
             else if (res.Data["Chapter_List"].ToString() == "")
             {
-                MessageBox.Show("章节所有版本列表为空");
+                log.Info("章节所有版本列表为空");
             }
             else
             {
                 string[][] ChapterListStr;
                 JArray ChapterListJson = (JArray)res.Data["Chapter_List"];
-                // MessageBox.Show(ChapterListJson.ToString());
+                // log.Info(ChapterListJson.ToString());
                 GetChapterList(in ChapterListJson, out ChapterListStr);
                 for (int i = 0; i < ChapterListJson.Count; i++)
                 {
                     DataGridViewResourceChapterAllVersion.Rows.Add(ChapterListStr[i]);
                 }
-                MessageBox.Show("章节所有版本列表查询成功");
+                log.Info("章节所有版本列表查询成功");
             }
         }
 
@@ -136,7 +138,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
             {
                 show += ColHead[i] + " : " + (string)DataGridViewResourceChapterAllVersion.Rows[RowIndex].Cells[ColName[i]].Value + "\n";
             }
-            MessageBox.Show(show);
+            log.Info(show);
         }
 
         private void MyRefresh_Click(object sender, EventArgs e)
