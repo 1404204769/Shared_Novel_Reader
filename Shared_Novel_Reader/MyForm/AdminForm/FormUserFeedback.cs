@@ -187,7 +187,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             {
                 show += ColHead[i] + " : " + (string)DataGridViewUserFeedback.Rows[RowIndex].Cells[ColName[i]].Value + "\n";
             }
-            log.Info(show);
+            MessageBox.Show(show);
         }
     }
 }

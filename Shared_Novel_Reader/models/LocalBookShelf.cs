@@ -16,6 +16,7 @@ namespace Shared_Novel_Reader.models
     /// </summary>
     internal static class LocalBookShelf
     {
+        static bool IsInit = false;
         static private string LocalResPath = Properties.Settings.Default.Local_Res_Path + "\\LocalRes.json";
         static public List<Book> BookList = new List<Book>();
         static public JObject LocalRes = new JObject();
@@ -27,6 +28,7 @@ namespace Shared_Novel_Reader.models
         /// <returns></returns>
         static public bool open()
         {
+            if (IsInit) return true;
             ILog log = LogManager.GetLogger(typeof(LocalBookShelf));
             if (!File.Exists(LocalResPath))
             {
@@ -52,6 +54,7 @@ namespace Shared_Novel_Reader.models
             }
 
             LocalResArray = (JArray)LocalRes["Book_Array"];
+            IsInit = true;
             return true;
         }
 
@@ -61,6 +64,7 @@ namespace Shared_Novel_Reader.models
         /// <returns></returns>
         static public bool close()
         {
+            if(!IsInit) return true;
             ILog log = LogManager.GetLogger(typeof(LocalBookShelf));
             foreach (var name in LocalResArray)
             {
@@ -77,7 +81,7 @@ namespace Shared_Novel_Reader.models
                 log.Info("书架关闭时,保存图书索引数据失败");
                 return false;
             }
-
+            IsInit = false;
             return true;
         }
 

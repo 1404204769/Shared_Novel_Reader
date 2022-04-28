@@ -45,7 +45,7 @@
             // 
             // labelContent
             // 
-            this.labelContent.BackColor = System.Drawing.Color.Silver;
+            this.labelContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.labelContent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.labelContent.ForeColor = System.Drawing.Color.Black;
             this.labelContent.Location = new System.Drawing.Point(110, 62);
@@ -71,6 +71,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1140, 150);
             this.Controls.Add(this.labelLink);
             this.Controls.Add(this.labelContent);

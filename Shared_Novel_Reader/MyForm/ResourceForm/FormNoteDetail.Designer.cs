@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.Panel = new System.Windows.Forms.Panel();
+            this.LabelJoin = new System.Windows.Forms.Label();
             this.labelViewBook = new System.Windows.Forms.Label();
             this.labelContent = new System.Windows.Forms.Label();
             this.labelTitle = new System.Windows.Forms.Label();
             this.FlowLayoutPanelNoteComment = new System.Windows.Forms.FlowLayoutPanel();
-            this.LabelJoin = new System.Windows.Forms.Label();
             this.Panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // Panel
             // 
-            this.Panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.Panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.Panel.Controls.Add(this.LabelJoin);
             this.Panel.Controls.Add(this.labelViewBook);
             this.Panel.Controls.Add(this.labelContent);
@@ -50,6 +50,19 @@
             this.Panel.Name = "Panel";
             this.Panel.Size = new System.Drawing.Size(1150, 200);
             this.Panel.TabIndex = 0;
+            // 
+            // LabelJoin
+            // 
+            this.LabelJoin.AutoSize = true;
+            this.LabelJoin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LabelJoin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LabelJoin.ForeColor = System.Drawing.Color.DarkCyan;
+            this.LabelJoin.Location = new System.Drawing.Point(1033, 48);
+            this.LabelJoin.Name = "LabelJoin";
+            this.LabelJoin.Size = new System.Drawing.Size(80, 18);
+            this.LabelJoin.TabIndex = 6;
+            this.LabelJoin.Text = "加入书架";
+            this.LabelJoin.Click += new System.EventHandler(this.LabelJoin_Click);
             // 
             // labelViewBook
             // 
@@ -94,19 +107,6 @@
             this.FlowLayoutPanelNoteComment.Name = "FlowLayoutPanelNoteComment";
             this.FlowLayoutPanelNoteComment.Size = new System.Drawing.Size(1150, 540);
             this.FlowLayoutPanelNoteComment.TabIndex = 1;
-            // 
-            // LabelJoin
-            // 
-            this.LabelJoin.AutoSize = true;
-            this.LabelJoin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LabelJoin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LabelJoin.ForeColor = System.Drawing.Color.DarkCyan;
-            this.LabelJoin.Location = new System.Drawing.Point(1033, 48);
-            this.LabelJoin.Name = "LabelJoin";
-            this.LabelJoin.Size = new System.Drawing.Size(80, 18);
-            this.LabelJoin.TabIndex = 6;
-            this.LabelJoin.Text = "加入书架";
-            this.LabelJoin.Click += new System.EventHandler(this.LabelJoin_Click);
             // 
             // FormNoteDetail
             // 

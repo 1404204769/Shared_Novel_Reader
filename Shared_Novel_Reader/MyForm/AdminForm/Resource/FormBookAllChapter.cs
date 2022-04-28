@@ -130,7 +130,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
             {
                 show += ColHead[i] + " : " + (string)DataGridViewResourceBookAllChapter.Rows[RowIndex].Cells[ColName[i]].Value + "\n";
             }
-            log.Info(show);
+            MessageBox.Show(show);
         }
 
         private void ViewChapter_Click(object sender, EventArgs e)

@@ -77,14 +77,14 @@ namespace Shared_Novel_Reader.MyForm
             }
 
             // 管理员权限
-            if(models.User.Power > 10000)
+            if(models.User.Power >= 10000)
             {
                 // 管理员界面
                 BtnAdminControl.Visible = true;
             }
 
             // 超级管理员权限
-            if (models.User.Power > int.MaxValue)
+            if (models.User.Power >= int.MaxValue)
             {
                 // 超级管理员界面
                 BtnRootControl.Visible = true;

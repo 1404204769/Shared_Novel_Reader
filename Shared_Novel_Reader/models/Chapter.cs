@@ -33,17 +33,17 @@ namespace Shared_Novel_Reader.models
         /// <summary>
         /// 创建时间,默认为当前时间
         /// </summary>
-        private string Create_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        public string Create_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
         /// <summary>
         /// 更改时间,默认为当前时间
         /// </summary>
-        private string Update_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        public string Update_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
         /// <summary>
         /// 上传时间,默认为时间最小值
         /// </summary>
-        private string Upload_Time = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
+        public string Upload_Time = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
 
 
         /// <summary>
@@ -58,6 +58,20 @@ namespace Shared_Novel_Reader.models
             Upload_Time = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
             ContentList = new List<models.Content>();
         }
+
+        /// <summary>
+        /// 章节类 初始化
+        /// </summary>
+        public Chapter(int num)
+        {
+            ChapNum = num;
+            ChapTitle = "";
+            Create_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            Update_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            Upload_Time = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
+            ContentList = new List<models.Content>();
+        }
+
 
         /// <summary>
         /// 将章节标记为最新

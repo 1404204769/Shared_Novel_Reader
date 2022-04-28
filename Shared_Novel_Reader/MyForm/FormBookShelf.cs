@@ -20,12 +20,6 @@ namespace Shared_Novel_Reader.MyForm
         }
 
 
-
-
-
-
-
-
         private void FormBookShelf_FormClosed(object sender, FormClosedEventArgs e)
         {
             log.Info("调用了FormBookShelf_FormClosed函数");

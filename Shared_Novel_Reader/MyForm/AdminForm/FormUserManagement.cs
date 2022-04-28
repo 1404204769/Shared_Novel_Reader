@@ -202,8 +202,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             {
                 show += ColHead[i] + " : " + (string)DataGridViewUser.Rows[RowIndex].Cells[ColName[i]].Value + "\n";
             }
-
-            log.Info(show);
+            MessageBox.Show(show);
         }
     }
 

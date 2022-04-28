@@ -238,5 +238,185 @@ namespace Shared_Novel_Reader.models
             }
         }
 
+
+        /// <summary>
+        /// 减少章节冲突，选择最新的版本，其余版本删除
+        /// </summary>
+        /// <param name="volNum">分卷数</param>
+        /// <param name="chapNum">章节数</param>
+        /// <param name="version">版本号</param>
+        /// <returns></returns>
+        public bool ReduceChapterConflicts(int volNum, int chapNum, int version = 0)
+        {
+            if (Vol_Array.Count < volNum)
+            {
+                log.Info("目标分卷数不存在");
+                return false;
+            }
+            Vol vol = Vol_Array[volNum - 1];
+
+            if (vol.Chapter_Array.Count < chapNum)
+            {
+                log.Info("目标章节数不存在");
+                return false;
+            }
+            Chapter chap = vol.Chapter_Array[chapNum - 1];
+
+            if(chap.ContentList.Count < version)
+            {
+                log.Info("目标版本不存在");
+                return false;
+            }
+
+            // 取消旧版标记
+            foreach(var content in chap.ContentList)
+            {
+                content.Best_New = false;
+            }
+
+            // 打上新的标记
+            chap.ContentList[version].Best_New = true;
+
+            // 将其他的删除
+            for (int i = 0;i< chap.ContentList.Count; i++)
+            {
+                if(!chap.ContentList[i].Best_New)
+                {
+                    chap.ContentList.RemoveAt(i);
+                }
+            }
+            // 保存回去
+
+            return true;
+        }
+
+        /// <summary>
+        /// 给图书添加章节
+        /// </summary>
+        /// <param name="volnum">章节所在分卷数</param>
+        /// <param name="chapnum">章节数</param>
+        /// <param name="chaptitle">章节名</param>
+        /// <param name="content">章节内容</param>
+        /// <returns></returns>
+        public bool InsertNewChapter(int volnum,int chapnum,string chaptitle,List<string>content)
+        {
+            if(Vol_Array.Count < volnum)
+            {
+                // 如果此卷不存在则新建卷
+                for(int i = Vol_Array.Count;i < volnum; i++)
+                {
+                    Vol_Array.Add(new Vol());
+                }
+            }
+
+            Vol vol = Vol_Array[volnum - 1];
+            if (vol.Chapter_Array.Count < chapnum)
+            {
+                // 如果此章节不存在则新建章节
+                for (int i = vol.Chapter_Array.Count; i < chapnum; i++)
+                {
+                    vol.Chapter_Array.Add(new Chapter(i + 1));
+                    if(vol.Chapter_Array.Count == chapnum)
+                    {
+                        vol.Chapter_Array[chapnum - 1].ChapTitle = chaptitle;
+                    }
+                }
+            }
+            else
+            {
+                // 如果此章节存在则判断是否存在标题
+                if(vol.Chapter_Array[chapnum - 1].ChapTitle == "")
+                {
+                    vol.Chapter_Array[chapnum - 1].ChapTitle = chaptitle;
+                }
+                
+            }
+
+            Chapter chap = vol.Chapter_Array[chapnum - 1];
+            if(chap.ContentList.Count == 0)
+            {
+                chap.ContentList.Add(new Content(content,true) );
+            }
+            else
+            {
+                if(chap.ChapTitle != chaptitle)
+                {
+                    DialogResult result = MessageBox.Show("新增章节名与原有的不一样,是否使用原有的或者放弃插入新内容？", "插入新章节", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.No)
+                    {
+                        MessageBox.Show("放弃插入新内容");
+                        return false;
+                    }
+                    MessageBox.Show("使用原有的章节名:"+chap.ChapTitle);
+                }
+                if(chap.ContentList[chap.ContentList.Count - 1].ContentArray.Count == 1 && chap.ContentList[chap.ContentList.Count - 1].ContentArray[0] == "")
+                {
+                    MessageBox.Show("此章节已存在新添加的待编辑的内容");
+                    return false;
+                }
+                else
+                {
+                    chap.ContentList.Add(new Content(content, false));
+                }
+            }
+            return true;
+        }
+
+
+        public bool RemoveChapter(int volNum, int chapNum, int version = 0)
+        {
+
+            if (Vol_Array.Count < volNum)
+            {
+                log.Info("目标分卷数不存在");
+                return false;
+            }
+            Vol vol = Vol_Array[volNum - 1];
+
+            if (vol.Chapter_Array.Count < chapNum)
+            {
+                log.Info("目标章节数不存在");
+                return false;
+            }
+            Chapter chap = vol.Chapter_Array[chapNum - 1];
+
+            if (chap.ContentList.Count < version)
+            {
+                log.Info("目标版本不存在");
+                return false;
+            }
+
+
+            chap.ContentList.RemoveAt(version);
+
+            return true;
+        }
+
+        public bool ChangeChapterTitle(int volNum, int chapNum, string title,int version = 0)
+        {
+            if (Vol_Array.Count < volNum)
+            {
+                log.Info("目标分卷数不存在");
+                return false;
+            }
+            Vol vol = Vol_Array[volNum - 1];
+
+            if (vol.Chapter_Array.Count < chapNum)
+            {
+                log.Info("目标章节数不存在");
+                return false;
+            }
+            Chapter chap = vol.Chapter_Array[chapNum - 1];
+
+            if (chap.ContentList.Count < version)
+            {
+                log.Info("目标版本不存在");
+                return false;
+            }
+
+            chap.ChapTitle = title;
+
+            return true;
+        }
     }
 }
