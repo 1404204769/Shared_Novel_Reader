@@ -793,6 +793,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 MessageBox.Show("当前行并不存在冲突");
                 return;
             }
+            log.Info("开始解决冲突");
             int bookid = Convert.ToInt32(this.DataGridViewList.CurrentRow.Cells[3].Value.ToString());
             int volnum = Convert.ToInt32(this.DataGridViewList.CurrentRow.Cells[1].Value.ToString());
             int chapnum = Convert.ToInt32(this.DataGridViewList.CurrentRow.Cells[2].Value.ToString());
@@ -804,18 +805,24 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             }
 
             // 修改颜色，删除多余的
-            foreach(DataGridViewRow row in this.DataGridViewList.Rows)
+            for(int i = 0;i < this.DataGridViewList.Rows.Count; i++)
             {
-                if((row.Cells[1].Value.ToString() == Convert.ToString(volnum)) && 
+                DataGridViewRow row = this.DataGridViewList.Rows[i];
+                //log.Info(row.Cells[1].Value.ToString() + " " + row.Cells[2].Value.ToString() + " " + row.Cells[5].Value.ToString());
+                if ((row.Cells[1].Value.ToString() == Convert.ToString(volnum)) && 
                     (row.Cells[2].Value.ToString() == Convert.ToString(chapnum)))
                 {
+                    log.Info("处理 : " + row.Cells[1].Value.ToString() + " " + row.Cells[2].Value.ToString() + " " + row.Cells[5].Value.ToString());
                     if (row.Cells[5].Value.ToString() == Convert.ToString(version))
                     {
                         row.Cells[0].Value = "第" + volnum + "卷" + "\t第" + chapnum + "章\t" + row.Cells[4].Value;
                         row.DefaultCellStyle.BackColor = System.Drawing.Color.White;
+                        // 将版本号更改为0，毕竟其他的被删除了
+                        row.Cells[5].Value = Convert.ToString(0);
                         continue;
                     }
                     this.DataGridViewList.Rows.Remove(row);
+                    i--;
                 }
             }
             log.Info("解决冲突成功");

@@ -1,6 +1,7 @@
 ﻿using log4net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Shared_Novel_Reader.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,28 @@ namespace Shared_Novel_Reader.models
     internal class Book
     {
         ILog log = LogManager.GetLogger(typeof(Book));
+
+        public bool IsDownload { get; set; }
+
         /// <summary>
         /// 图书名称
         /// </summary>
         public string Book_Name { get; set; }
+
+        /// <summary>
+        /// 图书作者
+        /// </summary>
+        public string Book_Author { get; set; }
+
+        /// <summary>
+        /// 图书出版商
+        /// </summary>
+        public string Book_Publisher { get; set; }
+
+        /// <summary>
+        /// 图书简介
+        /// </summary>
+        public string Book_Synopsis { get; set; }
 
         /// <summary>
         /// 文件路径
@@ -49,6 +68,10 @@ namespace Shared_Novel_Reader.models
         public Book()
         {
             Book_Name = "";
+            Book_Author = string.Empty;
+            Book_Publisher = string.Empty;
+            Book_Synopsis = string.Empty;
+            IsDownload = false;
             File_Path = new List<string>();
             Vol_Total_Num = Need_Upload = Exist_Upload = 0;
             Vol_Array = new List<Vol>();
@@ -61,6 +84,10 @@ namespace Shared_Novel_Reader.models
         public Book(JObject obj)
         {
             Book_Name = "";
+            Book_Author = string.Empty;
+            Book_Publisher = string.Empty;
+            Book_Synopsis = string.Empty;
+            IsDownload = false;
             File_Path = new List<string>();
             Vol_Total_Num = Need_Upload = Exist_Upload = 0;
             Vol_Array = new List<Vol>();
@@ -113,7 +140,18 @@ namespace Shared_Novel_Reader.models
             return true;
         }
 
-
+        public void CheckUpload()
+        {
+            // 遍历每个分卷
+            this.Exist_Upload = 0;
+            this.Need_Upload = 0;
+            for (int i = 0; i < Vol_Array.Count ; i++)
+            {
+                Vol_Array[i].CheckUpload();
+                this.Exist_Upload += Vol_Array[i].Exist_Upload;
+                this.Need_Upload += Vol_Array[i].Need_Upload;
+            }
+        }
 
 
         /// <summary>
@@ -160,16 +198,19 @@ namespace Shared_Novel_Reader.models
             }
 
             // 开始循环判断卷数
+            bool res = true;
             for (int i = 0; i < CompareVolNum; i++)
             {
                 Vol newVol = book.Vol_Array[i];
                 if (!this.Vol_Array[i].CompareVol(in newVol))
                 {
                     log.Info("第" + this.Vol_Array[i].Vol_Num + "卷比较失败");
-                    return false;
+                    res = false;
+                    continue;
                 }
             }
-
+            if (!res)
+                MessageBox.Show("图书资源部分整合失败");
             return true;
         }
 
@@ -189,11 +230,15 @@ namespace Shared_Novel_Reader.models
                 jArray.Add(item.toJson());
             }
             obj.Add("Book_Name", Book_Name);
+            obj.Add("Book_Author", Book_Author);
+            obj.Add("Book_Publisher", Book_Publisher);
+            obj.Add("Book_Synopsis", Book_Synopsis);
             obj.Add("File_Path", JArray.FromObject(File_Path));
             obj.Add("Vol_Total_Num", Vol_Total_Num);
             obj.Add("Need_Upload", Need_Upload);
             obj.Add("Exist_Upload", Exist_Upload);
             obj.Add("Vol_Array", jArray);
+            obj.Add("IsDownload", IsDownload);
             return obj;
         }
 
@@ -219,6 +264,22 @@ namespace Shared_Novel_Reader.models
             if (obj.ContainsKey("Book_Name"))
             {
                 Book_Name = ((string)obj["Book_Name"]);
+            }
+            if (obj.ContainsKey("Book_Author"))
+            {
+                Book_Author = ((string)obj["Book_Author"]);
+            }
+            if (obj.ContainsKey("Book_Publisher"))
+            {
+                Book_Publisher = ((string)obj["Book_Publisher"]);
+            }
+            if (obj.ContainsKey("Book_Synopsis"))
+            {
+                Book_Synopsis = ((string)obj["Book_Synopsis"]);
+            }
+            if (obj.ContainsKey("IsDownload"))
+            {
+                IsDownload = ((bool)obj["IsDownload"]);
             }
             if (obj.ContainsKey("File_Path"))
             {
@@ -305,7 +366,9 @@ namespace Shared_Novel_Reader.models
                 // 如果此卷不存在则新建卷
                 for(int i = Vol_Array.Count;i < volnum; i++)
                 {
-                    Vol_Array.Add(new Vol());
+                    Vol newvol = new Vol();
+                    newvol.Vol_Num = i + 1;
+                    Push_Vol(newvol);
                 }
             }
 
@@ -315,11 +378,12 @@ namespace Shared_Novel_Reader.models
                 // 如果此章节不存在则新建章节
                 for (int i = vol.Chapter_Array.Count; i < chapnum; i++)
                 {
-                    vol.Chapter_Array.Add(new Chapter(i + 1));
-                    if(vol.Chapter_Array.Count == chapnum)
+                    Chapter newchap = new Chapter(i + 1);
+                    if (i+1 == chapnum)
                     {
-                        vol.Chapter_Array[chapnum - 1].ChapTitle = chaptitle;
+                        newchap.ChapTitle = chaptitle;
                     }
+                    vol.Push_Chapter(newchap);
                 }
             }
             else
@@ -418,5 +482,116 @@ namespace Shared_Novel_Reader.models
 
             return true;
         }
+
+        /// <summary>
+        /// 上传所有新资源  UploadTime==Mini
+        /// </summary>
+        public async void UploadAllNew()
+        {
+            /*  以此作为API数据模板         
+                {
+                "Book_Author":"",//作者
+                "Book_Name":"", // 书名
+                "Book_Publisher":"",// 签约平台
+                "Book_Synopsis":"", // 提要
+                "Chapter_List":[
+                    {
+                        "Vol_Num":1,
+                        "Chapter_Num":2,
+                        "Chapter_Title": "企鹅：用心创造快乐",
+                        "Content_Array": [
+                            "“%……&amp;%@”"
+                        ]
+                    }
+                ]
+            }
+            */
+            // 遍历所有章节造就模板
+            JObject ReqJson = new JObject();
+            ReqJson["Book_Author"] = this.Book_Author;
+            ReqJson["Book_Name"] = this.Book_Name;
+            ReqJson["Book_Publisher"] = this.Book_Publisher;
+            ReqJson["Book_Synopsis"] = this.Book_Synopsis;
+            JArray ReqArray = new JArray();
+            for (int i = 0; i < Vol_Array.Count; i++)
+            {
+                if (Vol_Array[i].Need_Upload == 0) continue;
+                for(int j = 0; j < Vol_Array[i].Chapter_Array.Count; j++)
+                {
+                    // 如果没有数据则跳过
+                    if(Vol_Array[i].Chapter_Array[j].ContentList.Count == 0)
+                    {
+                        continue;
+                    }
+                    // 说明存在冲突
+                    if (Vol_Array[i].Chapter_Array[j].ContentList.Count > 1)
+                    {
+                        MessageBox.Show("此图书待上传资源存在冲突内容，请先解决冲突", "系统提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                    DateTime upload = DateTime.Parse(Vol_Array[i].Chapter_Array[j].Upload_Time);
+                    DateTime update = DateTime.Parse(Vol_Array[i].Chapter_Array[j].Update_Time);
+                    // 如果上传时间小于等于更新时间则说明无需上传更改
+                    if (upload >= update)
+                    {
+                        continue;
+                    }
+                    // 说明曾经上传过，需要调用的是更新接口
+                    if(upload != DateTime.MinValue)
+                    {
+                        continue;
+                    }
+                    // 更新时间
+                    JObject ChapJson = new JObject();
+                    ChapJson["Vol_Num"] = Vol_Array[i].Vol_Num;
+                    ChapJson["Chapter_Num"] = Vol_Array[i].Chapter_Array[j].ChapNum;
+                    ChapJson["Chapter_Title"] = Vol_Array[i].Chapter_Array[j].ChapTitle;
+                    JArray ContentArray = new JArray();
+                    foreach (var contentstr in Vol_Array[i].Chapter_Array[j].ContentList[0].ContentArray)
+                    {
+                        ContentArray.Add(contentstr);
+                    }
+                    ChapJson["Content_Array"] = ContentArray;
+
+                    ReqArray.Add(ChapJson);
+                }
+            }
+            ReqJson["Chapter_List"] = ReqArray;
+
+
+            // 发送请求
+            var UploadResult = Task<MyResponse>.Run(() => Tools.API.User.Resource.UploadNew(ReqJson));
+
+            MyResponse res = await UploadResult;
+
+            if (res == null || !res.Result)
+            {
+                // 清除残留数据
+                log.Info("用户上传资源失败");
+            }
+            else if (res.Data["Chapter_List"].ToString() == "")
+            {
+                log.Info("用户上传结果为空");
+            }
+            else
+            {
+                JArray UploadResArrayJson = (JArray)res.Data["Chapter_List"];
+                // log.Info(ApplicationListJson.ToString());
+                foreach(JObject obj in UploadResArrayJson)
+                {
+                    Vol_Array[(int)obj["Vol_Num"] - 1].Chapter_Array[(int)obj["Chapter_Num"] - 1].Upload_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                    if (!(bool)obj["Result"])
+                    {
+                        log.Info("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章 上传失败");
+                    }
+                    else
+                        log.Info("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章 上传成功");
+                }
+                log.Info("用户上传资源成功");
+            }
+        }
+
     }
+
 }

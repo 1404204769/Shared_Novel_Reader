@@ -164,5 +164,172 @@ namespace Shared_Novel_Reader.MyForm
             //FormNovelReader = new FormNovelReader("次元论坛", 17, false);
             FormNovelReader.Show();
         }
+
+        private void AddLocalRes_Click(object sender, EventArgs e)
+        {
+            if (!models.LocalBookShelf.open())
+            {
+                MessageBox.Show("书架打开失败");
+                return;
+            }
+            else
+            {
+                MessageBox.Show("书架打开成功");
+            }
+            string path = string.Empty;
+            //首先，实例化对话框类实例
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.Filter = "文本文件|*.txt";
+            //然后，判断如果当前用户在对话框里点击的是OK按钮的话。
+            if (DialogResult.OK == openDialog.ShowDialog())
+            {
+                //将打开文件对话框的FileName属性传递到你的字符串进行处理
+                path = openDialog.FileName;
+            }
+            if (path == string.Empty) return;
+            //其实，这个对话框控件还支持对打开文件类型的过滤等等属性。
+
+            models.Book Book;
+            Tools.Novel_Analysis.Analysis_Local_Resource(out Book, path);
+            if (Book != null)
+                models.LocalBookShelf.AddToBookshelf(Book);
+            else
+                return;
+            // 刷新书架
+            this.DataGridViewLocal.Rows.Clear();
+            foreach (var book in LocalBookShelf.LocalResArray)
+            {
+                string[] col = new string[5];
+                col[0] = (string)book["Book_Name"];
+                col[1] = (string)book["Link_Num"];
+                this.DataGridViewLocal.Rows.Add(col);
+            }
+            log.Info("本地书架刷新成功");
+        }
+
+        private void UploadNew_Click(object sender, EventArgs e)
+        {
+            string bookname = this.DataGridViewLocal.CurrentRow.Cells[0].Value.ToString();
+            int linknum = Convert.ToInt32(this.DataGridViewLocal.CurrentRow.Cells[1].Value.ToString());
+            int index = -1;
+            // 开始在内存中查找图书信息
+            index = LocalBookShelf.FindBookInMemoryByName(bookname);
+
+            // 如果没找到说明不在内存里,则需要从Resources文件夹内加载到内存里
+            if (index == -1)
+            {
+                // 文件加载失败
+                if (!LocalBookShelf.LoadBookByNum(linknum))
+                {
+                    MessageBox.Show("图书加载失败");
+
+                    return;
+                }
+                index = LocalBookShelf.FindBookInMemoryByName(bookname);
+                if (index == -1)
+                {
+                    MessageBox.Show("图书资源不存在");
+
+                    return;
+                }
+            }
+            LocalBookShelf.BookList[index].CheckUpload();
+            if(LocalBookShelf.BookList[index].Need_Upload == 0)
+            {
+                MessageBox.Show("这个资源已经全部上传过了哦，请添加或修改此资源，或者点击【申请更改章节】");
+                return;
+            }
+
+            ToolForm.FormBookTitle formBookTitle = new ToolForm.FormBookTitle();
+            formBookTitle.setBookAuthor(LocalBookShelf.BookList[index].Book_Author);
+            formBookTitle.setBookName(LocalBookShelf.BookList[index].Book_Name);
+            formBookTitle.setBookPublisher(LocalBookShelf.BookList[index].Book_Publisher);
+            formBookTitle.setBookSynopsis(LocalBookShelf.BookList[index].Book_Synopsis);
+            DialogResult res =  formBookTitle.ShowDialog();
+            if(res == DialogResult.OK)
+            {
+                // 说明被修改了
+                if(formBookTitle.IsEdit)
+                {
+                    LocalBookShelf.BookList[index].Book_Author = formBookTitle.newBookAuthor;
+                    LocalBookShelf.BookList[index].Book_Name = formBookTitle.newBookName;
+                    LocalBookShelf.BookList[index].Book_Publisher = formBookTitle.newBookPublisher;
+                    LocalBookShelf.BookList[index].Book_Synopsis = formBookTitle.newBookSynopsis;
+                }
+            }
+            else
+            {
+                log.Info("用户取消上传");
+                return;
+            }
+
+            LocalBookShelf.BookList[index].UploadAllNew();
+        }
+
+        private void UploadChange_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DataGridViewLocal_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.DataGridViewLocal.Rows[e.RowIndex].Selected = true;
+                this.ContextMenuStripLocal.Items[3].Visible = true;
+                // 必须在线才能上传
+                if(User.IsInit)
+                {
+                    this.ContextMenuStripLocal.Items[1].Visible = true;
+                    this.ContextMenuStripLocal.Items[2].Visible = true;
+                }
+            }
+        }
+
+        private void EditBookData_Click(object sender, EventArgs e)
+        {
+            string bookname = this.DataGridViewLocal.CurrentRow.Cells[0].Value.ToString();
+            int linknum = Convert.ToInt32(this.DataGridViewLocal.CurrentRow.Cells[1].Value.ToString());
+            int index = -1;
+            // 开始在内存中查找图书信息
+            index = LocalBookShelf.FindBookInMemoryByName(bookname);
+
+            // 如果没找到说明不在内存里,则需要从Resources文件夹内加载到内存里
+            if (index == -1)
+            {
+                // 文件加载失败
+                if (!LocalBookShelf.LoadBookByNum(linknum))
+                {
+                    MessageBox.Show("图书加载失败");
+
+                    return;
+                }
+                index = LocalBookShelf.FindBookInMemoryByName(bookname);
+                if (index == -1)
+                {
+                    MessageBox.Show("图书资源不存在");
+
+                    return;
+                }
+            }
+
+            ToolForm.FormBookTitle formBookTitle = new ToolForm.FormBookTitle();
+            formBookTitle.setBookAuthor(LocalBookShelf.BookList[index].Book_Author);
+            formBookTitle.setBookName(LocalBookShelf.BookList[index].Book_Name);
+            formBookTitle.setBookPublisher(LocalBookShelf.BookList[index].Book_Publisher);
+            formBookTitle.setBookSynopsis(LocalBookShelf.BookList[index].Book_Synopsis);
+            DialogResult res = formBookTitle.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                // 说明被修改了
+                if (formBookTitle.IsEdit)
+                {
+                    LocalBookShelf.BookList[index].Book_Author = formBookTitle.newBookAuthor;
+                    LocalBookShelf.BookList[index].Book_Name = formBookTitle.newBookName;
+                    LocalBookShelf.BookList[index].Book_Publisher = formBookTitle.newBookPublisher;
+                    LocalBookShelf.BookList[index].Book_Synopsis = formBookTitle.newBookSynopsis;
+                }
+            }
+        }
     }
 }

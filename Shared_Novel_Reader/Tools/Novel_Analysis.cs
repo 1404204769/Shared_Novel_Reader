@@ -15,7 +15,7 @@ namespace Shared_Novel_Reader.Tools
         private static Regex TitleRegex = new Regex(@"(?:^\s*|^\s*第.*?)(第[^\s,.，。]*?[章篇]\s?(?<ChapterTitle>.*))");
         private static Regex PartRegex = new Regex(@"(第[^\s,.，。]*?卷)");
         private static Regex ChapterRegex = new Regex(@"(第([^\s,.，。]*?)[章篇])");
-        private static Regex ChineseNumRegex = new Regex(@"([一二三四五六七八九十百千万亿]+)");
+        private static Regex ChineseNumRegex = new Regex(@"([零一二三四五六七八九十百千万亿]+)");
         private static Regex AlabNumRegex = new Regex(@"([0-9]+)");
         private static Regex BookNameRegex = new Regex(@"(?<BookName>[^<>/\\\|:""\*\?]+)\.\w+$");
         private static String Text { get; set; }// 内容
@@ -89,14 +89,14 @@ namespace Shared_Novel_Reader.Tools
                 }
                 String line;
                 // 读取txt文件并分段保存，将章节名标记为isHeader
-
+/*
                 int num = 0, vol = 1;// 设置全局章节/卷标记
                 // 初始化新书
                 newBook = new models.Book();
                 newBook.File_Path.Add(fs.Name);
                 Match match = BookNameRegex.Match(fs.Name);
                 newBook.Book_Name = match.Groups["BookName"].ToString();
-            
+
 
                 // 初始化卷
                 models.Vol newVol = new models.Vol();
@@ -151,6 +151,76 @@ namespace Shared_Novel_Reader.Tools
                 newChapter.Push_Content(newContent);// 保存章节内容到Chapter中
                 newVol.Push_Chapter(newChapter);// 保存章节信息到卷中
                 newBook.Push_Vol(newVol);// 保存卷信息到书中
+                sr.Dispose();// 关闭sr 释放资源
+*/
+
+                int num = 0, volnum = 0,chapnum = 0;// 设置全局章节/卷标记
+                // 初始化新书
+                newBook = new models.Book();
+                newBook.File_Path.Add(fs.Name);
+                Match match = BookNameRegex.Match(fs.Name);
+                newBook.Book_Name = match.Groups["BookName"].ToString();
+
+                // 初始化章节内容
+                string title = string.Empty;
+                List<string>Content = new List<string>();
+
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (!String.IsNullOrWhiteSpace(line))// 读取新的一行
+                    {
+                        Text = line.Trim();// 格式化段落
+
+                        // 识别标题
+                        Match matchResult = TitleRegex.Match(Text);
+
+                        if (matchResult.Success)
+                        {
+                            Console.WriteLine(Text);
+                            // 章节大于0 保存 去除了非章节的内容
+                            if (num > 0)
+                            {
+                                newBook.InsertNewChapter(volnum, chapnum, title, Content);
+                            }
+                            // 清空之前的数据
+                            Content = new List<string> {};
+                            title = matchResult.Groups["ChapterTitle"].ToString();// 设置标题
+                            Match matchChapResult = ChapterRegex.Match(Text);
+                            // 如果是章节名,保存之前章节的数据并新建一个章节
+                            chapnum = (int)Novel_Analysis.GetNum(matchChapResult.Value);
+                            // 如果是第一章 判断标题中是否存在卷数
+                            if (chapnum == 1)
+                            {
+                                // 说明开了新的一卷
+                                Match matchVolResult = PartRegex.Match(Text);
+                                if(matchVolResult.Success)
+                                    volnum = (int)Novel_Analysis.GetNum(matchVolResult.Value);
+                                else
+                                    volnum++;
+                            }
+                            else
+                            {
+                                // 如果没有明确的卷信息
+                                if(volnum == 0)
+                                {
+                                    // 判断是那一卷
+                                    Match matchVolResult = PartRegex.Match(Text);
+                                    if (matchVolResult.Success)
+                                        volnum = (int)Novel_Analysis.GetNum(matchVolResult.Value);
+                                    else
+                                        volnum = 1;// 标为第一卷
+                                }
+                            }
+                            num++;
+                        }
+                        else
+                        {
+                            // 不是章节名说明是章节内容，则保存到章节中
+                            Content.Add(Text);// 保存段落内容到章节内容空间中
+                        }
+                    }
+                }
+                newBook.InsertNewChapter(volnum, chapnum, title, Content);
                 sr.Dispose();// 关闭sr 释放资源
             }
             catch (SystemException ex)

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -37,13 +38,20 @@
             this.DataGridViewLocal = new System.Windows.Forms.DataGridView();
             this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KeyNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContextMenuStripLocal = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.AddLocalRes = new System.Windows.Forms.ToolStripMenuItem();
+            this.UploadNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.UploadChange = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageLocalBook = new System.Windows.Forms.TabPage();
             this.tabPageInternetBook = new System.Windows.Forms.TabPage();
             this.DataGridViewInternet = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContextMenuStripInternet = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.EditBookData = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLocal)).BeginInit();
+            this.ContextMenuStripLocal.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageLocalBook.SuspendLayout();
             this.tabPageInternetBook.SuspendLayout();
@@ -63,9 +71,11 @@
             this.DataGridViewLocal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Content,
             this.KeyNum});
+            this.DataGridViewLocal.ContextMenuStrip = this.ContextMenuStripLocal;
             this.DataGridViewLocal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataGridViewLocal.Location = new System.Drawing.Point(3, 3);
             this.DataGridViewLocal.Margin = new System.Windows.Forms.Padding(0);
+            this.DataGridViewLocal.MultiSelect = false;
             this.DataGridViewLocal.Name = "DataGridViewLocal";
             this.DataGridViewLocal.ReadOnly = true;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -85,6 +95,7 @@
             this.DataGridViewLocal.Size = new System.Drawing.Size(1136, 702);
             this.DataGridViewLocal.TabIndex = 1;
             this.DataGridViewLocal.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewLocal_CellDoubleClick);
+            this.DataGridViewLocal.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewLocal_CellMouseDown);
             // 
             // Content
             // 
@@ -107,6 +118,40 @@
             this.KeyNum.ReadOnly = true;
             this.KeyNum.Visible = false;
             this.KeyNum.Width = 8;
+            // 
+            // ContextMenuStripLocal
+            // 
+            this.ContextMenuStripLocal.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.ContextMenuStripLocal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AddLocalRes,
+            this.UploadNew,
+            this.UploadChange,
+            this.EditBookData});
+            this.ContextMenuStripLocal.Name = "ContextMenuStripLocal";
+            this.ContextMenuStripLocal.Size = new System.Drawing.Size(241, 157);
+            // 
+            // AddLocalRes
+            // 
+            this.AddLocalRes.Name = "AddLocalRes";
+            this.AddLocalRes.Size = new System.Drawing.Size(240, 30);
+            this.AddLocalRes.Text = "添加本地图书";
+            this.AddLocalRes.Click += new System.EventHandler(this.AddLocalRes_Click);
+            // 
+            // UploadNew
+            // 
+            this.UploadNew.Name = "UploadNew";
+            this.UploadNew.Size = new System.Drawing.Size(240, 30);
+            this.UploadNew.Text = "上传新资源";
+            this.UploadNew.Visible = false;
+            this.UploadNew.Click += new System.EventHandler(this.UploadNew_Click);
+            // 
+            // UploadChange
+            // 
+            this.UploadChange.Name = "UploadChange";
+            this.UploadChange.Size = new System.Drawing.Size(240, 30);
+            this.UploadChange.Text = "上传更改章节";
+            this.UploadChange.Visible = false;
+            this.UploadChange.Click += new System.EventHandler(this.UploadChange_Click);
             // 
             // tabControl1
             // 
@@ -155,9 +200,11 @@
             this.DataGridViewInternet.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2});
+            this.DataGridViewInternet.ContextMenuStrip = this.ContextMenuStripInternet;
             this.DataGridViewInternet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataGridViewInternet.Location = new System.Drawing.Point(3, 3);
             this.DataGridViewInternet.Margin = new System.Windows.Forms.Padding(0);
+            this.DataGridViewInternet.MultiSelect = false;
             this.DataGridViewInternet.Name = "DataGridViewInternet";
             this.DataGridViewInternet.ReadOnly = true;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -200,6 +247,20 @@
             this.dataGridViewTextBoxColumn2.Visible = false;
             this.dataGridViewTextBoxColumn2.Width = 8;
             // 
+            // ContextMenuStripInternet
+            // 
+            this.ContextMenuStripInternet.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.ContextMenuStripInternet.Name = "ContextMenuStripInternet";
+            this.ContextMenuStripInternet.Size = new System.Drawing.Size(61, 4);
+            // 
+            // EditBookData
+            // 
+            this.EditBookData.Name = "EditBookData";
+            this.EditBookData.Size = new System.Drawing.Size(240, 30);
+            this.EditBookData.Text = "查看/修改图书信息";
+            this.EditBookData.Visible = false;
+            this.EditBookData.Click += new System.EventHandler(this.EditBookData_Click);
+            // 
             // FormBookShelf
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -212,6 +273,7 @@
             this.Text = "FormBookShelf";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormBookShelf_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLocal)).EndInit();
+            this.ContextMenuStripLocal.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPageLocalBook.ResumeLayout(false);
             this.tabPageInternetBook.ResumeLayout(false);
@@ -231,5 +293,11 @@
         private System.Windows.Forms.DataGridView DataGridViewInternet;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuStripLocal;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuStripInternet;
+        private System.Windows.Forms.ToolStripMenuItem AddLocalRes;
+        private System.Windows.Forms.ToolStripMenuItem UploadNew;
+        private System.Windows.Forms.ToolStripMenuItem UploadChange;
+        private System.Windows.Forms.ToolStripMenuItem EditBookData;
     }
 }

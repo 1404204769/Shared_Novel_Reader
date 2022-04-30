@@ -137,6 +137,23 @@ namespace Shared_Novel_Reader.models
             }
             if (this.ChapTitle != newChapter.ChapTitle)
             {
+                // 如果本身章节无效 且对方有效 有内容 则复制对方的内容
+                if (this.ChapTitle == "" && newChapter.ChapTitle != "" && newChapter.ContentList.Count > 0)
+                {
+                    this.ChapTitle = newChapter.ChapTitle;
+                    this.Create_Time = newChapter.Create_Time;
+                    this.Update_Time = newChapter.Update_Time;
+                    this.Upload_Time = newChapter.Upload_Time;
+                    this.Push_Content(newChapter.ContentList[0]);
+                    return true;
+                }
+                // 如果双方都无效 则跳过比较
+                else if (this.ChapTitle == "" && newChapter.ChapTitle == "")
+                    return true;
+                // 如果我方有效 对方无效 则跳过比较
+                else if (newChapter.ChapTitle == "" && this.ChapTitle != "" && this.ContentList.Count > 0)
+                    return true;
+                // 否则为 标题不同的情况的比较
                 log.Info("章节标题不同,无法比较(ExistChapTitle : " + this.ChapTitle + ",newChapTitle : " + newChapter.ChapTitle + ")");
                 return false;
             }
@@ -161,6 +178,7 @@ namespace Shared_Novel_Reader.models
             }
 
             Content newContent = newChapter.ContentList[0];
+            this.Update_Time =  DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             // 开始比较当前内容是否一致
             if (!this.ContentList[Target].CompareContent(ref newContent))
             {

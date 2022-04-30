@@ -92,5 +92,87 @@ namespace Shared_Novel_Reader.Tools.API.User
             return res;
 
         }
+
+        /// <summary>
+        /// 上传新内容
+        /// </summary>
+        /// <param name="ResJson"></param>
+        /// <returns></returns>
+        public static MyResponse UploadNew(in JObject ReqJson)
+        {
+            MyResponse res = MyClient.PushRequests("User/Resource/Upload/List/New", ReqJson.ToString());
+            /*
+             * 不重试
+             * while ((res == null) && (num < 10))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("User/Resource/Upload/List/New", ReqJson.ToString());
+            }*/
+
+            if (res == null)
+            {
+                log.Info("上传资源失败");
+                return null;
+            }
+
+            if (res.Result == false)
+            {
+                log.Info(res.Message);
+                return null;
+            }
+
+            if (res.Data == null)
+            {
+                log.Info("上传资源失败");
+                return null;
+            }
+
+            log.Info("上传资源成功");
+            return res;
+
+        }
+
+        /// <summary>
+        /// 上传申请更改的内容
+        /// </summary>
+        /// <param name="ResJson"></param>
+        /// <returns></returns>
+        public static MyResponse UploadChange(in JObject ReqJson)
+        {
+            MyResponse res = MyClient.PushRequests("User/Resource/Upload/List/Old", ReqJson.ToString());
+            /*
+             * 不重试
+             * while ((res == null) && (num < 10))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("User/Resource/Upload/List/New", ReqJson.ToString());
+            }*/
+
+            if (res == null)
+            {
+                log.Info("申请更改资源失败");
+                return null;
+            }
+
+            if (res.Result == false)
+            {
+                log.Info(res.Message);
+                return null;
+            }
+
+            if (res.Data == null)
+            {
+                log.Info("申请更改资源失败");
+                return null;
+            }
+
+            log.Info("申请更改资源成功");
+            return res;
+
+        }
+
+
+
+
     }
 }

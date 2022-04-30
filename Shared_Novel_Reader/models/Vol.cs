@@ -121,6 +121,7 @@ namespace Shared_Novel_Reader.models
                 Need_Upload
                 Exist_Upload
              */
+            bool res = true;
             int CompareChapterNum = -1;// 需要比较的章节数
             // 如果章节数不存在则直接复制过来
             if (this.Chapter_Total_Num < newVol.Chapter_Total_Num)
@@ -134,7 +135,7 @@ namespace Shared_Novel_Reader.models
                     if (!newVol.Chapter_Array[i].MarkChapter())
                     {
                         log.Info("新章节资源标记为最新资源失败");
-                        return false;
+                        continue;
                     }
                     this.Push_Chapter(newVol.Chapter_Array[i]);
                 }
@@ -153,14 +154,40 @@ namespace Shared_Novel_Reader.models
                 if (!this.Chapter_Array[i].CompareChapter(newChapter))
                 {
                     log.Info("第" + this.Vol_Num + "卷第" + newChapter.ChapNum + "章比较失败");
-                    return false;
+                    res = false;
+                    continue;
                 }
             }
 
-            return true;
+            return res;
         }
 
 
+        public void CheckUpload()
+        {
+            // 遍历每个章节
+            this.Exist_Upload = 0;
+            this.Need_Upload = 0;
+            for (int i = 0; i < Chapter_Array.Count; i++)
+            {
+                // 如果章节没有内容说明是无效章节
+                if (Chapter_Array[i].ContentList.Count <= 0)
+                {
+                    continue;
+                }
+                DateTime upload = DateTime.Parse(Chapter_Array[i].Upload_Time);
+                DateTime update = DateTime.Parse(Chapter_Array[i].Update_Time);
+                // 如果上传时间小于等于更新时间则说明无需上传更改
+                if (upload >= update)
+                {
+                    this.Exist_Upload++;
+                }
+                else
+                {
+                    this.Need_Upload++;
+                }
+            }
+        }
 
 
 

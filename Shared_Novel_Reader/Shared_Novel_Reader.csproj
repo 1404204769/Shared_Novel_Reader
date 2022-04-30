@@ -263,6 +263,12 @@
     <Compile Include="MyForm\ResourceForm\FormNovelReader.Designer.cs">
       <DependentUpon>FormNovelReader.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyForm\ToolForm\FormBookTitle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\ToolForm\FormBookTitle.Designer.cs">
+      <DependentUpon>FormBookTitle.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\ToolForm\FormChapterTitle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -373,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\ResourceForm\FormNovelReader.resx">
       <DependentUpon>FormNovelReader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\ToolForm\FormBookTitle.resx">
+      <DependentUpon>FormBookTitle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\ToolForm\FormChapterTitle.resx">
       <DependentUpon>FormChapterTitle.cs</DependentUpon>

@@ -19,6 +19,7 @@ namespace Shared_Novel_Reader
              Application.SetCompatibleTextRenderingDefault(false);
             // Application.Run(new MyForm.FormBookPlatform());
              Application.Run(new MainForm());
+            //chaineseNumtest();
             // reset();
             // init();
             // Booktest();
@@ -56,6 +57,14 @@ namespace Shared_Novel_Reader
                 log.Info("项目根目录为 : " + Properties.Settings.Default.App_Path);
             }
         }
+
+        static void chaineseNumtest()
+        {
+            string str = "第一百零一章 测试章节";
+            long ans = Shared_Novel_Reader.Tools.Novel_Analysis.GetNum(str);
+            Console.WriteLine("ans : " + ans);
+        }
+
         static void Booktest()
         {
             if (!models.LocalBookShelf.open())
