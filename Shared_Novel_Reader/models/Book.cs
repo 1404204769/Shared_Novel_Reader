@@ -531,7 +531,7 @@ namespace Shared_Novel_Reader.models
                     }
                     DateTime upload = DateTime.Parse(Vol_Array[i].Chapter_Array[j].Upload_Time);
                     DateTime update = DateTime.Parse(Vol_Array[i].Chapter_Array[j].Update_Time);
-                    // 如果上传时间小于等于更新时间则说明无需上传更改
+                    // 如果上传时间大于等于更新时间则说明无需上传更改
                     if (upload >= update)
                     {
                         continue;
@@ -591,6 +591,127 @@ namespace Shared_Novel_Reader.models
                 log.Info("用户上传资源成功");
             }
         }
+
+
+
+        /// <summary>
+        /// 申请更改部分章节
+        /// </summary>
+        public async void UploadSomeOld(List<Tuple<int,int>> ChooseChapterList)
+        {
+            /*  以此作为API数据模板         
+            {
+                "Book_Author":"",//作者
+                "Book_Name":"", // 书名
+                "Book_Publisher":"",
+                "Chapter_List":[
+                    {
+                        "Vol_Num":  1,
+                        "Chapter_Num":1,
+                        "Chapter_Title": "",
+                        "Content_Array": [""]
+                    }
+                ]
+            }
+            */
+            // 遍历所有章节造就模板
+            JObject ReqJson = new JObject();
+            ReqJson["Book_Author"] = this.Book_Author;
+            ReqJson["Book_Name"] = this.Book_Name;
+            ReqJson["Book_Publisher"] = this.Book_Publisher;
+            JArray ReqArray = new JArray();
+
+            foreach(Tuple<int,int> choose in ChooseChapterList)
+            {
+                if (choose.Item1 > Vol_Array.Count)
+                {
+                    log.Info("选择的章节(第" + choose.Item1 + "卷 第" + choose.Item2 + "章)所在的分卷不存在");
+                    continue;
+                }
+
+                if (choose.Item2 > Vol_Array[choose.Item1 - 1].Chapter_Array.Count)
+                {
+                    log.Info("选择的章节(第" + choose.Item1 + "卷 第" + choose.Item2 + "章)不存在");
+                    continue;
+                }
+                // 如果没有数据则跳过
+                if (Vol_Array[choose.Item1 - 1].Chapter_Array[choose.Item2 - 1].ContentList.Count == 0)
+                {
+                    log.Info("选择的章节(第" + choose.Item1 + "卷 第" + choose.Item2 + "章)不存在有效内容");
+                    continue;
+                }
+
+                // 说明存在冲突
+                if (Vol_Array[choose.Item1 - 1].Chapter_Array[choose.Item2 - 1].ContentList.Count > 1)
+                {
+                    MessageBox.Show("选择的章节(第" + choose.Item1 + "卷 第" + choose.Item2 + "章)存在冲突内容，请先解决冲突", "系统提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+
+                DateTime upload = DateTime.Parse(Vol_Array[choose.Item1 - 1].Chapter_Array[choose.Item2 - 1].Upload_Time);
+                DateTime update = DateTime.Parse(Vol_Array[choose.Item1 - 1].Chapter_Array[choose.Item2 - 1].Update_Time);
+                // 如果上传时间大于等于更新时间则说明无需上传更改
+                if (upload >= update)
+                {
+                    continue;
+                }
+                // 说明不曾上传过，需要调用的是新资源接口
+                if (upload == DateTime.MinValue)
+                {
+                    continue;
+                }
+
+                // 更新时间
+                JObject ChapJson = new JObject();
+                ChapJson["Vol_Num"] = Vol_Array[choose.Item1 - 1].Vol_Num;
+                ChapJson["Chapter_Num"] = Vol_Array[choose.Item1 - 1].Chapter_Array[choose.Item2 - 1].ChapNum;
+                ChapJson["Chapter_Title"] = Vol_Array[choose.Item1 - 1].Chapter_Array[choose.Item2 - 1].ChapTitle;
+                JArray ContentArray = new JArray();
+                foreach (var contentstr in Vol_Array[choose.Item1 - 1].Chapter_Array[choose.Item2 - 1].ContentList[0].ContentArray)
+                {
+                    ContentArray.Add(contentstr);
+                }
+                ChapJson["Content_Array"] = ContentArray;
+
+                ReqArray.Add(ChapJson);
+
+            }
+            ReqJson["Chapter_List"] = ReqArray;
+
+            // 发送请求
+            var UploadResult = Task<MyResponse>.Run(() => Tools.API.User.Resource.UploadChange(ReqJson));
+
+            MyResponse res = await UploadResult;
+
+            if (res == null || !res.Result)
+            {
+                // 清除残留数据
+                log.Info("用户申请更改资源失败");
+            }
+            else if (res.Data["Chapter_List"].ToString() == "")
+            {
+                log.Info("用户申请更改结果为空");
+            }
+            else
+            {
+                JArray UploadResArrayJson = (JArray)res.Data["Chapter_List"];
+                // log.Info(ApplicationListJson.ToString());
+                foreach (JObject obj in UploadResArrayJson)
+                {
+                    Vol_Array[(int)obj["Vol_Num"] - 1].Chapter_Array[(int)obj["Chapter_Num"] - 1].Upload_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                    if (!(bool)obj["Result"])
+                    {
+                        log.Info("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章 申请更改失败");
+                    }
+                    else
+                        log.Info("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章 申请更改成功");
+                }
+                log.Info("用户申请更改资源成功");
+            }
+        }
+
 
     }
 

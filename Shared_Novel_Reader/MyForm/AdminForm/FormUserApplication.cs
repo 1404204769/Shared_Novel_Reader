@@ -70,7 +70,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             ReqJson["Filter_Col"] = Filter;
 
             // 发送请求
-            var ApplicationListResult = Task<MyResponse>.Run(() => Tools.API.Admin.Application.FindApplication(ReqJson));
+            var ApplicationListResult = Task<MyResponse>.Run(() => Tools.API.Admin.Application.FindApplicationList(ReqJson));
 
             MyResponse res = await ApplicationListResult;
             
@@ -127,6 +127,11 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
                         RowData[j] = MemoJson["Explain"].ToString();
                         continue;
                     }
+                    if(ColName[j] == "Content")
+                    {
+                        RowData[j] = "右键查看详情";
+                        continue;
+                    }
                     RowData[j] = ApplicationListJson[i][ColName[j]].ToString();
                 }
 
@@ -135,9 +140,13 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             return;
         }
 
-        private void ViewDetail(object sender, EventArgs e)
+        private async void ViewDetail(object sender, EventArgs e)
         {
+            JObject ReqJson = new JObject();
+
             int RowIndex = DataGridViewUserApplication.CurrentRow.Index;
+            if (RowIndex < 0) return;
+            ReqJson["Upload_ID"] = Convert.ToInt32( this.DataGridViewUserApplication.Rows[RowIndex].Cells[0].Value );
             string show = "";
             string[] ColName = new string[DataGridViewUserApplication.ColumnCount];
             string[] ColHead = new string[DataGridViewUserApplication.ColumnCount];
@@ -153,6 +162,53 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             }
 
             log.Info(show);
+            log.Info("开始连接系统查询详情");
+
+            // 发送请求
+            var ApplicationListResult = Task<MyResponse>.Run(() => Tools.API.Admin.Application.FindApplicationID(ReqJson));
+
+            MyResponse res = await ApplicationListResult;
+
+            if (res == null || !res.Result)
+            {
+                // 清除残留数据
+                log.Info("指定用户申请ID查询失败");
+                return;
+            }
+            else if (res.Data.ToString() == "")
+            {
+                log.Info("指定用户申请ID为空");
+                return;
+            }
+            JObject MemoJson = JObject.Parse(res.Data["Memo"].ToString());
+            JObject ContentJson = JObject.Parse(res.Data["Content"].ToString());
+            // 更新数据
+            for (int j = 0; j < DataGridViewUserApplication.ColumnCount; j++)
+            {
+                if (ColName[j] == "Memo")
+                {
+                    DataGridViewUserApplication.Rows[RowIndex].Cells[ColName[j]].Value = MemoJson["Explain"].ToString();
+                    continue;
+                }
+                if (ColName[j] == "Content")
+                {
+                    DataGridViewUserApplication.Rows[RowIndex].Cells[ColName[j]].Value = "右键查看详情";
+                    continue;
+                }
+                DataGridViewUserApplication.Rows[RowIndex].Cells[ColName[j]].Value = res.Data[ColName[j]].ToString();
+            }
+
+            show = "";
+            for (int i = 0; i < DataGridViewUserApplication.ColumnCount; i++)
+            {
+                if (ColName[i] == "Content")
+                {
+                    show += ColHead[i] + " : " + ContentJson.ToString() + "\n";
+                }
+                else
+                    show += ColHead[i] + " : " + (string)DataGridViewUserApplication.Rows[RowIndex].Cells[ColName[i]].Value + "\n";
+            }
+            MessageBox.Show(show);
         }
 
         private void ReFind_Click(object sender, EventArgs e)

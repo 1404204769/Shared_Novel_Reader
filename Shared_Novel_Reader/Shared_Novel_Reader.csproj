@@ -281,6 +281,12 @@
     <Compile Include="MyForm\ToolForm\FormInput.Designer.cs">
       <DependentUpon>FormInput.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyForm\ToolForm\FormUploadChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\ToolForm\FormUploadChange.Designer.cs">
+      <DependentUpon>FormUploadChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
@@ -388,6 +394,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\ToolForm\FormInput.resx">
       <DependentUpon>FormInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\ToolForm\FormUploadChange.resx">
+      <DependentUpon>FormUploadChange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

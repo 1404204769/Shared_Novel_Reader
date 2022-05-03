@@ -90,7 +90,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 foreach (var chapter in vol.Chapter_Array)
                 {
                     // 如果不存在内容则跳过
-                    if (chapter.ContentList.Count == 0) 
+                    if (chapter.ContentList.Count == 0)
                         continue;
                     int RowIndex = 0;
                     string[] col = new string[6];
@@ -672,10 +672,10 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 this.DataGridViewList.Rows[e.RowIndex].Selected = true;
                 if (this.DataGridViewList.Rows[e.RowIndex].DefaultCellStyle.BackColor == System.Drawing.Color.Red)
                 {
-                    this.ContextMenuStripList.Items[3].Visible = true;
+                    this.ContextMenuStripList.Items[2].Visible = true;
                 }
                 else
-                    this.ContextMenuStripList.Items[3].Visible = false;
+                    this.ContextMenuStripList.Items[2].Visible = false;
             }
         }
 

@@ -3,6 +3,8 @@ using System.Windows.Forms;
 using log4net;
 using Shared_Novel_Reader.models;
 using Shared_Novel_Reader.MyForm.ResourceForm;
+using Shared_Novel_Reader.MyForm.ToolForm;
+
 namespace Shared_Novel_Reader.MyForm
 {
     public partial class FormBookShelf : Form
@@ -268,7 +270,20 @@ namespace Shared_Novel_Reader.MyForm
 
         private void UploadChange_Click(object sender, EventArgs e)
         {
-
+            string bookname = this.DataGridViewLocal.CurrentRow.Cells[0].Value.ToString();
+            int linknum = Convert.ToInt32(this.DataGridViewLocal.CurrentRow.Cells[1].Value.ToString());
+            FormUploadChange FormUploadChange = new FormUploadChange(bookname, linknum);
+            //FormNovelReader = new FormNovelReader("次元论坛", 17, false);
+            if (FormUploadChange.IsDisposed)
+                return;
+            DialogResult res = FormUploadChange.ShowDialog();
+            if (res == DialogResult.Cancel)
+                return;
+            // 允许到这一步 此资源一定在内存中
+            FormUploadChange.Hide();
+            int index = LocalBookShelf.FindBookInMemoryByName(bookname);
+            LocalBookShelf.BookList[index].UploadSomeOld(FormUploadChange.SelectList);
+            FormUploadChange.Dispose();
         }
 
         private void DataGridViewLocal_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -278,10 +293,10 @@ namespace Shared_Novel_Reader.MyForm
                 this.DataGridViewLocal.Rows[e.RowIndex].Selected = true;
                 this.ContextMenuStripLocal.Items[3].Visible = true;
                 // 必须在线才能上传
-                if(User.IsInit)
+                if (User.IsInit)
                 {
-                    this.ContextMenuStripLocal.Items[1].Visible = true;
                     this.ContextMenuStripLocal.Items[2].Visible = true;
+                    this.ContextMenuStripLocal.Items[1].Visible = true;
                 }
             }
         }
