@@ -249,5 +249,112 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
 
             FilterUserApplication.Dispose();
         }
+
+        private void DataGridViewUserApplication_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.RowIndex < 0) return;
+                this.DataGridViewUserApplication.Rows[e.RowIndex].Selected = true;
+                this.ContextMenuStripFindUserApplication.Items[0].Visible = false;
+                // 必须未处理才可以处理
+                if (Convert.ToInt32(this.DataGridViewUserApplication.Rows[e.RowIndex].Cells[6].Value) == 0)
+                {
+                    this.ContextMenuStripFindUserApplication.Items[0].Visible = true;
+                }
+            }
+        }
+
+        private async void Examine(int UploadID,bool Result,string Explain = "")
+        {
+
+            JObject ReqJson = new JObject();
+            ReqJson["Upload_ID"] = UploadID;
+            ReqJson["Examine_Result"] = Result;
+            ReqJson["Examine_Explain"] = Explain;
+            // 发送请求
+            var ApplicationListResult = Task<MyResponse>.Run(() => Tools.API.Admin.Application.ExamineApplicationID(ReqJson));
+
+            MyResponse res = await ApplicationListResult;
+
+            if (res == null || !res.Result)
+            {
+                // 清除残留数据
+                log.Info("审核失败");
+                return;
+            }
+            else if (res.Data.ToString() == "")
+            {
+                log.Info("审核对象不存在");
+                return;
+            }
+            log.Info("审核成功");
+
+
+            JObject MemoJson = JObject.Parse(res.Data["Memo"].ToString());
+            // 更新数据
+            string[] ColName = new string[DataGridViewUserApplication.ColumnCount];
+            for (int i = 0; i < DataGridViewUserApplication.ColumnCount; i++)
+            {
+                ColName[i] = DataGridViewUserApplication.Columns[i].Name;
+            }
+            int RowIndex = 0;
+            for (int i = 0; i < DataGridViewUserApplication.Rows.Count; i++)
+            {
+                if(Convert.ToInt32( DataGridViewUserApplication.Rows[i].Cells[0].Value ) == UploadID)
+                {
+                    RowIndex = i;
+                    break;
+                }
+            }
+            for (int j = 0; j < DataGridViewUserApplication.ColumnCount; j++)
+            {
+                if (ColName[j] == "Memo")
+                {
+                    DataGridViewUserApplication.Rows[RowIndex].Cells[ColName[j]].Value = MemoJson["Explain"].ToString();
+                    continue;
+                }
+                if (ColName[j] == "Content")
+                {
+                    DataGridViewUserApplication.Rows[RowIndex].Cells[ColName[j]].Value = "右键查看详情";
+                    continue;
+                }
+                DataGridViewUserApplication.Rows[RowIndex].Cells[ColName[j]].Value = res.Data[ColName[j]].ToString();
+            }
+
+            return ;
+        }
+
+        private void ExamineAllow_Click(object sender, EventArgs e)
+        {
+            int RowIndex = DataGridViewUserApplication.CurrentRow.Index;
+            if (RowIndex < 0) return;
+            int UploadID = Convert.ToInt32(this.DataGridViewUserApplication.Rows[RowIndex].Cells[0].Value);
+
+            Examine(UploadID, true);
+        }
+
+        private void ExamineRefuse_Click(object sender, EventArgs e)
+        {
+            int RowIndex = DataGridViewUserApplication.CurrentRow.Index;
+            if (RowIndex < 0) return;
+            int UploadID = Convert.ToInt32(this.DataGridViewUserApplication.Rows[RowIndex].Cells[0].Value);
+
+            ToolForm.FormInput formInput = new ToolForm.FormInput();
+            formInput.Text = "请输入拒绝的理由";
+            DialogResult res = formInput.ShowDialog();
+            if (res == DialogResult.Cancel)
+                return;
+            else
+            {
+                if(formInput.getValue() == "")
+                {
+                    MessageBox.Show("拒绝理由不能为空，请重新操作");
+                    return;
+                }
+                Examine(UploadID, false, formInput.getValue());
+                
+            }
+        }
     }
 }

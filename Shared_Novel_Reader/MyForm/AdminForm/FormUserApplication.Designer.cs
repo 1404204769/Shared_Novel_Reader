@@ -53,8 +53,11 @@
             this.Create_Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Update_Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ContextMenuStripFindUserApplication = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExamineAction = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExamineAllow = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExamineRefuse = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUserApplication)).BeginInit();
             this.ContextMenuStripFindUserApplication.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +66,8 @@
             // 
             this.DataGridViewUserApplication.AllowUserToAddRows = false;
             this.DataGridViewUserApplication.AllowUserToDeleteRows = false;
-            this.DataGridViewUserApplication.AllowUserToOrderColumns = true;
+            this.DataGridViewUserApplication.AllowUserToResizeColumns = false;
+            this.DataGridViewUserApplication.AllowUserToResizeRows = false;
             this.DataGridViewUserApplication.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGridViewUserApplication.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.DataGridViewUserApplication.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -98,6 +102,7 @@
             this.DataGridViewUserApplication.GridColor = System.Drawing.Color.Peru;
             this.DataGridViewUserApplication.Location = new System.Drawing.Point(0, 0);
             this.DataGridViewUserApplication.Margin = new System.Windows.Forms.Padding(0);
+            this.DataGridViewUserApplication.MultiSelect = false;
             this.DataGridViewUserApplication.Name = "DataGridViewUserApplication";
             this.DataGridViewUserApplication.ReadOnly = true;
             this.DataGridViewUserApplication.RowHeadersVisible = false;
@@ -110,6 +115,7 @@
             this.DataGridViewUserApplication.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DataGridViewUserApplication.Size = new System.Drawing.Size(1150, 690);
             this.DataGridViewUserApplication.TabIndex = 2;
+            this.DataGridViewUserApplication.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewUserApplication_CellMouseDown);
             // 
             // Upload_ID
             // 
@@ -212,17 +218,35 @@
             // 
             this.ContextMenuStripFindUserApplication.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.ContextMenuStripFindUserApplication.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ReFind,
-            this.ViewDetails});
+            this.ExamineAction,
+            this.ViewDetails,
+            this.ReFind});
             this.ContextMenuStripFindUserApplication.Name = "ContextMenuStripFindUser";
-            this.ContextMenuStripFindUserApplication.Size = new System.Drawing.Size(241, 97);
+            this.ContextMenuStripFindUserApplication.Size = new System.Drawing.Size(241, 127);
             // 
-            // ReFind
+            // ExamineAction
             // 
-            this.ReFind.Name = "ReFind";
-            this.ReFind.Size = new System.Drawing.Size(240, 30);
-            this.ReFind.Text = "重置查询范围";
-            this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
+            this.ExamineAction.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ExamineAllow,
+            this.ExamineRefuse});
+            this.ExamineAction.Name = "ExamineAction";
+            this.ExamineAction.Size = new System.Drawing.Size(240, 30);
+            this.ExamineAction.Text = "执行审核";
+            this.ExamineAction.Visible = false;
+            // 
+            // ExamineAllow
+            // 
+            this.ExamineAllow.Name = "ExamineAllow";
+            this.ExamineAllow.Size = new System.Drawing.Size(270, 34);
+            this.ExamineAllow.Text = "允许";
+            this.ExamineAllow.Click += new System.EventHandler(this.ExamineAllow_Click);
+            // 
+            // ExamineRefuse
+            // 
+            this.ExamineRefuse.Name = "ExamineRefuse";
+            this.ExamineRefuse.Size = new System.Drawing.Size(270, 34);
+            this.ExamineRefuse.Text = "拒绝";
+            this.ExamineRefuse.Click += new System.EventHandler(this.ExamineRefuse_Click);
             // 
             // ViewDetails
             // 
@@ -230,6 +254,13 @@
             this.ViewDetails.Size = new System.Drawing.Size(240, 30);
             this.ViewDetails.Text = "查看详情";
             this.ViewDetails.Click += new System.EventHandler(this.ViewDetail);
+            // 
+            // ReFind
+            // 
+            this.ReFind.Name = "ReFind";
+            this.ReFind.Size = new System.Drawing.Size(240, 30);
+            this.ReFind.Text = "重置查询范围";
+            this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
             // 
             // FormUserApplication
             // 
@@ -263,5 +294,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Processor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Create_Time;
         private System.Windows.Forms.DataGridViewTextBoxColumn Update_Time;
+        private System.Windows.Forms.ToolStripMenuItem ExamineAction;
+        private System.Windows.Forms.ToolStripMenuItem ExamineAllow;
+        private System.Windows.Forms.ToolStripMenuItem ExamineRefuse;
     }
 }

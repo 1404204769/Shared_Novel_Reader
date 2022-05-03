@@ -69,7 +69,7 @@
             "未处理"});
             this.ComboBoxFinish.Location = new System.Drawing.Point(218, 348);
             this.ComboBoxFinish.Name = "ComboBoxFinish";
-            this.ComboBoxFinish.Size = new System.Drawing.Size(70, 26);
+            this.ComboBoxFinish.Size = new System.Drawing.Size(100, 26);
             this.ComboBoxFinish.TabIndex = 43;
             // 
             // TextProcessor

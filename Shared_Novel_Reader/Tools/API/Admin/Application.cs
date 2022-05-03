@@ -91,5 +91,49 @@ namespace Shared_Novel_Reader.Tools.API.Admin
             log.Info("查询指定用户申请成功");
             return res;
         }
+
+
+        /// <summary>
+        /// 查询所有用户信息
+        /// </summary>
+        /// <returns></returns>
+        public static MyResponse ExamineApplicationID(in JObject ReqJson)
+        {
+            // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
+
+
+            int num = 0;
+            MyResponse res = MyClient.PushRequests("Admin/Examine/Upload/Examine", ReqJson.ToString());
+            while ((res == null) && (num < 10))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("Admin/Examine/Upload/Examine", ReqJson.ToString());
+            }
+
+            if (res == null)
+            {
+                log.Info("审核指定用户申请失败");
+                return null;
+            }
+
+            if (res.Result == false)
+            {
+                log.Info(res.Message);
+                return null;
+            }
+
+            if (res.Data == null)
+            {
+                log.Info("审核目标不存在");
+                return null;
+            }
+
+            log.Info("审核指定用户申请成功");
+            return res;
+        }
+
+
+
+
     }
 }
