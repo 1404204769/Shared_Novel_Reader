@@ -171,12 +171,12 @@ namespace Shared_Novel_Reader.MyForm
         {
             if (!models.LocalBookShelf.open())
             {
-                MessageBox.Show("书架打开失败");
+                log.Info("书架打开失败");
                 return;
             }
             else
             {
-                MessageBox.Show("书架打开成功");
+                log.Info("书架打开成功");
             }
             string path = string.Empty;
             //首先，实例化对话框类实例
@@ -345,6 +345,13 @@ namespace Shared_Novel_Reader.MyForm
                     LocalBookShelf.BookList[index].Book_Synopsis = formBookTitle.newBookSynopsis;
                 }
             }
+        }
+
+        private void DownloadResourse_Click(object sender, EventArgs e)
+        {
+            string bookname = this.DataGridViewInternet.CurrentRow.Cells[0].Value.ToString();
+            int bookid = Convert.ToInt32(this.DataGridViewInternet.CurrentRow.Cells[1].Value.ToString());
+            InternetBookShelf.DownloadBook(bookname, bookid);
         }
     }
 }

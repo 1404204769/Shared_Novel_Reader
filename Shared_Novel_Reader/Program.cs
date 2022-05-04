@@ -15,10 +15,10 @@ namespace Shared_Novel_Reader
         static void Main()
         {
             // JsonTest();
-             Application.EnableVisualStyles();
-             Application.SetCompatibleTextRenderingDefault(false);
-            // Application.Run(new MyForm.FormBookPlatform());
-             Application.Run(new MainForm());
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainForm());
+            //Application.Run(new MyForm.ToolForm.FormProcessbar());
             //chaineseNumtest();
             // reset();
             // init();

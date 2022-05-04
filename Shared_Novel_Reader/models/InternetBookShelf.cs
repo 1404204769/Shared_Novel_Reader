@@ -7,6 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shared_Novel_Reader.models;
+using System.Windows.Forms;
+using Shared_Novel_Reader.Tools;
+using Shared_Novel_Reader.MyForm.ToolForm;
+using System.Threading;
+
 namespace Shared_Novel_Reader.models
 {
     /// <summary>
@@ -189,6 +194,10 @@ namespace Shared_Novel_Reader.models
                 log.Info("书架关闭时,保存网络图书索引数据失败");
                 return false;
             }
+            IsInit = false;
+            InternetResUserArray.Clear();
+            InternetRes.RemoveAll();
+            InternetResArray.Clear();
             return true;
         }
 
@@ -230,7 +239,158 @@ namespace Shared_Novel_Reader.models
         }
 
 
+        static async public void DownloadBook(string bookname,int bookid)
+        {
 
+            // 如果还未加入书架则加入书架
+            if (!User.IsInit)
+            {
+                log.Info("用户还未登入，请先登入");
+                return;
+            }
+            AddToBookshelf(bookname,bookid);
+
+            // 弹出提示框，询问是否覆盖原先已缓存的数据
+            bool overload = false;
+            DialogResult result = MessageBox.Show("是否覆盖原先已缓存的数据？", "下载资源", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                overload = true;
+            }
+
+            // 1.根据图书id向后端请求图书目录
+            // 2.根据目录循环获取内容
+            // 3.传入图书ID，分卷数，章节数逐一获取内容
+            JObject ReqJson = new JObject();
+            ReqJson["Book_Name"] = bookname;
+            ReqJson["Book_ID"] = bookid;
+            // 发送请求
+            var MenuResult = Task<MyResponse>.Run(() => Tools.API.User.Resource.SearchMenu(ReqJson));
+
+            MyResponse res = await MenuResult;
+            /// 返回格式
+            if (res == null || !res.Result)
+            {
+                // 清除残留数据
+                log.Info("在线图书章节列表查询失败");
+                return;
+            }
+            else if (res.Data["ChapterList"].ToString() == "")
+            {
+                log.Info("在线图书章节为空");
+                return;
+            }
+            JArray ChapterListJson = (JArray)res.Data["ChapterList"];
+
+            // 查询/建立本地资源
+
+            if (!models.LocalBookShelf.open())
+            {
+                log.Info("本地书架打开失败");
+                return;
+            }
+            log.Info("本地书架打开成功");
+            // 现在本地资源找此书
+            int index = -1;// 在内存中的位置
+            foreach (var name in LocalBookShelf.LocalResArray)
+            {
+                if ((string)name["Book_Name"] == bookname)
+                {
+                    // 开始在内存中查找图书信息
+                    index = LocalBookShelf.FindBookInMemoryByName(bookname);
+
+                    // 如果没找到说明不在内存里,则需要从Resources文件夹内加载到内存里
+                    if (index == -1)
+                    {
+                        // 文件加载失败
+                        if (!LocalBookShelf.LoadBookByNum((int)name["Link_Num"]))
+                        {
+                            log.Info("图书加载失败");
+                            break;
+                        }
+                        index = LocalBookShelf.FindBookInMemoryByName(bookname);
+                    }
+
+                    break;
+                }
+            }
+            // 开始在内存中查找图书信息
+            // 说明图书资源不存在，新建图书资源
+            if(index == -1)
+            {
+                models.Book book = new Book();
+                book.Book_Name = bookname;
+                book.Book_Author = res.Data["BookData"]["Author"].ToString();
+                book.Book_Publisher = res.Data["BookData"]["Publisher"].ToString();
+                book.Book_Synopsis = res.Data["BookData"]["Synopsis"].ToString();
+                models.LocalBookShelf.AddToBookshelf(book);
+            }
+            /// 能运行到这里说明在index位置就是需要的图书资源
+            index = LocalBookShelf.FindBookInMemoryByName(bookname);
+            if (index == -1)
+            {
+                log.Info("图书资源加载失败");
+                return;
+            }
+            log.Info("本地图书加载成功");
+
+
+            // 初始化进度条
+            FormProcessbar FormProcessbar = new FormProcessbar();
+            FormProcessbar.Text = "下载《" + bookname + "》中";
+            FormProcessbar.ProgressBar.Maximum = ChapterListJson.Count();
+            int FZ = 0, FM = ChapterListJson.Count();
+            FormProcessbar.LabelFM.Text = Convert.ToString(FM);
+            FormProcessbar.LabelFZ.Text = Convert.ToString(FZ);
+            FormProcessbar.ProgressBar.Value = FZ;
+            FormProcessbar.Show();
+            foreach (var chapter in ChapterListJson)
+            {
+                ReqJson.RemoveAll();
+                ReqJson["Book_ID"] = bookid;
+                ReqJson["Part_Num"] = chapter["VolNum"];
+                ReqJson["Chapter_Num"] = chapter["ChapterNum"];
+
+
+                // 发送请求
+                var ContentResult = Task<MyResponse>.Run(() => Tools.API.User.Resource.SearchContent(ReqJson));
+
+                res = await ContentResult;
+                /// 返回格式
+                if (res == null || !res.Result)
+                {
+                    // 清除残留数据
+                    log.Info("在线图书章节内容查询失败");
+                    continue;
+                }
+                else if (res.Data["ChapterContent"].ToString() == "")
+                {
+                    log.Info("在线图书章节内容为空");
+                    continue;
+                }
+
+                List<string> ContentList = new List<string>();
+                res.Data["ChapterContent"].ToList().ForEach(item => ContentList.Add(item.ToString()));
+                /*JArray ContentArray = (JArray)res.Data["ChapterContent"];
+                ContentArray.ToList().ForEach(x => ContentList.Add(x.ToString()));*/
+                bool overloadRes = LocalBookShelf.BookList[index].OverloadChapter(Convert.ToInt32(chapter["VolNum"]), Convert.ToInt32(chapter["ChapterNum"]), chapter["ChapterTitle"].ToString(), ContentList, overload);
+                if (!overloadRes)
+                    return;
+                // 更改进度条
+                FZ++;
+                FormProcessbar.LabelFZ.Text = Convert.ToString(FZ);
+                FormProcessbar.ProgressBar.Value = FZ;
+                Thread.Sleep(1000);
+            }
+            FormProcessbar.Hide();
+            FormProcessbar.Close();
+            FormProcessbar.Dispose();
+            if (FZ!=FM)
+            {
+                MessageBox.Show("部分章节下载失败,请重试");
+            }
+            return;
+        }
 
 
 

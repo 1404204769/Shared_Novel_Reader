@@ -344,13 +344,6 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
         }
 
 
-        private void DataGridViewList_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
-        {
-            int index = e.Cell.RowIndex;
-            log.Info("所选行 ： " + index);
-        }
-
-
 
         /// <summary>
         /// 更新章节内容，如果是本地则直接更新，如果是网络则弹出确认框
@@ -424,11 +417,6 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             Type ContentdgvType = this.DataGridViewContent.GetType();
             PropertyInfo ContentPi = ContentdgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
             ContentPi.SetValue(this.DataGridViewContent, true, null);
-        }
-
-        private void DataGridViewList_CellLeave(object sender, DataGridViewCellEventArgs e)
-        {
-            log.Info("离开了 index : " + e.RowIndex);
         }
 
 
@@ -670,6 +658,14 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             if(e.Button == MouseButtons.Right)
             {
                 this.DataGridViewList.Rows[e.RowIndex].Selected = true;
+                if (!IsLocal)
+                {
+                    this.ContextMenuStripList.Items[0].Visible = false;
+                    this.ContextMenuStripList.Items[1].Visible = false;
+                    this.ContextMenuStripList.Items[2].Visible = false;
+                    this.ContextMenuStripList.Items[3].Visible = false;
+                    return;
+                }
                 if (this.DataGridViewList.Rows[e.RowIndex].DefaultCellStyle.BackColor == System.Drawing.Color.Red)
                 {
                     this.ContextMenuStripList.Items[2].Visible = true;
@@ -827,6 +823,25 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             }
             log.Info("解决冲突成功");
 
+        }
+
+        private void DataGridViewContent_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.DataGridViewContent.Rows[e.RowIndex].Selected = true;/*
+                this.ContextMenuStripContent.Items[0].Visible = true;
+                this.ContextMenuStripContent.Items[1].Visible = false;
+                this.ContextMenuStripContent.Items[2].Visible = false;
+                this.ContextMenuStripContent.Items[3].Visible = false;
+                this.ContextMenuStripContent.Items[4].Visible = false;
+                this.ContextMenuStripContent.Items[5].Visible = false;
+                this.ContextMenuStripContent.Items[6].Visible = false;*/
+                if (!IsLocal)
+                {
+                    this.ContextMenuStripContent.Items[0].Visible = false;
+                }
+            }
         }
     }
 }

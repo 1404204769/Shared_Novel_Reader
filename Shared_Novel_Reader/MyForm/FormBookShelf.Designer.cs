@@ -42,6 +42,7 @@
             this.AddLocalRes = new System.Windows.Forms.ToolStripMenuItem();
             this.UploadNew = new System.Windows.Forms.ToolStripMenuItem();
             this.UploadChange = new System.Windows.Forms.ToolStripMenuItem();
+            this.EditBookData = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageLocalBook = new System.Windows.Forms.TabPage();
             this.tabPageInternetBook = new System.Windows.Forms.TabPage();
@@ -49,13 +50,14 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ContextMenuStripInternet = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.EditBookData = new System.Windows.Forms.ToolStripMenuItem();
+            this.DownloadResourse = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLocal)).BeginInit();
             this.ContextMenuStripLocal.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageLocalBook.SuspendLayout();
             this.tabPageInternetBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewInternet)).BeginInit();
+            this.ContextMenuStripInternet.SuspendLayout();
             this.SuspendLayout();
             // 
             // DataGridViewLocal
@@ -128,19 +130,19 @@
             this.UploadChange,
             this.EditBookData});
             this.ContextMenuStripLocal.Name = "ContextMenuStripLocal";
-            this.ContextMenuStripLocal.Size = new System.Drawing.Size(241, 157);
+            this.ContextMenuStripLocal.Size = new System.Drawing.Size(233, 124);
             // 
             // AddLocalRes
             // 
             this.AddLocalRes.Name = "AddLocalRes";
-            this.AddLocalRes.Size = new System.Drawing.Size(240, 30);
+            this.AddLocalRes.Size = new System.Drawing.Size(232, 30);
             this.AddLocalRes.Text = "添加本地图书";
             this.AddLocalRes.Click += new System.EventHandler(this.AddLocalRes_Click);
             // 
             // UploadNew
             // 
             this.UploadNew.Name = "UploadNew";
-            this.UploadNew.Size = new System.Drawing.Size(240, 30);
+            this.UploadNew.Size = new System.Drawing.Size(232, 30);
             this.UploadNew.Text = "上传新资源";
             this.UploadNew.Visible = false;
             this.UploadNew.Click += new System.EventHandler(this.UploadNew_Click);
@@ -148,10 +150,18 @@
             // UploadChange
             // 
             this.UploadChange.Name = "UploadChange";
-            this.UploadChange.Size = new System.Drawing.Size(240, 30);
+            this.UploadChange.Size = new System.Drawing.Size(232, 30);
             this.UploadChange.Text = "上传更改章节";
             this.UploadChange.Visible = false;
             this.UploadChange.Click += new System.EventHandler(this.UploadChange_Click);
+            // 
+            // EditBookData
+            // 
+            this.EditBookData.Name = "EditBookData";
+            this.EditBookData.Size = new System.Drawing.Size(232, 30);
+            this.EditBookData.Text = "查看/修改图书信息";
+            this.EditBookData.Visible = false;
+            this.EditBookData.Click += new System.EventHandler(this.EditBookData_Click);
             // 
             // tabControl1
             // 
@@ -250,16 +260,17 @@
             // ContextMenuStripInternet
             // 
             this.ContextMenuStripInternet.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.ContextMenuStripInternet.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DownloadResourse});
             this.ContextMenuStripInternet.Name = "ContextMenuStripInternet";
-            this.ContextMenuStripInternet.Size = new System.Drawing.Size(61, 4);
+            this.ContextMenuStripInternet.Size = new System.Drawing.Size(241, 67);
             // 
-            // EditBookData
+            // DownloadResourse
             // 
-            this.EditBookData.Name = "EditBookData";
-            this.EditBookData.Size = new System.Drawing.Size(240, 30);
-            this.EditBookData.Text = "查看/修改图书信息";
-            this.EditBookData.Visible = false;
-            this.EditBookData.Click += new System.EventHandler(this.EditBookData_Click);
+            this.DownloadResourse.Name = "DownloadResourse";
+            this.DownloadResourse.Size = new System.Drawing.Size(240, 30);
+            this.DownloadResourse.Text = "下载此书";
+            this.DownloadResourse.Click += new System.EventHandler(this.DownloadResourse_Click);
             // 
             // FormBookShelf
             // 
@@ -278,6 +289,7 @@
             this.tabPageLocalBook.ResumeLayout(false);
             this.tabPageInternetBook.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewInternet)).EndInit();
+            this.ContextMenuStripInternet.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -299,5 +311,6 @@
         private System.Windows.Forms.ToolStripMenuItem UploadNew;
         private System.Windows.Forms.ToolStripMenuItem UploadChange;
         private System.Windows.Forms.ToolStripMenuItem EditBookData;
+        private System.Windows.Forms.ToolStripMenuItem DownloadResourse;
     }
 }

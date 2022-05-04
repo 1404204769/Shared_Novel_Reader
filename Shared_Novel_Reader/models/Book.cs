@@ -426,6 +426,78 @@ namespace Shared_Novel_Reader.models
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="volnum">章节所在分卷数</param>
+        /// <param name="chapnum">章节数</param>
+        /// <param name="chaptitle">章节名</param>
+        /// <param name="content">章节内容</param>
+        /// <returns></returns>
+        public bool OverloadChapter(int volnum, int chapnum, string chaptitle, List<string> content,bool IsOverload)
+        {
+            if (Vol_Array.Count < volnum)
+            {
+                // 如果此卷不存在则新建卷
+                for (int i = Vol_Array.Count; i < volnum; i++)
+                {
+                    Vol newvol = new Vol();
+                    newvol.Vol_Num = i + 1;
+                    Push_Vol(newvol);
+                }
+            }
+
+            Vol vol = Vol_Array[volnum - 1];
+            if (vol.Chapter_Array.Count < chapnum)
+            {
+                // 如果此章节不存在则新建章节
+                for (int i = vol.Chapter_Array.Count; i < chapnum; i++)
+                {
+                    Chapter newchap = new Chapter(i + 1);
+                    if (i + 1 == chapnum)
+                    {
+                        newchap.ChapTitle = chaptitle;
+                    }
+                    vol.Push_Chapter(newchap);
+                }
+            }
+            else
+            {
+                // 无论标题如何，网络上的资源覆盖本地资源
+                if(!IsOverload)
+                {
+                    if(vol.Chapter_Array[chapnum - 1].Update_Time == DateTime.MinValue.ToString() && vol.Chapter_Array[chapnum - 1].Upload_Time == DateTime.MinValue.ToString())
+                    {
+                        // 无需覆盖
+                        return true;
+                    }
+                }
+                vol.Chapter_Array[chapnum - 1].ChapTitle = chaptitle;
+            }
+
+            Chapter chap = vol.Chapter_Array[chapnum - 1];
+            if (!IsOverload)
+            {
+                if (chap.Update_Time == DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss") && chap.Upload_Time == DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss"))
+                {
+                    // 无需覆盖
+                    return true;
+                }
+            }
+            chap.Update_Time = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
+            chap.Upload_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            if (chap.ContentList.Count == 0)
+            {
+                chap.ContentList.Add(new Content(content, true));
+            }
+            else
+            {
+                chap.ContentList.Clear();
+                chap.ContentList.Add(new Content(content, true));
+            }
+            return true;
+        }
+
 
         public bool RemoveChapter(int volNum, int chapNum, int version = 0)
         {

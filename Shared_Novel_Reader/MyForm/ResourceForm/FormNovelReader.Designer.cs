@@ -152,9 +152,7 @@
             this.DataGridViewList.Size = new System.Drawing.Size(328, 1044);
             this.DataGridViewList.TabIndex = 0;
             this.DataGridViewList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewList_CellClick);
-            this.DataGridViewList.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewList_CellLeave);
             this.DataGridViewList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewList_CellMouseDown);
-            this.DataGridViewList.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this.DataGridViewList_CellStateChanged);
             this.DataGridViewList.SelectionChanged += new System.EventHandler(this.DataGridViewList_SelectionChanged);
             // 
             // ContextMenuStripList
@@ -248,6 +246,7 @@
             this.DataGridViewContent.RowTemplate.Height = 30;
             this.DataGridViewContent.Size = new System.Drawing.Size(896, 1044);
             this.DataGridViewContent.TabIndex = 0;
+            this.DataGridViewContent.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewContent_CellMouseDown);
             this.DataGridViewContent.SelectionChanged += new System.EventHandler(this.DataGridViewContent_SelectionChanged);
             // 
             // ChapContent
@@ -351,7 +350,6 @@
             this.PartNum.MinimumWidth = 8;
             this.PartNum.Name = "PartNum";
             this.PartNum.ReadOnly = true;
-            this.PartNum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.PartNum.Visible = false;
             this.PartNum.Width = 150;
             // 
@@ -361,7 +359,6 @@
             this.ChapterNum.MinimumWidth = 8;
             this.ChapterNum.Name = "ChapterNum";
             this.ChapterNum.ReadOnly = true;
-            this.ChapterNum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.ChapterNum.Visible = false;
             this.ChapterNum.Width = 150;
             // 
