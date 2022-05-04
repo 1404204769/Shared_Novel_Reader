@@ -79,8 +79,9 @@ namespace Shared_Novel_Reader.MyForm
             // 如果存在则判断是否是需要的界面
             else
             {
+                FormNoteDetail = controls[0] as FormNoteDetail;
                 // 如果缓存的界面就是需要的界面则直接显示出来即可
-                if(FormNoteDetail.NoteID == noteid)
+                if (FormNoteDetail.NoteID == noteid)
                 {
                     FormNoteDetail = controls[0] as FormNoteDetail;
                     FormNoteDetail.Refresh();

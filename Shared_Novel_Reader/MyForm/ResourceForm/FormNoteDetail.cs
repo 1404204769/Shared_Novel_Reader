@@ -143,8 +143,70 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 BookName = match.Groups["BookName"].ToString();
             }
 
-            InternetBookShelf.AddToBookshelf(BookName, note.Book_ID);
+            bool res = InternetBookShelf.AddToBookshelf(BookName, note.Book_ID);
+            if(res)
+            {
+                MessageBox.Show("图书加入书架成功");
+            }
+            else
+            {
+                MessageBox.Show("图书加入书架失败");
+            }
 
+        }
+
+        private void PictureBoxReturn_Click(object sender, System.EventArgs e)
+        {
+            FormBookPlatform formBookPlatform = (FormBookPlatform)this.Parent.Parent;
+            formBookPlatform.NoteSearch_Switch();
+        }
+
+        private async void ButtonReport_Click(object sender, System.EventArgs e)
+        {
+            string comment = this.TextComment.Text.Trim();
+            if(comment.Length <= 5)
+            {
+                MessageBox.Show("评论不能少于五个字");
+                return;
+            }
+
+            if (NoteID == 0)
+            {
+                MessageBox.Show("帖子ID不能为0");
+                return;
+            }
+
+            // 给服务器发送请求
+            JObject ReqJson = new JObject();
+            JObject ContentJson = new JObject();
+            ReqJson["Note_ID"] = NoteID;
+            ContentJson["Content"] = comment;
+            ReqJson["Comment_Content"] = ContentJson;
+            // 发送请求
+            var ReportResult = Task<MyResponse>.Run(() => Tools.API.User.Note.ReportNoteComment(ReqJson));
+
+            MyResponse res = await ReportResult;
+
+            /// 返回格式
+            if (res == null || !res.Result)
+            {
+                // 清除残留数据
+                MessageBox.Show("发表帖子评论失败");
+            }
+            else if (res.Data.ToString() == "")
+            {
+                MessageBox.Show("发表帖子评论数据为空");
+            }
+            JObject Comment = (JObject)res.Data;
+            FormNoteComment commentView = new FormNoteComment(Comment);
+            commentView.TopLevel = false;
+            this.FlowLayoutPanelNoteComment.Controls.Add(commentView);
+            commentView.Show();
+        }
+
+        private void PictureBoxRefresh_Click(object sender, System.EventArgs e)
+        {
+            Refresh();
         }
     }
 }

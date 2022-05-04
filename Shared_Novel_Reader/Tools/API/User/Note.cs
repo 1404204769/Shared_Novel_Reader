@@ -90,5 +90,77 @@ namespace Shared_Novel_Reader.Tools.API.User
             return res;
 
         }
+
+        /// <summary>
+        /// 发布帖子评论
+        /// </summary>
+        /// <param name="ResJson"></param>
+        /// <returns></returns>
+        public static MyResponse ReportNoteComment(in JObject ReqJson)
+        {
+            // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
+
+
+            int num = 0;
+            MyResponse res = MyClient.PushRequests("User/Note/Comment", ReqJson.ToString());
+            while ((res == null) && (num < 10))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("User/Note/Comment", ReqJson.ToString());
+            }
+
+            if (res == null)
+            {
+                log.Info("发表帖子评论失败");
+                return null;
+            }
+
+            if (res.Result == false || res.Data == null)
+            {
+                log.Info(res.Message);
+                return null;
+            }
+
+            log.Info("发表帖子评论成功");
+            return res;
+
+        }
+
+
+        /// <summary>
+        /// 发布帖子回复
+        /// </summary>
+        /// <param name="ResJson"></param>
+        /// <returns></returns>
+        public static MyResponse ReportNoteReply(in JObject ReqJson)
+        {
+            // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
+
+
+            int num = 0;
+            MyResponse res = MyClient.PushRequests("User/Note/Reply", ReqJson.ToString());
+            while ((res == null) && (num < 10))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("User/Note/Reply", ReqJson.ToString());
+            }
+
+            if (res == null)
+            {
+                log.Info("回复帖子评论失败");
+                return null;
+            }
+
+            if (res.Result == false || res.Data == null)
+            {
+                log.Info(res.Message);
+                return null;
+            }
+
+            log.Info("回复帖子评论成功");
+            return res;
+
+        }
+
     }
 }
