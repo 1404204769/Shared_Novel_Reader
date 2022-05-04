@@ -29,20 +29,26 @@
         private void InitializeComponent()
         {
             this.Panel = new System.Windows.Forms.Panel();
+            this.PictureBoxRefresh = new System.Windows.Forms.PictureBox();
+            this.PictureBoxReturn = new System.Windows.Forms.PictureBox();
             this.LabelJoin = new System.Windows.Forms.Label();
             this.labelViewBook = new System.Windows.Forms.Label();
             this.labelContent = new System.Windows.Forms.Label();
             this.labelTitle = new System.Windows.Forms.Label();
-            this.FlowLayoutPanelNoteComment = new System.Windows.Forms.FlowLayoutPanel();
             this.PanelComment = new System.Windows.Forms.Panel();
             this.TextComment = new System.Windows.Forms.TextBox();
             this.ButtonReport = new System.Windows.Forms.Button();
-            this.PictureBoxRefresh = new System.Windows.Forms.PictureBox();
-            this.PictureBoxReturn = new System.Windows.Forms.PictureBox();
+            this.LabelCancelReply = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.LabelFloorValue = new System.Windows.Forms.Label();
+            this.FlowLayoutPanelNoteComment = new System.Windows.Forms.FlowLayoutPanel();
+            this.FlowLayoutPanelReply = new System.Windows.Forms.FlowLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
             this.Panel.SuspendLayout();
-            this.PanelComment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxRefresh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxReturn)).BeginInit();
+            this.PanelComment.SuspendLayout();
+            this.FlowLayoutPanelReply.SuspendLayout();
             this.SuspendLayout();
             // 
             // Panel
@@ -60,6 +66,32 @@
             this.Panel.Name = "Panel";
             this.Panel.Size = new System.Drawing.Size(1150, 200);
             this.Panel.TabIndex = 0;
+            // 
+            // PictureBoxRefresh
+            // 
+            this.PictureBoxRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.PictureBoxRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PictureBoxRefresh.Image = global::Shared_Novel_Reader.Properties.Resources.refresh;
+            this.PictureBoxRefresh.Location = new System.Drawing.Point(860, 34);
+            this.PictureBoxRefresh.Name = "PictureBoxRefresh";
+            this.PictureBoxRefresh.Size = new System.Drawing.Size(18, 18);
+            this.PictureBoxRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PictureBoxRefresh.TabIndex = 8;
+            this.PictureBoxRefresh.TabStop = false;
+            this.PictureBoxRefresh.Click += new System.EventHandler(this.PictureBoxRefresh_Click);
+            // 
+            // PictureBoxReturn
+            // 
+            this.PictureBoxReturn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.PictureBoxReturn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PictureBoxReturn.Image = global::Shared_Novel_Reader.Properties.Resources.arrow_left_circle;
+            this.PictureBoxReturn.Location = new System.Drawing.Point(12, 12);
+            this.PictureBoxReturn.Name = "PictureBoxReturn";
+            this.PictureBoxReturn.Size = new System.Drawing.Size(44, 40);
+            this.PictureBoxReturn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PictureBoxReturn.TabIndex = 7;
+            this.PictureBoxReturn.TabStop = false;
+            this.PictureBoxReturn.Click += new System.EventHandler(this.PictureBoxReturn_Click);
             // 
             // LabelJoin
             // 
@@ -109,16 +141,6 @@
             this.labelTitle.Text = "帖子标题";
             this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // FlowLayoutPanelNoteComment
-            // 
-            this.FlowLayoutPanelNoteComment.BackColor = System.Drawing.Color.RosyBrown;
-            this.FlowLayoutPanelNoteComment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FlowLayoutPanelNoteComment.Location = new System.Drawing.Point(0, 200);
-            this.FlowLayoutPanelNoteComment.Margin = new System.Windows.Forms.Padding(0);
-            this.FlowLayoutPanelNoteComment.Name = "FlowLayoutPanelNoteComment";
-            this.FlowLayoutPanelNoteComment.Size = new System.Drawing.Size(1150, 488);
-            this.FlowLayoutPanelNoteComment.TabIndex = 1;
-            // 
             // PanelComment
             // 
             this.PanelComment.Controls.Add(this.TextComment);
@@ -152,37 +174,90 @@
             this.ButtonReport.UseVisualStyleBackColor = true;
             this.ButtonReport.Click += new System.EventHandler(this.ButtonReport_Click);
             // 
-            // PictureBoxRefresh
+            // LabelCancelReply
             // 
-            this.PictureBoxRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PictureBoxRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PictureBoxRefresh.Image = global::Shared_Novel_Reader.Properties.Resources.refresh;
-            this.PictureBoxRefresh.Location = new System.Drawing.Point(860, 34);
-            this.PictureBoxRefresh.Name = "PictureBoxRefresh";
-            this.PictureBoxRefresh.Size = new System.Drawing.Size(18, 18);
-            this.PictureBoxRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PictureBoxRefresh.TabIndex = 8;
-            this.PictureBoxRefresh.TabStop = false;
-            this.PictureBoxRefresh.Click += new System.EventHandler(this.PictureBoxRefresh_Click);
+            this.LabelCancelReply.AutoSize = true;
+            this.LabelCancelReply.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LabelCancelReply.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold);
+            this.LabelCancelReply.Location = new System.Drawing.Point(229, 0);
+            this.LabelCancelReply.Margin = new System.Windows.Forms.Padding(0);
+            this.LabelCancelReply.Name = "LabelCancelReply";
+            this.LabelCancelReply.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.LabelCancelReply.Size = new System.Drawing.Size(86, 21);
+            this.LabelCancelReply.TabIndex = 0;
+            this.LabelCancelReply.Text = "取消回复";
+            this.LabelCancelReply.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LabelCancelReply.Click += new System.EventHandler(this.LabelCancelReply_Click);
             // 
-            // PictureBoxReturn
+            // label1
             // 
-            this.PictureBoxReturn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PictureBoxReturn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PictureBoxReturn.Image = global::Shared_Novel_Reader.Properties.Resources.arrow_left_circle;
-            this.PictureBoxReturn.Location = new System.Drawing.Point(12, 12);
-            this.PictureBoxReturn.Name = "PictureBoxReturn";
-            this.PictureBoxReturn.Size = new System.Drawing.Size(44, 40);
-            this.PictureBoxReturn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PictureBoxReturn.TabIndex = 7;
-            this.PictureBoxReturn.TabStop = false;
-            this.PictureBoxReturn.Click += new System.EventHandler(this.PictureBoxReturn_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(86, 21);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "正在回复";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LabelFloorValue
+            // 
+            this.LabelFloorValue.AutoSize = true;
+            this.LabelFloorValue.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold);
+            this.LabelFloorValue.Location = new System.Drawing.Point(86, 0);
+            this.LabelFloorValue.Margin = new System.Windows.Forms.Padding(0);
+            this.LabelFloorValue.Name = "LabelFloorValue";
+            this.LabelFloorValue.Size = new System.Drawing.Size(24, 21);
+            this.LabelFloorValue.TabIndex = 2;
+            this.LabelFloorValue.Text = "X";
+            this.LabelFloorValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // FlowLayoutPanelNoteComment
+            // 
+            this.FlowLayoutPanelNoteComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.FlowLayoutPanelNoteComment.AutoScroll = true;
+            this.FlowLayoutPanelNoteComment.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.FlowLayoutPanelNoteComment.BackColor = System.Drawing.Color.RosyBrown;
+            this.FlowLayoutPanelNoteComment.Location = new System.Drawing.Point(0, 200);
+            this.FlowLayoutPanelNoteComment.Margin = new System.Windows.Forms.Padding(0);
+            this.FlowLayoutPanelNoteComment.Name = "FlowLayoutPanelNoteComment";
+            this.FlowLayoutPanelNoteComment.Size = new System.Drawing.Size(1150, 488);
+            this.FlowLayoutPanelNoteComment.TabIndex = 1;
+            // 
+            // FlowLayoutPanelReply
+            // 
+            this.FlowLayoutPanelReply.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.FlowLayoutPanelReply.Controls.Add(this.label1);
+            this.FlowLayoutPanelReply.Controls.Add(this.LabelFloorValue);
+            this.FlowLayoutPanelReply.Controls.Add(this.label3);
+            this.FlowLayoutPanelReply.Controls.Add(this.LabelCancelReply);
+            this.FlowLayoutPanelReply.Location = new System.Drawing.Point(2, 659);
+            this.FlowLayoutPanelReply.Name = "FlowLayoutPanelReply";
+            this.FlowLayoutPanelReply.Size = new System.Drawing.Size(1146, 30);
+            this.FlowLayoutPanelReply.TabIndex = 4;
+            this.FlowLayoutPanelReply.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(110, 0);
+            this.label3.Margin = new System.Windows.Forms.Padding(0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(119, 21);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "楼               ";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormNoteDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1150, 740);
+            this.Controls.Add(this.FlowLayoutPanelReply);
             this.Controls.Add(this.FlowLayoutPanelNoteComment);
             this.Controls.Add(this.Panel);
             this.Controls.Add(this.PanelComment);
@@ -191,10 +266,12 @@
             this.Text = "FormNoteDetail";
             this.Panel.ResumeLayout(false);
             this.Panel.PerformLayout();
-            this.PanelComment.ResumeLayout(false);
-            this.PanelComment.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxRefresh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxReturn)).EndInit();
+            this.PanelComment.ResumeLayout(false);
+            this.PanelComment.PerformLayout();
+            this.FlowLayoutPanelReply.ResumeLayout(false);
+            this.FlowLayoutPanelReply.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -202,7 +279,6 @@
         #endregion
 
         private System.Windows.Forms.Panel Panel;
-        private System.Windows.Forms.FlowLayoutPanel FlowLayoutPanelNoteComment;
         private System.Windows.Forms.Label labelViewBook;
         private System.Windows.Forms.Label labelContent;
         private System.Windows.Forms.Label labelTitle;
@@ -212,5 +288,11 @@
         private System.Windows.Forms.Button ButtonReport;
         private System.Windows.Forms.TextBox TextComment;
         private System.Windows.Forms.PictureBox PictureBoxRefresh;
+        private System.Windows.Forms.Label LabelCancelReply;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.FlowLayoutPanel FlowLayoutPanelNoteComment;
+        private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.FlowLayoutPanel FlowLayoutPanelReply;
+        public System.Windows.Forms.Label LabelFloorValue;
     }
 }

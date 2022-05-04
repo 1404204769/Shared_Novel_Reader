@@ -32,7 +32,8 @@
             this.LabelContent = new System.Windows.Forms.Label();
             this.LabelAgreeNum = new System.Windows.Forms.Label();
             this.LabelCommentTime = new System.Windows.Forms.Label();
-            this.labelAgree = new System.Windows.Forms.Label();
+            this.LabelAgree = new System.Windows.Forms.Label();
+            this.LabelReply = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LabelUserID
@@ -47,7 +48,7 @@
             // 
             this.LabelContent.Location = new System.Drawing.Point(44, 33);
             this.LabelContent.Name = "LabelContent";
-            this.LabelContent.Size = new System.Drawing.Size(1085, 34);
+            this.LabelContent.Size = new System.Drawing.Size(1000, 34);
             this.LabelContent.TabIndex = 1;
             this.LabelContent.Text = "评论内容";
             // 
@@ -61,30 +62,43 @@
             // 
             // LabelCommentTime
             // 
-            this.LabelCommentTime.Location = new System.Drawing.Point(825, 67);
+            this.LabelCommentTime.Location = new System.Drawing.Point(772, 67);
             this.LabelCommentTime.Name = "LabelCommentTime";
             this.LabelCommentTime.Size = new System.Drawing.Size(167, 23);
             this.LabelCommentTime.TabIndex = 3;
             this.LabelCommentTime.Text = "评论时间";
             // 
-            // labelAgree
+            // LabelAgree
             // 
-            this.labelAgree.AutoSize = true;
-            this.labelAgree.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labelAgree.ForeColor = System.Drawing.Color.Green;
-            this.labelAgree.Location = new System.Drawing.Point(1018, 67);
-            this.labelAgree.Name = "labelAgree";
-            this.labelAgree.Size = new System.Drawing.Size(44, 18);
-            this.labelAgree.TabIndex = 4;
-            this.labelAgree.Text = "点赞";
+            this.LabelAgree.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LabelAgree.ForeColor = System.Drawing.Color.Green;
+            this.LabelAgree.Location = new System.Drawing.Point(945, 67);
+            this.LabelAgree.Name = "LabelAgree";
+            this.LabelAgree.Size = new System.Drawing.Size(97, 18);
+            this.LabelAgree.TabIndex = 4;
+            this.LabelAgree.Text = "点赞";
+            this.LabelAgree.Click += new System.EventHandler(this.labelAgree_Click);
+            // 
+            // LabelReply
+            // 
+            this.LabelReply.AutoSize = true;
+            this.LabelReply.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LabelReply.ForeColor = System.Drawing.Color.Green;
+            this.LabelReply.Location = new System.Drawing.Point(1048, 67);
+            this.LabelReply.Name = "LabelReply";
+            this.LabelReply.Size = new System.Drawing.Size(44, 18);
+            this.LabelReply.TabIndex = 5;
+            this.LabelReply.Text = "回复";
+            this.LabelReply.Click += new System.EventHandler(this.LabelReply_Click);
             // 
             // FormNoteComment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(1150, 100);
-            this.Controls.Add(this.labelAgree);
+            this.ClientSize = new System.Drawing.Size(1115, 100);
+            this.Controls.Add(this.LabelReply);
+            this.Controls.Add(this.LabelAgree);
             this.Controls.Add(this.LabelCommentTime);
             this.Controls.Add(this.LabelAgreeNum);
             this.Controls.Add(this.LabelContent);
@@ -103,6 +117,7 @@
         private System.Windows.Forms.Label LabelContent;
         private System.Windows.Forms.Label LabelAgreeNum;
         private System.Windows.Forms.Label LabelCommentTime;
-        private System.Windows.Forms.Label labelAgree;
+        private System.Windows.Forms.Label LabelReply;
+        public System.Windows.Forms.Label LabelAgree;
     }
 }

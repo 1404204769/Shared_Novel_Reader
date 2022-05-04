@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using Shared_Novel_Reader.models;
 using Shared_Novel_Reader.Tools;
+using System;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -183,30 +184,50 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             ContentJson["Content"] = comment;
             ReqJson["Comment_Content"] = ContentJson;
             // 发送请求
-            var ReportResult = Task<MyResponse>.Run(() => Tools.API.User.Note.ReportNoteComment(ReqJson));
+            MyResponse res = null;
+            if (this.FlowLayoutPanelReply.Visible)
+            {
+                // 说明是回复别人的评论
+                ReqJson["Reply_Floor_ID"] = Convert.ToInt32(this.LabelFloorValue.Text);
+                Task<MyResponse> ReportResult = Task<MyResponse>.Run(() => Tools.API.User.Note.ReportNoteReply(ReqJson));
+                res = await ReportResult;
+            }
+            else
+            {
+                // 说明是自己发表评论
+                Task<MyResponse> ReportResult = Task<MyResponse>.Run(() => Tools.API.User.Note.ReportNoteComment(ReqJson));
+                res = await ReportResult;
+            }
 
-            MyResponse res = await ReportResult;
 
             /// 返回格式
             if (res == null || !res.Result)
             {
                 // 清除残留数据
-                MessageBox.Show("发表帖子评论失败");
+                MessageBox.Show("发表评论失败");
             }
             else if (res.Data.ToString() == "")
             {
-                MessageBox.Show("发表帖子评论数据为空");
+                MessageBox.Show("发表评论数据为空");
             }
             JObject Comment = (JObject)res.Data;
             FormNoteComment commentView = new FormNoteComment(Comment);
             commentView.TopLevel = false;
             this.FlowLayoutPanelNoteComment.Controls.Add(commentView);
             commentView.Show();
+
+            this.FlowLayoutPanelReply.Visible = false;
+            this.TextComment.Text = String.Empty;
         }
 
         private void PictureBoxRefresh_Click(object sender, System.EventArgs e)
         {
             Refresh();
+        }
+
+        private void LabelCancelReply_Click(object sender, System.EventArgs e)
+        {
+            this.FlowLayoutPanelReply.Visible = false;
         }
     }
 }
