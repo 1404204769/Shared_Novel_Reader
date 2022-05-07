@@ -291,12 +291,14 @@ namespace Shared_Novel_Reader.MyForm
             if (e.Button == MouseButtons.Right)
             {
                 this.DataGridViewLocal.Rows[e.RowIndex].Selected = true;
-                this.ContextMenuStripLocal.Items[3].Visible = true;
+                this.ContextMenuStripLocal.Items[0].Visible = true;
+                this.ContextMenuStripLocal.Items[1].Visible = true;
+                this.ContextMenuStripLocal.Items[5].Visible = true;
                 // 必须在线才能上传
                 if (User.IsInit)
                 {
                     this.ContextMenuStripLocal.Items[2].Visible = true;
-                    this.ContextMenuStripLocal.Items[1].Visible = true;
+                    this.ContextMenuStripLocal.Items[3].Visible = true;
                 }
             }
         }
@@ -353,5 +355,73 @@ namespace Shared_Novel_Reader.MyForm
             int bookid = Convert.ToInt32(this.DataGridViewInternet.CurrentRow.Cells[1].Value.ToString());
             InternetBookShelf.DownloadBook(bookname, bookid);
         }
+
+        private void CreateRes_Click(object sender, EventArgs e)
+        {
+            FormBookTitle FormBookTitle = new FormBookTitle();
+            FormBookTitle.OpenEdit();
+            DialogResult res = FormBookTitle.ShowDialog();
+            if (res == DialogResult.Cancel)
+                return;
+            Book book = new Book();
+            book.Book_Author = FormBookTitle.newBookAuthor;
+            book.Book_Name = FormBookTitle.newBookName;
+            book.Book_Publisher = FormBookTitle.newBookPublisher;
+            book.Book_Synopsis = FormBookTitle.newBookSynopsis;
+            if (book.Book_Name == string.Empty)
+            {
+                MessageBox.Show("图书名称不可为空");
+                return;
+            }
+            if (book.Book_Author == string.Empty)
+            {
+                MessageBox.Show("作者名称不可为空");
+                return;
+            }
+            LocalBookShelf.AddToBookshelf(book);
+            // 刷新书架
+            this.DataGridViewLocal.Rows.Clear();
+            foreach (var obj in LocalBookShelf.LocalResArray)
+            {
+                string[] col = new string[5];
+                col[0] = (string)obj["Book_Name"];
+                col[1] = (string)obj["Link_Num"];
+                this.DataGridViewLocal.Rows.Add(col);
+            }
+            log.Info("本地书架刷新成功");
+        }
+
+        private void DeleteRes_Click(object sender, EventArgs e)
+        {
+            foreach(DataGridViewRow row in this.DataGridViewLocal.Rows)
+            {
+                if(row.Selected)
+                {
+                    string bookname = row.Cells[0].Value.ToString();
+                    bool res = LocalBookShelf.RemoveFromBookshelf(bookname);
+                    if (res)
+                    {
+                        MessageBox.Show("图书移除成功");
+                        // 刷新书架
+                        this.DataGridViewLocal.Rows.Clear();
+                        foreach (var obj in LocalBookShelf.LocalResArray)
+                        {
+                            string[] col = new string[5];
+                            col[0] = (string)obj["Book_Name"];
+                            col[1] = (string)obj["Link_Num"];
+                            this.DataGridViewLocal.Rows.Add(col);
+                        }
+                        log.Info("本地书架刷新成功");
+                    }
+                    else
+                    {
+                        MessageBox.Show("图书移除失败");
+                    }
+                    return;
+                }
+            }
+            MessageBox.Show("不存在选中项");
+        }
+
     }
 }

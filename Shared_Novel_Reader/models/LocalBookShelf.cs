@@ -16,10 +16,23 @@ namespace Shared_Novel_Reader.models
     /// </summary>
     internal static class LocalBookShelf
     {
+        static ILog log = LogManager.GetLogger(typeof(LocalBookShelf));
         static bool IsInit = false;
         static private string LocalResPath = Properties.Settings.Default.Local_Res_Path + "\\LocalRes.json";
+
+        /// <summary>
+        /// 内存加载
+        /// </summary>
         static public List<Book> BookList = new List<Book>();
+
+        /// <summary>
+        /// 本地书架保存对象
+        /// </summary>
         static public JObject LocalRes = new JObject();
+
+        /// <summary>
+        /// 本地书架目录
+        /// </summary>
         static public JArray LocalResArray = new JArray();
 
         /// <summary>
@@ -29,7 +42,6 @@ namespace Shared_Novel_Reader.models
         static public bool open()
         {
             if (IsInit) return true;
-            ILog log = LogManager.GetLogger(typeof(LocalBookShelf));
             if (!File.Exists(LocalResPath))
             {
                 log.Info(LocalResPath + "文件不存在,即将开始初始化");
@@ -65,7 +77,6 @@ namespace Shared_Novel_Reader.models
         static public bool close()
         {
             if(!IsInit) return true;
-            ILog log = LogManager.GetLogger(typeof(LocalBookShelf));
             foreach (var name in LocalResArray)
             {
                 if (!closeBook((string)name["Book_Name"], (int)name["Link_Num"]))
@@ -130,7 +141,6 @@ namespace Shared_Novel_Reader.models
         /// <returns></returns>
         static private bool Verify()
         {
-            ILog log = LogManager.GetLogger(typeof(LocalBookShelf));
             /*
                 "Book_Array":[
                     {
@@ -194,7 +204,6 @@ namespace Shared_Novel_Reader.models
         /// <returns></returns>
         static public bool LoadBookByNum(in int num)
         {
-            ILog log = LogManager.GetLogger(typeof(LocalBookShelf));
             string path = Properties.Settings.Default.Local_Res_Path + "\\" + num + ".json";
             JObject jobj = new JObject();
             if (!Tools.MyJson.JsonFromFile(ref jobj, path))
@@ -216,7 +225,6 @@ namespace Shared_Novel_Reader.models
         /// <returns></returns>
         static public bool AddToBookshelf(in Book book)
         {
-            ILog log = LogManager.GetLogger(typeof(LocalBookShelf));
             // 在保存数据前，应该先校验数据
             int TargetBook = -1;// 说明目标不曾解析过
             foreach (var name in LocalResArray)
@@ -270,6 +278,13 @@ namespace Shared_Novel_Reader.models
             // 否则说明是完全的新书,则赋予新的书架ID并保存到本地即可
             //SelectToken with LINQ
             // $...name  意思是从当前接口文档的1,2,3级中查找name，并返回结果
+            // 如果资源没有目录，则创建一个默认的章节
+            if(book.Vol_Array.Count == 0)
+            {
+                List<string> content = new List<string>();
+                content.Add("默认章节内容");
+                book.InsertNewChapter(1, 1, "默认章节", content);
+            }
             JObject jobj = new JObject();
             JObject jBook = book.toJson();
             jobj.Add("Book_Name", book.Book_Name);
@@ -294,6 +309,42 @@ namespace Shared_Novel_Reader.models
             return true;
         }
 
+
+        /// <summary>
+        /// 将指定图书从书架中删除
+        /// </summary>
+        /// <param name="BookName"></param>
+        /// <returns></returns>
+        static public bool RemoveFromBookshelf(in string BookName)
+        {
+            for (int i = 0; i <  LocalResArray.Count; i++)
+            {
+                if ((string)LocalResArray[i]["Book_Name"] == BookName)
+                {
+                    // 开始在内存中查找图书信息
+                    int index = FindBookInMemoryByName(BookName);
+
+                    // 如果找到说明在内存里,需要从内存里移除
+                    if (index != -1)
+                    {
+                        BookList.RemoveAt(index);
+                    }
+
+                    // 运行到这里说明内存中已经移除，现在需要从目录中移除
+                    LocalResArray.RemoveAt(i);
+                    return true;
+                }
+            }
+
+            for (int i = 0; i < LocalResArray.Count; i++)
+            {
+                if ((string)LocalResArray[i]["Book_Name"] == BookName)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
     }
 }
