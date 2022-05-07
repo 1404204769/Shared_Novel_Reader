@@ -37,14 +37,18 @@
             this.LabelIntegral = new System.Windows.Forms.Label();
             this.LabelTotalIntegral = new System.Windows.Forms.Label();
             this.LabelUserID = new System.Windows.Forms.Label();
-            this.LabelUserIDValue = new System.Windows.Forms.Label();
-            this.LabelNameValue = new System.Windows.Forms.Label();
-            this.LabelSexValue = new System.Windows.Forms.Label();
-            this.LabelStatusValue = new System.Windows.Forms.Label();
-            this.LabelTotalIntegralValue = new System.Windows.Forms.Label();
-            this.LabelIntegralValue = new System.Windows.Forms.Label();
-            this.LabelLevelValue = new System.Windows.Forms.Label();
-            this.LabelPowerValue = new System.Windows.Forms.Label();
+            this.TextUserIDValue = new System.Windows.Forms.TextBox();
+            this.LabelSave = new System.Windows.Forms.Label();
+            this.LabelEdit = new System.Windows.Forms.Label();
+            this.TextSexValue = new System.Windows.Forms.TextBox();
+            this.TextStatusValue = new System.Windows.Forms.TextBox();
+            this.TextNameValue = new System.Windows.Forms.TextBox();
+            this.TextLevelValue = new System.Windows.Forms.TextBox();
+            this.TextPowerValue = new System.Windows.Forms.TextBox();
+            this.TextIntegralValue = new System.Windows.Forms.TextBox();
+            this.TextTotalIntegralValue = new System.Windows.Forms.TextBox();
+            this.ComboBoxSex = new System.Windows.Forms.ComboBox();
+            this.LabelPwd = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LabelShow
@@ -52,7 +56,7 @@
             this.LabelShow.AutoSize = true;
             this.LabelShow.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelShow.ForeColor = System.Drawing.Color.Black;
-            this.LabelShow.Location = new System.Drawing.Point(307, 21);
+            this.LabelShow.Location = new System.Drawing.Point(367, 23);
             this.LabelShow.Name = "LabelShow";
             this.LabelShow.Size = new System.Drawing.Size(416, 56);
             this.LabelShow.TabIndex = 2;
@@ -146,85 +150,156 @@
             this.LabelUserID.TabIndex = 3;
             this.LabelUserID.Text = "账号：";
             // 
-            // LabelUserIDValue
+            // TextUserIDValue
             // 
-            this.LabelUserIDValue.BackColor = System.Drawing.Color.White;
-            this.LabelUserIDValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelUserIDValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelUserIDValue.Location = new System.Drawing.Point(215, 125);
-            this.LabelUserIDValue.Name = "LabelUserIDValue";
-            this.LabelUserIDValue.Size = new System.Drawing.Size(290, 56);
-            this.LabelUserIDValue.TabIndex = 11;
+            this.TextUserIDValue.BackColor = System.Drawing.Color.LightGray;
+            this.TextUserIDValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextUserIDValue.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TextUserIDValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold);
+            this.TextUserIDValue.Location = new System.Drawing.Point(215, 124);
+            this.TextUserIDValue.Name = "TextUserIDValue";
+            this.TextUserIDValue.ReadOnly = true;
+            this.TextUserIDValue.Size = new System.Drawing.Size(290, 57);
+            this.TextUserIDValue.TabIndex = 19;
             // 
-            // LabelNameValue
+            // LabelSave
             // 
-            this.LabelNameValue.BackColor = System.Drawing.Color.White;
-            this.LabelNameValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelNameValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelNameValue.Location = new System.Drawing.Point(215, 239);
-            this.LabelNameValue.Name = "LabelNameValue";
-            this.LabelNameValue.Size = new System.Drawing.Size(290, 56);
-            this.LabelNameValue.TabIndex = 12;
+            this.LabelSave.AutoSize = true;
+            this.LabelSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LabelSave.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelSave.ForeColor = System.Drawing.Color.Teal;
+            this.LabelSave.Location = new System.Drawing.Point(869, 51);
+            this.LabelSave.Name = "LabelSave";
+            this.LabelSave.Size = new System.Drawing.Size(62, 28);
+            this.LabelSave.TabIndex = 20;
+            this.LabelSave.Text = "保存";
+            this.LabelSave.Visible = false;
+            this.LabelSave.Click += new System.EventHandler(this.LabelSave_Click);
             // 
-            // LabelSexValue
+            // LabelEdit
             // 
-            this.LabelSexValue.BackColor = System.Drawing.Color.White;
-            this.LabelSexValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelSexValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelSexValue.Location = new System.Drawing.Point(215, 454);
-            this.LabelSexValue.Name = "LabelSexValue";
-            this.LabelSexValue.Size = new System.Drawing.Size(290, 56);
-            this.LabelSexValue.TabIndex = 14;
+            this.LabelEdit.AutoSize = true;
+            this.LabelEdit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LabelEdit.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelEdit.ForeColor = System.Drawing.Color.Teal;
+            this.LabelEdit.Location = new System.Drawing.Point(955, 51);
+            this.LabelEdit.Name = "LabelEdit";
+            this.LabelEdit.Size = new System.Drawing.Size(62, 28);
+            this.LabelEdit.TabIndex = 21;
+            this.LabelEdit.Text = "编辑";
+            this.LabelEdit.Click += new System.EventHandler(this.LabelEdit_Click);
             // 
-            // LabelStatusValue
+            // TextSexValue
             // 
-            this.LabelStatusValue.BackColor = System.Drawing.Color.White;
-            this.LabelStatusValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelStatusValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelStatusValue.Location = new System.Drawing.Point(215, 340);
-            this.LabelStatusValue.Name = "LabelStatusValue";
-            this.LabelStatusValue.Size = new System.Drawing.Size(290, 56);
-            this.LabelStatusValue.TabIndex = 13;
+            this.TextSexValue.BackColor = System.Drawing.Color.LightGray;
+            this.TextSexValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextSexValue.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TextSexValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold);
+            this.TextSexValue.Location = new System.Drawing.Point(215, 446);
+            this.TextSexValue.Name = "TextSexValue";
+            this.TextSexValue.ReadOnly = true;
+            this.TextSexValue.Size = new System.Drawing.Size(290, 57);
+            this.TextSexValue.TabIndex = 22;
             // 
-            // LabelTotalIntegralValue
+            // TextStatusValue
             // 
-            this.LabelTotalIntegralValue.BackColor = System.Drawing.Color.White;
-            this.LabelTotalIntegralValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelTotalIntegralValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelTotalIntegralValue.Location = new System.Drawing.Point(765, 454);
-            this.LabelTotalIntegralValue.Name = "LabelTotalIntegralValue";
-            this.LabelTotalIntegralValue.Size = new System.Drawing.Size(290, 56);
-            this.LabelTotalIntegralValue.TabIndex = 15;
+            this.TextStatusValue.BackColor = System.Drawing.Color.LightGray;
+            this.TextStatusValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextStatusValue.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TextStatusValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold);
+            this.TextStatusValue.Location = new System.Drawing.Point(215, 346);
+            this.TextStatusValue.Name = "TextStatusValue";
+            this.TextStatusValue.ReadOnly = true;
+            this.TextStatusValue.Size = new System.Drawing.Size(290, 57);
+            this.TextStatusValue.TabIndex = 23;
             // 
-            // LabelIntegralValue
+            // TextNameValue
             // 
-            this.LabelIntegralValue.BackColor = System.Drawing.Color.White;
-            this.LabelIntegralValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelIntegralValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelIntegralValue.Location = new System.Drawing.Point(765, 340);
-            this.LabelIntegralValue.Name = "LabelIntegralValue";
-            this.LabelIntegralValue.Size = new System.Drawing.Size(290, 56);
-            this.LabelIntegralValue.TabIndex = 16;
+            this.TextNameValue.BackColor = System.Drawing.Color.LightGray;
+            this.TextNameValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextNameValue.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TextNameValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold);
+            this.TextNameValue.Location = new System.Drawing.Point(215, 239);
+            this.TextNameValue.Name = "TextNameValue";
+            this.TextNameValue.ReadOnly = true;
+            this.TextNameValue.Size = new System.Drawing.Size(290, 57);
+            this.TextNameValue.TabIndex = 24;
             // 
-            // LabelLevelValue
+            // TextLevelValue
             // 
-            this.LabelLevelValue.BackColor = System.Drawing.Color.White;
-            this.LabelLevelValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelLevelValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelLevelValue.Location = new System.Drawing.Point(765, 125);
-            this.LabelLevelValue.Name = "LabelLevelValue";
-            this.LabelLevelValue.Size = new System.Drawing.Size(290, 56);
-            this.LabelLevelValue.TabIndex = 18;
+            this.TextLevelValue.BackColor = System.Drawing.Color.LightGray;
+            this.TextLevelValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextLevelValue.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TextLevelValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold);
+            this.TextLevelValue.Location = new System.Drawing.Point(765, 125);
+            this.TextLevelValue.Name = "TextLevelValue";
+            this.TextLevelValue.ReadOnly = true;
+            this.TextLevelValue.Size = new System.Drawing.Size(290, 57);
+            this.TextLevelValue.TabIndex = 25;
             // 
-            // LabelPowerValue
+            // TextPowerValue
             // 
-            this.LabelPowerValue.BackColor = System.Drawing.Color.White;
-            this.LabelPowerValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelPowerValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelPowerValue.Location = new System.Drawing.Point(765, 239);
-            this.LabelPowerValue.Name = "LabelPowerValue";
-            this.LabelPowerValue.Size = new System.Drawing.Size(290, 56);
-            this.LabelPowerValue.TabIndex = 17;
+            this.TextPowerValue.BackColor = System.Drawing.Color.LightGray;
+            this.TextPowerValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextPowerValue.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TextPowerValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold);
+            this.TextPowerValue.Location = new System.Drawing.Point(765, 239);
+            this.TextPowerValue.Name = "TextPowerValue";
+            this.TextPowerValue.ReadOnly = true;
+            this.TextPowerValue.Size = new System.Drawing.Size(290, 57);
+            this.TextPowerValue.TabIndex = 26;
+            // 
+            // TextIntegralValue
+            // 
+            this.TextIntegralValue.BackColor = System.Drawing.Color.LightGray;
+            this.TextIntegralValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextIntegralValue.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TextIntegralValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold);
+            this.TextIntegralValue.Location = new System.Drawing.Point(765, 346);
+            this.TextIntegralValue.Name = "TextIntegralValue";
+            this.TextIntegralValue.ReadOnly = true;
+            this.TextIntegralValue.Size = new System.Drawing.Size(290, 57);
+            this.TextIntegralValue.TabIndex = 27;
+            // 
+            // TextTotalIntegralValue
+            // 
+            this.TextTotalIntegralValue.BackColor = System.Drawing.Color.LightGray;
+            this.TextTotalIntegralValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextTotalIntegralValue.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TextTotalIntegralValue.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold);
+            this.TextTotalIntegralValue.Location = new System.Drawing.Point(765, 446);
+            this.TextTotalIntegralValue.Name = "TextTotalIntegralValue";
+            this.TextTotalIntegralValue.ReadOnly = true;
+            this.TextTotalIntegralValue.Size = new System.Drawing.Size(290, 57);
+            this.TextTotalIntegralValue.TabIndex = 28;
+            // 
+            // ComboBoxSex
+            // 
+            this.ComboBoxSex.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ComboBoxSex.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold);
+            this.ComboBoxSex.FormattingEnabled = true;
+            this.ComboBoxSex.Items.AddRange(new object[] {
+            "男",
+            "女"});
+            this.ComboBoxSex.Location = new System.Drawing.Point(215, 446);
+            this.ComboBoxSex.Name = "ComboBoxSex";
+            this.ComboBoxSex.Size = new System.Drawing.Size(290, 64);
+            this.ComboBoxSex.TabIndex = 29;
+            this.ComboBoxSex.Visible = false;
+            this.ComboBoxSex.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSex_SelectedIndexChanged);
+            // 
+            // LabelPwd
+            // 
+            this.LabelPwd.AutoSize = true;
+            this.LabelPwd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LabelPwd.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelPwd.ForeColor = System.Drawing.Color.Teal;
+            this.LabelPwd.Location = new System.Drawing.Point(54, 592);
+            this.LabelPwd.Name = "LabelPwd";
+            this.LabelPwd.Size = new System.Drawing.Size(112, 28);
+            this.LabelPwd.TabIndex = 30;
+            this.LabelPwd.Text = "修改密码";
+            this.LabelPwd.Click += new System.EventHandler(this.LabelPwd_Click);
             // 
             // FormPersonalData
             // 
@@ -232,14 +307,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1150, 740);
-            this.Controls.Add(this.LabelLevelValue);
-            this.Controls.Add(this.LabelPowerValue);
-            this.Controls.Add(this.LabelIntegralValue);
-            this.Controls.Add(this.LabelTotalIntegralValue);
-            this.Controls.Add(this.LabelSexValue);
-            this.Controls.Add(this.LabelStatusValue);
-            this.Controls.Add(this.LabelNameValue);
-            this.Controls.Add(this.LabelUserIDValue);
+            this.Controls.Add(this.LabelPwd);
+            this.Controls.Add(this.ComboBoxSex);
+            this.Controls.Add(this.TextTotalIntegralValue);
+            this.Controls.Add(this.TextIntegralValue);
+            this.Controls.Add(this.TextPowerValue);
+            this.Controls.Add(this.TextLevelValue);
+            this.Controls.Add(this.TextNameValue);
+            this.Controls.Add(this.TextStatusValue);
+            this.Controls.Add(this.TextSexValue);
+            this.Controls.Add(this.LabelEdit);
+            this.Controls.Add(this.LabelSave);
+            this.Controls.Add(this.TextUserIDValue);
             this.Controls.Add(this.LabelTotalIntegral);
             this.Controls.Add(this.LabelIntegral);
             this.Controls.Add(this.LabelPower);
@@ -268,13 +347,17 @@
         private System.Windows.Forms.Label LabelIntegral;
         private System.Windows.Forms.Label LabelTotalIntegral;
         private System.Windows.Forms.Label LabelUserID;
-        private System.Windows.Forms.Label LabelUserIDValue;
-        private System.Windows.Forms.Label LabelNameValue;
-        private System.Windows.Forms.Label LabelSexValue;
-        private System.Windows.Forms.Label LabelStatusValue;
-        private System.Windows.Forms.Label LabelTotalIntegralValue;
-        private System.Windows.Forms.Label LabelIntegralValue;
-        private System.Windows.Forms.Label LabelLevelValue;
-        private System.Windows.Forms.Label LabelPowerValue;
+        private System.Windows.Forms.TextBox TextUserIDValue;
+        private System.Windows.Forms.Label LabelSave;
+        private System.Windows.Forms.Label LabelEdit;
+        private System.Windows.Forms.TextBox TextSexValue;
+        private System.Windows.Forms.TextBox TextStatusValue;
+        private System.Windows.Forms.TextBox TextNameValue;
+        private System.Windows.Forms.TextBox TextLevelValue;
+        private System.Windows.Forms.TextBox TextPowerValue;
+        private System.Windows.Forms.TextBox TextIntegralValue;
+        private System.Windows.Forms.TextBox TextTotalIntegralValue;
+        private System.Windows.Forms.ComboBox ComboBoxSex;
+        private System.Windows.Forms.Label LabelPwd;
     }
 }

@@ -287,6 +287,12 @@
     <Compile Include="MyForm\ToolForm\FormProcessbar.Designer.cs">
       <DependentUpon>FormProcessbar.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyForm\ToolForm\FormPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\ToolForm\FormPwd.Designer.cs">
+      <DependentUpon>FormPwd.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\ToolForm\FormUploadChange.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -303,6 +309,7 @@
     <Compile Include="Tools\API\GPI.cs" />
     <Compile Include="Tools\API\User\Note.cs" />
     <Compile Include="Tools\API\User\Resource.cs" />
+    <Compile Include="Tools\API\User\User.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\BaiExpression.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\ChineseNumberChar.cs" />
     <Compile Include="Tools\Dependence\ChineseNumberConvert\ChineseNumberConvertContext.cs" />
@@ -403,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\ToolForm\FormProcessbar.resx">
       <DependentUpon>FormProcessbar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\ToolForm\FormPwd.resx">
+      <DependentUpon>FormPwd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\ToolForm\FormUploadChange.resx">
       <DependentUpon>FormUploadChange.cs</DependentUpon>

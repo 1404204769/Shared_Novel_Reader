@@ -49,7 +49,7 @@ namespace Shared_Novel_Reader.Tools.API.Admin
         }
 
         /// <summary>
-        /// 查询所有用户信息
+        /// 查询部分用户信息
         /// </summary>
         /// <returns></returns>
         public static MyResponse SomeUserList(in JObject ReqJson)
@@ -85,5 +85,7 @@ namespace Shared_Novel_Reader.Tools.API.Admin
             log.Info("查询用户列表成功");
             return res;
         }
+
+
     }
 }
