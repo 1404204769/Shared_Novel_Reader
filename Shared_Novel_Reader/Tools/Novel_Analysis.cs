@@ -14,7 +14,7 @@ namespace Shared_Novel_Reader.Tools
         
         private static Regex TitleRegex = new Regex(@"(?:^\s*|^\s*第.*?)(第[^\s,.，。]*?[章篇]\s?(?<ChapterTitle>.*))");
         private static Regex PartRegex = new Regex(@"(第[^\s,.，。]*?卷)");
-        private static Regex ChapterRegex = new Regex(@"(第([^\s,.，。]*?)[章篇])");
+        private static Regex ChapterRegex = new Regex(@"(第[零一二三四五六七八九十百千万亿]+[章篇])");
         private static Regex ChineseNumRegex = new Regex(@"([零一二三四五六七八九十百千万亿]+)");
         private static Regex AlabNumRegex = new Regex(@"([0-9]+)");
         private static Regex BookNameRegex = new Regex(@"(?<BookName>[^<>/\\\|:""\*\?]+)\.\w+$");
@@ -177,6 +177,12 @@ namespace Shared_Novel_Reader.Tools
                         if (matchResult.Success)
                         {
                             Console.WriteLine(Text);
+                            Match matchChapResult = ChapterRegex.Match(Text);
+                            if(!matchChapResult.Success)
+                            {
+                                Content.Add(Text);// 保存段落内容到章节内容空间中
+                                continue;
+                            }
                             // 章节大于0 保存 去除了非章节的内容
                             if (num > 0)
                             {
@@ -185,7 +191,6 @@ namespace Shared_Novel_Reader.Tools
                             // 清空之前的数据
                             Content = new List<string> {};
                             title = matchResult.Groups["ChapterTitle"].ToString();// 设置标题
-                            Match matchChapResult = ChapterRegex.Match(Text);
                             // 如果是章节名,保存之前章节的数据并新建一个章节
                             chapnum = (int)Novel_Analysis.GetNum(matchChapResult.Value);
                             // 如果是第一章 判断标题中是否存在卷数

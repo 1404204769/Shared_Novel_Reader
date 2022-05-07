@@ -163,6 +163,7 @@
             this.TextPassword.PasswordChar = '*';
             this.TextPassword.Size = new System.Drawing.Size(293, 28);
             this.TextPassword.TabIndex = 20;
+            this.TextPassword.TextChanged += new System.EventHandler(this.TextPassword_TextChanged);
             this.TextPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxPassword_KeyPress);
             // 
             // TextPasswordAgain

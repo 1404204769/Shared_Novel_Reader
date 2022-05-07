@@ -181,5 +181,11 @@ namespace Shared_Novel_Reader.MyForm
             this.labelNameExplain.Visible = false;
             this.UserName = this.TextName.Text;
         }
+
+        private void TextPassword_TextChanged(object sender, EventArgs e)
+        {
+            this.LabelPasswordExplain.Visible = false;
+            this.Password = this.TextPassword.Text;
+        }
     }
 }

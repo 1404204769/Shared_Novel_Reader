@@ -133,7 +133,7 @@ namespace Shared_Novel_Reader.models
             if (size != this.Vol_Array.Count)
             {
                 log.Info("将图书 " + Book_Name + " 标记为最新--->失败");
-                log.Info("预计标记最新卷数: " + this.Vol_Array.Count + "\n实际标记最新卷数: " + size);
+                log.Info("预计标记最新卷数: " + this.Vol_Array.Count + "\t实际标记最新卷数: " + size);
                 return false;
             }
             log.Info("将图书 " + Book_Name + " 标记为最新--->成功");
@@ -647,6 +647,8 @@ namespace Shared_Novel_Reader.models
             }
             else
             {
+                JArray ErrorShow = new JArray();
+
                 JArray UploadResArrayJson = (JArray)res.Data["Chapter_List"];
                 // log.Info(ApplicationListJson.ToString());
                 foreach(JObject obj in UploadResArrayJson)
@@ -655,12 +657,19 @@ namespace Shared_Novel_Reader.models
 
                     if (!(bool)obj["Result"])
                     {
+                        ErrorShow.Add("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章");
                         log.Info("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章 上传失败");
                     }
                     else
                         log.Info("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章 上传成功");
                 }
-                log.Info("用户上传资源成功");
+                if(ErrorShow.Count > 0)
+                {
+                    MessageBox.Show("上传失败列表: " + ErrorShow.ToString());
+                    MessageBox.Show("部分上传成功");
+                }
+                else
+                    MessageBox.Show("全部上传成功");
             }
         }
 
@@ -767,6 +776,7 @@ namespace Shared_Novel_Reader.models
             }
             else
             {
+                JArray ErrorShow = new JArray();
                 JArray UploadResArrayJson = (JArray)res.Data["Chapter_List"];
                 // log.Info(ApplicationListJson.ToString());
                 foreach (JObject obj in UploadResArrayJson)
@@ -775,11 +785,19 @@ namespace Shared_Novel_Reader.models
 
                     if (!(bool)obj["Result"])
                     {
+                        ErrorShow.Add("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章 申请更改失败");
                         log.Info("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章 申请更改失败");
                     }
                     else
                         log.Info("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章 申请更改成功");
                 }
+                if (ErrorShow.Count > 0)
+                {
+                    MessageBox.Show("上传失败列表: " + ErrorShow.ToString());
+                    MessageBox.Show("部分上传成功");
+                }
+                else
+                    MessageBox.Show("全部上传成功");
                 log.Info("用户申请更改资源成功");
             }
         }

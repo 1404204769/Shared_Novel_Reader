@@ -250,7 +250,7 @@ namespace Shared_Novel_Reader.models
                 /// 检查此文件是否被解析过
                 if (BookList[TargetBook].CompareFilePath(book.File_Path[0]))
                 {
-                    log.Info("此图书文件曾被解析过");
+                    MessageBox.Show("此图书文件曾被解析过");
                     return false;
                 }
 
@@ -258,7 +258,7 @@ namespace Shared_Novel_Reader.models
                 // 说明此图书不曾被解析过，需要解析后加入原有的图书中
                 if (!BookList[TargetBook].CompareBook(in book))
                 {
-                    log.Info("图书资源整合失败");
+                    MessageBox.Show("图书资源整合失败");
                     return false;
                 }
                 BookList[TargetBook].File_Path.Add(book.File_Path[0]);

@@ -38,21 +38,20 @@ namespace Shared_Novel_Reader.Tools.API
 
             if (res == null)
             {
-                log.Info("登入失败");
+                MessageBox.Show("服务器异常,登入失败");
                 return false;
             }
 
             if (res.Data == null)
             {
-                log.Info("用户不存在,请注册");
+                MessageBox.Show("用户不存在,请注册");
                 return false;
             }
 
             MyClient.Token = res.Data["Token"].ToString();
-            log.Info("登入成功");
             if (!models.User.Init((JObject)res.Data["User_Data"]))
             {
-                log.Info("用户初始化失败");
+                MessageBox.Show("用户初始化失败");
                 return false;
             }
             log.Info("用户初始化成功");
@@ -88,20 +87,20 @@ namespace Shared_Novel_Reader.Tools.API
 
             if (res == null)
             {
-                log.Info("服务器连接异常,注册失败");
+                MessageBox.Show("服务器连接异常,注册失败");
                 return false;
             }
 
             if (res.Result == false)
             {
-                log.Info(res.Message);
+                MessageBox.Show(res.Message);
                 return false;
             }
 
 
             if (res.Data == null)
             {
-                log.Info("服务器异常,请重试");
+                MessageBox.Show("服务器异常,请重试");
                 return false;
             }
 

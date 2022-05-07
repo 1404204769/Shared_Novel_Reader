@@ -68,7 +68,7 @@ namespace Shared_Novel_Reader.MyForm
             {
                 this.DialogResult = DialogResult.OK;
                 this.Dispose();
-                log.Info("登入成功");
+                MessageBox.Show("登入成功");
             }
         }
 
