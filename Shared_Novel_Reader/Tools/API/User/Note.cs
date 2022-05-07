@@ -242,6 +242,33 @@ namespace Shared_Novel_Reader.Tools.API.User
         }
 
 
+        /// <summary>
+        /// 发布求助帖
+        /// </summary>
+        /// <param name="ResJson"></param>
+        /// <returns></returns>
+        public static MyResponse CreateNote(in JObject ReqJson)
+        {
+            // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
+            int num = 0;
+            MyResponse res = MyClient.PushRequests("User/Note/Appeal", ReqJson.ToString());
+            while ((res == null) && (num < 10))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("User/Note/Appeal", ReqJson.ToString());
+            }
+
+            if (res == null)
+            {
+                log.Info("发布求助帖失败");
+                return null;
+            }
+
+            log.Info("发布求助帖成功");
+            return res;
+
+        }
+
 
 
 

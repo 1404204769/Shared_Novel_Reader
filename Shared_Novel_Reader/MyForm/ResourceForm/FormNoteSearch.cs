@@ -88,5 +88,53 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
         {
             SearchKey = this.TextSearch.Text;
         }
+
+        private async void BtnCreate_Click(object sender, EventArgs e)
+        {
+            ToolForm.FormNote formNote = new ToolForm.FormNote();
+            DialogResult DiaRes = formNote.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+
+            // 给服务器发送请求
+            /*           
+                {
+                    "Note_Content"  :   {
+                        "Content"   :   "测试发布Help帖2"
+                    },
+                    "Note_Title"    :   "测试发布Help帖2",
+                    "Note_Type"     :   
+                }
+            */
+
+            JObject ReqJson = new JObject();
+            JObject ContentJson = new JObject();
+            ReqJson["Note_Title"] = formNote.TextTitle.Text.Trim();
+            ContentJson["Content"] = formNote.TextContent.Text.Trim();
+            ReqJson["Note_Content"] = ContentJson;
+            ReqJson["Note_Type"] = "Help";
+            // 发送请求
+            var CreateNoteRes = Task<MyResponse>.Run(() => Tools.API.User.Note.CreateNote(ReqJson));
+
+            MyResponse res = await CreateNoteRes;
+            /// 返回格式
+            if (res == null)
+            {
+                // 清除残留数据
+                MessageBox.Show("网络异常，请重试");
+            }
+            else if(!res.Result)
+            {
+                MessageBox.Show(res.Message);
+            }
+            else if (res.Data.ToString() == "")
+            {
+                MessageBox.Show("发布求助帖数据异常");
+            }
+            else
+            {
+                MessageBox.Show("发布求助帖成功");
+            }
+        }
     }
 }

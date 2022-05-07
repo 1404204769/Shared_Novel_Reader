@@ -34,12 +34,14 @@
             this.BtnSearch = new System.Windows.Forms.Button();
             this.TextSearch = new System.Windows.Forms.TextBox();
             this.FlowLayoutPanelNote = new System.Windows.Forms.FlowLayoutPanel();
+            this.BtnCreate = new System.Windows.Forms.Button();
             this.PanelTop.SuspendLayout();
             this.SuspendLayout();
             // 
             // PanelTop
             // 
             this.PanelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.PanelTop.Controls.Add(this.BtnCreate);
             this.PanelTop.Controls.Add(this.LabelKey);
             this.PanelTop.Controls.Add(this.ComboBoxNoteType);
             this.PanelTop.Controls.Add(this.BtnSearch);
@@ -54,7 +56,8 @@
             // 
             this.LabelKey.AutoSize = true;
             this.LabelKey.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelKey.Location = new System.Drawing.Point(11, 39);
+            this.LabelKey.Location = new System.Drawing.Point(11, 35);
+            this.LabelKey.Margin = new System.Windows.Forms.Padding(0);
             this.LabelKey.Name = "LabelKey";
             this.LabelKey.Size = new System.Drawing.Size(95, 28);
             this.LabelKey.TabIndex = 16;
@@ -70,23 +73,25 @@
             this.ComboBoxNoteType.DropDownHeight = 50;
             this.ComboBoxNoteType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxNoteType.DropDownWidth = 50;
+            this.ComboBoxNoteType.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold);
             this.ComboBoxNoteType.FormattingEnabled = true;
             this.ComboBoxNoteType.IntegralHeight = false;
             this.ComboBoxNoteType.Items.AddRange(new object[] {
             "所有",
             "资源贴",
             "求助帖"});
-            this.ComboBoxNoteType.Location = new System.Drawing.Point(708, 39);
+            this.ComboBoxNoteType.Location = new System.Drawing.Point(655, 35);
             this.ComboBoxNoteType.Name = "ComboBoxNoteType";
-            this.ComboBoxNoteType.Size = new System.Drawing.Size(137, 26);
+            this.ComboBoxNoteType.Size = new System.Drawing.Size(137, 36);
             this.ComboBoxNoteType.TabIndex = 15;
             this.ComboBoxNoteType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxNoteType_SelectedIndexChanged);
             // 
             // BtnSearch
             // 
-            this.BtnSearch.Location = new System.Drawing.Point(922, 29);
+            this.BtnSearch.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold);
+            this.BtnSearch.Location = new System.Drawing.Point(831, 35);
             this.BtnSearch.Name = "BtnSearch";
-            this.BtnSearch.Size = new System.Drawing.Size(156, 45);
+            this.BtnSearch.Size = new System.Drawing.Size(120, 35);
             this.BtnSearch.TabIndex = 1;
             this.BtnSearch.Text = "搜索";
             this.BtnSearch.UseVisualStyleBackColor = true;
@@ -94,9 +99,10 @@
             // 
             // TextSearch
             // 
-            this.TextSearch.Location = new System.Drawing.Point(112, 39);
+            this.TextSearch.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold);
+            this.TextSearch.Location = new System.Drawing.Point(112, 35);
             this.TextSearch.Name = "TextSearch";
-            this.TextSearch.Size = new System.Drawing.Size(548, 28);
+            this.TextSearch.Size = new System.Drawing.Size(496, 36);
             this.TextSearch.TabIndex = 0;
             this.TextSearch.TextChanged += new System.EventHandler(this.TextSearch_TextChanged);
             // 
@@ -110,6 +116,17 @@
             this.FlowLayoutPanelNote.Name = "FlowLayoutPanelNote";
             this.FlowLayoutPanelNote.Size = new System.Drawing.Size(1150, 640);
             this.FlowLayoutPanelNote.TabIndex = 2;
+            // 
+            // BtnCreate
+            // 
+            this.BtnCreate.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold);
+            this.BtnCreate.Location = new System.Drawing.Point(982, 35);
+            this.BtnCreate.Name = "BtnCreate";
+            this.BtnCreate.Size = new System.Drawing.Size(120, 35);
+            this.BtnCreate.TabIndex = 17;
+            this.BtnCreate.Text = "发布";
+            this.BtnCreate.UseVisualStyleBackColor = true;
+            this.BtnCreate.Click += new System.EventHandler(this.BtnCreate_Click);
             // 
             // FormNoteSearch
             // 
@@ -136,5 +153,6 @@
         private System.Windows.Forms.ComboBox ComboBoxNoteType;
         private System.Windows.Forms.FlowLayoutPanel FlowLayoutPanelNote;
         private System.Windows.Forms.Label LabelKey;
+        private System.Windows.Forms.Button BtnCreate;
     }
 }

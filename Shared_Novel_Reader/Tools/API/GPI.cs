@@ -41,7 +41,11 @@ namespace Shared_Novel_Reader.Tools.API
                 MessageBox.Show("服务器异常,登入失败");
                 return false;
             }
-
+            if (!res.Result)
+            {
+                MessageBox.Show(res.Message);
+                return false;
+            }
             if (res.Data == null)
             {
                 MessageBox.Show("用户不存在,请注册");

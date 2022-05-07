@@ -281,6 +281,12 @@
     <Compile Include="MyForm\ToolForm\FormInput.Designer.cs">
       <DependentUpon>FormInput.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyForm\ToolForm\FormNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\ToolForm\FormNote.Designer.cs">
+      <DependentUpon>FormNote.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\ToolForm\FormProcessbar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -407,6 +413,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\ToolForm\FormInput.resx">
       <DependentUpon>FormInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\ToolForm\FormNote.resx">
+      <DependentUpon>FormNote.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\ToolForm\FormProcessbar.resx">
       <DependentUpon>FormProcessbar.cs</DependentUpon>

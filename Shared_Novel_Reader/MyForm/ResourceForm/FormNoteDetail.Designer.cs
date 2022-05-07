@@ -72,7 +72,7 @@
             this.PictureBoxRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.PictureBoxRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PictureBoxRefresh.Image = global::Shared_Novel_Reader.Properties.Resources.refresh;
-            this.PictureBoxRefresh.Location = new System.Drawing.Point(860, 34);
+            this.PictureBoxRefresh.Location = new System.Drawing.Point(1105, 34);
             this.PictureBoxRefresh.Name = "PictureBoxRefresh";
             this.PictureBoxRefresh.Size = new System.Drawing.Size(18, 18);
             this.PictureBoxRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -99,7 +99,7 @@
             this.LabelJoin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LabelJoin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LabelJoin.ForeColor = System.Drawing.Color.DarkCyan;
-            this.LabelJoin.Location = new System.Drawing.Point(1033, 34);
+            this.LabelJoin.Location = new System.Drawing.Point(991, 34);
             this.LabelJoin.Name = "LabelJoin";
             this.LabelJoin.Size = new System.Drawing.Size(80, 18);
             this.LabelJoin.TabIndex = 6;
@@ -112,7 +112,7 @@
             this.labelViewBook.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelViewBook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelViewBook.ForeColor = System.Drawing.Color.DarkCyan;
-            this.labelViewBook.Location = new System.Drawing.Point(912, 34);
+            this.labelViewBook.Location = new System.Drawing.Point(895, 34);
             this.labelViewBook.Name = "labelViewBook";
             this.labelViewBook.Size = new System.Drawing.Size(80, 18);
             this.labelViewBook.TabIndex = 5;

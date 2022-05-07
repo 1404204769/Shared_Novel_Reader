@@ -20,6 +20,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
         {
             InitializeComponent();
             this.labelViewBook.Visible = false;
+            this.LabelJoin.Visible = false;
             NoteID = noteid;
             Interface_Rendering(); 
         }
