@@ -49,6 +49,7 @@
             this.TextTotalIntegralValue = new System.Windows.Forms.TextBox();
             this.ComboBoxSex = new System.Windows.Forms.ComboBox();
             this.LabelPwd = new System.Windows.Forms.Label();
+            this.LabelFeedback = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LabelShow
@@ -301,12 +302,26 @@
             this.LabelPwd.Text = "修改密码";
             this.LabelPwd.Click += new System.EventHandler(this.LabelPwd_Click);
             // 
+            // LabelFeedback
+            // 
+            this.LabelFeedback.AutoSize = true;
+            this.LabelFeedback.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LabelFeedback.Font = new System.Drawing.Font("Bookman Old Style", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelFeedback.ForeColor = System.Drawing.Color.Teal;
+            this.LabelFeedback.Location = new System.Drawing.Point(999, 695);
+            this.LabelFeedback.Name = "LabelFeedback";
+            this.LabelFeedback.Size = new System.Drawing.Size(139, 36);
+            this.LabelFeedback.TabIndex = 31;
+            this.LabelFeedback.Text = "意见反馈";
+            this.LabelFeedback.Click += new System.EventHandler(this.LabelFeedback_Click);
+            // 
             // FormPersonalData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1150, 740);
+            this.Controls.Add(this.LabelFeedback);
             this.Controls.Add(this.LabelPwd);
             this.Controls.Add(this.ComboBoxSex);
             this.Controls.Add(this.TextTotalIntegralValue);
@@ -359,5 +374,6 @@
         private System.Windows.Forms.TextBox TextTotalIntegralValue;
         private System.Windows.Forms.ComboBox ComboBoxSex;
         private System.Windows.Forms.Label LabelPwd;
+        private System.Windows.Forms.Label LabelFeedback;
     }
 }

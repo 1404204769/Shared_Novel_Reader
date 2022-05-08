@@ -34,6 +34,7 @@
             this.LabelCommentTime = new System.Windows.Forms.Label();
             this.LabelAgree = new System.Windows.Forms.Label();
             this.LabelReply = new System.Windows.Forms.Label();
+            this.LabelReport = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LabelUserID
@@ -54,7 +55,7 @@
             // 
             // LabelAgreeNum
             // 
-            this.LabelAgreeNum.Location = new System.Drawing.Point(666, 67);
+            this.LabelAgreeNum.Location = new System.Drawing.Point(616, 67);
             this.LabelAgreeNum.Name = "LabelAgreeNum";
             this.LabelAgreeNum.Size = new System.Drawing.Size(100, 23);
             this.LabelAgreeNum.TabIndex = 2;
@@ -62,7 +63,7 @@
             // 
             // LabelCommentTime
             // 
-            this.LabelCommentTime.Location = new System.Drawing.Point(772, 67);
+            this.LabelCommentTime.Location = new System.Drawing.Point(736, 67);
             this.LabelCommentTime.Name = "LabelCommentTime";
             this.LabelCommentTime.Size = new System.Drawing.Size(167, 23);
             this.LabelCommentTime.TabIndex = 3;
@@ -72,7 +73,7 @@
             // 
             this.LabelAgree.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LabelAgree.ForeColor = System.Drawing.Color.Green;
-            this.LabelAgree.Location = new System.Drawing.Point(945, 67);
+            this.LabelAgree.Location = new System.Drawing.Point(909, 67);
             this.LabelAgree.Name = "LabelAgree";
             this.LabelAgree.Size = new System.Drawing.Size(97, 18);
             this.LabelAgree.TabIndex = 4;
@@ -84,12 +85,24 @@
             this.LabelReply.AutoSize = true;
             this.LabelReply.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LabelReply.ForeColor = System.Drawing.Color.Green;
-            this.LabelReply.Location = new System.Drawing.Point(1048, 67);
+            this.LabelReply.Location = new System.Drawing.Point(1012, 67);
             this.LabelReply.Name = "LabelReply";
             this.LabelReply.Size = new System.Drawing.Size(44, 18);
             this.LabelReply.TabIndex = 5;
             this.LabelReply.Text = "回复";
             this.LabelReply.Click += new System.EventHandler(this.LabelReply_Click);
+            // 
+            // LabelReport
+            // 
+            this.LabelReport.AutoSize = true;
+            this.LabelReport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LabelReport.ForeColor = System.Drawing.Color.Green;
+            this.LabelReport.Location = new System.Drawing.Point(1062, 67);
+            this.LabelReport.Name = "LabelReport";
+            this.LabelReport.Size = new System.Drawing.Size(44, 18);
+            this.LabelReport.TabIndex = 6;
+            this.LabelReport.Text = "举报";
+            this.LabelReport.Click += new System.EventHandler(this.LabelReport_Click);
             // 
             // FormNoteComment
             // 
@@ -97,6 +110,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1115, 100);
+            this.Controls.Add(this.LabelReport);
             this.Controls.Add(this.LabelReply);
             this.Controls.Add(this.LabelAgree);
             this.Controls.Add(this.LabelCommentTime);
@@ -119,5 +133,6 @@
         private System.Windows.Forms.Label LabelCommentTime;
         private System.Windows.Forms.Label LabelReply;
         public System.Windows.Forms.Label LabelAgree;
+        private System.Windows.Forms.Label LabelReport;
     }
 }

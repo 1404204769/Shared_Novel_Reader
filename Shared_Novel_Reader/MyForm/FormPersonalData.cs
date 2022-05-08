@@ -164,5 +164,43 @@ namespace Shared_Novel_Reader.MyForm
             }
 
         }
+
+        private async void LabelFeedback_Click(object sender, EventArgs e)
+        {
+            ToolForm.FormInput formInput = new ToolForm.FormInput();
+            formInput.Text = "意见反馈";
+            DialogResult DiaRes = formInput.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+
+            // 准备数据
+            JObject ReqJson = new JObject();
+            ReqJson["Content"] = formInput.getValue();
+
+            // 发送请求
+            var FeedbackRes = Task<MyResponse>.Run(() => Tools.API.User.User.Feedback(ReqJson));
+
+            MyResponse res = await FeedbackRes;
+
+            if (res == null)
+            {
+                // 清除残留数据
+                MessageBox.Show("网络异常，请重试");
+                return;
+            }
+            else if (!res.Result)
+            {
+                MessageBox.Show("意见反馈失败");
+            }
+            else if (res.Data.ToString() == "")
+            {
+                MessageBox.Show("数据异常，请重试");
+            }
+            else
+            {
+                MessageBox.Show("意见反馈成功");
+            }
+
+        }
     }
 }

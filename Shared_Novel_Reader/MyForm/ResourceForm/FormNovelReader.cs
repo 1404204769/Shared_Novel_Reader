@@ -25,6 +25,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
         public int Row_Index = 0;
         public int EditRow_Index = -1;// 编辑章节的标记
         public int ContentRow_Index = 0;
+        public int InternetChapterID = -1;// 在线章节ID
         public bool IsEditMode = false;// 内容是否处于编辑状态
         public List<string> content = null;
         public FormNovelReader(string bookname,int keyNum,bool islocal)
@@ -153,7 +154,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 foreach (var chapter in ChapterListJson)
                 {
                     string[] col = new string[5];
-                    string ChapterName = chapter["VolNum"] + "\t第" + chapter["ChapterNum"] + "章\t" + chapter["ChapterTitle"];
+                    string ChapterName = "第" + chapter["VolNum"] + "卷\t第" + chapter["ChapterNum"] + "章\t" + chapter["ChapterTitle"];
                     col[0] = ChapterName;
                     col[1] = Convert.ToString(chapter["VolNum"]);
                     col[2] = Convert.ToString(chapter["ChapterNum"]);
@@ -310,6 +311,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             else
             {
                 JArray ContentArray = (JArray)res.Data["ChapterContent"];
+                InternetChapterID = Convert.ToInt32(res.Data["ChapterID"]);
                 this.DataGridViewContent.Rows.Clear();
                 //this.DataGridViewContent.Rows[0].Cells[0].Value = chapter.ChapTitle;
                 string ChapterName = "第" + volnum + "卷" + "  第" + chapnum + "章  " + chapTitle;
@@ -842,6 +844,54 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                     this.ContextMenuStripContent.Items[0].Visible = false;
                 }
             }
+        }
+
+        private async void Report_Click(object sender, EventArgs e)
+        {
+            if(InternetChapterID == -1)
+            {
+                MessageBox.Show("章节ID无效");
+                return;
+            }
+
+            ToolForm.FormInput formInput = new ToolForm.FormInput();
+            formInput.Text = "报告章节错误内容(章节ID:" + InternetChapterID + "  章节所属分卷:" + Part_Num + "  章节数:" + Chapter_Num+")";
+            DialogResult DiaRes = formInput.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+
+            // 准备数据
+            JObject ReqJson = new JObject();
+            JObject TargetJson = new JObject();
+            TargetJson["Chapter_ID"] = InternetChapterID;
+            ReqJson["Content"] = formInput.getValue();
+            ReqJson["Target"] = TargetJson;
+            ReqJson["Type"] = "Chapter_Report";
+
+            // 发送请求
+            var ReportRes = Task<MyResponse>.Run(() => Tools.API.User.User.Report(ReqJson));
+
+            MyResponse res = await ReportRes;
+
+            if (res == null)
+            {
+                // 清除残留数据
+                MessageBox.Show("网络异常，请重试");
+                return;
+            }
+            else if (!res.Result)
+            {
+                MessageBox.Show("章节错误报告失败");
+            }
+            else if (res.Data.ToString() == "")
+            {
+                MessageBox.Show("数据异常，请重试");
+            }
+            else
+            {
+                MessageBox.Show("章节错误报告成功");
+            }
+
         }
     }
 }

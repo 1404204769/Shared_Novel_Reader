@@ -107,5 +107,52 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             }
             this.LabelAgreeNum.Text = Convert.ToString(num);
         }
+
+        private async void LabelReport_Click(object sender, EventArgs e)
+        {
+            if (comment == null)
+            {
+                MessageBox.Show("评论数据不存在");
+                return;
+            }
+            ToolForm.FormInput formInput = new ToolForm.FormInput();
+            formInput.Text = "评论举报";
+            DialogResult DiaRes = formInput.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+
+            // 准备数据
+            JObject ReqJson = new JObject();
+            JObject TargetJson = new JObject();
+            TargetJson["Comment_ID"] = comment.Comment_ID;
+            ReqJson["Content"] = formInput.getValue();
+            ReqJson["Target"] = TargetJson;
+            ReqJson["Type"] = "Comment_Report";
+
+            // 发送请求
+            var ReportRes = Task<MyResponse>.Run(() => Tools.API.User.User.Report(ReqJson));
+
+            MyResponse res = await ReportRes;
+
+            if (res == null)
+            {
+                // 清除残留数据
+                MessageBox.Show("网络异常，请重试");
+                return;
+            }
+            else if (!res.Result)
+            {
+                MessageBox.Show("举报失败");
+            }
+            else if (res.Data.ToString() == "")
+            {
+                MessageBox.Show("数据异常，请重试");
+            }
+            else
+            {
+                MessageBox.Show("举报成功");
+            }
+
+        }
     }
 }

@@ -54,6 +54,7 @@
             this.ChooseChapter = new System.Windows.Forms.ToolStripMenuItem();
             this.UpdateChapter = new System.Windows.Forms.ToolStripMenuItem();
             this.DataGridViewContent = new System.Windows.Forms.DataGridView();
+            this.ChapContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ContextMenuStripContent = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.UpdateChapterContent = new System.Windows.Forms.ToolStripMenuItem();
             this.MoveUpRow = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,7 +63,7 @@
             this.InsertDownRow = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteRow = new System.Windows.Forms.ToolStripMenuItem();
             this.EditRow = new System.Windows.Forms.ToolStripMenuItem();
-            this.ChapContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Report = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -309,76 +310,6 @@
             this.DataGridViewContent.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewContent_CellMouseDown);
             this.DataGridViewContent.SelectionChanged += new System.EventHandler(this.DataGridViewContent_SelectionChanged);
             // 
-            // ContextMenuStripContent
-            // 
-            this.ContextMenuStripContent.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.ContextMenuStripContent.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.UpdateChapterContent,
-            this.MoveUpRow,
-            this.MoveDownRow,
-            this.InsertUpRow,
-            this.InsertDownRow,
-            this.DeleteRow,
-            this.EditRow});
-            this.ContextMenuStripContent.Name = "ContextMenuStripContent";
-            this.ContextMenuStripContent.Size = new System.Drawing.Size(207, 214);
-            // 
-            // UpdateChapterContent
-            // 
-            this.UpdateChapterContent.Name = "UpdateChapterContent";
-            this.UpdateChapterContent.Size = new System.Drawing.Size(206, 30);
-            this.UpdateChapterContent.Text = "更改章节内容";
-            this.UpdateChapterContent.Click += new System.EventHandler(this.UpdateChapterContent_Click);
-            // 
-            // MoveUpRow
-            // 
-            this.MoveUpRow.Name = "MoveUpRow";
-            this.MoveUpRow.Size = new System.Drawing.Size(206, 30);
-            this.MoveUpRow.Text = "上移此行";
-            this.MoveUpRow.Visible = false;
-            this.MoveUpRow.Click += new System.EventHandler(this.MoveUpRow_Click);
-            // 
-            // MoveDownRow
-            // 
-            this.MoveDownRow.Name = "MoveDownRow";
-            this.MoveDownRow.Size = new System.Drawing.Size(206, 30);
-            this.MoveDownRow.Text = "下移此行";
-            this.MoveDownRow.Visible = false;
-            this.MoveDownRow.Click += new System.EventHandler(this.MoveDownRow_Click);
-            // 
-            // InsertUpRow
-            // 
-            this.InsertUpRow.Name = "InsertUpRow";
-            this.InsertUpRow.Size = new System.Drawing.Size(206, 30);
-            this.InsertUpRow.Text = "在上方插入一行";
-            this.InsertUpRow.Visible = false;
-            this.InsertUpRow.Click += new System.EventHandler(this.InsertUpRow_Click);
-            // 
-            // InsertDownRow
-            // 
-            this.InsertDownRow.Name = "InsertDownRow";
-            this.InsertDownRow.Size = new System.Drawing.Size(206, 30);
-            this.InsertDownRow.Text = "在下方新增一行";
-            this.InsertDownRow.Visible = false;
-            this.InsertDownRow.Click += new System.EventHandler(this.InsertDownRow_Click);
-            // 
-            // DeleteRow
-            // 
-            this.DeleteRow.Name = "DeleteRow";
-            this.DeleteRow.Size = new System.Drawing.Size(206, 30);
-            this.DeleteRow.Text = "删除此行";
-            this.DeleteRow.Visible = false;
-            this.DeleteRow.Click += new System.EventHandler(this.DeleteRow_Click);
-            // 
-            // EditRow
-            // 
-            this.EditRow.ForeColor = System.Drawing.Color.Black;
-            this.EditRow.Name = "EditRow";
-            this.EditRow.Size = new System.Drawing.Size(206, 30);
-            this.EditRow.Text = "编辑此行";
-            this.EditRow.Visible = false;
-            this.EditRow.Click += new System.EventHandler(this.EditRow_Click);
-            // 
             // ChapContent
             // 
             this.ChapContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -393,6 +324,84 @@
             this.ChapContent.ReadOnly = true;
             this.ChapContent.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ChapContent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ContextMenuStripContent
+            // 
+            this.ContextMenuStripContent.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.ContextMenuStripContent.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.UpdateChapterContent,
+            this.MoveUpRow,
+            this.MoveDownRow,
+            this.InsertUpRow,
+            this.InsertDownRow,
+            this.DeleteRow,
+            this.EditRow,
+            this.Report});
+            this.ContextMenuStripContent.Name = "ContextMenuStripContent";
+            this.ContextMenuStripContent.Size = new System.Drawing.Size(241, 277);
+            // 
+            // UpdateChapterContent
+            // 
+            this.UpdateChapterContent.Name = "UpdateChapterContent";
+            this.UpdateChapterContent.Size = new System.Drawing.Size(240, 30);
+            this.UpdateChapterContent.Text = "更改章节内容";
+            this.UpdateChapterContent.Click += new System.EventHandler(this.UpdateChapterContent_Click);
+            // 
+            // MoveUpRow
+            // 
+            this.MoveUpRow.Name = "MoveUpRow";
+            this.MoveUpRow.Size = new System.Drawing.Size(240, 30);
+            this.MoveUpRow.Text = "上移此行";
+            this.MoveUpRow.Visible = false;
+            this.MoveUpRow.Click += new System.EventHandler(this.MoveUpRow_Click);
+            // 
+            // MoveDownRow
+            // 
+            this.MoveDownRow.Name = "MoveDownRow";
+            this.MoveDownRow.Size = new System.Drawing.Size(240, 30);
+            this.MoveDownRow.Text = "下移此行";
+            this.MoveDownRow.Visible = false;
+            this.MoveDownRow.Click += new System.EventHandler(this.MoveDownRow_Click);
+            // 
+            // InsertUpRow
+            // 
+            this.InsertUpRow.Name = "InsertUpRow";
+            this.InsertUpRow.Size = new System.Drawing.Size(240, 30);
+            this.InsertUpRow.Text = "在上方插入一行";
+            this.InsertUpRow.Visible = false;
+            this.InsertUpRow.Click += new System.EventHandler(this.InsertUpRow_Click);
+            // 
+            // InsertDownRow
+            // 
+            this.InsertDownRow.Name = "InsertDownRow";
+            this.InsertDownRow.Size = new System.Drawing.Size(240, 30);
+            this.InsertDownRow.Text = "在下方新增一行";
+            this.InsertDownRow.Visible = false;
+            this.InsertDownRow.Click += new System.EventHandler(this.InsertDownRow_Click);
+            // 
+            // DeleteRow
+            // 
+            this.DeleteRow.Name = "DeleteRow";
+            this.DeleteRow.Size = new System.Drawing.Size(240, 30);
+            this.DeleteRow.Text = "删除此行";
+            this.DeleteRow.Visible = false;
+            this.DeleteRow.Click += new System.EventHandler(this.DeleteRow_Click);
+            // 
+            // EditRow
+            // 
+            this.EditRow.ForeColor = System.Drawing.Color.Black;
+            this.EditRow.Name = "EditRow";
+            this.EditRow.Size = new System.Drawing.Size(240, 30);
+            this.EditRow.Text = "编辑此行";
+            this.EditRow.Visible = false;
+            this.EditRow.Click += new System.EventHandler(this.EditRow_Click);
+            // 
+            // Report
+            // 
+            this.Report.Name = "Report";
+            this.Report.Size = new System.Drawing.Size(240, 30);
+            this.Report.Text = "报告此章节错误";
+            this.Report.Click += new System.EventHandler(this.Report_Click);
             // 
             // FormNovelReader
             // 
@@ -442,5 +451,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OringeTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn ContentVersion;
         private System.Windows.Forms.DataGridViewTextBoxColumn ChapContent;
+        private System.Windows.Forms.ToolStripMenuItem Report;
     }
 }

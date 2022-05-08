@@ -74,6 +74,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 if(note.Type == "Resource")
                 {
                     this.labelViewBook.Visible = true;
+                    this.LabelJoin.Visible = true;
                 }
             }
 
