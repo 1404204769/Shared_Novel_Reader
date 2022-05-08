@@ -204,6 +204,357 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             }
             MessageBox.Show(show);
         }
+
+        private async void InitPwd_Click(object sender, EventArgs e)
+        {
+            int RowIndex = DataGridViewUser.CurrentRow.Index;
+            int UserID = Convert.ToInt32(DataGridViewUser.Rows[RowIndex].Cells["User_ID"].Value);
+            DialogResult result = MessageBox.Show("确认初始化此用户(User_ID = "+ UserID + ")的密码嘛？", "初始化用户密码", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+                return;
+            /*"Change_Target":[
+                {
+                        ""      :   911220 ,
+                    ""    :   "陈彤磊",
+                    "":   "chentonlei",
+                    ""     :   "男",
+                    ""   :   0,
+                    ""  :   "Add",
+                    "Change_Col"     :   ["Change_Name","Change_Password","Change_Sex","ss"]
+                }
+            ]*/
+
+            // 数据处理
+
+
+            JObject ReqJson = new JObject();
+            JArray Target = new JArray();
+            JArray ChangeCol = new JArray();
+            JObject UserJson = new JObject();
+            ChangeCol.Add("Change_Password");
+            UserJson["Change_ID"] = UserID;
+            UserJson["Change_Password"] = "123456";
+            UserJson["Change_Name"] = "";
+            UserJson["Change_Sex"] = "";
+            UserJson["Change_Integral_Num"] = "";
+            UserJson["Change_Integral_Type"] = "";
+            UserJson["Change_Col"] = ChangeCol;
+            Target.Add(UserJson);
+            ReqJson["Change_Target"] = Target;
+
+            // 发送请求
+            var UpdateResult = Task<MyResponse>.Run(() => User.UpdateUserList(ReqJson));
+
+            MyResponse res = await UpdateResult;
+
+            if (res == null)
+            {
+                MessageBox.Show("网络异常,请重试");
+                return;
+            }
+            else if(!res.Result||res.Data.ToString() == "")
+            {
+                MessageBox.Show("初始化密码失败");
+                return;
+            }
+            JArray TargetRes = (JArray)res.Data["ChangeTarget"];
+            if(TargetRes.Count == 0 || TargetRes.Count > 1)
+            {
+                MessageBox.Show("数据异常，初始化密码失败");
+                return;
+            }
+            JObject ans = TargetRes[0] as JObject;
+            if((bool)ans["Result"] == false)
+            {
+                MessageBox.Show("初始化密码失败:"+ ans["ErrorMsg"][0].ToString());
+                return;
+            }
+            MessageBox.Show("初始化密码成功");
+        }
+
+        public bool IsNumber(in string NumStr,out int Num)
+        {
+            try
+            {
+                //当数字字符串的为是少于4时，以下三种都可以转换，任选一种
+                //如果位数超过4的话，请选用Convert.ToInt32() 和int.Parse()
+
+                //result = int.Parse(message);
+                //result = Convert.ToInt16(message);
+                Num = Convert.ToInt32(NumStr);
+            }
+            catch
+            {
+                Num = -1;
+                MessageBox.Show("输入的不是数字,请重新输入");
+                return false;
+            }
+            return true;
+        }
+
+        // 奖励积分
+        private async void Reward_Click(object sender, EventArgs e)
+        {
+            ToolForm.FormInput formInput = new ToolForm.FormInput();
+            formInput.Text = "奖励积分:请输入要奖励的积分数量";
+            DialogResult DiaRes = formInput.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+            string NumStr = formInput.getValue();
+            int Num;
+            if(!IsNumber(in NumStr,out Num))
+            {
+                return;
+            }
+            if(Num <= 0 || Num >= 10000)
+            {
+                MessageBox.Show("输入的数字不规范,请重新输入(有效范围:0<x<10000)");
+                return;
+            }
+            int RowIndex = DataGridViewUser.CurrentRow.Index;
+            int UserID = Convert.ToInt32(DataGridViewUser.Rows[RowIndex].Cells["User_ID"].Value);
+
+            DialogResult result = MessageBox.Show("确认奖励此用户(User_ID = " + UserID + ") "+Num+" 积分嘛？", "奖励用户积分", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+                return;
+
+            /*
+                {
+                    "Change_ID" : 911221,
+                    "Change_Num" : 20,
+                    "Change_Type" : "Sub",
+                    "Change_Explain" : "看你小子不顺眼"
+                } 
+            */
+
+            // 数据处理
+
+            // 获取操作说明
+            formInput.Text = "奖励积分:请输入奖励的原因";
+            formInput.setValue("");
+            DiaRes = formInput.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+
+            JObject ReqJson = new JObject();
+            ReqJson["Change_Explain"] = formInput.getValue();
+            ReqJson["Change_ID"] = UserID;
+            ReqJson["Change_Num"] = Num;
+            ReqJson["Change_Type"] = "Add";
+
+            // 发送请求
+            var UpdateResult = Task<MyResponse>.Run(() => User.UpdateUserIntegral(ReqJson));
+
+            MyResponse res = await UpdateResult;
+
+            if (res == null)
+            {
+                MessageBox.Show("网络异常,请重试");
+                return;
+            }
+            else if (!res.Result || res.Data.ToString() == "")
+            {
+                MessageBox.Show("奖励用户积分失败: " + res.Message);
+                return;
+            }
+            DataGridViewUser.Rows[RowIndex].Cells["Integral"].Value = res.Data["Integral"];
+            DataGridViewUser.Rows[RowIndex].Cells["Total_Integral"].Value = res.Data["Total_Integral"];
+            MessageBox.Show("奖励用户积分成功");
+        }
+
+        // 扣除积分
+        private async void Punishment_Click(object sender, EventArgs e)
+        {
+            ToolForm.FormInput formInput = new ToolForm.FormInput();
+            formInput.Text = "扣除积分:请输入要扣除的积分数量";
+            DialogResult DiaRes = formInput.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+            string NumStr = formInput.getValue();
+            int Num;
+            if (!IsNumber(in NumStr, out Num))
+            {
+                return;
+            }
+            if (Num <= 0 || Num >= 10000)
+            {
+                MessageBox.Show("输入的数字不规范,请重新输入(有效范围:0<x<10000)");
+                return;
+            }
+            int RowIndex = DataGridViewUser.CurrentRow.Index;
+            int UserID = Convert.ToInt32(DataGridViewUser.Rows[RowIndex].Cells["User_ID"].Value);
+
+            DialogResult result = MessageBox.Show("确认扣除此用户(User_ID = " + UserID + ") " + Num + " 积分嘛？", "扣除用户积分", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+                return;
+
+            /*
+                {
+                    "Change_ID" : 911221,
+                    "Change_Num" : 20,
+                    "Change_Type" : "Sub",
+                    "Change_Explain" : "看你小子不顺眼"
+                } 
+            */
+
+            // 数据处理
+
+            // 获取操作说明
+            formInput.Text = "扣除积分:请输入扣除积分的原因";
+            formInput.setValue("");
+            DiaRes = formInput.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+
+            JObject ReqJson = new JObject();
+            ReqJson["Change_Explain"] = formInput.getValue();
+            ReqJson["Change_ID"] = UserID;
+            ReqJson["Change_Num"] = Num;
+            ReqJson["Change_Type"] = "Sub";
+
+            // 发送请求
+            var UpdateResult = Task<MyResponse>.Run(() => User.UpdateUserIntegral(ReqJson));
+
+            MyResponse res = await UpdateResult;
+
+            if (res == null)
+            {
+                MessageBox.Show("网络异常,请重试");
+                return;
+            }
+            else if (!res.Result || res.Data.ToString() == "")
+            {
+                MessageBox.Show("扣除用户积分失败: " + res.Message);
+                return;
+            }
+            DataGridViewUser.Rows[RowIndex].Cells["Integral"].Value = res.Data["Integral"];
+            DataGridViewUser.Rows[RowIndex].Cells["Total_Integral"].Value = res.Data["Total_Integral"];
+            MessageBox.Show("扣除用户积分成功");
+
+        }
+
+        // 封号
+        private async void Ban_Click(object sender, EventArgs e)
+        {
+
+            ToolForm.FormInput formInput = new ToolForm.FormInput();
+            formInput.Text = "封号:请输入要封号的时间(单位:天)";
+            DialogResult DiaRes = formInput.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+            string NumStr = formInput.getValue();
+            int Num;
+            if (!IsNumber(in NumStr, out Num))
+            {
+                return;
+            }
+            if (Num <= 0)
+            {
+                MessageBox.Show("输入的数字不规范,请重新输入(有效范围:x>0");
+                return;
+            }
+            int RowIndex = DataGridViewUser.CurrentRow.Index;
+            int UserID = Convert.ToInt32(DataGridViewUser.Rows[RowIndex].Cells["User_ID"].Value);
+
+            DialogResult result = MessageBox.Show("确认将此用户(User_ID = " + UserID + ") 封号 " + Num + " 天嘛？", "封号", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+                return;
+
+            /*
+                {
+                    "Change_ID" : 911223,
+                    "Change_Type" : "Ban",
+                    "Limit_Time"  : 1,
+                    "Change_Explain" : "看你小子不顺眼"
+                }
+            */
+
+            // 数据处理
+
+            // 获取操作说明
+            formInput.Text = "封号:请输入封号的原因";
+            formInput.setValue("");
+            DiaRes = formInput.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+
+            JObject ReqJson = new JObject();
+            ReqJson["Change_ID"] = UserID;
+            ReqJson["Change_Type"] = "Ban";
+            ReqJson["Limit_Time"] = Num;
+            ReqJson["Change_Explain"] = formInput.getValue();
+
+            // 发送请求
+            var UpdateResult = Task<MyResponse>.Run(() => User.UpdateUserStatus(ReqJson));
+
+            MyResponse res = await UpdateResult;
+
+            if (res == null)
+            {
+                MessageBox.Show("网络异常,请重试");
+                return;
+            }
+            else if (!res.Result || res.Data.ToString() == "")
+            {
+                MessageBox.Show("用户封号失败: " + res.Message);
+                return;
+            }
+            DataGridViewUser.Rows[RowIndex].Cells["Status"].Value = res.Data["Status"];
+            MessageBox.Show("用户封号成功");
+
+        }
+
+        // 解封
+        private async void Unseal_Click(object sender, EventArgs e)
+        {
+
+            int RowIndex = DataGridViewUser.CurrentRow.Index;
+            int UserID = Convert.ToInt32(DataGridViewUser.Rows[RowIndex].Cells["User_ID"].Value);
+
+            DialogResult result = MessageBox.Show("确认解封此用户(User_ID = " + UserID + ") 嘛？", "解封", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+                return;
+
+            /*
+                {
+                    "Change_ID" : 123456,
+                    "Change_Type" : "Unseal",
+                    "Change_Explain" : "看你小子顺眼"
+                }
+            */
+
+            // 数据处理
+
+            // 获取操作说明
+            ToolForm.FormInput formInput = new ToolForm.FormInput();
+            formInput.Text = "解封:请输入解封的原因";
+            DialogResult DiaRes = formInput.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+
+            JObject ReqJson = new JObject();
+            ReqJson["Change_ID"] = UserID;
+            ReqJson["Change_Type"] = "Unseal";
+            ReqJson["Change_Explain"] = formInput.getValue();
+
+            // 发送请求
+            var UpdateResult = Task<MyResponse>.Run(() => User.UpdateUserStatus(ReqJson));
+
+            MyResponse res = await UpdateResult;
+
+            if (res == null)
+            {
+                MessageBox.Show("网络异常,请重试");
+                return;
+            }
+            else if (!res.Result || res.Data.ToString() == "")
+            {
+                MessageBox.Show("用户解封失败: " + res.Message);
+                return;
+            }
+            DataGridViewUser.Rows[RowIndex].Cells["Status"].Value = res.Data["Status"];
+            MessageBox.Show("用户解封成功");
+        }
     }
 
 

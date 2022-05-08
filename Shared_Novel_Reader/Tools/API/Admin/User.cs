@@ -86,6 +86,88 @@ namespace Shared_Novel_Reader.Tools.API.Admin
             return res;
         }
 
+        /// <summary>
+        /// 批量修改用户信息
+        /// </summary>
+        /// <returns></returns>
+        public static MyResponse UpdateUserList(in JObject ReqJson)
+        {
+            // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
+
+            int num = 0;
+            MyResponse res = MyClient.PushRequests("Admin/User/Update", ReqJson.ToString());
+            while ((res == null) && (num < 10))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("Admin/User/Update", ReqJson.ToString());
+            }
+
+            if (res == null)
+            {
+                log.Info("网络异常");
+                return null;
+            }
+
+            if (res.Result == false || res.Data == null)
+            {
+                log.Info("修改用户信息失败 : " + res.Message);
+                return null;
+            }
+
+            log.Info("修改用户信息成功");
+            return res;
+        }
+
+
+        /// <summary>
+        /// 修改用户积分数据
+        /// </summary>
+        /// <returns></returns>
+        public static MyResponse UpdateUserIntegral(in JObject ReqJson)
+        {
+            // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
+
+            int num = 0;
+            MyResponse res = MyClient.PushRequests("Admin/User/Change_User_Integral", ReqJson.ToString());
+            while ((res == null) && (num < 10))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("Admin/User/Change_User_Integral", ReqJson.ToString());
+            }
+
+            if (res == null)
+            {
+                log.Info("网络异常");
+                return null;
+            }
+
+            if (res.Result == false || res.Data == null)
+            {
+                log.Info("修改用户信息失败 : " + res.Message);
+                return null;
+            }
+
+            log.Info("修改用户信息成功");
+            return res;
+        }
+
+        /// <summary>
+        /// 修改用户状态数据
+        /// </summary>
+        /// <returns></returns>
+        public static MyResponse UpdateUserStatus(in JObject ReqJson)
+        {
+            // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
+
+            int num = 0;
+            MyResponse res = MyClient.PushRequests("Admin/User/Change_User_Status", ReqJson.ToString());
+            while ((res == null) && (num < 10))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("Admin/User/Change_User_Status", ReqJson.ToString());
+            }
+            return res;
+        }
 
     }
 }

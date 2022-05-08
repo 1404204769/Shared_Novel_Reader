@@ -19,6 +19,11 @@ namespace Shared_Novel_Reader.MyForm.ToolForm
 
         private void BtnOK_Click(object sender, EventArgs e)
         {
+            if(this.TextContent.Text.Trim() == "")
+            {
+                MessageBox.Show("输入不能为空,请重新输入");
+                return;
+            }
             DialogResult = DialogResult.OK;
         }
 
