@@ -122,6 +122,66 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
             FormChapterContent.Visible = true;
         }
 
+        private async void SelectThisValid_Click(object sender, EventArgs e)
+        {
+            // 获取当前行的下标
+            int RowIndex = DataGridViewResourceChapterAllVersion.CurrentRow.Index;
+            BookID = Convert.ToInt32((string)DataGridViewResourceChapterAllVersion.Rows[RowIndex].Cells[0].Value);
+            PartNum = Convert.ToInt32((string)DataGridViewResourceChapterAllVersion.Rows[RowIndex].Cells[2].Value);
+            ChapterNum = Convert.ToInt32((string)DataGridViewResourceChapterAllVersion.Rows[RowIndex].Cells[3].Value);
+            int VersionNum = Convert.ToInt32((string)DataGridViewResourceChapterAllVersion.Rows[RowIndex].Cells[8].Value);
+            DisposeFormChapterContent();
+            /*
+             {
+                "Book_ID":1,
+                "Chapter_Num":1,
+                "Version":1,
+                "Part_Num":2,
+            }
+             
+             */
+            JObject ReqJson = new JObject();
+            ReqJson["Book_ID"] = BookID;
+            ReqJson["Chapter_Num"] = ChapterNum;
+            ReqJson["Version"] = VersionNum;
+            ReqJson["Part_Num"] = PartNum;
+
+            // 发送请求
+            var SelectRes = Task<MyResponse>.Run(() => Tools.API.Admin.Resource.SelectChapterVersion(ReqJson));
+
+            MyResponse res = await SelectRes;
+
+            if (res == null)
+            {
+                MessageBox.Show("网络异常,请重试");
+            }
+            else if(!res.Result)
+            {
+                MessageBox.Show("指定版本生效失败:"+res.Message);
+                // 失败后刷新界面
+                LoadChapterAllVersion();
+            }
+            else
+            {
+                // 成功后将界面手动刷新
+                foreach(DataGridViewRow row in DataGridViewResourceChapterAllVersion.Rows)
+                {
+                    if(Convert.ToInt32(row.Cells[8].Value) == VersionNum)
+                    {
+                        row.Cells[9].Value = 1;
+                    }
+                    else
+                    {
+                        if (Convert.ToInt32(row.Cells[9].Value) == 0)
+                            continue;
+                        row.Cells[9].Value = 0;
+                    }
+                }
+                MessageBox.Show("指定版本生效成功");
+            }
+
+        }
+
         private void ViewDetails_Click(object sender, EventArgs e)
         {
             int RowIndex = DataGridViewResourceChapterAllVersion.CurrentRow.Index;

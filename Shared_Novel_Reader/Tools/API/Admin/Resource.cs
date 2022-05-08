@@ -52,5 +52,32 @@ namespace Shared_Novel_Reader.Tools.API.Admin
             return res;
         }
 
+
+        /// <summary>
+        /// 管理员查询所有资源信息
+        /// </summary>
+        /// <returns></returns>
+        public static MyResponse SelectChapterVersion(in JObject ReqJson)
+        {
+            // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
+
+
+            int num = 0;
+            MyResponse res = MyClient.PushRequests("Admin/Resource/Update/Chapter/Valid", ReqJson.ToString());
+            while ((res == null) && (num < 10))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("Admin/Resource/Update/Chapter/Valid", ReqJson.ToString());
+            }
+
+            if (res == null)
+            {
+                log.Info("指定版本生效失败");
+                return null;
+            }
+
+            log.Info("查询资源成功");
+            return res;
+        }
     }
 }

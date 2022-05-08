@@ -55,6 +55,7 @@
             this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewChapter = new System.Windows.Forms.ToolStripMenuItem();
             this.MyRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.SelectThisValid = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewResourceChapterAllVersion)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -209,32 +210,40 @@
             // 
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MyRefresh,
             this.ViewDetails,
             this.ViewChapter,
-            this.MyRefresh});
+            this.SelectThisValid});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(189, 94);
+            this.contextMenuStrip.Size = new System.Drawing.Size(241, 157);
             // 
             // ViewDetails
             // 
             this.ViewDetails.Name = "ViewDetails";
-            this.ViewDetails.Size = new System.Drawing.Size(188, 30);
+            this.ViewDetails.Size = new System.Drawing.Size(240, 30);
             this.ViewDetails.Text = "查看详情";
             this.ViewDetails.Click += new System.EventHandler(this.ViewDetails_Click);
             // 
             // ViewChapter
             // 
             this.ViewChapter.Name = "ViewChapter";
-            this.ViewChapter.Size = new System.Drawing.Size(188, 30);
+            this.ViewChapter.Size = new System.Drawing.Size(240, 30);
             this.ViewChapter.Text = "查看章节内容";
             this.ViewChapter.Click += new System.EventHandler(this.ViewChapter_Click);
             // 
             // MyRefresh
             // 
             this.MyRefresh.Name = "MyRefresh";
-            this.MyRefresh.Size = new System.Drawing.Size(188, 30);
+            this.MyRefresh.Size = new System.Drawing.Size(240, 30);
             this.MyRefresh.Text = "刷新";
             this.MyRefresh.Click += new System.EventHandler(this.MyRefresh_Click);
+            // 
+            // SelectThisValid
+            // 
+            this.SelectThisValid.Name = "SelectThisValid";
+            this.SelectThisValid.Size = new System.Drawing.Size(240, 30);
+            this.SelectThisValid.Text = "指定此版本生效";
+            this.SelectThisValid.Click += new System.EventHandler(this.SelectThisValid_Click);
             // 
             // FormChapterAllVersion
             // 
@@ -267,5 +276,6 @@
         private System.Windows.Forms.ToolStripMenuItem ViewDetails;
         private System.Windows.Forms.ToolStripMenuItem MyRefresh;
         private System.Windows.Forms.ToolStripMenuItem ViewChapter;
+        private System.Windows.Forms.ToolStripMenuItem SelectThisValid;
     }
 }
