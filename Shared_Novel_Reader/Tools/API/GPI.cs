@@ -113,5 +113,41 @@ namespace Shared_Novel_Reader.Tools.API
         }
 
 
+        /// <summary>
+        /// 查询用户封号时间
+        /// </summary>
+        /// <param name="User_ID">账号</param>
+        /// <returns></returns>
+        public static MyResponse SearchBanTime(in int User_ID)
+        {
+            // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
+
+            JObject ReqJson = new JObject();
+            ReqJson.Add("User_ID", User_ID);
+
+            int num = 0;
+            MyResponse res = MyClient.PushRequests("Gpi/SearchBanTime", ReqJson.ToString());
+            while ((res == null) && (num < 10))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("Gpi/SearchBanTime", ReqJson.ToString());
+            }
+
+            if (res == null)
+            {
+                log.Info("服务器异常,查询失败");
+                return null;
+            }
+
+            if (!res.Result || res.Data == null)
+            {
+                log.Info("查询失败: " + res.Message);
+                return res;
+            }
+
+            log.Info("用户初始化成功");
+            return res;
+        }
+
     }
 }

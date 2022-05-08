@@ -204,26 +204,26 @@
             this.ViewDetails,
             this.ViewChapters});
             this.ContextMenuStripFindResourceBook.Name = "ContextMenuStripFindUser";
-            this.ContextMenuStripFindResourceBook.Size = new System.Drawing.Size(241, 127);
+            this.ContextMenuStripFindResourceBook.Size = new System.Drawing.Size(189, 94);
             // 
             // ReFind
             // 
             this.ReFind.Name = "ReFind";
-            this.ReFind.Size = new System.Drawing.Size(240, 30);
+            this.ReFind.Size = new System.Drawing.Size(188, 30);
             this.ReFind.Text = "重置查询范围";
             this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
             // 
             // ViewDetails
             // 
             this.ViewDetails.Name = "ViewDetails";
-            this.ViewDetails.Size = new System.Drawing.Size(240, 30);
+            this.ViewDetails.Size = new System.Drawing.Size(188, 30);
             this.ViewDetails.Text = "查看详情";
             this.ViewDetails.Click += new System.EventHandler(this.ViewDetails_Click);
             // 
             // ViewChapters
             // 
             this.ViewChapters.Name = "ViewChapters";
-            this.ViewChapters.Size = new System.Drawing.Size(240, 30);
+            this.ViewChapters.Size = new System.Drawing.Size(188, 30);
             this.ViewChapters.Text = "查看章节信息";
             this.ViewChapters.Click += new System.EventHandler(this.ViewChapters_Click);
             // 

@@ -186,7 +186,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             FilterUserList.Dispose();
         }
 
-        private void ViewDetails_Click(object sender, EventArgs e)
+        private async void ViewDetails_Click(object sender, EventArgs e)
         {
             int RowIndex = DataGridViewUser.CurrentRow.Index;
             string show = "";
@@ -202,6 +202,32 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             {
                 show += ColHead[i] + " : " + (string)DataGridViewUser.Rows[RowIndex].Cells[ColName[i]].Value + "\n";
             }
+            if((string)DataGridViewUser.Rows[RowIndex].Cells[7].Value == "Ban")
+            {
+                string Time = "";
+
+                // 发送请求
+                var SearchRes = Task<MyResponse>.Run(() => Tools.API.GPI.SearchBanTime(Convert.ToInt32(DataGridViewUser.Rows[RowIndex].Cells[0].Value)));
+
+                MyResponse res = await SearchRes;
+
+                if (res == null)
+                {
+                    Time = "网络异常,请重试";
+                    return;
+                }
+                else if (!res.Result || res.Data.ToString() == "")
+                {
+                    Time = "查询封号截止时间失败";
+                    return;
+                }
+                else
+                {
+                    Time = res.Data["Ban_Time"].ToString();
+                }
+                show +="封号截止时间:"+Time;
+            }
+
             MessageBox.Show(show);
         }
 
@@ -436,6 +462,20 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
         // 封号
         private async void Ban_Click(object sender, EventArgs e)
         {
+            int RowIndex = DataGridViewUser.CurrentRow.Index;
+            int UserID = Convert.ToInt32(DataGridViewUser.Rows[RowIndex].Cells["User_ID"].Value);
+            int Power = Convert.ToInt32(DataGridViewUser.Rows[RowIndex].Cells["Power"].Value);
+            if (UserID == models.User.User_ID)
+            {
+                MessageBox.Show("不能自己封号自己哦~");
+                return;
+            }
+
+            if (Power >= 10000)
+            {
+                MessageBox.Show("不能将管理员封号哦~");
+                return;
+            }
 
             ToolForm.FormInput formInput = new ToolForm.FormInput();
             formInput.Text = "封号:请输入要封号的时间(单位:天)";
@@ -453,8 +493,6 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
                 MessageBox.Show("输入的数字不规范,请重新输入(有效范围:x>0");
                 return;
             }
-            int RowIndex = DataGridViewUser.CurrentRow.Index;
-            int UserID = Convert.ToInt32(DataGridViewUser.Rows[RowIndex].Cells["User_ID"].Value);
 
             DialogResult result = MessageBox.Show("确认将此用户(User_ID = " + UserID + ") 封号 " + Num + " 天嘛？", "封号", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.No)
@@ -499,7 +537,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
                 MessageBox.Show("用户封号失败: " + res.Message);
                 return;
             }
-            DataGridViewUser.Rows[RowIndex].Cells["Status"].Value = res.Data["Status"];
+            DataGridViewUser.Rows[RowIndex].Cells["Status"].Value = res.Data["Status"].ToString();
             MessageBox.Show("用户封号成功");
 
         }
