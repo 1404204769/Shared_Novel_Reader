@@ -1,4 +1,6 @@
-﻿namespace Shared_Novel_Reader.MyForm
+﻿using System;
+
+namespace Shared_Novel_Reader.MyForm
 {
     partial class FormRootControl
     {
@@ -30,6 +32,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.TabControl = new System.Windows.Forms.TabControl();
+            this.TabPageReport = new System.Windows.Forms.TabPage();
+            this.WebBrowserEcharts = new System.Windows.Forms.WebBrowser();
             this.TabPageAdmin = new System.Windows.Forms.TabPage();
             this.DataGridViewUser = new System.Windows.Forms.DataGridView();
             this.User_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,8 +70,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.LabelTRACE = new System.Windows.Forms.Label();
-            this.TabPageReport = new System.Windows.Forms.TabPage();
             this.TabControl.SuspendLayout();
+            this.TabPageReport.SuspendLayout();
             this.TabPageAdmin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUser)).BeginInit();
             this.ContextMenuStripUser.SuspendLayout();
@@ -76,15 +80,40 @@
             // 
             // TabControl
             // 
+            this.TabControl.Controls.Add(this.TabPageReport);
             this.TabControl.Controls.Add(this.TabPageAdmin);
             this.TabControl.Controls.Add(this.TabPageSystem);
-            this.TabControl.Controls.Add(this.TabPageReport);
             this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TabControl.Location = new System.Drawing.Point(0, 0);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
             this.TabControl.Size = new System.Drawing.Size(1150, 740);
             this.TabControl.TabIndex = 3;
+            // 
+            // TabPageReport
+            // 
+            this.TabPageReport.Controls.Add(this.WebBrowserEcharts);
+            this.TabPageReport.Location = new System.Drawing.Point(4, 28);
+            this.TabPageReport.Name = "TabPageReport";
+            this.TabPageReport.Size = new System.Drawing.Size(1142, 708);
+            this.TabPageReport.TabIndex = 2;
+            this.TabPageReport.Text = "财务报表";
+            this.TabPageReport.UseVisualStyleBackColor = true;
+            // 
+            // WebBrowserEcharts
+            // 
+            this.WebBrowserEcharts.AllowWebBrowserDrop = false;
+            this.WebBrowserEcharts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WebBrowserEcharts.IsWebBrowserContextMenuEnabled = false;
+            this.WebBrowserEcharts.Location = new System.Drawing.Point(0, 0);
+            this.WebBrowserEcharts.MinimumSize = new System.Drawing.Size(20, 20);
+            this.WebBrowserEcharts.Name = "WebBrowserEcharts";
+            this.WebBrowserEcharts.ScriptErrorsSuppressed = true;
+            this.WebBrowserEcharts.ScrollBarsEnabled = false;
+            this.WebBrowserEcharts.Size = new System.Drawing.Size(1142, 708);
+            this.WebBrowserEcharts.TabIndex = 0;
+            this.WebBrowserEcharts.WebBrowserShortcutsEnabled = false;
+            this.WebBrowserEcharts.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowserEcharts_DocumentCompleted);
             // 
             // TabPageAdmin
             // 
@@ -252,7 +281,7 @@
             // 
             this.BtnWARNClose.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
             this.BtnWARNClose.ForeColor = System.Drawing.Color.Black;
-            this.BtnWARNClose.Location = new System.Drawing.Point(536, 276);
+            this.BtnWARNClose.Location = new System.Drawing.Point(620, 276);
             this.BtnWARNClose.Name = "BtnWARNClose";
             this.BtnWARNClose.Size = new System.Drawing.Size(126, 44);
             this.BtnWARNClose.TabIndex = 20;
@@ -265,7 +294,7 @@
             // 
             this.BtnINFOClose.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
             this.BtnINFOClose.ForeColor = System.Drawing.Color.Black;
-            this.BtnINFOClose.Location = new System.Drawing.Point(536, 219);
+            this.BtnINFOClose.Location = new System.Drawing.Point(620, 219);
             this.BtnINFOClose.Name = "BtnINFOClose";
             this.BtnINFOClose.Size = new System.Drawing.Size(126, 44);
             this.BtnINFOClose.TabIndex = 19;
@@ -278,7 +307,7 @@
             // 
             this.BtnDEBUGClose.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
             this.BtnDEBUGClose.ForeColor = System.Drawing.Color.Black;
-            this.BtnDEBUGClose.Location = new System.Drawing.Point(536, 159);
+            this.BtnDEBUGClose.Location = new System.Drawing.Point(620, 159);
             this.BtnDEBUGClose.Name = "BtnDEBUGClose";
             this.BtnDEBUGClose.Size = new System.Drawing.Size(126, 44);
             this.BtnDEBUGClose.TabIndex = 18;
@@ -291,7 +320,7 @@
             // 
             this.BtnWARNOpen.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
             this.BtnWARNOpen.ForeColor = System.Drawing.Color.Black;
-            this.BtnWARNOpen.Location = new System.Drawing.Point(536, 276);
+            this.BtnWARNOpen.Location = new System.Drawing.Point(620, 276);
             this.BtnWARNOpen.Name = "BtnWARNOpen";
             this.BtnWARNOpen.Size = new System.Drawing.Size(126, 44);
             this.BtnWARNOpen.TabIndex = 17;
@@ -304,7 +333,7 @@
             // 
             this.BtnINFOOpen.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
             this.BtnINFOOpen.ForeColor = System.Drawing.Color.Black;
-            this.BtnINFOOpen.Location = new System.Drawing.Point(536, 219);
+            this.BtnINFOOpen.Location = new System.Drawing.Point(620, 219);
             this.BtnINFOOpen.Name = "BtnINFOOpen";
             this.BtnINFOOpen.Size = new System.Drawing.Size(126, 44);
             this.BtnINFOOpen.TabIndex = 16;
@@ -317,7 +346,7 @@
             // 
             this.BtnDEBUGOpen.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
             this.BtnDEBUGOpen.ForeColor = System.Drawing.Color.Black;
-            this.BtnDEBUGOpen.Location = new System.Drawing.Point(536, 159);
+            this.BtnDEBUGOpen.Location = new System.Drawing.Point(620, 159);
             this.BtnDEBUGOpen.Name = "BtnDEBUGOpen";
             this.BtnDEBUGOpen.Size = new System.Drawing.Size(126, 44);
             this.BtnDEBUGOpen.TabIndex = 15;
@@ -330,7 +359,7 @@
             // 
             this.BtnTRACEOpen.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
             this.BtnTRACEOpen.ForeColor = System.Drawing.Color.Black;
-            this.BtnTRACEOpen.Location = new System.Drawing.Point(536, 96);
+            this.BtnTRACEOpen.Location = new System.Drawing.Point(620, 96);
             this.BtnTRACEOpen.Name = "BtnTRACEOpen";
             this.BtnTRACEOpen.Size = new System.Drawing.Size(126, 44);
             this.BtnTRACEOpen.TabIndex = 14;
@@ -343,7 +372,7 @@
             // 
             this.BtnTRACEClose.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
             this.BtnTRACEClose.ForeColor = System.Drawing.Color.Black;
-            this.BtnTRACEClose.Location = new System.Drawing.Point(536, 96);
+            this.BtnTRACEClose.Location = new System.Drawing.Point(620, 96);
             this.BtnTRACEClose.Name = "BtnTRACEClose";
             this.BtnTRACEClose.Size = new System.Drawing.Size(126, 44);
             this.BtnTRACEClose.TabIndex = 13;
@@ -394,11 +423,11 @@
             this.LabelWARNValue.AutoSize = true;
             this.LabelWARNValue.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelWARNValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelWARNValue.Location = new System.Drawing.Point(393, 282);
+            this.LabelWARNValue.Location = new System.Drawing.Point(422, 282);
             this.LabelWARNValue.Name = "LabelWARNValue";
-            this.LabelWARNValue.Size = new System.Drawing.Size(101, 32);
+            this.LabelWARNValue.Size = new System.Drawing.Size(130, 32);
             this.LabelWARNValue.TabIndex = 9;
-            this.LabelWARNValue.Text = "已开启";
+            this.LabelWARNValue.Text = "网络异常";
             // 
             // LabelWARN
             // 
@@ -416,11 +445,11 @@
             this.LabelINFOValue.AutoSize = true;
             this.LabelINFOValue.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelINFOValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelINFOValue.Location = new System.Drawing.Point(393, 219);
+            this.LabelINFOValue.Location = new System.Drawing.Point(422, 219);
             this.LabelINFOValue.Name = "LabelINFOValue";
-            this.LabelINFOValue.Size = new System.Drawing.Size(101, 32);
+            this.LabelINFOValue.Size = new System.Drawing.Size(130, 32);
             this.LabelINFOValue.TabIndex = 7;
-            this.LabelINFOValue.Text = "已开启";
+            this.LabelINFOValue.Text = "网络异常";
             // 
             // LabelINFO
             // 
@@ -438,11 +467,11 @@
             this.LabelDEBUGValue.AutoSize = true;
             this.LabelDEBUGValue.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelDEBUGValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelDEBUGValue.Location = new System.Drawing.Point(393, 165);
+            this.LabelDEBUGValue.Location = new System.Drawing.Point(422, 165);
             this.LabelDEBUGValue.Name = "LabelDEBUGValue";
-            this.LabelDEBUGValue.Size = new System.Drawing.Size(101, 32);
+            this.LabelDEBUGValue.Size = new System.Drawing.Size(130, 32);
             this.LabelDEBUGValue.TabIndex = 5;
-            this.LabelDEBUGValue.Text = "已开启";
+            this.LabelDEBUGValue.Text = "网络异常";
             // 
             // LabelDEBUG
             // 
@@ -460,11 +489,11 @@
             this.LabelTRACEValue.AutoSize = true;
             this.LabelTRACEValue.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelTRACEValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelTRACEValue.Location = new System.Drawing.Point(393, 102);
+            this.LabelTRACEValue.Location = new System.Drawing.Point(422, 102);
             this.LabelTRACEValue.Name = "LabelTRACEValue";
-            this.LabelTRACEValue.Size = new System.Drawing.Size(101, 32);
+            this.LabelTRACEValue.Size = new System.Drawing.Size(130, 32);
             this.LabelTRACEValue.TabIndex = 3;
-            this.LabelTRACEValue.Text = "已开启";
+            this.LabelTRACEValue.Text = "网络异常";
             // 
             // label2
             // 
@@ -499,15 +528,6 @@
             this.LabelTRACE.TabIndex = 0;
             this.LabelTRACE.Text = "TRACE：";
             // 
-            // TabPageReport
-            // 
-            this.TabPageReport.Location = new System.Drawing.Point(4, 28);
-            this.TabPageReport.Name = "TabPageReport";
-            this.TabPageReport.Size = new System.Drawing.Size(1142, 708);
-            this.TabPageReport.TabIndex = 2;
-            this.TabPageReport.Text = "财务报表";
-            this.TabPageReport.UseVisualStyleBackColor = true;
-            // 
             // FormRootControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -519,6 +539,7 @@
             this.Name = "FormRootControl";
             this.Text = "FormRootControl";
             this.TabControl.ResumeLayout(false);
+            this.TabPageReport.ResumeLayout(false);
             this.TabPageAdmin.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUser)).EndInit();
             this.ContextMenuStripUser.ResumeLayout(false);
@@ -568,5 +589,6 @@
         private System.Windows.Forms.Button BtnDEBUGClose;
         private System.Windows.Forms.Button BtnINFOClose;
         private System.Windows.Forms.Button BtnWARNClose;
+        private System.Windows.Forms.WebBrowser WebBrowserEcharts;
     }
 }

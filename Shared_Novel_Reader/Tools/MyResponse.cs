@@ -24,7 +24,7 @@ namespace Shared_Novel_Reader.Tools
             {
                 Message = responseJson["Message"].ToString();
             }
-            if (MyJson.CheckColAndType(responseJson, "Data", JTokenType.Object))
+            if( (MyJson.CheckColAndType(responseJson, "Data", JTokenType.Object)))
             {
                 Data = (JObject)responseJson["Data"];
             }

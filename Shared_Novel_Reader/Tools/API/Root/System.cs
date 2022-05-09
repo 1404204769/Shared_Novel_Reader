@@ -36,6 +36,30 @@ namespace Shared_Novel_Reader.Tools.API.Root
         }
 
         /// <summary>
+        /// 查看系统报表数据
+        /// </summary>
+        /// <returns></returns>
+        public static MyResponse SearchReport()
+        {
+            // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
+            JObject ReqJson = new JObject();
+            int num = 0;
+            MyResponse res = MyClient.PushRequests("Root/ReportForm", ReqJson.ToString());
+            while ((res == null) && (num < 10))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("Root/ReportForm", ReqJson.ToString());
+            }
+            if (res == null)
+            {
+                log.Info("网络异常，请重试");
+                return null;
+            }
+            return res;
+        }
+
+
+        /// <summary>
         /// 修改系统日志级别
         /// </summary>
         /// <returns></returns>

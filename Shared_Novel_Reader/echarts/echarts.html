@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>ECharts</title>
+		<!-- 引入 echarts.js -->
+		<script src="./echarts.js"></script>
+	</head>
+	<body style="background-color: aquamarine;">
+		<!-- 	<br/><br/>
+	    数据展示和采集：<input id="text" type="text"/><br/><br/>
+	    &nbsp;&nbsp;&nbsp;
+	    发送数据按钮：<button id="button">发送数据</button>
+		<br/><br/> -->
+<!-- 		<button onclick="Refresh()">asdas</button>
+		<span id="showTest" style="background-color: antiquewhite">asd </span> -->
+		<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+		<div id="main" style="width: 761px;height:472px;background-color: aqua;"></div>
+	</body>
+	<script type="text/javascript">
+		// 基于准备好的dom，初始化echarts实例
+		var myChart = echarts.init(document.getElementById('main'));
+		// 指定图表的配置项和数据
+		var option = {
+			legend: {},
+			tooltip: {},
+			dataset: {
+				// 这里指定了维度名的顺序，从而可以利用默认的维度到坐标轴的映射。
+				// 如果不指定 dimensions，也可以通过指定 series.encode 完成映射，参见后文。
+				dimensions: ['product', '2015', '2016', '2017'],
+				source: [
+					{
+						'product': 'aa',
+						'2015': 231,
+						'2016': 212,
+						'2017': 234
+					},
+					{
+						'product': 'bb',
+						'2015': 231,
+						'2016': 212,
+						'2017': 234
+					},{
+						'product':'ds',
+						'2015': 231,
+						'2016': 212,
+						'2017': 234
+					}
+				]
+			},
+			xAxis: {
+				type: 'category'
+			},
+			yAxis: {},
+			series: [
+				{
+					type: 'bar'
+				},
+				{
+					type: 'bar'
+				},
+				{
+					type: 'bar'
+				}
+			]
+		};
+			this.myChart.setOption(option);
+		// 使用刚指定的配置项和数据显示图表。
+		//myChart.setOption(option);
+
+		function show(option) {
+			alert("收到来自C#代码的信息：");
+			let text = document.getElementById('showTest');
+			//text.value = "参数：" + option[0];
+			text.innerHTML += "参数option：" + option;
+			let json = JSON.parse(option);
+			text.innerHTML = typeof(json)
+			text.innerHTML += "参数json：" + JSON.stringify(json) + "\n";
+			text.innerHTML += "参数json[0]：" + JSON.stringify(json[0]) + "\n";
+			text.innerHTML += "参数json[1]：" + JSON.stringify(json[1]) + "\n";
+			text.innerHTML += "参数json[2]：" + JSON.stringify(json[2]) + "\n";
+			alert(a)
+		}
+
+		function Refresh(obj) {
+			console.log(this.myChart)
+			//this.myChart.clear();
+			// let text = document.getElementById('showTest');
+			
+			let json = JSON.parse(obj);
+			let sourceJson = json.source;
+			let sourcedata = [];
+			for(let i=0; i < sourceJson.length; i++) {
+				sourcedata.push(sourceJson[i]);
+			}
+			this.option.dataset.source = sourcedata;
+			
+			let seriesJson = json.series;
+			let seriesdata = [];
+			for(let i=0; i < seriesJson.length; i++) {
+				seriesdata.push(seriesJson[i]);
+			}
+			this.option.series = seriesdata;
+			
+			
+			let dimensionsdata = [];
+			dimensionsdata.push(json.dimensions_Key);
+			let dimensionsJson = json.dimensions_Value;
+			for(let i=0; i < dimensionsJson.length; i++) {
+				dimensionsdata.push(dimensionsJson[i]);
+			}
+			alert(dimensionsdata)
+			this.option.dataset.dimensions = dimensionsdata;
+			
+			//图表渲染数据
+			  this.myChart.setOption(option,true);
+		}
+	</script>
+	<!-- <script>
+
+/* function setPosition(option) {
+	let text = document.getElementById('showTest');
+	//text.value = "参数：" + option[0];
+	text.innerHTML = "大小已变化";
+   var data_pri = eval(option);  //解析webBrowser1传入的数据
+   var divMain = document.getElementById("main");  //获取html中id为main的echart控件
+   divMain.style.height = data_pri[0] + "px";
+   divMain.style.width = data_pri[1]+"px";
+   window.onresize = myChart.resize(); //改变大小
+} */
+    // 按钮点击事件
+/*    let but = document.getElementById('button');
+    but.onclick = function () {
+		let showTest = document.getElementById('showTest');
+		showTest.innerHTML = "参数：" +option[0];
+        // 获取input输入框里的值
+		let text = document.getElementById('text');
+        var input_val = text.value
+		console.log(input_val)
+        // 调用主窗口中的方法 functionForHtml
+        var result = window.external.functionForHtml(input_val);
+        // 弹框显示返回值
+        alert("收到来自C#代码的反馈信息：" + result);
+    }
+	// 设置input框的值
+	function setInputValue(str)
+	{
+		let text = document.getElementById('text');
+	    text.value = str;
+	} */
+</script> -->
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+	</style>
+</html>

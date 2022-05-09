@@ -14,7 +14,7 @@ namespace Shared_Novel_Reader.Tools
     internal class MyClient
     {
         private static RestClient client = null;
-        private static string Authorization = "";// 用户Token
+        private static string Authorization = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJMb2dpbl9TdGF0dXMiOiJyb290IiwiVXNlcl9JRCI6IjkxMTIyMiJ9.az6mKpUg74RM8WA0bsLJPvJ3ngK27sdvNGK3BlbCZek";// 用户Token
         private static ILog log = LogManager.GetLogger(typeof(Tools.MyClient));
         private static bool IsInit = false;
 
