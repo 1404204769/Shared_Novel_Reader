@@ -84,7 +84,7 @@ namespace Shared_Novel_Reader.MyForm
             }
 
             // 超级管理员权限
-            if (models.User.Power >= int.MaxValue)
+            if (models.User.Power >= 1000000000)
             {
                 // 超级管理员界面
                 BtnRootControl.Visible = true;

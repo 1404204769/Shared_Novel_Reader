@@ -39,14 +39,14 @@
             this.Total_Integral = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ContextMenuStripFindUser = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
-            this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.Ban = new System.Windows.Forms.ToolStripMenuItem();
             this.Unseal = new System.Windows.Forms.ToolStripMenuItem();
-            this.InitPwd = new System.Windows.Forms.ToolStripMenuItem();
             this.ChangeIntegral = new System.Windows.Forms.ToolStripMenuItem();
             this.Reward = new System.Windows.Forms.ToolStripMenuItem();
             this.Punishment = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.InitPwd = new System.Windows.Forms.ToolStripMenuItem();
+            this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUser)).BeginInit();
             this.ContextMenuStripFindUser.SuspendLayout();
             this.SuspendLayout();
@@ -56,6 +56,8 @@
             this.DataGridViewUser.AllowUserToAddRows = false;
             this.DataGridViewUser.AllowUserToDeleteRows = false;
             this.DataGridViewUser.AllowUserToOrderColumns = true;
+            this.DataGridViewUser.AllowUserToResizeColumns = false;
+            this.DataGridViewUser.AllowUserToResizeRows = false;
             this.DataGridViewUser.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGridViewUser.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.DataGridViewUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -148,42 +150,21 @@
             this.InitPwd,
             this.ReFind});
             this.ContextMenuStripFindUser.Name = "ContextMenuStripFindUser";
-            this.ContextMenuStripFindUser.Size = new System.Drawing.Size(241, 217);
-            // 
-            // ReFind
-            // 
-            this.ReFind.Name = "ReFind";
-            this.ReFind.Size = new System.Drawing.Size(240, 30);
-            this.ReFind.Text = "重置查询范围";
-            this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
-            // 
-            // ViewDetails
-            // 
-            this.ViewDetails.Name = "ViewDetails";
-            this.ViewDetails.Size = new System.Drawing.Size(240, 30);
-            this.ViewDetails.Text = "查看详情";
-            this.ViewDetails.Click += new System.EventHandler(this.ViewDetails_Click);
+            this.ContextMenuStripFindUser.Size = new System.Drawing.Size(189, 184);
             // 
             // Ban
             // 
             this.Ban.Name = "Ban";
-            this.Ban.Size = new System.Drawing.Size(240, 30);
+            this.Ban.Size = new System.Drawing.Size(188, 30);
             this.Ban.Text = "封号";
             this.Ban.Click += new System.EventHandler(this.Ban_Click);
             // 
             // Unseal
             // 
             this.Unseal.Name = "Unseal";
-            this.Unseal.Size = new System.Drawing.Size(240, 30);
+            this.Unseal.Size = new System.Drawing.Size(188, 30);
             this.Unseal.Text = "解封";
             this.Unseal.Click += new System.EventHandler(this.Unseal_Click);
-            // 
-            // InitPwd
-            // 
-            this.InitPwd.Name = "InitPwd";
-            this.InitPwd.Size = new System.Drawing.Size(240, 30);
-            this.InitPwd.Text = "初始化密码";
-            this.InitPwd.Click += new System.EventHandler(this.InitPwd_Click);
             // 
             // ChangeIntegral
             // 
@@ -191,22 +172,43 @@
             this.Reward,
             this.Punishment});
             this.ChangeIntegral.Name = "ChangeIntegral";
-            this.ChangeIntegral.Size = new System.Drawing.Size(240, 30);
+            this.ChangeIntegral.Size = new System.Drawing.Size(188, 30);
             this.ChangeIntegral.Text = "更改积分";
             // 
             // Reward
             // 
             this.Reward.Name = "Reward";
-            this.Reward.Size = new System.Drawing.Size(270, 34);
+            this.Reward.Size = new System.Drawing.Size(182, 34);
             this.Reward.Text = "奖励积分";
             this.Reward.Click += new System.EventHandler(this.Reward_Click);
             // 
             // Punishment
             // 
             this.Punishment.Name = "Punishment";
-            this.Punishment.Size = new System.Drawing.Size(270, 34);
+            this.Punishment.Size = new System.Drawing.Size(182, 34);
             this.Punishment.Text = "扣除积分";
             this.Punishment.Click += new System.EventHandler(this.Punishment_Click);
+            // 
+            // ViewDetails
+            // 
+            this.ViewDetails.Name = "ViewDetails";
+            this.ViewDetails.Size = new System.Drawing.Size(188, 30);
+            this.ViewDetails.Text = "查看详情";
+            this.ViewDetails.Click += new System.EventHandler(this.ViewDetails_Click);
+            // 
+            // InitPwd
+            // 
+            this.InitPwd.Name = "InitPwd";
+            this.InitPwd.Size = new System.Drawing.Size(188, 30);
+            this.InitPwd.Text = "初始化密码";
+            this.InitPwd.Click += new System.EventHandler(this.InitPwd_Click);
+            // 
+            // ReFind
+            // 
+            this.ReFind.Name = "ReFind";
+            this.ReFind.Size = new System.Drawing.Size(188, 30);
+            this.ReFind.Text = "重置查询范围";
+            this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
             // 
             // FormUserManagement
             // 

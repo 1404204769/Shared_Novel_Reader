@@ -313,6 +313,8 @@
     <Compile Include="Tools\API\Admin\Resource.cs" />
     <Compile Include="Tools\API\Admin\User.cs" />
     <Compile Include="Tools\API\GPI.cs" />
+    <Compile Include="Tools\API\Root\System.cs" />
+    <Compile Include="Tools\API\Root\User.cs" />
     <Compile Include="Tools\API\User\Note.cs" />
     <Compile Include="Tools\API\User\Resource.cs" />
     <Compile Include="Tools\API\User\User.cs" />
