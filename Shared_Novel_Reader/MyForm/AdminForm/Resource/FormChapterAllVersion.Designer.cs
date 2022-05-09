@@ -52,9 +52,9 @@
             this.Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Valid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MyRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewChapter = new System.Windows.Forms.ToolStripMenuItem();
-            this.MyRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.SelectThisValid = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewResourceChapterAllVersion)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
@@ -66,7 +66,7 @@
             this.DataGridViewResourceChapterAllVersion.AllowUserToDeleteRows = false;
             this.DataGridViewResourceChapterAllVersion.AllowUserToOrderColumns = true;
             this.DataGridViewResourceChapterAllVersion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DataGridViewResourceChapterAllVersion.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.DataGridViewResourceChapterAllVersion.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.DataGridViewResourceChapterAllVersion.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -215,33 +215,33 @@
             this.ViewChapter,
             this.SelectThisValid});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(241, 157);
+            this.contextMenuStrip.Size = new System.Drawing.Size(207, 124);
+            // 
+            // MyRefresh
+            // 
+            this.MyRefresh.Name = "MyRefresh";
+            this.MyRefresh.Size = new System.Drawing.Size(206, 30);
+            this.MyRefresh.Text = "刷新";
+            this.MyRefresh.Click += new System.EventHandler(this.MyRefresh_Click);
             // 
             // ViewDetails
             // 
             this.ViewDetails.Name = "ViewDetails";
-            this.ViewDetails.Size = new System.Drawing.Size(240, 30);
+            this.ViewDetails.Size = new System.Drawing.Size(206, 30);
             this.ViewDetails.Text = "查看详情";
             this.ViewDetails.Click += new System.EventHandler(this.ViewDetails_Click);
             // 
             // ViewChapter
             // 
             this.ViewChapter.Name = "ViewChapter";
-            this.ViewChapter.Size = new System.Drawing.Size(240, 30);
+            this.ViewChapter.Size = new System.Drawing.Size(206, 30);
             this.ViewChapter.Text = "查看章节内容";
             this.ViewChapter.Click += new System.EventHandler(this.ViewChapter_Click);
-            // 
-            // MyRefresh
-            // 
-            this.MyRefresh.Name = "MyRefresh";
-            this.MyRefresh.Size = new System.Drawing.Size(240, 30);
-            this.MyRefresh.Text = "刷新";
-            this.MyRefresh.Click += new System.EventHandler(this.MyRefresh_Click);
             // 
             // SelectThisValid
             // 
             this.SelectThisValid.Name = "SelectThisValid";
-            this.SelectThisValid.Size = new System.Drawing.Size(240, 30);
+            this.SelectThisValid.Size = new System.Drawing.Size(206, 30);
             this.SelectThisValid.Text = "指定此版本生效";
             this.SelectThisValid.Click += new System.EventHandler(this.SelectThisValid_Click);
             // 

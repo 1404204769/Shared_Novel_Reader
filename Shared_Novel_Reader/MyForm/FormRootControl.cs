@@ -30,7 +30,7 @@ namespace Shared_Novel_Reader.MyForm
             //调用
             SetWebBrowserFeatures(10);
             InitializeComponent();
-            //LevelInit();
+            LevelInit();
             WebEchartInit();
         }
 

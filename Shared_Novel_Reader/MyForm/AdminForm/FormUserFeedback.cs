@@ -188,7 +188,17 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
                 if(ColName[i] == "Memo")
                 {
                     JObject MemoJson = JObject.Parse((string)DataGridViewUserFeedback.Rows[RowIndex].Cells[ColName[i]].Value);
-                    show += "反馈内容:"+ MemoJson["Content"].ToString()+"\n";
+                    // 如果是举报评论
+                    if ((string)DataGridViewUserFeedback.Rows[RowIndex].Cells["Type"].Value == "Comment_Report")
+                    {
+                        show += "举报评论:\n{\n说明:" + MemoJson["Explain"].ToString() + "\n举报对象ID:" + MemoJson["Target"]["Comment_ID"].ToString() + "\n}\n";
+                    }
+                    else if ((string)DataGridViewUserFeedback.Rows[RowIndex].Cells["Type"].Value == "Chapter_Report")
+                    {
+                        show += "报告章节错误:\n{\n说明:" + MemoJson["Explain"].ToString() + "\n举报对象ID:" + MemoJson["Target"]["Chapter_ID"].ToString() + "\n}\n";
+                    }
+                    else
+                        show += "反馈内容:"+ MemoJson["Content"].ToString()+"\n";
                     string status = Convert.ToString(this.DataGridViewUserFeedback.Rows[RowIndex].Cells["Status"].Value);
                     if (status == "已完成" || status == "已拒绝")
                     {

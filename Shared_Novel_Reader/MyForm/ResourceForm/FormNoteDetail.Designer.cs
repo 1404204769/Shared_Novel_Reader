@@ -53,7 +53,7 @@
             // 
             // Panel
             // 
-            this.Panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.Panel.BackColor = System.Drawing.Color.DimGray;
             this.Panel.Controls.Add(this.PictureBoxRefresh);
             this.Panel.Controls.Add(this.PictureBoxReturn);
             this.Panel.Controls.Add(this.LabelJoin);
@@ -69,12 +69,13 @@
             // 
             // PictureBoxRefresh
             // 
+            this.PictureBoxRefresh.BackColor = System.Drawing.Color.White;
             this.PictureBoxRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.PictureBoxRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PictureBoxRefresh.Image = global::Shared_Novel_Reader.Properties.Resources.refresh;
-            this.PictureBoxRefresh.Location = new System.Drawing.Point(1105, 34);
+            this.PictureBoxRefresh.Location = new System.Drawing.Point(1105, 28);
             this.PictureBoxRefresh.Name = "PictureBoxRefresh";
-            this.PictureBoxRefresh.Size = new System.Drawing.Size(18, 18);
+            this.PictureBoxRefresh.Size = new System.Drawing.Size(30, 30);
             this.PictureBoxRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PictureBoxRefresh.TabIndex = 8;
             this.PictureBoxRefresh.TabStop = false;
@@ -95,28 +96,34 @@
             // 
             // LabelJoin
             // 
-            this.LabelJoin.AutoSize = true;
+            this.LabelJoin.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.LabelJoin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LabelJoin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LabelJoin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LabelJoin.ForeColor = System.Drawing.Color.DarkCyan;
-            this.LabelJoin.Location = new System.Drawing.Point(991, 34);
+            this.LabelJoin.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LabelJoin.ForeColor = System.Drawing.Color.Black;
+            this.LabelJoin.Location = new System.Drawing.Point(984, 28);
             this.LabelJoin.Name = "LabelJoin";
-            this.LabelJoin.Size = new System.Drawing.Size(80, 18);
+            this.LabelJoin.Size = new System.Drawing.Size(100, 30);
             this.LabelJoin.TabIndex = 6;
             this.LabelJoin.Text = "加入书架";
+            this.LabelJoin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LabelJoin.Click += new System.EventHandler(this.LabelJoin_Click);
             // 
             // labelViewBook
             // 
-            this.labelViewBook.AutoSize = true;
+            this.labelViewBook.BackColor = System.Drawing.Color.PeachPuff;
+            this.labelViewBook.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.labelViewBook.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelViewBook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelViewBook.ForeColor = System.Drawing.Color.DarkCyan;
-            this.labelViewBook.Location = new System.Drawing.Point(895, 34);
+            this.labelViewBook.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelViewBook.ForeColor = System.Drawing.Color.Black;
+            this.labelViewBook.Location = new System.Drawing.Point(864, 28);
             this.labelViewBook.Name = "labelViewBook";
-            this.labelViewBook.Size = new System.Drawing.Size(80, 18);
+            this.labelViewBook.Size = new System.Drawing.Size(100, 30);
             this.labelViewBook.TabIndex = 5;
             this.labelViewBook.Text = "在线阅读";
+            this.labelViewBook.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelViewBook.Click += new System.EventHandler(this.labelViewBook_Click);
             // 
             // labelContent
@@ -164,6 +171,7 @@
             // 
             // ButtonReport
             // 
+            this.ButtonReport.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ButtonReport.Dock = System.Windows.Forms.DockStyle.Right;
             this.ButtonReport.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonReport.Location = new System.Drawing.Point(1017, 0);
@@ -171,7 +179,7 @@
             this.ButtonReport.Size = new System.Drawing.Size(133, 52);
             this.ButtonReport.TabIndex = 1;
             this.ButtonReport.Text = "发表评论";
-            this.ButtonReport.UseVisualStyleBackColor = true;
+            this.ButtonReport.UseVisualStyleBackColor = false;
             this.ButtonReport.Click += new System.EventHandler(this.ButtonReport_Click);
             // 
             // LabelCancelReply
@@ -220,7 +228,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.FlowLayoutPanelNoteComment.AutoScroll = true;
             this.FlowLayoutPanelNoteComment.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.FlowLayoutPanelNoteComment.BackColor = System.Drawing.Color.RosyBrown;
+            this.FlowLayoutPanelNoteComment.BackColor = System.Drawing.Color.Gainsboro;
             this.FlowLayoutPanelNoteComment.Location = new System.Drawing.Point(0, 200);
             this.FlowLayoutPanelNoteComment.Margin = new System.Windows.Forms.Padding(0);
             this.FlowLayoutPanelNoteComment.Name = "FlowLayoutPanelNoteComment";
@@ -265,7 +273,6 @@
             this.Name = "FormNoteDetail";
             this.Text = "FormNoteDetail";
             this.Panel.ResumeLayout(false);
-            this.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxRefresh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxReturn)).EndInit();
             this.PanelComment.ResumeLayout(false);

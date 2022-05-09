@@ -37,12 +37,12 @@
             this.BtnBookPlatform = new System.Windows.Forms.Button();
             this.LogoPanel = new System.Windows.Forms.Panel();
             this.BtnPanel = new System.Windows.Forms.Panel();
+            this.BtnLogout = new System.Windows.Forms.Button();
             this.BtnRegister = new System.Windows.Forms.Button();
             this.BtnLogin = new System.Windows.Forms.Button();
             this.TitlePanel = new System.Windows.Forms.Panel();
             this.LabelWelcome = new System.Windows.Forms.Label();
             this.BtnPersonalData = new System.Windows.Forms.Button();
-            this.BtnResManage = new System.Windows.Forms.Button();
             this.BtnBookShelf = new System.Windows.Forms.Button();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.LabelTime = new System.Windows.Forms.Label();
@@ -51,7 +51,6 @@
             this.LabelToolString = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.TimerTopPanelTime = new System.Windows.Forms.Timer(this.components);
-            this.BtnLogout = new System.Windows.Forms.Button();
             PictureLogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(PictureLogo)).BeginInit();
             this.SizePanel.SuspendLayout();
@@ -63,7 +62,7 @@
             // 
             // PictureLogo
             // 
-            PictureLogo.BackColor = System.Drawing.Color.DimGray;
+            PictureLogo.BackColor = System.Drawing.SystemColors.ActiveCaption;
             PictureLogo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureLogo.BackgroundImage")));
             PictureLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             PictureLogo.Dock = System.Windows.Forms.DockStyle.Top;
@@ -77,13 +76,12 @@
             // 
             // SizePanel
             // 
-            this.SizePanel.BackColor = System.Drawing.Color.DimGray;
+            this.SizePanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.SizePanel.Controls.Add(this.BtnRootControl);
             this.SizePanel.Controls.Add(this.BtnAdminControl);
             this.SizePanel.Controls.Add(this.BtnBookPlatform);
             this.SizePanel.Controls.Add(this.LogoPanel);
             this.SizePanel.Controls.Add(this.BtnPersonalData);
-            this.SizePanel.Controls.Add(this.BtnResManage);
             this.SizePanel.Controls.Add(this.BtnBookShelf);
             this.SizePanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.SizePanel.Location = new System.Drawing.Point(0, 60);
@@ -99,10 +97,10 @@
             this.BtnRootControl.FlatAppearance.BorderSize = 0;
             this.BtnRootControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnRootControl.Font = new System.Drawing.Font("华文新魏", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.BtnRootControl.ForeColor = System.Drawing.Color.White;
+            this.BtnRootControl.ForeColor = System.Drawing.Color.Black;
             this.BtnRootControl.Image = global::Shared_Novel_Reader.Properties.Resources.root;
             this.BtnRootControl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnRootControl.Location = new System.Drawing.Point(0, 635);
+            this.BtnRootControl.Location = new System.Drawing.Point(0, 545);
             this.BtnRootControl.Margin = new System.Windows.Forms.Padding(0);
             this.BtnRootControl.Name = "BtnRootControl";
             this.BtnRootControl.Size = new System.Drawing.Size(250, 60);
@@ -120,10 +118,10 @@
             this.BtnAdminControl.FlatAppearance.BorderSize = 0;
             this.BtnAdminControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnAdminControl.Font = new System.Drawing.Font("华文新魏", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.BtnAdminControl.ForeColor = System.Drawing.Color.White;
+            this.BtnAdminControl.ForeColor = System.Drawing.Color.Black;
             this.BtnAdminControl.Image = global::Shared_Novel_Reader.Properties.Resources.admin;
             this.BtnAdminControl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnAdminControl.Location = new System.Drawing.Point(0, 563);
+            this.BtnAdminControl.Location = new System.Drawing.Point(0, 476);
             this.BtnAdminControl.Margin = new System.Windows.Forms.Padding(0);
             this.BtnAdminControl.Name = "BtnAdminControl";
             this.BtnAdminControl.Size = new System.Drawing.Size(250, 60);
@@ -141,10 +139,10 @@
             this.BtnBookPlatform.FlatAppearance.BorderSize = 0;
             this.BtnBookPlatform.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnBookPlatform.Font = new System.Drawing.Font("华文新魏", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.BtnBookPlatform.ForeColor = System.Drawing.Color.White;
+            this.BtnBookPlatform.ForeColor = System.Drawing.Color.Black;
             this.BtnBookPlatform.Image = global::Shared_Novel_Reader.Properties.Resources.BookPlatform;
             this.BtnBookPlatform.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnBookPlatform.Location = new System.Drawing.Point(0, 491);
+            this.BtnBookPlatform.Location = new System.Drawing.Point(0, 406);
             this.BtnBookPlatform.Margin = new System.Windows.Forms.Padding(0);
             this.BtnBookPlatform.Name = "BtnBookPlatform";
             this.BtnBookPlatform.Size = new System.Drawing.Size(250, 60);
@@ -167,7 +165,7 @@
             // 
             // BtnPanel
             // 
-            this.BtnPanel.BackColor = System.Drawing.Color.DimGray;
+            this.BtnPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnPanel.Controls.Add(this.BtnLogout);
             this.BtnPanel.Controls.Add(this.BtnRegister);
             this.BtnPanel.Controls.Add(this.BtnLogin);
@@ -177,13 +175,27 @@
             this.BtnPanel.Size = new System.Drawing.Size(250, 50);
             this.BtnPanel.TabIndex = 5;
             // 
+            // BtnLogout
+            // 
+            this.BtnLogout.BackColor = System.Drawing.Color.Maroon;
+            this.BtnLogout.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.BtnLogout.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnLogout.Location = new System.Drawing.Point(21, -1);
+            this.BtnLogout.Name = "BtnLogout";
+            this.BtnLogout.Size = new System.Drawing.Size(206, 50);
+            this.BtnLogout.TabIndex = 2;
+            this.BtnLogout.Text = "注销";
+            this.BtnLogout.UseVisualStyleBackColor = false;
+            this.BtnLogout.Visible = false;
+            this.BtnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
+            // 
             // BtnRegister
             // 
-            this.BtnRegister.BackColor = System.Drawing.Color.Silver;
+            this.BtnRegister.BackColor = System.Drawing.Color.DarkKhaki;
             this.BtnRegister.Dock = System.Windows.Forms.DockStyle.Right;
             this.BtnRegister.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.BtnRegister.FlatAppearance.BorderSize = 0;
-            this.BtnRegister.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BtnRegister.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.BtnRegister.Location = new System.Drawing.Point(125, 0);
             this.BtnRegister.Margin = new System.Windows.Forms.Padding(0);
             this.BtnRegister.Name = "BtnRegister";
@@ -195,11 +207,12 @@
             // 
             // BtnLogin
             // 
-            this.BtnLogin.BackColor = System.Drawing.Color.Silver;
+            this.BtnLogin.BackColor = System.Drawing.Color.Green;
             this.BtnLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BtnLogin.Dock = System.Windows.Forms.DockStyle.Left;
             this.BtnLogin.FlatAppearance.BorderSize = 0;
             this.BtnLogin.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BtnLogin.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.BtnLogin.Location = new System.Drawing.Point(0, 0);
             this.BtnLogin.Margin = new System.Windows.Forms.Padding(0);
             this.BtnLogin.Name = "BtnLogin";
@@ -220,7 +233,7 @@
             // 
             // LabelWelcome
             // 
-            this.LabelWelcome.BackColor = System.Drawing.Color.LightSlateGray;
+            this.LabelWelcome.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.LabelWelcome.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LabelWelcome.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelWelcome.Location = new System.Drawing.Point(0, 0);
@@ -238,10 +251,10 @@
             this.BtnPersonalData.FlatAppearance.BorderSize = 0;
             this.BtnPersonalData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnPersonalData.Font = new System.Drawing.Font("华文新魏", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.BtnPersonalData.ForeColor = System.Drawing.Color.White;
+            this.BtnPersonalData.ForeColor = System.Drawing.Color.Black;
             this.BtnPersonalData.Image = global::Shared_Novel_Reader.Properties.Resources.personal_Data;
             this.BtnPersonalData.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnPersonalData.Location = new System.Drawing.Point(0, 419);
+            this.BtnPersonalData.Location = new System.Drawing.Point(0, 335);
             this.BtnPersonalData.Margin = new System.Windows.Forms.Padding(0);
             this.BtnPersonalData.Name = "BtnPersonalData";
             this.BtnPersonalData.Size = new System.Drawing.Size(250, 60);
@@ -251,36 +264,16 @@
             this.BtnPersonalData.Visible = false;
             this.BtnPersonalData.Click += new System.EventHandler(this.BtnPersonalData_Click);
             // 
-            // BtnResManage
-            // 
-            this.BtnResManage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BtnResManage.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnResManage.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.BtnResManage.FlatAppearance.BorderSize = 0;
-            this.BtnResManage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnResManage.Font = new System.Drawing.Font("华文新魏", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.BtnResManage.ForeColor = System.Drawing.Color.White;
-            this.BtnResManage.Image = global::Shared_Novel_Reader.Properties.Resources.Resources_Outlined;
-            this.BtnResManage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnResManage.Location = new System.Drawing.Point(0, 347);
-            this.BtnResManage.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnResManage.Name = "BtnResManage";
-            this.BtnResManage.Size = new System.Drawing.Size(250, 60);
-            this.BtnResManage.TabIndex = 1;
-            this.BtnResManage.Text = "资源管理";
-            this.BtnResManage.UseVisualStyleBackColor = true;
-            this.BtnResManage.Visible = false;
-            this.BtnResManage.Click += new System.EventHandler(this.BtnResManage_Click);
-            // 
             // BtnBookShelf
             // 
+            this.BtnBookShelf.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnBookShelf.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BtnBookShelf.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnBookShelf.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.BtnBookShelf.FlatAppearance.BorderSize = 0;
             this.BtnBookShelf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnBookShelf.Font = new System.Drawing.Font("华文新魏", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.BtnBookShelf.ForeColor = System.Drawing.Color.White;
+            this.BtnBookShelf.ForeColor = System.Drawing.Color.Black;
             this.BtnBookShelf.Image = global::Shared_Novel_Reader.Properties.Resources.chart_bar;
             this.BtnBookShelf.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnBookShelf.Location = new System.Drawing.Point(0, 275);
@@ -289,13 +282,13 @@
             this.BtnBookShelf.Size = new System.Drawing.Size(250, 60);
             this.BtnBookShelf.TabIndex = 0;
             this.BtnBookShelf.Text = "书架";
-            this.BtnBookShelf.UseVisualStyleBackColor = true;
+            this.BtnBookShelf.UseVisualStyleBackColor = false;
             this.BtnBookShelf.Visible = false;
             this.BtnBookShelf.Click += new System.EventHandler(this.BtnBookShelf_Click);
             // 
             // TopPanel
             // 
-            this.TopPanel.BackColor = System.Drawing.Color.Gray;
+            this.TopPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.TopPanel.Controls.Add(this.LabelTime);
             this.TopPanel.Controls.Add(this.LabelAppTitle);
             this.TopPanel.Controls.Add(this.BtnClose);
@@ -358,7 +351,7 @@
             // LabelToolString
             // 
             this.LabelToolString.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.LabelToolString.BackColor = System.Drawing.Color.Gray;
+            this.LabelToolString.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.LabelToolString.Location = new System.Drawing.Point(478, 0);
             this.LabelToolString.Name = "LabelToolString";
             this.LabelToolString.Size = new System.Drawing.Size(655, 60);
@@ -370,7 +363,7 @@
             // 
             // MainPanel
             // 
-            this.MainPanel.BackColor = System.Drawing.Color.Silver;
+            this.MainPanel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.ForeColor = System.Drawing.Color.Silver;
             this.MainPanel.Location = new System.Drawing.Point(250, 60);
@@ -382,18 +375,6 @@
             // 
             this.TimerTopPanelTime.Interval = 1000;
             this.TimerTopPanelTime.Tick += new System.EventHandler(this.TimerTopPanelTime_Tick);
-            // 
-            // BtnLogout
-            // 
-            this.BtnLogout.BackColor = System.Drawing.Color.Red;
-            this.BtnLogout.Location = new System.Drawing.Point(23, 0);
-            this.BtnLogout.Name = "BtnLogout";
-            this.BtnLogout.Size = new System.Drawing.Size(206, 50);
-            this.BtnLogout.TabIndex = 2;
-            this.BtnLogout.Text = "注销";
-            this.BtnLogout.UseVisualStyleBackColor = false;
-            this.BtnLogout.Visible = false;
-            this.BtnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
             // 
             // MainForm
             // 
@@ -428,7 +409,6 @@
         private System.Windows.Forms.Panel MainPanel;
         private System.Windows.Forms.Button BtnBookShelf;
         private System.Windows.Forms.Button BtnPersonalData;
-        private System.Windows.Forms.Button BtnResManage;
         private System.Windows.Forms.Button BtnClose;
         private System.Windows.Forms.Panel LogoPanel;
         private System.Windows.Forms.Panel TitlePanel;

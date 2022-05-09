@@ -71,44 +71,51 @@
             // 
             // LabelAgree
             // 
+            this.LabelAgree.BackColor = System.Drawing.Color.SeaGreen;
+            this.LabelAgree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LabelAgree.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LabelAgree.ForeColor = System.Drawing.Color.Green;
+            this.LabelAgree.ForeColor = System.Drawing.Color.LightYellow;
             this.LabelAgree.Location = new System.Drawing.Point(909, 67);
             this.LabelAgree.Name = "LabelAgree";
-            this.LabelAgree.Size = new System.Drawing.Size(97, 18);
+            this.LabelAgree.Size = new System.Drawing.Size(55, 30);
             this.LabelAgree.TabIndex = 4;
             this.LabelAgree.Text = "点赞";
+            this.LabelAgree.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LabelAgree.Click += new System.EventHandler(this.labelAgree_Click);
             // 
             // LabelReply
             // 
-            this.LabelReply.AutoSize = true;
+            this.LabelReply.BackColor = System.Drawing.Color.Olive;
+            this.LabelReply.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LabelReply.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LabelReply.ForeColor = System.Drawing.Color.Green;
-            this.LabelReply.Location = new System.Drawing.Point(1012, 67);
+            this.LabelReply.ForeColor = System.Drawing.Color.White;
+            this.LabelReply.Location = new System.Drawing.Point(980, 67);
             this.LabelReply.Name = "LabelReply";
-            this.LabelReply.Size = new System.Drawing.Size(44, 18);
+            this.LabelReply.Size = new System.Drawing.Size(55, 30);
             this.LabelReply.TabIndex = 5;
             this.LabelReply.Text = "回复";
+            this.LabelReply.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LabelReply.Click += new System.EventHandler(this.LabelReply_Click);
             // 
             // LabelReport
             // 
-            this.LabelReport.AutoSize = true;
+            this.LabelReport.BackColor = System.Drawing.Color.Firebrick;
+            this.LabelReport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LabelReport.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LabelReport.ForeColor = System.Drawing.Color.Green;
-            this.LabelReport.Location = new System.Drawing.Point(1062, 67);
+            this.LabelReport.ForeColor = System.Drawing.Color.White;
+            this.LabelReport.Location = new System.Drawing.Point(1050, 67);
             this.LabelReport.Name = "LabelReport";
-            this.LabelReport.Size = new System.Drawing.Size(44, 18);
+            this.LabelReport.Size = new System.Drawing.Size(55, 30);
             this.LabelReport.TabIndex = 6;
             this.LabelReport.Text = "举报";
+            this.LabelReport.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LabelReport.Click += new System.EventHandler(this.LabelReport_Click);
             // 
             // FormNoteComment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1115, 100);
             this.Controls.Add(this.LabelReport);
             this.Controls.Add(this.LabelReply);
@@ -121,7 +128,6 @@
             this.Name = "FormNoteComment";
             this.Text = "FormNoteComment";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

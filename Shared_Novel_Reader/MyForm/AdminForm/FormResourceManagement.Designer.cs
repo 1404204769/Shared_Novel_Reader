@@ -64,7 +64,7 @@
             this.DataGridViewResourceBook.AllowUserToDeleteRows = false;
             this.DataGridViewResourceBook.AllowUserToOrderColumns = true;
             this.DataGridViewResourceBook.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DataGridViewResourceBook.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.DataGridViewResourceBook.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.DataGridViewResourceBook.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

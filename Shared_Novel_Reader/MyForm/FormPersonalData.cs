@@ -88,11 +88,15 @@ namespace Shared_Novel_Reader.MyForm
 
             MyResponse res = await ChangeRes;
 
-            if (res == null || !res.Result)
+            if (res == null)
             {
                 // 清除残留数据
                 MessageBox.Show("网络异常，请重试");
                 return;
+            }
+            else if(!res.Result)
+            {
+                MessageBox.Show("个人资料保存失败:"+res.Message);
             }
             else if (res.Data.ToString() == "")
             {

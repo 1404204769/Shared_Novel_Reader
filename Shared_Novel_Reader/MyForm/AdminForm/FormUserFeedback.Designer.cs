@@ -31,12 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DataGridViewUserFeedback = new System.Windows.Forms.DataGridView();
-            this.ContextMenuStripFindUserFeedback = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
-            this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
-            this.执行审核ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Allow = new System.Windows.Forms.ToolStripMenuItem();
-            this.Refuse = new System.Windows.Forms.ToolStripMenuItem();
             this.Idea_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.User_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,6 +40,12 @@
             this.Processor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Create_Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Update_Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContextMenuStripFindUserFeedback = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.执行审核ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Allow = new System.Windows.Forms.ToolStripMenuItem();
+            this.Refuse = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUserFeedback)).BeginInit();
             this.ContextMenuStripFindUserFeedback.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +57,7 @@
             this.DataGridViewUserFeedback.AllowUserToOrderColumns = true;
             this.DataGridViewUserFeedback.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGridViewUserFeedback.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.DataGridViewUserFeedback.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.DataGridViewUserFeedback.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.DataGridViewUserFeedback.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewUserFeedback.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Idea_ID,
@@ -83,53 +83,6 @@
             this.DataGridViewUserFeedback.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DataGridViewUserFeedback.Size = new System.Drawing.Size(1150, 690);
             this.DataGridViewUserFeedback.TabIndex = 1;
-            // 
-            // ContextMenuStripFindUserFeedback
-            // 
-            this.ContextMenuStripFindUserFeedback.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.ContextMenuStripFindUserFeedback.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.执行审核ToolStripMenuItem,
-            this.ViewDetails,
-            this.ReFind});
-            this.ContextMenuStripFindUserFeedback.Name = "ContextMenuStripFindUser";
-            this.ContextMenuStripFindUserFeedback.Size = new System.Drawing.Size(189, 94);
-            // 
-            // ReFind
-            // 
-            this.ReFind.Name = "ReFind";
-            this.ReFind.Size = new System.Drawing.Size(188, 30);
-            this.ReFind.Text = "重置查询范围";
-            this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
-            // 
-            // ViewDetails
-            // 
-            this.ViewDetails.Name = "ViewDetails";
-            this.ViewDetails.Size = new System.Drawing.Size(188, 30);
-            this.ViewDetails.Text = "查看详情";
-            this.ViewDetails.Click += new System.EventHandler(this.ViewDetails_Click);
-            // 
-            // 执行审核ToolStripMenuItem
-            // 
-            this.执行审核ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Allow,
-            this.Refuse});
-            this.执行审核ToolStripMenuItem.Name = "执行审核ToolStripMenuItem";
-            this.执行审核ToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
-            this.执行审核ToolStripMenuItem.Text = "执行审核";
-            // 
-            // Allow
-            // 
-            this.Allow.Name = "Allow";
-            this.Allow.Size = new System.Drawing.Size(270, 34);
-            this.Allow.Text = "已完成";
-            this.Allow.Click += new System.EventHandler(this.Allow_Click);
-            // 
-            // Refuse
-            // 
-            this.Refuse.Name = "Refuse";
-            this.Refuse.Size = new System.Drawing.Size(270, 34);
-            this.Refuse.Text = "拒绝执行";
-            this.Refuse.Click += new System.EventHandler(this.Refuse_Click);
             // 
             // Idea_ID
             // 
@@ -194,6 +147,53 @@
             this.Update_Time.MinimumWidth = 8;
             this.Update_Time.Name = "Update_Time";
             this.Update_Time.ReadOnly = true;
+            // 
+            // ContextMenuStripFindUserFeedback
+            // 
+            this.ContextMenuStripFindUserFeedback.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.ContextMenuStripFindUserFeedback.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.执行审核ToolStripMenuItem,
+            this.ViewDetails,
+            this.ReFind});
+            this.ContextMenuStripFindUserFeedback.Name = "ContextMenuStripFindUser";
+            this.ContextMenuStripFindUserFeedback.Size = new System.Drawing.Size(189, 94);
+            // 
+            // 执行审核ToolStripMenuItem
+            // 
+            this.执行审核ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Allow,
+            this.Refuse});
+            this.执行审核ToolStripMenuItem.Name = "执行审核ToolStripMenuItem";
+            this.执行审核ToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.执行审核ToolStripMenuItem.Text = "执行审核";
+            // 
+            // Allow
+            // 
+            this.Allow.Name = "Allow";
+            this.Allow.Size = new System.Drawing.Size(182, 34);
+            this.Allow.Text = "已完成";
+            this.Allow.Click += new System.EventHandler(this.Allow_Click);
+            // 
+            // Refuse
+            // 
+            this.Refuse.Name = "Refuse";
+            this.Refuse.Size = new System.Drawing.Size(182, 34);
+            this.Refuse.Text = "拒绝执行";
+            this.Refuse.Click += new System.EventHandler(this.Refuse_Click);
+            // 
+            // ViewDetails
+            // 
+            this.ViewDetails.Name = "ViewDetails";
+            this.ViewDetails.Size = new System.Drawing.Size(188, 30);
+            this.ViewDetails.Text = "查看详情";
+            this.ViewDetails.Click += new System.EventHandler(this.ViewDetails_Click);
+            // 
+            // ReFind
+            // 
+            this.ReFind.Name = "ReFind";
+            this.ReFind.Size = new System.Drawing.Size(188, 30);
+            this.ReFind.Text = "重置查询范围";
+            this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
             // 
             // FormUserFeedback
             // 

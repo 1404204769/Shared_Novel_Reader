@@ -35,6 +35,7 @@
             // 
             // labelTitle
             // 
+            this.labelTitle.BackColor = System.Drawing.Color.White;
             this.labelTitle.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitle.Location = new System.Drawing.Point(12, 9);
             this.labelTitle.Name = "labelTitle";
@@ -45,8 +46,7 @@
             // 
             // labelContent
             // 
-            this.labelContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.labelContent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelContent.BackColor = System.Drawing.Color.Gainsboro;
             this.labelContent.ForeColor = System.Drawing.Color.Black;
             this.labelContent.Location = new System.Drawing.Point(110, 62);
             this.labelContent.Name = "labelContent";
@@ -56,22 +56,24 @@
             // 
             // labelLink
             // 
-            this.labelLink.AutoSize = true;
+            this.labelLink.BackColor = System.Drawing.Color.Chocolate;
             this.labelLink.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelLink.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelLink.ForeColor = System.Drawing.Color.DarkCyan;
-            this.labelLink.Location = new System.Drawing.Point(1034, 23);
+            this.labelLink.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLink.ForeColor = System.Drawing.Color.Transparent;
+            this.labelLink.Location = new System.Drawing.Point(1014, 9);
             this.labelLink.Name = "labelLink";
-            this.labelLink.Size = new System.Drawing.Size(80, 18);
+            this.labelLink.Size = new System.Drawing.Size(100, 30);
             this.labelLink.TabIndex = 2;
             this.labelLink.Text = "查看详情";
+            this.labelLink.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelLink.Click += new System.EventHandler(this.labelLink_Click);
             // 
             // FormNoteRows
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1140, 150);
             this.Controls.Add(this.labelLink);
             this.Controls.Add(this.labelContent);
@@ -82,7 +84,6 @@
             this.Name = "FormNoteRows";
             this.Text = "FormNoteRows";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

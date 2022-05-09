@@ -397,7 +397,13 @@ namespace Shared_Novel_Reader.MyForm
             {
                 if(row.Selected)
                 {
+
                     string bookname = row.Cells[0].Value.ToString();
+                    DialogResult result = MessageBox.Show("确定要删除此资源("+ bookname + ")吗？", "删除资源", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.No)
+                    {
+                        return;
+                    }
                     bool res = LocalBookShelf.RemoveFromBookshelf(bookname);
                     if (res)
                     {

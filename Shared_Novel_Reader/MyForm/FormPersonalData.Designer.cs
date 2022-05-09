@@ -165,29 +165,33 @@
             // 
             // LabelSave
             // 
-            this.LabelSave.AutoSize = true;
+            this.LabelSave.BackColor = System.Drawing.Color.ForestGreen;
+            this.LabelSave.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LabelSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LabelSave.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelSave.ForeColor = System.Drawing.Color.Teal;
-            this.LabelSave.Location = new System.Drawing.Point(869, 51);
+            this.LabelSave.ForeColor = System.Drawing.Color.Azure;
+            this.LabelSave.Location = new System.Drawing.Point(848, 51);
             this.LabelSave.Name = "LabelSave";
-            this.LabelSave.Size = new System.Drawing.Size(62, 28);
+            this.LabelSave.Size = new System.Drawing.Size(70, 40);
             this.LabelSave.TabIndex = 20;
             this.LabelSave.Text = "保存";
+            this.LabelSave.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LabelSave.Visible = false;
             this.LabelSave.Click += new System.EventHandler(this.LabelSave_Click);
             // 
             // LabelEdit
             // 
-            this.LabelEdit.AutoSize = true;
+            this.LabelEdit.BackColor = System.Drawing.Color.IndianRed;
+            this.LabelEdit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LabelEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LabelEdit.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelEdit.ForeColor = System.Drawing.Color.Teal;
-            this.LabelEdit.Location = new System.Drawing.Point(955, 51);
+            this.LabelEdit.ForeColor = System.Drawing.Color.LightCyan;
+            this.LabelEdit.Location = new System.Drawing.Point(949, 51);
             this.LabelEdit.Name = "LabelEdit";
-            this.LabelEdit.Size = new System.Drawing.Size(62, 28);
+            this.LabelEdit.Size = new System.Drawing.Size(70, 40);
             this.LabelEdit.TabIndex = 21;
             this.LabelEdit.Text = "编辑";
+            this.LabelEdit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LabelEdit.Click += new System.EventHandler(this.LabelEdit_Click);
             // 
             // TextSexValue
@@ -291,35 +295,39 @@
             // 
             // LabelPwd
             // 
-            this.LabelPwd.AutoSize = true;
+            this.LabelPwd.BackColor = System.Drawing.Color.Gainsboro;
+            this.LabelPwd.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.LabelPwd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LabelPwd.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelPwd.ForeColor = System.Drawing.Color.Teal;
             this.LabelPwd.Location = new System.Drawing.Point(54, 592);
             this.LabelPwd.Name = "LabelPwd";
-            this.LabelPwd.Size = new System.Drawing.Size(112, 28);
+            this.LabelPwd.Size = new System.Drawing.Size(150, 40);
             this.LabelPwd.TabIndex = 30;
             this.LabelPwd.Text = "修改密码";
+            this.LabelPwd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LabelPwd.Click += new System.EventHandler(this.LabelPwd_Click);
             // 
             // LabelFeedback
             // 
-            this.LabelFeedback.AutoSize = true;
+            this.LabelFeedback.BackColor = System.Drawing.Color.NavajoWhite;
+            this.LabelFeedback.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LabelFeedback.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LabelFeedback.Font = new System.Drawing.Font("Bookman Old Style", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelFeedback.ForeColor = System.Drawing.Color.Teal;
-            this.LabelFeedback.Location = new System.Drawing.Point(999, 695);
+            this.LabelFeedback.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelFeedback.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.LabelFeedback.Location = new System.Drawing.Point(988, 691);
             this.LabelFeedback.Name = "LabelFeedback";
-            this.LabelFeedback.Size = new System.Drawing.Size(139, 36);
+            this.LabelFeedback.Size = new System.Drawing.Size(150, 40);
             this.LabelFeedback.TabIndex = 31;
             this.LabelFeedback.Text = "意见反馈";
+            this.LabelFeedback.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LabelFeedback.Click += new System.EventHandler(this.LabelFeedback_Click);
             // 
             // FormPersonalData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Silver;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1150, 740);
             this.Controls.Add(this.LabelFeedback);
             this.Controls.Add(this.LabelPwd);

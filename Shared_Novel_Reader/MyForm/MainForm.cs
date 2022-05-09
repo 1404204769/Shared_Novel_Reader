@@ -62,7 +62,6 @@ namespace Shared_Novel_Reader.MyForm
             // 游客权限
 
             BtnBookShelf.Visible = true;
-            BtnResManage.Visible = true;
             BtnPersonalData.Visible = false;
             BtnBookPlatform.Visible = false;
             BtnAdminControl.Visible = false;

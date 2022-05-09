@@ -47,8 +47,8 @@
             this.toolStripLabelRowNumValue = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabelChineseNum = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabelChineseNumValue = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabelVersion = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabelVersionValue = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabelVersion = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewChapterContent)).BeginInit();
             this.toolStripTop.SuspendLayout();
             this.toolStripBottom.SuspendLayout();
@@ -61,7 +61,7 @@
             this.DataGridViewChapterContent.AllowUserToResizeColumns = false;
             this.DataGridViewChapterContent.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DataGridViewChapterContent.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.DataGridViewChapterContent.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.DataGridViewChapterContent.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.DataGridViewChapterContent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewChapterContent.ColumnHeadersVisible = false;
             this.DataGridViewChapterContent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -218,14 +218,6 @@
             this.toolStripLabelChineseNumValue.Text = "字数";
             this.toolStripLabelChineseNumValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // toolStripLabelVersion
-            // 
-            this.toolStripLabelVersion.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabelVersion.Name = "toolStripLabelVersion";
-            this.toolStripLabelVersion.Size = new System.Drawing.Size(50, 24);
-            this.toolStripLabelVersion.Text = "版本:";
-            this.toolStripLabelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // toolStripLabelVersionValue
             // 
             this.toolStripLabelVersionValue.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -233,6 +225,14 @@
             this.toolStripLabelVersionValue.Size = new System.Drawing.Size(46, 24);
             this.toolStripLabelVersionValue.Text = "版本";
             this.toolStripLabelVersionValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripLabelVersion
+            // 
+            this.toolStripLabelVersion.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabelVersion.Name = "toolStripLabelVersion";
+            this.toolStripLabelVersion.Size = new System.Drawing.Size(50, 24);
+            this.toolStripLabelVersion.Text = "版本:";
+            this.toolStripLabelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // FormChapterContent
             // 

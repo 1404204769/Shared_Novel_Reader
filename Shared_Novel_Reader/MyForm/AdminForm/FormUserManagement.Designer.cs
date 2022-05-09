@@ -59,7 +59,7 @@
             this.DataGridViewUser.AllowUserToResizeColumns = false;
             this.DataGridViewUser.AllowUserToResizeRows = false;
             this.DataGridViewUser.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DataGridViewUser.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.DataGridViewUser.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.DataGridViewUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.User_ID,

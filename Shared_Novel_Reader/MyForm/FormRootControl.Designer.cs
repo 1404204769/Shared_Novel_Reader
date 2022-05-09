@@ -135,7 +135,7 @@ namespace Shared_Novel_Reader.MyForm
             this.DataGridViewUser.AllowUserToResizeColumns = false;
             this.DataGridViewUser.AllowUserToResizeRows = false;
             this.DataGridViewUser.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DataGridViewUser.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.DataGridViewUser.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.DataGridViewUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.User_ID,
@@ -279,116 +279,124 @@ namespace Shared_Novel_Reader.MyForm
             // 
             // BtnWARNClose
             // 
-            this.BtnWARNClose.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
-            this.BtnWARNClose.ForeColor = System.Drawing.Color.Black;
-            this.BtnWARNClose.Location = new System.Drawing.Point(620, 276);
+            this.BtnWARNClose.BackColor = System.Drawing.Color.Firebrick;
+            this.BtnWARNClose.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnWARNClose.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnWARNClose.Location = new System.Drawing.Point(738, 341);
             this.BtnWARNClose.Name = "BtnWARNClose";
             this.BtnWARNClose.Size = new System.Drawing.Size(126, 44);
             this.BtnWARNClose.TabIndex = 20;
             this.BtnWARNClose.Text = "关闭";
-            this.BtnWARNClose.UseVisualStyleBackColor = true;
+            this.BtnWARNClose.UseVisualStyleBackColor = false;
             this.BtnWARNClose.Visible = false;
             this.BtnWARNClose.Click += new System.EventHandler(this.BtnWARNClose_Click);
             // 
             // BtnINFOClose
             // 
-            this.BtnINFOClose.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
-            this.BtnINFOClose.ForeColor = System.Drawing.Color.Black;
-            this.BtnINFOClose.Location = new System.Drawing.Point(620, 219);
+            this.BtnINFOClose.BackColor = System.Drawing.Color.Firebrick;
+            this.BtnINFOClose.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnINFOClose.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnINFOClose.Location = new System.Drawing.Point(738, 284);
             this.BtnINFOClose.Name = "BtnINFOClose";
             this.BtnINFOClose.Size = new System.Drawing.Size(126, 44);
             this.BtnINFOClose.TabIndex = 19;
             this.BtnINFOClose.Text = "关闭";
-            this.BtnINFOClose.UseVisualStyleBackColor = true;
+            this.BtnINFOClose.UseVisualStyleBackColor = false;
             this.BtnINFOClose.Visible = false;
             this.BtnINFOClose.Click += new System.EventHandler(this.BtnINFOClose_Click);
             // 
             // BtnDEBUGClose
             // 
-            this.BtnDEBUGClose.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
-            this.BtnDEBUGClose.ForeColor = System.Drawing.Color.Black;
-            this.BtnDEBUGClose.Location = new System.Drawing.Point(620, 159);
+            this.BtnDEBUGClose.BackColor = System.Drawing.Color.Firebrick;
+            this.BtnDEBUGClose.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnDEBUGClose.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnDEBUGClose.Location = new System.Drawing.Point(738, 224);
             this.BtnDEBUGClose.Name = "BtnDEBUGClose";
             this.BtnDEBUGClose.Size = new System.Drawing.Size(126, 44);
             this.BtnDEBUGClose.TabIndex = 18;
             this.BtnDEBUGClose.Text = "关闭";
-            this.BtnDEBUGClose.UseVisualStyleBackColor = true;
+            this.BtnDEBUGClose.UseVisualStyleBackColor = false;
             this.BtnDEBUGClose.Visible = false;
             this.BtnDEBUGClose.Click += new System.EventHandler(this.BtnDEBUGClose_Click);
             // 
             // BtnWARNOpen
             // 
-            this.BtnWARNOpen.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
-            this.BtnWARNOpen.ForeColor = System.Drawing.Color.Black;
-            this.BtnWARNOpen.Location = new System.Drawing.Point(620, 276);
+            this.BtnWARNOpen.BackColor = System.Drawing.Color.DarkGreen;
+            this.BtnWARNOpen.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnWARNOpen.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnWARNOpen.Location = new System.Drawing.Point(738, 341);
             this.BtnWARNOpen.Name = "BtnWARNOpen";
             this.BtnWARNOpen.Size = new System.Drawing.Size(126, 44);
             this.BtnWARNOpen.TabIndex = 17;
             this.BtnWARNOpen.Text = "打开";
-            this.BtnWARNOpen.UseVisualStyleBackColor = true;
+            this.BtnWARNOpen.UseVisualStyleBackColor = false;
             this.BtnWARNOpen.Visible = false;
             this.BtnWARNOpen.Click += new System.EventHandler(this.BtnWARNOpen_Click);
             // 
             // BtnINFOOpen
             // 
-            this.BtnINFOOpen.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
-            this.BtnINFOOpen.ForeColor = System.Drawing.Color.Black;
-            this.BtnINFOOpen.Location = new System.Drawing.Point(620, 219);
+            this.BtnINFOOpen.BackColor = System.Drawing.Color.DarkGreen;
+            this.BtnINFOOpen.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnINFOOpen.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnINFOOpen.Location = new System.Drawing.Point(738, 284);
             this.BtnINFOOpen.Name = "BtnINFOOpen";
             this.BtnINFOOpen.Size = new System.Drawing.Size(126, 44);
             this.BtnINFOOpen.TabIndex = 16;
             this.BtnINFOOpen.Text = "打开";
-            this.BtnINFOOpen.UseVisualStyleBackColor = true;
+            this.BtnINFOOpen.UseVisualStyleBackColor = false;
             this.BtnINFOOpen.Visible = false;
             this.BtnINFOOpen.Click += new System.EventHandler(this.BtnINFOOpen_Click);
             // 
             // BtnDEBUGOpen
             // 
-            this.BtnDEBUGOpen.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
-            this.BtnDEBUGOpen.ForeColor = System.Drawing.Color.Black;
-            this.BtnDEBUGOpen.Location = new System.Drawing.Point(620, 159);
+            this.BtnDEBUGOpen.BackColor = System.Drawing.Color.DarkGreen;
+            this.BtnDEBUGOpen.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnDEBUGOpen.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnDEBUGOpen.Location = new System.Drawing.Point(738, 224);
             this.BtnDEBUGOpen.Name = "BtnDEBUGOpen";
             this.BtnDEBUGOpen.Size = new System.Drawing.Size(126, 44);
             this.BtnDEBUGOpen.TabIndex = 15;
             this.BtnDEBUGOpen.Text = "打开";
-            this.BtnDEBUGOpen.UseVisualStyleBackColor = true;
+            this.BtnDEBUGOpen.UseVisualStyleBackColor = false;
             this.BtnDEBUGOpen.Visible = false;
             this.BtnDEBUGOpen.Click += new System.EventHandler(this.BtnDEBUGOpen_Click);
             // 
             // BtnTRACEOpen
             // 
-            this.BtnTRACEOpen.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
-            this.BtnTRACEOpen.ForeColor = System.Drawing.Color.Black;
-            this.BtnTRACEOpen.Location = new System.Drawing.Point(620, 96);
+            this.BtnTRACEOpen.BackColor = System.Drawing.Color.DarkGreen;
+            this.BtnTRACEOpen.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnTRACEOpen.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnTRACEOpen.Location = new System.Drawing.Point(738, 161);
             this.BtnTRACEOpen.Name = "BtnTRACEOpen";
             this.BtnTRACEOpen.Size = new System.Drawing.Size(126, 44);
             this.BtnTRACEOpen.TabIndex = 14;
             this.BtnTRACEOpen.Text = "打开";
-            this.BtnTRACEOpen.UseVisualStyleBackColor = true;
+            this.BtnTRACEOpen.UseVisualStyleBackColor = false;
             this.BtnTRACEOpen.Visible = false;
             this.BtnTRACEOpen.Click += new System.EventHandler(this.BtnTRACEOpen_Click);
             // 
             // BtnTRACEClose
             // 
-            this.BtnTRACEClose.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
-            this.BtnTRACEClose.ForeColor = System.Drawing.Color.Black;
-            this.BtnTRACEClose.Location = new System.Drawing.Point(620, 96);
+            this.BtnTRACEClose.BackColor = System.Drawing.Color.Firebrick;
+            this.BtnTRACEClose.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnTRACEClose.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnTRACEClose.Location = new System.Drawing.Point(738, 161);
             this.BtnTRACEClose.Name = "BtnTRACEClose";
             this.BtnTRACEClose.Size = new System.Drawing.Size(126, 44);
             this.BtnTRACEClose.TabIndex = 13;
             this.BtnTRACEClose.Text = "关闭";
-            this.BtnTRACEClose.UseVisualStyleBackColor = true;
+            this.BtnTRACEClose.UseVisualStyleBackColor = false;
             this.BtnTRACEClose.Visible = false;
             this.BtnTRACEClose.Click += new System.EventHandler(this.BtnTRACEClose_Click);
             // 
             // BtnClose
             // 
             this.BtnClose.BackColor = System.Drawing.Color.Brown;
-            this.BtnClose.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
-            this.BtnClose.ForeColor = System.Drawing.Color.Black;
-            this.BtnClose.Location = new System.Drawing.Point(247, 429);
+            this.BtnClose.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnClose.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnClose.Location = new System.Drawing.Point(432, 452);
             this.BtnClose.Name = "BtnClose";
-            this.BtnClose.Size = new System.Drawing.Size(126, 44);
+            this.BtnClose.Size = new System.Drawing.Size(126, 50);
             this.BtnClose.TabIndex = 12;
             this.BtnClose.Text = "关闭";
             this.BtnClose.UseVisualStyleBackColor = false;
@@ -396,12 +404,12 @@ namespace Shared_Novel_Reader.MyForm
             // 
             // BtnRestart
             // 
-            this.BtnRestart.BackColor = System.Drawing.Color.LightGray;
+            this.BtnRestart.BackColor = System.Drawing.Color.DarkSlateGray;
             this.BtnRestart.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
-            this.BtnRestart.ForeColor = System.Drawing.Color.Black;
-            this.BtnRestart.Location = new System.Drawing.Point(399, 429);
+            this.BtnRestart.ForeColor = System.Drawing.Color.White;
+            this.BtnRestart.Location = new System.Drawing.Point(584, 452);
             this.BtnRestart.Name = "BtnRestart";
-            this.BtnRestart.Size = new System.Drawing.Size(126, 44);
+            this.BtnRestart.Size = new System.Drawing.Size(126, 50);
             this.BtnRestart.TabIndex = 11;
             this.BtnRestart.Text = "重启";
             this.BtnRestart.UseVisualStyleBackColor = false;
@@ -412,7 +420,7 @@ namespace Shared_Novel_Reader.MyForm
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(36, 389);
+            this.label3.Location = new System.Drawing.Point(213, 459);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(159, 32);
             this.label3.TabIndex = 10;
@@ -423,7 +431,7 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelWARNValue.AutoSize = true;
             this.LabelWARNValue.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelWARNValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelWARNValue.Location = new System.Drawing.Point(422, 282);
+            this.LabelWARNValue.Location = new System.Drawing.Point(540, 347);
             this.LabelWARNValue.Name = "LabelWARNValue";
             this.LabelWARNValue.Size = new System.Drawing.Size(130, 32);
             this.LabelWARNValue.TabIndex = 9;
@@ -434,7 +442,7 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelWARN.AutoSize = true;
             this.LabelWARN.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelWARN.ForeColor = System.Drawing.Color.Black;
-            this.LabelWARN.Location = new System.Drawing.Point(241, 282);
+            this.LabelWARN.Location = new System.Drawing.Point(359, 347);
             this.LabelWARN.Name = "LabelWARN";
             this.LabelWARN.Size = new System.Drawing.Size(132, 32);
             this.LabelWARN.TabIndex = 8;
@@ -445,7 +453,7 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelINFOValue.AutoSize = true;
             this.LabelINFOValue.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelINFOValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelINFOValue.Location = new System.Drawing.Point(422, 219);
+            this.LabelINFOValue.Location = new System.Drawing.Point(540, 284);
             this.LabelINFOValue.Name = "LabelINFOValue";
             this.LabelINFOValue.Size = new System.Drawing.Size(130, 32);
             this.LabelINFOValue.TabIndex = 7;
@@ -456,7 +464,7 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelINFO.AutoSize = true;
             this.LabelINFO.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelINFO.ForeColor = System.Drawing.Color.Black;
-            this.LabelINFO.Location = new System.Drawing.Point(241, 219);
+            this.LabelINFO.Location = new System.Drawing.Point(359, 284);
             this.LabelINFO.Name = "LabelINFO";
             this.LabelINFO.Size = new System.Drawing.Size(116, 32);
             this.LabelINFO.TabIndex = 6;
@@ -467,7 +475,7 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelDEBUGValue.AutoSize = true;
             this.LabelDEBUGValue.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelDEBUGValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelDEBUGValue.Location = new System.Drawing.Point(422, 165);
+            this.LabelDEBUGValue.Location = new System.Drawing.Point(540, 230);
             this.LabelDEBUGValue.Name = "LabelDEBUGValue";
             this.LabelDEBUGValue.Size = new System.Drawing.Size(130, 32);
             this.LabelDEBUGValue.TabIndex = 5;
@@ -478,7 +486,7 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelDEBUG.AutoSize = true;
             this.LabelDEBUG.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelDEBUG.ForeColor = System.Drawing.Color.Black;
-            this.LabelDEBUG.Location = new System.Drawing.Point(241, 165);
+            this.LabelDEBUG.Location = new System.Drawing.Point(359, 230);
             this.LabelDEBUG.Name = "LabelDEBUG";
             this.LabelDEBUG.Size = new System.Drawing.Size(148, 32);
             this.LabelDEBUG.TabIndex = 4;
@@ -489,7 +497,7 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelTRACEValue.AutoSize = true;
             this.LabelTRACEValue.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelTRACEValue.ForeColor = System.Drawing.Color.Black;
-            this.LabelTRACEValue.Location = new System.Drawing.Point(422, 102);
+            this.LabelTRACEValue.Location = new System.Drawing.Point(540, 167);
             this.LabelTRACEValue.Name = "LabelTRACEValue";
             this.LabelTRACEValue.Size = new System.Drawing.Size(130, 32);
             this.LabelTRACEValue.TabIndex = 3;
@@ -500,7 +508,7 @@ namespace Shared_Novel_Reader.MyForm
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(241, 43);
+            this.label2.Location = new System.Drawing.Point(359, 108);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(505, 32);
             this.label2.TabIndex = 2;
@@ -511,7 +519,7 @@ namespace Shared_Novel_Reader.MyForm
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(36, 43);
+            this.label1.Location = new System.Drawing.Point(154, 108);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(217, 32);
             this.label1.TabIndex = 1;
@@ -522,7 +530,7 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelTRACE.AutoSize = true;
             this.LabelTRACE.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelTRACE.ForeColor = System.Drawing.Color.Black;
-            this.LabelTRACE.Location = new System.Drawing.Point(241, 102);
+            this.LabelTRACE.Location = new System.Drawing.Point(359, 167);
             this.LabelTRACE.Name = "LabelTRACE";
             this.LabelTRACE.Size = new System.Drawing.Size(146, 32);
             this.LabelTRACE.TabIndex = 0;

@@ -69,7 +69,7 @@
             this.DataGridViewUserApplication.AllowUserToResizeColumns = false;
             this.DataGridViewUserApplication.AllowUserToResizeRows = false;
             this.DataGridViewUserApplication.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DataGridViewUserApplication.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.DataGridViewUserApplication.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.DataGridViewUserApplication.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -222,7 +222,7 @@
             this.ViewDetails,
             this.ReFind});
             this.ContextMenuStripFindUserApplication.Name = "ContextMenuStripFindUser";
-            this.ContextMenuStripFindUserApplication.Size = new System.Drawing.Size(241, 127);
+            this.ContextMenuStripFindUserApplication.Size = new System.Drawing.Size(189, 94);
             // 
             // ExamineAction
             // 
@@ -230,35 +230,35 @@
             this.ExamineAllow,
             this.ExamineRefuse});
             this.ExamineAction.Name = "ExamineAction";
-            this.ExamineAction.Size = new System.Drawing.Size(240, 30);
+            this.ExamineAction.Size = new System.Drawing.Size(188, 30);
             this.ExamineAction.Text = "执行审核";
             this.ExamineAction.Visible = false;
             // 
             // ExamineAllow
             // 
             this.ExamineAllow.Name = "ExamineAllow";
-            this.ExamineAllow.Size = new System.Drawing.Size(270, 34);
+            this.ExamineAllow.Size = new System.Drawing.Size(146, 34);
             this.ExamineAllow.Text = "允许";
             this.ExamineAllow.Click += new System.EventHandler(this.ExamineAllow_Click);
             // 
             // ExamineRefuse
             // 
             this.ExamineRefuse.Name = "ExamineRefuse";
-            this.ExamineRefuse.Size = new System.Drawing.Size(270, 34);
+            this.ExamineRefuse.Size = new System.Drawing.Size(146, 34);
             this.ExamineRefuse.Text = "拒绝";
             this.ExamineRefuse.Click += new System.EventHandler(this.ExamineRefuse_Click);
             // 
             // ViewDetails
             // 
             this.ViewDetails.Name = "ViewDetails";
-            this.ViewDetails.Size = new System.Drawing.Size(240, 30);
+            this.ViewDetails.Size = new System.Drawing.Size(188, 30);
             this.ViewDetails.Text = "查看详情";
             this.ViewDetails.Click += new System.EventHandler(this.ViewDetail);
             // 
             // ReFind
             // 
             this.ReFind.Name = "ReFind";
-            this.ReFind.Size = new System.Drawing.Size(240, 30);
+            this.ReFind.Size = new System.Drawing.Size(188, 30);
             this.ReFind.Text = "重置查询范围";
             this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
             // 
