@@ -628,8 +628,12 @@ namespace Shared_Novel_Reader.models
                     ReqArray.Add(ChapJson);
                 }
             }
+            if (ReqArray.Count == 0)
+            {
+                MessageBox.Show("上传失败:用户上传内容为空");
+                return;
+            }
             ReqJson["Chapter_List"] = ReqArray;
-
 
             // 发送请求
             var UploadResult = Task<MyResponse>.Run(() => Tools.API.User.Resource.UploadNew(ReqJson));
@@ -640,10 +644,12 @@ namespace Shared_Novel_Reader.models
             {
                 // 清除残留数据
                 log.Info("用户上传资源失败");
+                MessageBox.Show("用户上传资源失败:"+res.Message);
             }
             else if (res.Data["Chapter_List"].ToString() == "")
             {
                 log.Info("用户上传结果为空");
+                MessageBox.Show("用户上传资源失败:用户上传结果为空");
             }
             else
             {
@@ -758,6 +764,11 @@ namespace Shared_Novel_Reader.models
                 ReqArray.Add(ChapJson);
 
             }
+            if (ReqArray.Count == 0)
+            {
+                MessageBox.Show("上传失败:用户上传内容为空");
+                return;
+            }
             ReqJson["Chapter_List"] = ReqArray;
 
             // 发送请求
@@ -769,14 +780,18 @@ namespace Shared_Novel_Reader.models
             {
                 // 清除残留数据
                 log.Info("用户申请更改资源失败");
+                MessageBox.Show("用户申请更改资源失败:"+res.Message);
+
             }
             else if (res.Data["Chapter_List"].ToString() == "")
             {
                 log.Info("用户申请更改结果为空");
+                MessageBox.Show("用户申请更改资源失败:用户申请更改结果为空");
             }
             else
             {
-                JArray ErrorShow = new JArray();
+                bool AllSuss = true;
+                JArray Show = new JArray();
                 JArray UploadResArrayJson = (JArray)res.Data["Chapter_List"];
                 // log.Info(ApplicationListJson.ToString());
                 foreach (JObject obj in UploadResArrayJson)
@@ -785,16 +800,19 @@ namespace Shared_Novel_Reader.models
 
                     if (!(bool)obj["Result"])
                     {
-                        ErrorShow.Add("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章 申请更改失败");
-                        log.Info("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章 申请更改失败");
+                        AllSuss = false;
+                        Show.Add("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章 申请更改失败:"+obj["Error"]);
+                        log.Info("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章 申请更改失败" + obj["Error"]);
                     }
                     else
+                    {
+                        Show.Add("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章 申请更改成功");
                         log.Info("第" + obj["Vol_Num"] + "卷" + " 第" + obj["Chapter_Num"] + "章 申请更改成功");
+                    }
                 }
-                if (ErrorShow.Count > 0)
+                if (!AllSuss)
                 {
-                    MessageBox.Show("上传失败列表: " + ErrorShow.ToString());
-                    MessageBox.Show("部分上传成功");
+                    MessageBox.Show("上传详情: " + Show.ToString());
                 }
                 else
                     MessageBox.Show("全部上传成功");

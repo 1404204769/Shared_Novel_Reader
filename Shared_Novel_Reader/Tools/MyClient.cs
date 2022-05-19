@@ -14,7 +14,7 @@ namespace Shared_Novel_Reader.Tools
     internal class MyClient
     {
         private static RestClient client = null;
-        private static string Authorization = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJMb2dpbl9TdGF0dXMiOiJyb290IiwiVXNlcl9JRCI6IjkxMTIyMiJ9.az6mKpUg74RM8WA0bsLJPvJ3ngK27sdvNGK3BlbCZek";// 用户Token
+        private static string Authorization = "";// 用户Token
         private static ILog log = LogManager.GetLogger(typeof(Tools.MyClient));
         private static bool IsInit = false;
 
@@ -124,6 +124,8 @@ namespace Shared_Novel_Reader.Tools
             IsInit = true;
             // 管理员权限
             // Authorization = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJMb2dpbl9TdGF0dXMiOiJhZG1pbiIsIlVzZXJfSUQiOiI5MTExMDgifQ.7ERq0WPlu6kVsBguiBQZny9F_lNkU4AGBUurazNwDrc";
+            // 超级管理员权限
+            // Authorization = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJMb2dpbl9TdGF0dXMiOiJyb290IiwiVXNlcl9JRCI6IjkxMTIyMiJ9.az6mKpUg74RM8WA0bsLJPvJ3ngK27sdvNGK3BlbCZek";
         }
 
 
@@ -142,7 +144,7 @@ namespace Shared_Novel_Reader.Tools
             if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(jsonStr))
             {
                 log.Info("URL或Json为空");
-                return null;
+                return null;     
             }
             // 请求登入
             var request = new RestRequest(url, Method.Post);
@@ -150,8 +152,10 @@ namespace Shared_Novel_Reader.Tools
             // request.AddJsonBody(jobj);
             request.AddStringBody(jsonStr, DataFormat.Json);
             request.Timeout = TimeOut;
+            log.Info("请求数据如下:" + request.Parameters.ToString());
             var response = client.ExecuteAsync(request, CancelLogin);
 
+            log.Info("接收数据如下:" + response.Result.Content);
             if (!CheckStatus(in response))
             {
                 if (!string.IsNullOrEmpty(response.Result.Content))
@@ -201,7 +205,10 @@ namespace Shared_Novel_Reader.Tools
             request.AddStringBody(jsonStr, DataFormat.Json);
             request.Timeout = TimeOut;
             request.AddHeader("Authorization", Authorization);
+            log.Info("请求数据如下:" + request.Parameters.ToString());
+
             var response = client.ExecuteAsync(request);
+            log.Info("接收数据如下:" + response.Result.Content);
 
             if (!CheckStatus(in response))
             {

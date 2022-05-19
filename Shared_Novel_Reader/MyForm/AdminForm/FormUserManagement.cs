@@ -593,6 +593,22 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             DataGridViewUser.Rows[RowIndex].Cells["Status"].Value = res.Data["Status"];
             MessageBox.Show("用户解封成功");
         }
+
+        private async void ViewAction_Click(object sender, EventArgs e)
+        {
+            UserForm.FormActionList FormActionList = new UserForm.FormActionList();
+            int RowIndex = DataGridViewUser.CurrentRow.Index;
+            bool res = await FormActionList.LoadList(Convert.ToInt32(DataGridViewUser.Rows[RowIndex].Cells["User_ID"].Value));
+            if (res)
+            {
+                FormActionList.Show();
+            }
+            else
+            {
+                FormActionList.Dispose();
+            }
+
+        }
     }
 
 

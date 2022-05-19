@@ -50,6 +50,7 @@
             this.ComboBoxSex = new System.Windows.Forms.ComboBox();
             this.LabelPwd = new System.Windows.Forms.Label();
             this.LabelFeedback = new System.Windows.Forms.Label();
+            this.LabelHistoryAction = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LabelShow
@@ -323,12 +324,28 @@
             this.LabelFeedback.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LabelFeedback.Click += new System.EventHandler(this.LabelFeedback_Click);
             // 
+            // LabelHistoryAction
+            // 
+            this.LabelHistoryAction.BackColor = System.Drawing.Color.NavajoWhite;
+            this.LabelHistoryAction.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LabelHistoryAction.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LabelHistoryAction.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelHistoryAction.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.LabelHistoryAction.Location = new System.Drawing.Point(808, 691);
+            this.LabelHistoryAction.Name = "LabelHistoryAction";
+            this.LabelHistoryAction.Size = new System.Drawing.Size(150, 40);
+            this.LabelHistoryAction.TabIndex = 32;
+            this.LabelHistoryAction.Text = "历史行为";
+            this.LabelHistoryAction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LabelHistoryAction.Click += new System.EventHandler(this.LabelHistoryAction_Click);
+            // 
             // FormPersonalData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1150, 740);
+            this.Controls.Add(this.LabelHistoryAction);
             this.Controls.Add(this.LabelFeedback);
             this.Controls.Add(this.LabelPwd);
             this.Controls.Add(this.ComboBoxSex);
@@ -383,5 +400,6 @@
         private System.Windows.Forms.ComboBox ComboBoxSex;
         private System.Windows.Forms.Label LabelPwd;
         private System.Windows.Forms.Label LabelFeedback;
+        private System.Windows.Forms.Label LabelHistoryAction;
     }
 }

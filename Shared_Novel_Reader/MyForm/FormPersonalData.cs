@@ -12,7 +12,8 @@ namespace Shared_Novel_Reader.MyForm
     public partial class FormPersonalData : Form
     {
         ILog log = LogManager.GetLogger(typeof(FormPersonalData));
-        public bool IsEdit = false; 
+        UserForm.FormActionList FormActionList = null;
+        public bool IsEdit = false;
         public FormPersonalData()
         {
             InitializeComponent();
@@ -26,7 +27,7 @@ namespace Shared_Novel_Reader.MyForm
 
         public bool UserRefresh()
         {
-            if(!User.IsInit)
+            if (!User.IsInit)
             {
                 MessageBox.Show("用户未初始化,请重新登入", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -94,25 +95,28 @@ namespace Shared_Novel_Reader.MyForm
                 MessageBox.Show("网络异常，请重试");
                 return;
             }
-            else if(!res.Result)
+            else if (!res.Result)
             {
-                MessageBox.Show("个人资料保存失败:"+res.Message);
-            }
-            else if (res.Data.ToString() == "")
-            {
-                MessageBox.Show("用户数据异常，请重试");
+                MessageBox.Show("个人资料保存失败:" + res.Message);
             }
             else
             {
-                User.Level = (int)res.Data["Level"];
-                User.Power = (int)res.Data["Power"];
-                User.Integral = (int)res.Data["Integral"];
-                User.Total_Integral = (int)res.Data["Total_Integral"];
-                User.Name = (string)res.Data["Name"];
-                User.Password = (string)res.Data["Password"];
-                User.Status = (string)res.Data["Status"];
-                User.Sex = (string)res.Data["Sex"];
-                MessageBox.Show("个人资料更新成功");
+                if (res.Data == null)
+                {
+                    MessageBox.Show(res.Message);
+                }
+                else
+                {
+                    User.Level = (int)res.Data["Level"];
+                    User.Power = (int)res.Data["Power"];
+                    User.Integral = (int)res.Data["Integral"];
+                    User.Total_Integral = (int)res.Data["Total_Integral"];
+                    User.Name = (string)res.Data["Name"];
+                    User.Password = (string)res.Data["Password"];
+                    User.Status = (string)res.Data["Status"];
+                    User.Sex = (string)res.Data["Sex"];
+                    MessageBox.Show("个人资料更新成功");
+                }
             }
 
             // 修改界面
@@ -154,7 +158,7 @@ namespace Shared_Novel_Reader.MyForm
                 MessageBox.Show("网络异常，请重试");
                 return;
             }
-            else if(!res.Result)
+            else if (!res.Result)
             {
                 MessageBox.Show("密码更改失败");
             }
@@ -205,6 +209,23 @@ namespace Shared_Novel_Reader.MyForm
                 MessageBox.Show("意见反馈成功");
             }
 
+        }
+
+        private async void LabelHistoryAction_Click(object sender, EventArgs e)
+        {
+            if (FormActionList == null || FormActionList.IsDisposed)
+                FormActionList = new UserForm.FormActionList();
+            else
+                return;
+            bool res = await FormActionList.LoadList(User.User_ID);
+            if (res)
+            {
+                FormActionList.Show();
+            }else
+            {
+                FormActionList.Dispose();
+                FormActionList=null;
+            }
         }
     }
 }

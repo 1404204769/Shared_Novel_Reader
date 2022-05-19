@@ -21,19 +21,6 @@ namespace Shared_Novel_Reader.Tools.API.User
                 res = MyClient.PushRequests("User/PersonalData/Update", ReqJson.ToString());
             }
 
-            if (res == null)
-            {
-                log.Info("修改个人资料失败");
-                return null;
-            }
-
-            if (res.Result == false || res.Data == null)
-            {
-                log.Info(res.Message);
-                return null;
-            }
-
-            log.Info("修改个人资料成功");
             return res;
         }
         /// <summary>
@@ -96,6 +83,28 @@ namespace Shared_Novel_Reader.Tools.API.User
             }
 
             log.Info("举报成功");
+            return res;
+        }
+
+
+        /// <summary>
+        /// 查看用户行为
+        /// </summary>
+        /// <param name="UserID">目标用户ID</param>
+        /// <returns></returns>
+        public static MyResponse SearchAction(in int UserID)
+        {
+            // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
+            JObject ReqJson = new JObject();
+            ReqJson["User_ID"] = UserID;
+            int num = 0;
+            MyResponse res = MyClient.PushRequests("User/Action", ReqJson.ToString());
+            while ((res == null) && (num < 10))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("User/Action", ReqJson.ToString());
+            }
+
             return res;
         }
     }

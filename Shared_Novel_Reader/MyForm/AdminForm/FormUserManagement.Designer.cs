@@ -47,6 +47,7 @@
             this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.InitPwd = new System.Windows.Forms.ToolStripMenuItem();
             this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewAction = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUser)).BeginInit();
             this.ContextMenuStripFindUser.SuspendLayout();
             this.SuspendLayout();
@@ -148,21 +149,22 @@
             this.ChangeIntegral,
             this.ViewDetails,
             this.InitPwd,
+            this.ViewAction,
             this.ReFind});
             this.ContextMenuStripFindUser.Name = "ContextMenuStripFindUser";
-            this.ContextMenuStripFindUser.Size = new System.Drawing.Size(189, 184);
+            this.ContextMenuStripFindUser.Size = new System.Drawing.Size(241, 247);
             // 
             // Ban
             // 
             this.Ban.Name = "Ban";
-            this.Ban.Size = new System.Drawing.Size(188, 30);
+            this.Ban.Size = new System.Drawing.Size(240, 30);
             this.Ban.Text = "封号";
             this.Ban.Click += new System.EventHandler(this.Ban_Click);
             // 
             // Unseal
             // 
             this.Unseal.Name = "Unseal";
-            this.Unseal.Size = new System.Drawing.Size(188, 30);
+            this.Unseal.Size = new System.Drawing.Size(240, 30);
             this.Unseal.Text = "解封";
             this.Unseal.Click += new System.EventHandler(this.Unseal_Click);
             // 
@@ -172,7 +174,7 @@
             this.Reward,
             this.Punishment});
             this.ChangeIntegral.Name = "ChangeIntegral";
-            this.ChangeIntegral.Size = new System.Drawing.Size(188, 30);
+            this.ChangeIntegral.Size = new System.Drawing.Size(240, 30);
             this.ChangeIntegral.Text = "更改积分";
             // 
             // Reward
@@ -192,23 +194,30 @@
             // ViewDetails
             // 
             this.ViewDetails.Name = "ViewDetails";
-            this.ViewDetails.Size = new System.Drawing.Size(188, 30);
+            this.ViewDetails.Size = new System.Drawing.Size(240, 30);
             this.ViewDetails.Text = "查看详情";
             this.ViewDetails.Click += new System.EventHandler(this.ViewDetails_Click);
             // 
             // InitPwd
             // 
             this.InitPwd.Name = "InitPwd";
-            this.InitPwd.Size = new System.Drawing.Size(188, 30);
+            this.InitPwd.Size = new System.Drawing.Size(240, 30);
             this.InitPwd.Text = "初始化密码";
             this.InitPwd.Click += new System.EventHandler(this.InitPwd_Click);
             // 
             // ReFind
             // 
             this.ReFind.Name = "ReFind";
-            this.ReFind.Size = new System.Drawing.Size(188, 30);
+            this.ReFind.Size = new System.Drawing.Size(240, 30);
             this.ReFind.Text = "重置查询范围";
             this.ReFind.Click += new System.EventHandler(this.ReFind_Click);
+            // 
+            // ViewAction
+            // 
+            this.ViewAction.Name = "ViewAction";
+            this.ViewAction.Size = new System.Drawing.Size(240, 30);
+            this.ViewAction.Text = "查看用户行为";
+            this.ViewAction.Click += new System.EventHandler(this.ViewAction_Click);
             // 
             // FormUserManagement
             // 
@@ -245,5 +254,6 @@
         private System.Windows.Forms.ToolStripMenuItem ChangeIntegral;
         private System.Windows.Forms.ToolStripMenuItem Reward;
         private System.Windows.Forms.ToolStripMenuItem Punishment;
+        private System.Windows.Forms.ToolStripMenuItem ViewAction;
     }
 }
