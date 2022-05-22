@@ -305,6 +305,12 @@
     <Compile Include="MyForm\ToolForm\FormPwd.Designer.cs">
       <DependentUpon>FormPwd.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyForm\ToolForm\FormRecharge.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\ToolForm\FormRecharge.Designer.cs">
+      <DependentUpon>FormRecharge.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\ToolForm\FormUploadChange.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -439,6 +445,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\ToolForm\FormPwd.resx">
       <DependentUpon>FormPwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\ToolForm\FormRecharge.resx">
+      <DependentUpon>FormRecharge.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\ToolForm\FormUploadChange.resx">
       <DependentUpon>FormUploadChange.cs</DependentUpon>

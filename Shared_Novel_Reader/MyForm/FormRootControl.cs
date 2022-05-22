@@ -734,6 +734,7 @@ namespace Shared_Novel_Reader.MyForm
         private async Task<Echarts> GetEcharts(string BeginTime,string EndTime,string ReportType,string LineType)
         {
             string UnitType = String.Empty;
+            // 发送请求
             var SearchRes = Task<MyResponse>.Run(() => Tools.API.Root.System.SearchReport(BeginTime, EndTime, ReportType));
 
             MyResponse res = await SearchRes;
@@ -834,7 +835,6 @@ namespace Shared_Novel_Reader.MyForm
 
         private async void WebBrowserEcharts_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            // 发送请求
             Echarts ech = await InitReport();
             if (ech == null)
                 return;

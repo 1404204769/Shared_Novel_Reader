@@ -350,6 +350,7 @@ namespace Shared_Novel_Reader.models
                 ReqJson["Book_ID"] = bookid;
                 ReqJson["Part_Num"] = chapter["VolNum"];
                 ReqJson["Chapter_Num"] = chapter["ChapterNum"];
+                ReqJson["Type"] = "Download";
 
 
                 // 发送请求
@@ -357,11 +358,23 @@ namespace Shared_Novel_Reader.models
 
                 res = await ContentResult;
                 /// 返回格式
-                if (res == null || !res.Result)
+                if (res == null)
                 {
                     // 清除残留数据
-                    log.Info("在线图书章节内容查询失败");
+                    log.Info("网络异常，跳过");
                     continue;
+                }
+                else if(!res.Result)
+                {
+                    log.Info("获取失败:"+res.Message);
+                    if(res.Message == "积分扣除失败:积分不足，请充值")
+                    {
+                        MessageBox.Show(res.Message);
+                        FormProcessbar.Hide();
+                        FormProcessbar.Close();
+                        FormProcessbar.Dispose();
+                        return;
+                    }
                 }
                 else if (res.Data["ChapterContent"].ToString() == "")
                 {
@@ -371,6 +384,18 @@ namespace Shared_Novel_Reader.models
 
                 List<string> ContentList = new List<string>();
                 res.Data["ChapterContent"].ToList().ForEach(item => ContentList.Add(item.ToString()));
+
+                JObject UserData = res.Data["User_Data"] as JObject;
+                // 设置校验条件
+                Dictionary<string, JTokenType> usermap = new Dictionary<string, JTokenType>();
+                usermap.Add("Integral", JTokenType.Integer);
+                usermap.Add("TotalIntegral", JTokenType.Integer);
+                usermap.Add("Level", JTokenType.Integer);
+                MyJson.CheckColAndTypeFromMap(UserData, usermap);
+                User.Level = Convert.ToInt32(UserData["Level"].ToString());
+                User.Integral = Convert.ToInt32(UserData["Integral"].ToString());
+                User.Total_Integral = Convert.ToInt32(UserData["TotalIntegral"].ToString());
+
                 /*JArray ContentArray = (JArray)res.Data["ChapterContent"];
                 ContentArray.ToList().ForEach(x => ContentList.Add(x.ToString()));*/
                 bool overloadRes = LocalBookShelf.BookList[index].OverloadChapter(Convert.ToInt32(chapter["VolNum"]), Convert.ToInt32(chapter["ChapterNum"]), chapter["ChapterTitle"].ToString(), ContentList, overload);
@@ -380,7 +405,6 @@ namespace Shared_Novel_Reader.models
                 FZ++;
                 FormProcessbar.LabelFZ.Text = Convert.ToString(FZ);
                 FormProcessbar.ProgressBar.Value = FZ;
-                Thread.Sleep(1000);
             }
             FormProcessbar.Hide();
             FormProcessbar.Close();

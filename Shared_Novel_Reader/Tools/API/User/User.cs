@@ -107,5 +107,26 @@ namespace Shared_Novel_Reader.Tools.API.User
 
             return res;
         }
+
+        /// <summary>
+        /// 用户充值
+        /// </summary>
+        /// <param name="MoneyNum">充值金额</param>
+        /// <returns></returns>
+        public static MyResponse Recharge(in int MoneyNum)
+        {
+            // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
+            JObject ReqJson = new JObject();
+            ReqJson["Money_Num"] = MoneyNum;
+            int num = 0;
+            MyResponse res = MyClient.PushRequests("User/Recharge", ReqJson.ToString());
+            while ((res == null) && (num < 3))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("User/Recharge", ReqJson.ToString());
+            }
+            return res;
+        }
+
     }
 }

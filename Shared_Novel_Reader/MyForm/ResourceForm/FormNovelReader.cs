@@ -290,6 +290,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             ReqJson["Book_ID"] = bookid;
             ReqJson["Part_Num"] = volnum;
             ReqJson["Chapter_Num"] = chapnum;
+            ReqJson["Type"] = "Read";
 
 
             // 发送请求

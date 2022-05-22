@@ -17,8 +17,8 @@ namespace Shared_Novel_Reader
             // JsonTest();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // Application.Run(new MainForm());
-            Application.Run(new MyForm.FormRootControl()) ;
+             Application.Run(new MainForm());
+            //Application.Run(new MyForm.ToolForm.FormRecharge()) ;
             //chaineseNumtest();
             // reset();
             // init();

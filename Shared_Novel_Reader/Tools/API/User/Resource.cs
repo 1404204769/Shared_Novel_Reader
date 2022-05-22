@@ -46,7 +46,7 @@ namespace Shared_Novel_Reader.Tools.API.User
 
             int num = 0;
             MyResponse res = MyClient.PushRequests("User/Resource/Search/Content", ReqJson.ToString());
-            while ((res == null) && (num < 10))
+            while ((res == null) && (num < 3))
             {
                 log.Info("第" + (++num) + "次重试");
                 res = MyClient.PushRequests("User/Resource/Search/Content", ReqJson.ToString());

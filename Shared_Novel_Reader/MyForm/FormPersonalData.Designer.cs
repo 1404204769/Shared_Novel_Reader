@@ -51,6 +51,7 @@
             this.LabelPwd = new System.Windows.Forms.Label();
             this.LabelFeedback = new System.Windows.Forms.Label();
             this.LabelHistoryAction = new System.Windows.Forms.Label();
+            this.LabelRecharge = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LabelShow
@@ -339,12 +340,28 @@
             this.LabelHistoryAction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LabelHistoryAction.Click += new System.EventHandler(this.LabelHistoryAction_Click);
             // 
+            // LabelRecharge
+            // 
+            this.LabelRecharge.BackColor = System.Drawing.Color.NavajoWhite;
+            this.LabelRecharge.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LabelRecharge.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LabelRecharge.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelRecharge.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.LabelRecharge.Location = new System.Drawing.Point(633, 691);
+            this.LabelRecharge.Name = "LabelRecharge";
+            this.LabelRecharge.Size = new System.Drawing.Size(150, 40);
+            this.LabelRecharge.TabIndex = 33;
+            this.LabelRecharge.Text = "积分充值";
+            this.LabelRecharge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LabelRecharge.Click += new System.EventHandler(this.LabelRecharge_Click);
+            // 
             // FormPersonalData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1150, 740);
+            this.Controls.Add(this.LabelRecharge);
             this.Controls.Add(this.LabelHistoryAction);
             this.Controls.Add(this.LabelFeedback);
             this.Controls.Add(this.LabelPwd);
@@ -401,5 +418,6 @@
         private System.Windows.Forms.Label LabelPwd;
         private System.Windows.Forms.Label LabelFeedback;
         private System.Windows.Forms.Label LabelHistoryAction;
+        private System.Windows.Forms.Label LabelRecharge;
     }
 }

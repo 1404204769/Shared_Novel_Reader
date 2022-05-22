@@ -227,5 +227,15 @@ namespace Shared_Novel_Reader.MyForm
                 FormActionList=null;
             }
         }
+
+        private void LabelRecharge_Click(object sender, EventArgs e)
+        {
+            MyForm.ToolForm.FormRecharge FormRecharge = new MyForm.ToolForm.FormRecharge();
+            DialogResult DiaRes = FormRecharge.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+            MessageBox.Show("积分充值成功");
+            Refresh();
+        }
     }
 }

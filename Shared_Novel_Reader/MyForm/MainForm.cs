@@ -112,6 +112,7 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelTipString.AutoSize = true;
             //this.LabelTipString.Visible = true;
             this.LabelTipString.TextAlign = ContentAlignment.MiddleCenter;
+            this.LabelTipString.ForeColor = Color.AliceBlue;
             this.LabelTipString.Parent = this.TipPanel;
             this.LabelTipString.BackColor = SystemPens.ActiveCaption.Color;  // 设置滚动条背景色
         }

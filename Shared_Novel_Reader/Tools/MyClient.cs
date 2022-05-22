@@ -36,7 +36,7 @@ namespace Shared_Novel_Reader.Tools
         /// <summary>
         /// 请求超时时间
         /// </summary>
-        public static int TimeOut = 1000 * 5;
+        public static int TimeOut = 1000 * 60;
 
         /// <summary>
         /// 服务器IP地址
