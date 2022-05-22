@@ -38,6 +38,9 @@ namespace Shared_Novel_Reader.MyForm
             this.View_Economic_Report = new System.Windows.Forms.ToolStripMenuItem();
             this.View_Economic_Report_line = new System.Windows.Forms.ToolStripMenuItem();
             this.View_Economic_Report_bar = new System.Windows.Forms.ToolStripMenuItem();
+            this.View_Upload_Report = new System.Windows.Forms.ToolStripMenuItem();
+            this.View_Upload_Report_line = new System.Windows.Forms.ToolStripMenuItem();
+            this.View_Upload_Report_bar = new System.Windows.Forms.ToolStripMenuItem();
             this.TabPageAdmin = new System.Windows.Forms.TabPage();
             this.DataGridViewUser = new System.Windows.Forms.DataGridView();
             this.User_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,6 +77,9 @@ namespace Shared_Novel_Reader.MyForm
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.LabelTRACE = new System.Windows.Forms.Label();
+            this.View_Download_Report = new System.Windows.Forms.ToolStripMenuItem();
+            this.View_Download_Report_line = new System.Windows.Forms.ToolStripMenuItem();
+            this.View_Download_Report_bar = new System.Windows.Forms.ToolStripMenuItem();
             this.TabControl.SuspendLayout();
             this.TabPageReport.SuspendLayout();
             this.contextMenuStripWeb.SuspendLayout();
@@ -125,9 +131,11 @@ namespace Shared_Novel_Reader.MyForm
             // 
             this.contextMenuStripWeb.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStripWeb.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.View_Economic_Report});
+            this.View_Economic_Report,
+            this.View_Upload_Report,
+            this.View_Download_Report});
             this.contextMenuStripWeb.Name = "contextMenuStripWeb";
-            this.contextMenuStripWeb.Size = new System.Drawing.Size(189, 34);
+            this.contextMenuStripWeb.Size = new System.Drawing.Size(241, 127);
             // 
             // View_Economic_Report
             // 
@@ -135,7 +143,7 @@ namespace Shared_Novel_Reader.MyForm
             this.View_Economic_Report_line,
             this.View_Economic_Report_bar});
             this.View_Economic_Report.Name = "View_Economic_Report";
-            this.View_Economic_Report.Size = new System.Drawing.Size(188, 30);
+            this.View_Economic_Report.Size = new System.Drawing.Size(240, 30);
             this.View_Economic_Report.Text = "查看经济报表";
             // 
             // View_Economic_Report_line
@@ -151,6 +159,29 @@ namespace Shared_Novel_Reader.MyForm
             this.View_Economic_Report_bar.Size = new System.Drawing.Size(270, 34);
             this.View_Economic_Report_bar.Text = "柱形图";
             this.View_Economic_Report_bar.Click += new System.EventHandler(this.View_Economic_Report_bar_Click);
+            // 
+            // View_Upload_Report
+            // 
+            this.View_Upload_Report.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.View_Upload_Report_line,
+            this.View_Upload_Report_bar});
+            this.View_Upload_Report.Name = "View_Upload_Report";
+            this.View_Upload_Report.Size = new System.Drawing.Size(240, 30);
+            this.View_Upload_Report.Text = "查看用户上传报表";
+            // 
+            // View_Upload_Report_line
+            // 
+            this.View_Upload_Report_line.Name = "View_Upload_Report_line";
+            this.View_Upload_Report_line.Size = new System.Drawing.Size(270, 34);
+            this.View_Upload_Report_line.Text = "折线图";
+            this.View_Upload_Report_line.Click += new System.EventHandler(this.View_Upload_Report_line_Click);
+            // 
+            // View_Upload_Report_bar
+            // 
+            this.View_Upload_Report_bar.Name = "View_Upload_Report_bar";
+            this.View_Upload_Report_bar.Size = new System.Drawing.Size(270, 34);
+            this.View_Upload_Report_bar.Text = "柱形图";
+            this.View_Upload_Report_bar.Click += new System.EventHandler(this.View_Upload_Report_bar_Click);
             // 
             // TabPageAdmin
             // 
@@ -573,6 +604,29 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelTRACE.TabIndex = 0;
             this.LabelTRACE.Text = "TRACE：";
             // 
+            // View_Download_Report
+            // 
+            this.View_Download_Report.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.View_Download_Report_line,
+            this.View_Download_Report_bar});
+            this.View_Download_Report.Name = "View_Download_Report";
+            this.View_Download_Report.Size = new System.Drawing.Size(240, 30);
+            this.View_Download_Report.Text = "查看用户下载报表";
+            // 
+            // View_Download_Report_line
+            // 
+            this.View_Download_Report_line.Name = "View_Download_Report_line";
+            this.View_Download_Report_line.Size = new System.Drawing.Size(270, 34);
+            this.View_Download_Report_line.Text = "折线图";
+            this.View_Download_Report_line.Click += new System.EventHandler(this.View_Download_Report_line_Click);
+            // 
+            // View_Download_Report_bar
+            // 
+            this.View_Download_Report_bar.Name = "View_Download_Report_bar";
+            this.View_Download_Report_bar.Size = new System.Drawing.Size(270, 34);
+            this.View_Download_Report_bar.Text = "柱形图";
+            this.View_Download_Report_bar.Click += new System.EventHandler(this.View_Download_Report_bar_Click);
+            // 
             // FormRootControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -640,5 +694,11 @@ namespace Shared_Novel_Reader.MyForm
         private System.Windows.Forms.ToolStripMenuItem View_Economic_Report;
         private System.Windows.Forms.ToolStripMenuItem View_Economic_Report_line;
         private System.Windows.Forms.ToolStripMenuItem View_Economic_Report_bar;
+        private System.Windows.Forms.ToolStripMenuItem View_Upload_Report;
+        private System.Windows.Forms.ToolStripMenuItem View_Upload_Report_line;
+        private System.Windows.Forms.ToolStripMenuItem View_Upload_Report_bar;
+        private System.Windows.Forms.ToolStripMenuItem View_Download_Report;
+        private System.Windows.Forms.ToolStripMenuItem View_Download_Report_line;
+        private System.Windows.Forms.ToolStripMenuItem View_Download_Report_bar;
     }
 }

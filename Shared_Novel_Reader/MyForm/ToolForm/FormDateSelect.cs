@@ -26,7 +26,7 @@ namespace Shared_Novel_Reader.MyForm.ToolForm
         private void BtnYes_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
-            MessageBox.Show("开始时间:" + Begin + "\n结束时间:" + End);
+            //MessageBox.Show("开始时间:" + Begin + "\n结束时间:" + End);
         }
 
         private void BtnNo_Click(object sender, EventArgs e)

@@ -754,65 +754,52 @@ namespace Shared_Novel_Reader.MyForm
                 log.Info("查看报表成功:");
                 //Console.WriteLine("Data:" + res.Data.ToString());
                 JArray ReportArray = res.Data["Report"] as JArray;
-                Dictionary<string, Dictionary<DateTime, Double>> Dictionary = new Dictionary<string, Dictionary<DateTime, Double>>();
-                if(ReportType == "Economic")
+                Dictionary<string, Double[]> Dictionary = new Dictionary<string, Double[]>();
+                if(ReportType == "Upload" || ReportType == "Download" || ReportType == "Economic")
                 {
-                    UnitType = "元";
+                    if (ReportType == "Economic")
+                    {
+                        UnitType = "元";
+                    }
+                    else if(ReportType == "Upload" || ReportType == "Download")
+                    {
+                        UnitType = "次";
+                    }
+                    JArray value = new JArray();
                     for (int i = 0; i < ReportArray.Count; i++)
                     {
                         // 第一级 年份
-                        Dictionary<DateTime, Double> dic = new Dictionary<DateTime, Double>();
-                        for (int j = 1; j < ReportArray[i].Count(); j++)
+                        value.Add(ReportArray[i]["year"].ToString());
+
+                        Double[] Month = new Double[13];
+                        for (int j = 1; j < 13; j++)
                         {
-                            Double num = Convert.ToDouble(ReportArray[i][j]["Money_Num"].ToString());
-                            DateTime time = Convert.ToDateTime(ReportArray[i][j]["Time"].ToString());
-                            if (dic.ContainsKey(time))
-                            {
-                                dic[time] = dic[time] + num;
-                            }
-                            else
-                                dic[time] = num;
+                            Month[j] = Convert.ToDouble(ReportArray[i][Convert.ToString(j)].ToString());
                         }
-                        Dictionary[ReportArray[i][0].ToString()] = dic;
+                        Dictionary[ReportArray[i]["year"].ToString()] = Month;
                     }
-                }
 
-                if (UnitType == String.Empty) return null;
+                    Echarts ech = new Echarts(value, LineType, UnitType);
 
-                JArray value = new JArray();
-                for (int i = 0; i < Dictionary.Count; i++)
-                {
-                    value.Add(Dictionary.Keys.ElementAt(i));
-                }
-                Echarts ech = new Echarts(value, LineType, UnitType);
-                // 将每年每月的数据计算汇总
-                Dictionary<string, Double[]> DicMonth = new Dictionary<string, double[]>();
-                for (int i = 0; i < Dictionary.Count; i++)
-                {
-                    Double[] Month = new Double[13];
-                    string year = Dictionary.Keys.ElementAt(i);
-                    foreach (DateTime time in Dictionary[year].Keys)
+
+                    for (int j = 1; j < 13; j++)
                     {
-                        Month[time.Month] += Dictionary[year][time];
+                        JObject obj = new JObject();
+                        obj["Month"] = j + "月";
+
+                        for (int i = 0; i < Dictionary.Count; i++)
+                        {
+                            string year = Dictionary.Keys.ElementAt(i);
+                            obj[year] = Dictionary[year][j];
+                        }
+                        ech.Add(obj);
                     }
-                    DicMonth[year] = Month;
+
+                    Console.WriteLine(ech.ToJson().ToString());
+                    return ech;
                 }
-
-                for (int j = 1; j < 13; j++)
-                {
-                    JObject obj = new JObject();
-                    obj["Month"] = j + "月";
-
-                    for (int i = 0; i < Dictionary.Count; i++)
-                    {
-                        string year = Dictionary.Keys.ElementAt(i);
-                        obj[year] = DicMonth[year][j];
-                    }
-                    ech.Add(obj);
-                }
-
-                Console.WriteLine(ech.ToJson().ToString());
-                return ech;
+                
+                return null;
             }
         }
 
@@ -864,7 +851,56 @@ namespace Shared_Novel_Reader.MyForm
             if (ech == null)
                 return;
             RefreshReport(ech.ToJson().ToString());
+        }
 
+        private async void View_Upload_Report_line_Click(object sender, EventArgs e)
+        {
+
+            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect();
+            DialogResult DiaRes = FormDateSelect.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+            Echarts ech = await GetEcharts(FormDateSelect.Begin, FormDateSelect.End, "Upload", "line");
+            if (ech == null)
+                return;
+            RefreshReport(ech.ToJson().ToString());
+        }
+
+        private async void View_Upload_Report_bar_Click(object sender, EventArgs e)
+        {
+            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect();
+            DialogResult DiaRes = FormDateSelect.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+            Echarts ech = await GetEcharts(FormDateSelect.Begin, FormDateSelect.End, "Upload", "bar");
+            if (ech == null)
+                return;
+            RefreshReport(ech.ToJson().ToString());
+        }
+
+        private async void View_Download_Report_line_Click(object sender, EventArgs e)
+        {
+            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect();
+            DialogResult DiaRes = FormDateSelect.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+            Echarts ech = await GetEcharts(FormDateSelect.Begin, FormDateSelect.End, "Download", "line");
+            if (ech == null)
+                return;
+            RefreshReport(ech.ToJson().ToString());
+        }
+
+        private async void View_Download_Report_bar_Click(object sender, EventArgs e)
+        {
+
+            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect();
+            DialogResult DiaRes = FormDateSelect.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+            Echarts ech = await GetEcharts(FormDateSelect.Begin, FormDateSelect.End, "Download", "bar");
+            if (ech == null)
+                return;
+            RefreshReport(ech.ToJson().ToString());
         }
     }
 }
