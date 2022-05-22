@@ -731,9 +731,96 @@ namespace Shared_Novel_Reader.MyForm
         */
 
 
+        private async Task<Echarts> GetEcharts(string BeginTime,string EndTime,string ReportType,string LineType)
+        {
+            string UnitType = String.Empty;
+            var SearchRes = Task<MyResponse>.Run(() => Tools.API.Root.System.SearchReport(BeginTime, EndTime, ReportType));
 
+            MyResponse res = await SearchRes;
 
+            if (res == null)
+            {
+                MessageBox.Show("网络异常,请重试");
+                return null;
+            }
+            else if (!res.Result || res.Data.ToString() == "")
+            {
+                MessageBox.Show("查看报表失败:" + res.Message);
+                return null;
+            }
+            else
+            {
+                log.Info("查看报表成功:");
+                //Console.WriteLine("Data:" + res.Data.ToString());
+                JArray ReportArray = res.Data["Report"] as JArray;
+                Dictionary<string, Dictionary<DateTime, Double>> Dictionary = new Dictionary<string, Dictionary<DateTime, Double>>();
+                if(ReportType == "Economic")
+                {
+                    UnitType = "元";
+                    for (int i = 0; i < ReportArray.Count; i++)
+                    {
+                        // 第一级 年份
+                        Dictionary<DateTime, Double> dic = new Dictionary<DateTime, Double>();
+                        for (int j = 1; j < ReportArray[i].Count(); j++)
+                        {
+                            Double num = Convert.ToDouble(ReportArray[i][j]["Money_Num"].ToString());
+                            DateTime time = Convert.ToDateTime(ReportArray[i][j]["Time"].ToString());
+                            if (dic.ContainsKey(time))
+                            {
+                                dic[time] = dic[time] + num;
+                            }
+                            else
+                                dic[time] = num;
+                        }
+                        Dictionary[ReportArray[i][0].ToString()] = dic;
+                    }
+                }
 
+                if (UnitType == String.Empty) return null;
+
+                JArray value = new JArray();
+                for (int i = 0; i < Dictionary.Count; i++)
+                {
+                    value.Add(Dictionary.Keys.ElementAt(i));
+                }
+                Echarts ech = new Echarts(value, LineType, UnitType);
+                // 将每年每月的数据计算汇总
+                Dictionary<string, Double[]> DicMonth = new Dictionary<string, double[]>();
+                for (int i = 0; i < Dictionary.Count; i++)
+                {
+                    Double[] Month = new Double[13];
+                    string year = Dictionary.Keys.ElementAt(i);
+                    foreach (DateTime time in Dictionary[year].Keys)
+                    {
+                        Month[time.Month] += Dictionary[year][time];
+                    }
+                    DicMonth[year] = Month;
+                }
+
+                for (int j = 1; j < 13; j++)
+                {
+                    JObject obj = new JObject();
+                    obj["Month"] = j + "月";
+
+                    for (int i = 0; i < Dictionary.Count; i++)
+                    {
+                        string year = Dictionary.Keys.ElementAt(i);
+                        obj[year] = DicMonth[year][j];
+                    }
+                    ech.Add(obj);
+                }
+
+                Console.WriteLine(ech.ToJson().ToString());
+                return ech;
+            }
+        }
+
+        private async Task<Echarts> InitReport()
+        {
+            string BeginTime = DateTime.Now.ToString("yyyy-01-01 00:00:00");
+            string EndTime = DateTime.Now.Year + 1 + "-01-01 00:00:00";
+            return await GetEcharts(BeginTime, EndTime,"Economic", "bar");
+        }
 
         #region
         public void RefreshReport(string JsonStr)
@@ -746,93 +833,38 @@ namespace Shared_Novel_Reader.MyForm
         #endregion
 
         private async void WebBrowserEcharts_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {/*
-            JArray value = new JArray();
-            value.Add("2015");
-            value.Add("2016");
-            value.Add("2018");
-
-            Echarts ech = new Echarts("product",value,"bar");
-            JObject obj = new JObject();
-            obj["product"] = "Matcha Latte";
-            obj["2015"] = 43.3;
-            obj["2016"] = 85.8;
-            obj["2018"] = 93.7;
-            ech.Add(obj);
-            obj = new JObject();
-            obj["product"] = "Cheese Cocoa";
-            obj["2015"] = 86.4;
-            obj["2016"] = 65.2;
-            obj["2018"] = 82.5;
-            ech.Add(obj);
-            obj = new JObject();
-            obj["product"] = "Walnut Brownie";
-            obj["2015"] = 72.4;
-            obj["2016"] = 53.9;
-            obj["2018"] = 39.1;
-            ech.Add(obj);
-            Console.WriteLine(ech.ToJson().ToString());
-            RefreshReport(ech.ToJson().ToString());*/
-
-            //ReqJson["Level"] = "TRACE";
+        {
             // 发送请求
-            var SearchRes = Task<MyResponse>.Run(() => Tools.API.Root.System.SearchReport());
+            Echarts ech = await InitReport();
+            if (ech == null)
+                return;
+            RefreshReport(ech.ToJson().ToString());
+        }
 
-            MyResponse res = await SearchRes;
+        private async void View_Economic_Report_bar_Click(object sender, EventArgs e)
+        {
+            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect();
+            DialogResult DiaRes = FormDateSelect.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+            Echarts ech = await GetEcharts(FormDateSelect.Begin, FormDateSelect.End, "Economic", "bar");
+            if (ech == null)
+                return;
+            RefreshReport(ech.ToJson().ToString());
 
-            if (res == null)
-            {
-                MessageBox.Show("网络异常,请重试");
-            }
-            else if (!res.Result || res.Data.ToString() == "")
-            {
-                MessageBox.Show("查看报表失败:" + res.Message);
-            }
-            else
-            {
-                MessageBox.Show("查看报表成功:");
-                //Console.WriteLine("Data:" + res.Data.ToString());
-                JArray ReportArray = res.Data["Report_Array"] as JArray;
-                Dictionary<DateTime, Double> dic = new Dictionary<DateTime, Double>();
-                for (int i = 0;i < ReportArray.Count;i++)
-                {
-                    Double num = Convert.ToDouble(ReportArray[i]["Money_Num"].ToString());
-                    DateTime time = Convert.ToDateTime(ReportArray[i]["Time"].ToString());
-                    if(dic.ContainsKey(time))
-                    {
-                        dic[time] = dic[time] + num;
-                    }
-                    else
-                        dic[time] = num;
-                }
-                Console.WriteLine(dic);
+        }
 
-                /*
-                Console.WriteLine("Year:" + time.Year);
-                Console.WriteLine("Month:" + time.Month);
-                Console.WriteLine("Day:" + time.Day);
-                Console.WriteLine("DayOfWeek:" + time.DayOfWeek);*/
+        private async void View_Economic_Report_line_Click(object sender, EventArgs e)
+        {
+            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect();
+            DialogResult DiaRes = FormDateSelect.ShowDialog();
+            if (DiaRes == DialogResult.Cancel)
+                return;
+            Echarts ech = await GetEcharts(FormDateSelect.Begin, FormDateSelect.End, "Economic", "line");
+            if (ech == null)
+                return;
+            RefreshReport(ech.ToJson().ToString());
 
-                JArray value = new JArray();
-                value.Add("2022");
-                Echarts ech = new Echarts("Month", value, "bar");
-                Double[] Month = new Double[13];
-                foreach (DateTime time in dic.Keys)
-                {
-                    Month[time.Month] += dic[time];
-                }
-                for(int i = 1;i < Month.Length;i++)
-                {
-                    JObject obj = new JObject();
-                    obj["Month"] = i+"月";
-                    obj["2022"] = Month[i];
-                    ech.Add(obj);
-
-                }
-
-                Console.WriteLine(ech.ToJson().ToString());
-                RefreshReport(ech.ToJson().ToString());
-            }
         }
     }
 }
@@ -840,15 +872,16 @@ namespace Shared_Novel_Reader.MyForm
 class Echarts
 {
     bool Init = false;
-    public string dimensions_Key = string.Empty;
+    public string dimensions_Key = string.Empty, unit = String.Empty;
     JArray dimensions_Value = new JArray();
     JArray source = new JArray();
     string LineType = string.Empty; 
-    public Echarts(string key,JArray value,string linetype)
+    public Echarts(JArray value,string linetype,string Unit)
     {
-        dimensions_Key = key;
+        dimensions_Key = "Month";
         dimensions_Value = value;
         LineType = linetype;
+        unit = Unit + "/月份";
         Init = true;
     }
 
@@ -881,6 +914,7 @@ class Echarts
         }
         obj["series"] = series;
         obj["source"] = source;
+        obj["unit"] = unit;
 
         return obj;
     }

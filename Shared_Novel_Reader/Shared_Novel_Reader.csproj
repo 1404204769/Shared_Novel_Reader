@@ -275,6 +275,12 @@
     <Compile Include="MyForm\ToolForm\FormChapterTitle.Designer.cs">
       <DependentUpon>FormChapterTitle.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyForm\ToolForm\FormDateSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\ToolForm\FormDateSelect.Designer.cs">
+      <DependentUpon>FormDateSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\ToolForm\FormInput.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -418,6 +424,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\ToolForm\FormChapterTitle.resx">
       <DependentUpon>FormChapterTitle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\ToolForm\FormDateSelect.resx">
+      <DependentUpon>FormDateSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\ToolForm\FormInput.resx">
       <DependentUpon>FormInput.cs</DependentUpon>

@@ -17,14 +17,14 @@ namespace Shared_Novel_Reader
             // JsonTest();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
-            //Application.Run(new MyForm.FormPersonalData()) ;
+            // Application.Run(new MainForm());
+            Application.Run(new MyForm.FormRootControl()) ;
             //chaineseNumtest();
             // reset();
             // init();
             // Booktest();
         }
-
+/*
         static void reset()
         {
             Properties.Settings.Default.Local_Res_Path = "";
@@ -106,7 +106,7 @@ namespace Shared_Novel_Reader
 
             JObject res = JObject.Parse(json);
             MessageBox.Show(res.ToString());
-        }
+        }*/
 
     }
 }

@@ -125,7 +125,7 @@ namespace Shared_Novel_Reader.Tools
             // 管理员权限
             // Authorization = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJMb2dpbl9TdGF0dXMiOiJhZG1pbiIsIlVzZXJfSUQiOiI5MTExMDgifQ.7ERq0WPlu6kVsBguiBQZny9F_lNkU4AGBUurazNwDrc";
             // 超级管理员权限
-            // Authorization = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJMb2dpbl9TdGF0dXMiOiJyb290IiwiVXNlcl9JRCI6IjkxMTIyMiJ9.az6mKpUg74RM8WA0bsLJPvJ3ngK27sdvNGK3BlbCZek";
+             Authorization = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJMb2dpbl9TdGF0dXMiOiJyb290IiwiVXNlcl9JRCI6IjkxMTIyMiJ9.az6mKpUg74RM8WA0bsLJPvJ3ngK27sdvNGK3BlbCZek";
         }
 
 

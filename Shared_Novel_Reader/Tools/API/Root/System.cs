@@ -38,11 +38,17 @@ namespace Shared_Novel_Reader.Tools.API.Root
         /// <summary>
         /// 查看系统报表数据
         /// </summary>
+        /// <param name="BeginTime">开始时间</param>
+        /// <param name="EndTime">截止时间</param>
+        /// <param name="Type">报表类型</param>
         /// <returns></returns>
-        public static MyResponse SearchReport()
+        public static MyResponse SearchReport(string BeginTime,string EndTime,string Type)
         {
             // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
             JObject ReqJson = new JObject();
+            ReqJson["Begin_Time"] = BeginTime;
+            ReqJson["End_Time"] = EndTime;
+            ReqJson["Report_Type"] = Type;
             int num = 0;
             MyResponse res = MyClient.PushRequests("Root/ReportForm", ReqJson.ToString());
             while ((res == null) && (num < 10))

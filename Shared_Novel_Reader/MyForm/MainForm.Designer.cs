@@ -48,9 +48,12 @@
             this.LabelTime = new System.Windows.Forms.Label();
             this.LabelAppTitle = new System.Windows.Forms.Label();
             this.BtnClose = new System.Windows.Forms.Button();
-            this.LabelToolString = new System.Windows.Forms.Label();
+            this.LabelTipString = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.TimerTopPanelTime = new System.Windows.Forms.Timer(this.components);
+            this.TipPanel = new System.Windows.Forms.Panel();
+            this.TimerTip = new System.Windows.Forms.Timer(this.components);
+            this.LabelTip = new System.Windows.Forms.Label();
             PictureLogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(PictureLogo)).BeginInit();
             this.SizePanel.SuspendLayout();
@@ -58,6 +61,7 @@
             this.BtnPanel.SuspendLayout();
             this.TitlePanel.SuspendLayout();
             this.TopPanel.SuspendLayout();
+            this.TipPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // PictureLogo
@@ -289,10 +293,11 @@
             // TopPanel
             // 
             this.TopPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.TopPanel.Controls.Add(this.LabelTip);
+            this.TopPanel.Controls.Add(this.TipPanel);
             this.TopPanel.Controls.Add(this.LabelTime);
             this.TopPanel.Controls.Add(this.LabelAppTitle);
             this.TopPanel.Controls.Add(this.BtnClose);
-            this.TopPanel.Controls.Add(this.LabelToolString);
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPanel.Location = new System.Drawing.Point(0, 0);
             this.TopPanel.Name = "TopPanel";
@@ -301,6 +306,7 @@
             // 
             // LabelTime
             // 
+            this.LabelTime.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.LabelTime.Dock = System.Windows.Forms.DockStyle.Right;
             this.LabelTime.Location = new System.Drawing.Point(1139, 0);
             this.LabelTime.Name = "LabelTime";
@@ -314,6 +320,7 @@
             // 
             // LabelAppTitle
             // 
+            this.LabelAppTitle.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.LabelAppTitle.Dock = System.Windows.Forms.DockStyle.Left;
             this.LabelAppTitle.Font = new System.Drawing.Font("Bookman Old Style", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelAppTitle.Image = global::Shared_Novel_Reader.Properties.Resources.Book;
@@ -322,7 +329,7 @@
             this.LabelAppTitle.Name = "LabelAppTitle";
             this.LabelAppTitle.Size = new System.Drawing.Size(472, 60);
             this.LabelAppTitle.TabIndex = 5;
-            this.LabelAppTitle.Text = "   小说共享平台阅读器";
+            this.LabelAppTitle.Text = "   小说资源共享平台";
             this.LabelAppTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.LabelAppTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseDown);
             this.LabelAppTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseMove);
@@ -348,18 +355,20 @@
             this.BtnClose.UseVisualStyleBackColor = true;
             this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
-            // LabelToolString
+            // LabelTipString
             // 
-            this.LabelToolString.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.LabelToolString.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.LabelToolString.Location = new System.Drawing.Point(478, 0);
-            this.LabelToolString.Name = "LabelToolString";
-            this.LabelToolString.Size = new System.Drawing.Size(655, 60);
-            this.LabelToolString.TabIndex = 6;
-            this.LabelToolString.Text = "   ";
-            this.LabelToolString.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseDown);
-            this.LabelToolString.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseMove);
-            this.LabelToolString.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseUp);
+            this.LabelTipString.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.LabelTipString.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.LabelTipString.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold);
+            this.LabelTipString.Location = new System.Drawing.Point(3, 0);
+            this.LabelTipString.Name = "LabelTipString";
+            this.LabelTipString.Size = new System.Drawing.Size(600, 60);
+            this.LabelTipString.TabIndex = 6;
+            this.LabelTipString.Text = "   ";
+            this.LabelTipString.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LabelTipString.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseDown);
+            this.LabelTipString.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseMove);
+            this.LabelTipString.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseUp);
             // 
             // MainPanel
             // 
@@ -375,6 +384,34 @@
             // 
             this.TimerTopPanelTime.Interval = 1000;
             this.TimerTopPanelTime.Tick += new System.EventHandler(this.TimerTopPanelTime_Tick);
+            // 
+            // TipPanel
+            // 
+            this.TipPanel.Controls.Add(this.LabelTipString);
+            this.TipPanel.Location = new System.Drawing.Point(570, 0);
+            this.TipPanel.Name = "TipPanel";
+            this.TipPanel.Size = new System.Drawing.Size(563, 60);
+            this.TipPanel.TabIndex = 0;
+            // 
+            // TimerTip
+            // 
+            this.TimerTip.Enabled = true;
+            this.TimerTip.Tick += new System.EventHandler(this.TimerTip_Tick);
+            // 
+            // LabelTip
+            // 
+            this.LabelTip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.LabelTip.AutoSize = true;
+            this.LabelTip.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LabelTip.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelTip.ForeColor = System.Drawing.Color.DarkCyan;
+            this.LabelTip.Location = new System.Drawing.Point(478, 19);
+            this.LabelTip.Name = "LabelTip";
+            this.LabelTip.Size = new System.Drawing.Size(86, 21);
+            this.LabelTip.TabIndex = 0;
+            this.LabelTip.Text = "免责声明";
+            this.LabelTip.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LabelTip.Click += new System.EventHandler(this.LabelTip_Click);
             // 
             // MainForm
             // 
@@ -398,6 +435,8 @@
             this.BtnPanel.ResumeLayout(false);
             this.TitlePanel.ResumeLayout(false);
             this.TopPanel.ResumeLayout(false);
+            this.TopPanel.PerformLayout();
+            this.TipPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -417,12 +456,15 @@
         private System.Windows.Forms.Button BtnLogin;
         private System.Windows.Forms.Label LabelAppTitle;
         private System.Windows.Forms.Label LabelTime;
-        private System.Windows.Forms.Label LabelToolString;
+        private System.Windows.Forms.Label LabelTipString;
         private System.Windows.Forms.Timer TimerTopPanelTime;
         private System.Windows.Forms.Button BtnAdminControl;
         private System.Windows.Forms.Button BtnBookPlatform;
         private System.Windows.Forms.Button BtnRootControl;
         private System.Windows.Forms.Label LabelWelcome;
         private System.Windows.Forms.Button BtnLogout;
+        private System.Windows.Forms.Panel TipPanel;
+        private System.Windows.Forms.Timer TimerTip;
+        private System.Windows.Forms.Label LabelTip;
     }
 }

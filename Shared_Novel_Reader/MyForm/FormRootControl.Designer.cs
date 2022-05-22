@@ -34,6 +34,10 @@ namespace Shared_Novel_Reader.MyForm
             this.TabControl = new System.Windows.Forms.TabControl();
             this.TabPageReport = new System.Windows.Forms.TabPage();
             this.WebBrowserEcharts = new System.Windows.Forms.WebBrowser();
+            this.contextMenuStripWeb = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.View_Economic_Report = new System.Windows.Forms.ToolStripMenuItem();
+            this.View_Economic_Report_line = new System.Windows.Forms.ToolStripMenuItem();
+            this.View_Economic_Report_bar = new System.Windows.Forms.ToolStripMenuItem();
             this.TabPageAdmin = new System.Windows.Forms.TabPage();
             this.DataGridViewUser = new System.Windows.Forms.DataGridView();
             this.User_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,6 +76,7 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelTRACE = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.TabPageReport.SuspendLayout();
+            this.contextMenuStripWeb.SuspendLayout();
             this.TabPageAdmin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUser)).BeginInit();
             this.ContextMenuStripUser.SuspendLayout();
@@ -97,12 +102,13 @@ namespace Shared_Novel_Reader.MyForm
             this.TabPageReport.Name = "TabPageReport";
             this.TabPageReport.Size = new System.Drawing.Size(1142, 708);
             this.TabPageReport.TabIndex = 2;
-            this.TabPageReport.Text = "财务报表";
+            this.TabPageReport.Text = "报表";
             this.TabPageReport.UseVisualStyleBackColor = true;
             // 
             // WebBrowserEcharts
             // 
             this.WebBrowserEcharts.AllowWebBrowserDrop = false;
+            this.WebBrowserEcharts.ContextMenuStrip = this.contextMenuStripWeb;
             this.WebBrowserEcharts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.WebBrowserEcharts.IsWebBrowserContextMenuEnabled = false;
             this.WebBrowserEcharts.Location = new System.Drawing.Point(0, 0);
@@ -114,6 +120,37 @@ namespace Shared_Novel_Reader.MyForm
             this.WebBrowserEcharts.TabIndex = 0;
             this.WebBrowserEcharts.WebBrowserShortcutsEnabled = false;
             this.WebBrowserEcharts.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowserEcharts_DocumentCompleted);
+            // 
+            // contextMenuStripWeb
+            // 
+            this.contextMenuStripWeb.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStripWeb.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.View_Economic_Report});
+            this.contextMenuStripWeb.Name = "contextMenuStripWeb";
+            this.contextMenuStripWeb.Size = new System.Drawing.Size(189, 34);
+            // 
+            // View_Economic_Report
+            // 
+            this.View_Economic_Report.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.View_Economic_Report_line,
+            this.View_Economic_Report_bar});
+            this.View_Economic_Report.Name = "View_Economic_Report";
+            this.View_Economic_Report.Size = new System.Drawing.Size(188, 30);
+            this.View_Economic_Report.Text = "查看经济报表";
+            // 
+            // View_Economic_Report_line
+            // 
+            this.View_Economic_Report_line.Name = "View_Economic_Report_line";
+            this.View_Economic_Report_line.Size = new System.Drawing.Size(270, 34);
+            this.View_Economic_Report_line.Text = "折线图";
+            this.View_Economic_Report_line.Click += new System.EventHandler(this.View_Economic_Report_line_Click);
+            // 
+            // View_Economic_Report_bar
+            // 
+            this.View_Economic_Report_bar.Name = "View_Economic_Report_bar";
+            this.View_Economic_Report_bar.Size = new System.Drawing.Size(270, 34);
+            this.View_Economic_Report_bar.Text = "柱形图";
+            this.View_Economic_Report_bar.Click += new System.EventHandler(this.View_Economic_Report_bar_Click);
             // 
             // TabPageAdmin
             // 
@@ -548,6 +585,7 @@ namespace Shared_Novel_Reader.MyForm
             this.Text = "FormRootControl";
             this.TabControl.ResumeLayout(false);
             this.TabPageReport.ResumeLayout(false);
+            this.contextMenuStripWeb.ResumeLayout(false);
             this.TabPageAdmin.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUser)).EndInit();
             this.ContextMenuStripUser.ResumeLayout(false);
@@ -598,5 +636,9 @@ namespace Shared_Novel_Reader.MyForm
         private System.Windows.Forms.Button BtnINFOClose;
         private System.Windows.Forms.Button BtnWARNClose;
         private System.Windows.Forms.WebBrowser WebBrowserEcharts;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripWeb;
+        private System.Windows.Forms.ToolStripMenuItem View_Economic_Report;
+        private System.Windows.Forms.ToolStripMenuItem View_Economic_Report_line;
+        private System.Windows.Forms.ToolStripMenuItem View_Economic_Report_bar;
     }
 }

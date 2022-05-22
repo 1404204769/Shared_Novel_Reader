@@ -7,6 +7,7 @@
 		<script src="./echarts.js"></script>
 	</head>
 	<body >
+		<!-- <span id="showTest" style="background-color: antiquewhite">asd </span> -->
 		<!-- 	<br/><br/>
 	    数据展示和采集：<input id="text" type="text"/><br/><br/>
 	    &nbsp;&nbsp;&nbsp;
@@ -38,20 +39,27 @@
 					{
 						'product': 'bb',
 						'2015': 231,
-						'2016': 212,
+						'2016': 112,
 						'2017': 234
 					},{
 						'product':'ds',
-						'2015': 231,
+						'2015': 131,
 						'2016': 212,
 						'2017': 234
 					}
 				]
 			},
 			xAxis: {
-				type: 'category'
+				type: 'category',
 			},
-			yAxis: {},
+			yAxis: {
+				name: 'y/x',
+				nameLocation: 'start',
+				nameTextStyle: {
+					padding: [0, 0, 0, -20],
+					color : "grey"
+				}
+			},
 			series: [
 				{
 					type: 'bar'
@@ -62,7 +70,8 @@
 				{
 					type: 'bar'
 				}
-			]
+			],
+			
 		};
 			this.myChart.setOption(option);
 		// 使用刚指定的配置项和数据显示图表。
@@ -83,11 +92,17 @@
 		}
 
 		function Refresh(obj) {
-			console.log(this.myChart)
-			//this.myChart.clear();
+			// console.log(this.myChart)
+			// this.myChart.clear();
 			// let text = document.getElementById('showTest');
 			
+			// text.innerHTML = "参数obj：" + obj;
+			
 			let json = JSON.parse(obj);
+			
+			this.option.yAxis.name = json.unit;
+			
+			
 			let sourceJson = json.source;
 			let sourcedata = [];
 			for(let i=0; i < sourceJson.length; i++) {
@@ -109,11 +124,11 @@
 			for(let i=0; i < dimensionsJson.length; i++) {
 				dimensionsdata.push(dimensionsJson[i]);
 			}
-			alert(dimensionsdata)
+			// alert(dimensionsdata)
 			this.option.dataset.dimensions = dimensionsdata;
 			
 			//图表渲染数据
-			  this.myChart.setOption(option,true);
+			this.myChart.setOption(option,true);
 		}
 	</script>
 	<!-- <script>
@@ -153,6 +168,10 @@
 		* {
 			padding: 0;
 			margin: 0;
+		}
+		#showTest {
+			background-color: antiquewhite;
+			
 		}
 	</style>
 </html>
