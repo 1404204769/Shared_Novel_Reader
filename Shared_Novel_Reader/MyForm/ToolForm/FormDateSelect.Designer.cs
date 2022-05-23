@@ -120,12 +120,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DateTimePicker DateBegin;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker DateOver;
         private System.Windows.Forms.Button BtnYes;
         private System.Windows.Forms.Button BtnNo;
+        private System.Windows.Forms.DateTimePicker DateBegin;
+        private System.Windows.Forms.DateTimePicker DateOver;
     }
 }

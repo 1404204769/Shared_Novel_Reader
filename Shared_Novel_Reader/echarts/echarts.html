@@ -16,7 +16,14 @@
 <!-- 		<button onclick="Refresh()">asdas</button>
 		<span id="showTest" style="background-color: antiquewhite">asd </span> -->
 		<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-		<div id="main" style="width: 761px;height:472px;"></div>
+		<div class="container">
+			<span id="topTime">时间:2021-03-21~2022-03-12</span>
+			<span id="topNum">汇总:2200</span>
+			<div id="main" style="width: 761px;height:472px;"></div>
+			<div class="lineContainer">
+				<span id="tableName">表名</span>
+			</div>
+		</div>
 	</body>
 	<script type="text/javascript">
 		// 基于准备好的dom，初始化echarts实例
@@ -101,7 +108,12 @@
 			let json = JSON.parse(obj);
 			
 			this.option.yAxis.name = json.unit;
-			
+			let tableName = document.getElementById('tableName');
+			tableName.innerHTML = json.tableName;
+			let topNum = document.getElementById('topNum');
+			topNum.innerHTML = json.topNum;
+			let topTime = document.getElementById('topTime');
+			topTime.innerHTML = json.topTime;
 			
 			let sourceJson = json.source;
 			let sourcedata = [];
@@ -169,9 +181,35 @@
 			padding: 0;
 			margin: 0;
 		}
-		#showTest {
-			background-color: antiquewhite;
-			
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		#topTime {
+			color: #708090;
+			position: absolute;
+			left: 5px;
+			top: 30px;
+			font-size: 14px;
+			font-weight: bold;
+		}
+		#topNum {
+			color: darkgray;
+			position: absolute;
+			right: 5px;
+			top: 5px;
+		}
+		.lineContainer {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: -30px;
+		}
+		.container .lineContainer #tableName {
+			font-size: 20px;
+			font-weight: bold;
+
 		}
 	</style>
 </html>

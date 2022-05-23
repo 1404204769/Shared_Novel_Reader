@@ -18,7 +18,7 @@ namespace Shared_Novel_Reader
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
-            // Application.Run(new MyForm.FormRootControl()) ;
+            //Application.Run(new MyForm.FormRootControl());
             //chaineseNumtest();
             // reset();
             // init();

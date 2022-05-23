@@ -14,9 +14,25 @@ namespace Shared_Novel_Reader.MyForm.ToolForm
     {
         public string Begin = String.Empty;
         public string End = String.Empty;
-        public FormDateSelect()
+        public FormDateSelect(string BeginTime,string EndTime)
         {
             InitializeComponent();
+            if(BeginTime != String.Empty)
+            {
+                DateBegin.Value = DateTime.Parse(BeginTime);
+            }
+            else
+            {
+                DateBegin.Value = DateTime.Parse(DateTime.Now.Year.ToString() + "-01-01");
+            }
+            if(EndTime != String.Empty)
+            {
+                DateOver.Value = DateTime.Parse(EndTime);
+            }
+            else
+            {
+                DateOver.Value = DateTime.Now;
+            }
             DateBegin.CustomFormat = "yyyy-MM-dd";
             DateOver.CustomFormat = "yyyy-MM-dd";
             Begin = DateBegin.Value.Year+"-"+ DateBegin.Value.Month + "-" + DateBegin.Value.Day + " 00:00:00";

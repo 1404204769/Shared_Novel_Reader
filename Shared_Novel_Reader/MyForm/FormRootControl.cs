@@ -25,6 +25,9 @@ namespace Shared_Novel_Reader.MyForm
         public string UserIDStr = String.Empty;
         public string UserNameStr = String.Empty;
         public string UserSexStr = String.Empty;
+
+        public string BeginTime = string.Empty;
+        public string EndTime = string.Empty;
         public FormRootControl()
         {
             //调用
@@ -737,6 +740,9 @@ namespace Shared_Novel_Reader.MyForm
             // 发送请求
             var SearchRes = Task<MyResponse>.Run(() => Tools.API.Root.System.SearchReport(BeginTime, EndTime, ReportType));
 
+            DateTime Begin = DateTime.Parse(BeginTime);
+            DateTime End = DateTime.Parse(EndTime);
+            string topTime = "起止时间: "+Begin.ToString("yyyy-MM-dd")+"~"+ End.ToString("yyyy-MM-dd");
             MyResponse res = await SearchRes;
 
             if (res == null)
@@ -753,6 +759,7 @@ namespace Shared_Novel_Reader.MyForm
             {
                 log.Info("查看报表成功:");
                 //Console.WriteLine("Data:" + res.Data.ToString());
+                String TableName = string.Empty;
                 JArray ReportArray = res.Data["Report"] as JArray;
                 Dictionary<string, Double[]> Dictionary = new Dictionary<string, Double[]>();
                 if(ReportType == "Upload" || ReportType == "Download" || ReportType == "Economic")
@@ -760,12 +767,22 @@ namespace Shared_Novel_Reader.MyForm
                     if (ReportType == "Economic")
                     {
                         UnitType = "元";
+                        TableName = "系统收入";
                     }
                     else if(ReportType == "Upload" || ReportType == "Download")
                     {
                         UnitType = "次";
+                        if(ReportType == "Upload")
+                        {
+                            TableName = "资源上传量";
+                        }
+                        else if (ReportType == "Download")
+                        {
+                            TableName = "资源下载量";
+                        }
                     }
                     JArray value = new JArray();
+                    Double sum = 0;
                     for (int i = 0; i < ReportArray.Count; i++)
                     {
                         // 第一级 年份
@@ -775,11 +792,12 @@ namespace Shared_Novel_Reader.MyForm
                         for (int j = 1; j < 13; j++)
                         {
                             Month[j] = Convert.ToDouble(ReportArray[i][Convert.ToString(j)].ToString());
+                            sum += Month[j];
                         }
                         Dictionary[ReportArray[i]["year"].ToString()] = Month;
                     }
-
-                    Echarts ech = new Echarts(value, LineType, UnitType);
+                    string topNum = "总和: " + Convert.ToString(sum) + UnitType;
+                    Echarts ech = new Echarts(value, LineType, UnitType, TableName, topNum, topTime);
 
 
                     for (int j = 1; j < 13; j++)
@@ -806,7 +824,7 @@ namespace Shared_Novel_Reader.MyForm
         private async Task<Echarts> InitReport()
         {
             string BeginTime = DateTime.Now.ToString("yyyy-01-01 00:00:00");
-            string EndTime = DateTime.Now.Year + 1 + "-01-01 00:00:00";
+            string EndTime = DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
             return await GetEcharts(BeginTime, EndTime,"Economic", "bar");
         }
 
@@ -830,11 +848,13 @@ namespace Shared_Novel_Reader.MyForm
 
         private async void View_Economic_Report_bar_Click(object sender, EventArgs e)
         {
-            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect();
+            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect(BeginTime, EndTime);
             DialogResult DiaRes = FormDateSelect.ShowDialog();
             if (DiaRes == DialogResult.Cancel)
                 return;
-            Echarts ech = await GetEcharts(FormDateSelect.Begin, FormDateSelect.End, "Economic", "bar");
+            BeginTime = FormDateSelect.Begin;
+            EndTime = FormDateSelect.End;
+            Echarts ech = await GetEcharts(BeginTime, EndTime, "Economic", "bar");
             if (ech == null)
                 return;
             RefreshReport(ech.ToJson().ToString());
@@ -843,11 +863,13 @@ namespace Shared_Novel_Reader.MyForm
 
         private async void View_Economic_Report_line_Click(object sender, EventArgs e)
         {
-            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect();
+            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect(BeginTime, EndTime);
             DialogResult DiaRes = FormDateSelect.ShowDialog();
             if (DiaRes == DialogResult.Cancel)
                 return;
-            Echarts ech = await GetEcharts(FormDateSelect.Begin, FormDateSelect.End, "Economic", "line");
+            BeginTime = FormDateSelect.Begin;
+            EndTime = FormDateSelect.End;
+            Echarts ech = await GetEcharts(BeginTime, EndTime, "Economic", "line");
             if (ech == null)
                 return;
             RefreshReport(ech.ToJson().ToString());
@@ -856,11 +878,13 @@ namespace Shared_Novel_Reader.MyForm
         private async void View_Upload_Report_line_Click(object sender, EventArgs e)
         {
 
-            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect();
+            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect(BeginTime, EndTime);
             DialogResult DiaRes = FormDateSelect.ShowDialog();
             if (DiaRes == DialogResult.Cancel)
                 return;
-            Echarts ech = await GetEcharts(FormDateSelect.Begin, FormDateSelect.End, "Upload", "line");
+            BeginTime = FormDateSelect.Begin;
+            EndTime = FormDateSelect.End;
+            Echarts ech = await GetEcharts(BeginTime, EndTime, "Upload", "line");
             if (ech == null)
                 return;
             RefreshReport(ech.ToJson().ToString());
@@ -868,11 +892,13 @@ namespace Shared_Novel_Reader.MyForm
 
         private async void View_Upload_Report_bar_Click(object sender, EventArgs e)
         {
-            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect();
+            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect(BeginTime,EndTime);
             DialogResult DiaRes = FormDateSelect.ShowDialog();
             if (DiaRes == DialogResult.Cancel)
                 return;
-            Echarts ech = await GetEcharts(FormDateSelect.Begin, FormDateSelect.End, "Upload", "bar");
+            BeginTime = FormDateSelect.Begin;
+            EndTime = FormDateSelect.End;
+            Echarts ech = await GetEcharts(BeginTime, EndTime, "Upload", "bar");
             if (ech == null)
                 return;
             RefreshReport(ech.ToJson().ToString());
@@ -880,11 +906,13 @@ namespace Shared_Novel_Reader.MyForm
 
         private async void View_Download_Report_line_Click(object sender, EventArgs e)
         {
-            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect();
+            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect(BeginTime, EndTime);
             DialogResult DiaRes = FormDateSelect.ShowDialog();
             if (DiaRes == DialogResult.Cancel)
                 return;
-            Echarts ech = await GetEcharts(FormDateSelect.Begin, FormDateSelect.End, "Download", "line");
+            BeginTime = FormDateSelect.Begin;
+            EndTime = FormDateSelect.End;
+            Echarts ech = await GetEcharts(BeginTime, EndTime, "Download", "line");
             if (ech == null)
                 return;
             RefreshReport(ech.ToJson().ToString());
@@ -893,11 +921,13 @@ namespace Shared_Novel_Reader.MyForm
         private async void View_Download_Report_bar_Click(object sender, EventArgs e)
         {
 
-            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect();
+            ToolForm.FormDateSelect FormDateSelect = new ToolForm.FormDateSelect(BeginTime, EndTime);
             DialogResult DiaRes = FormDateSelect.ShowDialog();
             if (DiaRes == DialogResult.Cancel)
                 return;
-            Echarts ech = await GetEcharts(FormDateSelect.Begin, FormDateSelect.End, "Download", "bar");
+            BeginTime = FormDateSelect.Begin;
+            EndTime = FormDateSelect.End;
+            Echarts ech = await GetEcharts(BeginTime, EndTime, "Download", "bar");
             if (ech == null)
                 return;
             RefreshReport(ech.ToJson().ToString());
@@ -908,16 +938,23 @@ namespace Shared_Novel_Reader.MyForm
 class Echarts
 {
     bool Init = false;
-    public string dimensions_Key = string.Empty, unit = String.Empty;
+    public string dimensions_Key = string.Empty;
+    public string unit = String.Empty;
+    public string tableName = String.Empty; 
+    public string topNum = String.Empty;
+    public string topTime = String.Empty;
     JArray dimensions_Value = new JArray();
     JArray source = new JArray();
     string LineType = string.Empty; 
-    public Echarts(JArray value,string linetype,string Unit)
+    public Echarts(JArray value,string linetype,string Unit,string TableName,string TopNum,string TopTime)
     {
         dimensions_Key = "Month";
         dimensions_Value = value;
         LineType = linetype;
         unit = Unit + "/月份";
+        tableName = TableName;
+        topNum = TopNum;
+        topTime = TopTime;
         Init = true;
     }
 
@@ -951,6 +988,16 @@ class Echarts
         obj["series"] = series;
         obj["source"] = source;
         obj["unit"] = unit;
+        if(LineType == "line")
+        {
+            obj["tableName"] = tableName+"折线图";
+        }
+        else if(LineType == "bar")
+        {
+            obj["tableName"] = tableName + "柱形图";
+        }
+        obj["topNum"] = topNum;
+        obj["topTime"] = topTime;
 
         return obj;
     }
