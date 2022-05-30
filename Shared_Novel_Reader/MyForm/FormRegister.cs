@@ -131,15 +131,9 @@ namespace Shared_Novel_Reader.MyForm
             // 发送请求
             var RegisterResult = Task<bool>.Run(() => Tools.API.GPI.Register(this.UserID,this.Password,this.UserName,this.UserSex,CancelRegisterControl.Token));
 
-            if (!await RegisterResult)
-            {
-                MessageBox.Show("注册失败,请重试", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
+            if (await RegisterResult){
                 this.DialogResult = DialogResult.OK;
                 this.Dispose();
-                MessageBox.Show("注册成功");
             }
 
         }
@@ -186,6 +180,33 @@ namespace Shared_Novel_Reader.MyForm
         {
             this.LabelPasswordExplain.Visible = false;
             this.Password = this.TextPassword.Text;
+        }
+
+        private void label_Pwd1_IMG_Click(object sender, EventArgs e)
+        {
+            if(TextPassword.PasswordChar == '*')
+            {
+                TextPassword.PasswordChar = Char.MinValue;
+                this.Label_Pwd1_IMG.Image = global::Shared_Novel_Reader.Properties.Resources.show;
+            }else
+            {
+                TextPassword.PasswordChar = '*';
+                this.Label_Pwd1_IMG.Image = global::Shared_Novel_Reader.Properties.Resources.hide;
+            }
+        }
+
+        private void label_Pwd2_IMG_Click(object sender, EventArgs e)
+        {
+            if (TextPasswordAgain.PasswordChar == '*')
+            {
+                TextPasswordAgain.PasswordChar = Char.MinValue;
+                this.Label_Pwd2_IMG.Image = global::Shared_Novel_Reader.Properties.Resources.show;
+            }
+            else
+            {
+                TextPasswordAgain.PasswordChar = '*';
+                this.Label_Pwd2_IMG.Image = global::Shared_Novel_Reader.Properties.Resources.hide;
+            }
         }
     }
 }

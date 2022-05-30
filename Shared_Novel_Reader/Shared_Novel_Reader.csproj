@@ -317,6 +317,12 @@
     <Compile Include="MyForm\ToolForm\FormUploadChange.Designer.cs">
       <DependentUpon>FormUploadChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyForm\ToolForm\PageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyForm\ToolForm\PageControl.Designer.cs">
+      <DependentUpon>PageControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\UserForm\FormActionList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -452,6 +458,9 @@
     <EmbeddedResource Include="MyForm\ToolForm\FormUploadChange.resx">
       <DependentUpon>FormUploadChange.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\ToolForm\PageControl.resx">
+      <DependentUpon>PageControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyForm\UserForm\FormActionList.resx">
       <DependentUpon>FormActionList.cs</DependentUpon>
     </EmbeddedResource>
@@ -544,6 +553,10 @@
     <Content Include="echarts\echarts.html" />
     <Content Include="echarts\echarts.js" />
     <Content Include="echarts\echarts.min.js" />
+    <None Include="Resources\back.ico" />
+    <None Include="Resources\next.ico" />
+    <None Include="Resources\hide.ico" />
+    <None Include="Resources\show.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

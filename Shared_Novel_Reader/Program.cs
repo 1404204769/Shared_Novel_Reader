@@ -14,99 +14,10 @@ namespace Shared_Novel_Reader
         [STAThread]
         static void Main()
         {
-            // JsonTest();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
             //Application.Run(new MyForm.FormRootControl());
-            //chaineseNumtest();
-            // reset();
-            // init();
-            // Booktest();
         }
-/*
-        static void reset()
-        {
-            Properties.Settings.Default.Local_Res_Path = "";
-            Properties.Settings.Default.App_Path = "";
-            Properties.Settings.Default.Save();
-        }
-        static void init()
-        {
-            ILog log = LogManager.GetLogger(typeof(Program));
-            if(Properties.Settings.Default.Local_Res_Path == "")
-            {
-                DirectoryInfo directory = new DirectoryInfo(Application.StartupPath);
-                Properties.Settings.Default.Local_Res_Path  = directory.Parent.Parent.FullName + "\\Book";
-                Properties.Settings.Default.Save();
-                log.Info("文件资源路径初始化为 : " + Properties.Settings.Default.Local_Res_Path);
-            }
-            else
-            {
-                log.Info("文件资源路径为 : " + Properties.Settings.Default.Local_Res_Path);
-            }
-            if (Properties.Settings.Default.App_Path == "")
-            {
-                DirectoryInfo directory = new DirectoryInfo(Application.StartupPath);
-                Properties.Settings.Default.App_Path = directory.Parent.Parent.FullName;
-                Properties.Settings.Default.Save();
-                log.Info("项目根目录初始化为 : " + Properties.Settings.Default.App_Path);
-            }
-            else
-            {
-                log.Info("项目根目录为 : " + Properties.Settings.Default.App_Path);
-            }
-        }
-
-        static void chaineseNumtest()
-        {
-            string str = "第一百零一章 测试章节";
-            long ans = Shared_Novel_Reader.Tools.Novel_Analysis.GetNum(str);
-            Console.WriteLine("ans : " + ans);
-        }
-
-        static void Booktest()
-        {
-            if (!models.LocalBookShelf.open())
-            {
-                MessageBox.Show("书架打开失败");
-            }
-            else
-            {
-                MessageBox.Show("书架打开成功");
-            }
-
-            models.Book book;
-            string path = "C:\\Users\\LZC\\大学\\毕业设计\\毕业设计-设计阶段\\客户端开发过程文件\\测试文件\\1\\从木叶开始逃亡.txt";
-            Tools.Novel_Analysis.Analysis_Local_Resource(out book,path);
-            if(book != null)
-                models.LocalBookShelf.AddToBookshelf(book);
-
-            if (!models.LocalBookShelf.close())
-            {
-                MessageBox.Show("书架关闭失败");
-            }
-            else
-            {
-                MessageBox.Show("书架关闭成功");
-            }
-        }
-    
-        static void LoginTest()
-        {
-            ILog log = LogManager.GetLogger(typeof(Program));
-            // Tools.API.Login(911220, "chentonlei");
-
-        }
-        
-        static void JsonTest()
-        {
-            string json =
-"{\"Data\":{\"Token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJMb2dpbl9TdGF0dXMiOiJ1c2VyIiwiVXNlcl9JRCI6IjkxMTIyMCJ9.zkRERegP0WiSKTI6eWe1Bj4I_atu3oCfpQH6SZrlFLk\",\"User_Data\":{\"Integral\":1043,\"Level\":1,\"Name\":\"陈彤磊\",\"Password\":\"chentonlei\",\"Power\":1,\"Sex\":\"男\",\"Status\":\"Normal\",\"Total_Integral\":1043,\"User_ID\":911220}},\"Message\":\"登入成功\",\"Result\":true}";
-
-            JObject res = JObject.Parse(json);
-            MessageBox.Show(res.ToString());
-        }*/
-
     }
 }

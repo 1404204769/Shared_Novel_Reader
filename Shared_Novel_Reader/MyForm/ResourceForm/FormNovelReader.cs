@@ -268,7 +268,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             this.DataGridViewContent.Rows.Clear();
             foreach (var str in chapter.ContentList[contentversion].ContentArray)
             {
-                this.DataGridViewContent.Rows.Add(str);
+                this.DataGridViewContent.Rows.Add("    "+str);
             }
             Part_Num = volnum;
             Chapter_Num = chapnum;

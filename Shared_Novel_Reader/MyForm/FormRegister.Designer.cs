@@ -45,6 +45,8 @@
             this.LabelPasswordAgainExplain = new System.Windows.Forms.Label();
             this.LabelErrorExpain = new System.Windows.Forms.Label();
             this.labelNameExplain = new System.Windows.Forms.Label();
+            this.Label_Pwd2_IMG = new System.Windows.Forms.Label();
+            this.Label_Pwd1_IMG = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LabelAccount
@@ -161,7 +163,7 @@
             this.TextPassword.MaxLength = 11;
             this.TextPassword.Name = "TextPassword";
             this.TextPassword.PasswordChar = '*';
-            this.TextPassword.Size = new System.Drawing.Size(293, 28);
+            this.TextPassword.Size = new System.Drawing.Size(246, 28);
             this.TextPassword.TabIndex = 20;
             this.TextPassword.TextChanged += new System.EventHandler(this.TextPassword_TextChanged);
             this.TextPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxPassword_KeyPress);
@@ -173,7 +175,7 @@
             this.TextPasswordAgain.MaxLength = 11;
             this.TextPasswordAgain.Name = "TextPasswordAgain";
             this.TextPasswordAgain.PasswordChar = '*';
-            this.TextPasswordAgain.Size = new System.Drawing.Size(293, 28);
+            this.TextPasswordAgain.Size = new System.Drawing.Size(246, 28);
             this.TextPasswordAgain.TabIndex = 22;
             this.TextPasswordAgain.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxPasswordAgain_KeyPress);
             // 
@@ -243,11 +245,33 @@
             this.labelNameExplain.Text = "请输入昵称";
             this.labelNameExplain.Visible = false;
             // 
+            // Label_Pwd2_IMG
+            // 
+            this.Label_Pwd2_IMG.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Label_Pwd2_IMG.Image = global::Shared_Novel_Reader.Properties.Resources.hide;
+            this.Label_Pwd2_IMG.Location = new System.Drawing.Point(432, 259);
+            this.Label_Pwd2_IMG.Name = "Label_Pwd2_IMG";
+            this.Label_Pwd2_IMG.Size = new System.Drawing.Size(28, 28);
+            this.Label_Pwd2_IMG.TabIndex = 28;
+            this.Label_Pwd2_IMG.Click += new System.EventHandler(this.label_Pwd2_IMG_Click);
+            // 
+            // Label_Pwd1_IMG
+            // 
+            this.Label_Pwd1_IMG.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Label_Pwd1_IMG.Image = global::Shared_Novel_Reader.Properties.Resources.hide;
+            this.Label_Pwd1_IMG.Location = new System.Drawing.Point(432, 210);
+            this.Label_Pwd1_IMG.Name = "Label_Pwd1_IMG";
+            this.Label_Pwd1_IMG.Size = new System.Drawing.Size(28, 28);
+            this.Label_Pwd1_IMG.TabIndex = 29;
+            this.Label_Pwd1_IMG.Click += new System.EventHandler(this.label_Pwd1_IMG_Click);
+            // 
             // FormRegister
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(478, 544);
+            this.Controls.Add(this.Label_Pwd1_IMG);
+            this.Controls.Add(this.Label_Pwd2_IMG);
             this.Controls.Add(this.labelNameExplain);
             this.Controls.Add(this.LabelErrorExpain);
             this.Controls.Add(this.LabelPasswordAgainExplain);
@@ -268,6 +292,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormRegister";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "注册";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -293,5 +318,7 @@
         private System.Windows.Forms.Label LabelPasswordAgainExplain;
         private System.Windows.Forms.Label LabelErrorExpain;
         private System.Windows.Forms.Label labelNameExplain;
+        private System.Windows.Forms.Label Label_Pwd2_IMG;
+        private System.Windows.Forms.Label Label_Pwd1_IMG;
     }
 }

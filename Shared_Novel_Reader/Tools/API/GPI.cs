@@ -97,18 +97,18 @@ namespace Shared_Novel_Reader.Tools.API
 
             if (res.Result == false)
             {
-                MessageBox.Show(res.Message);
+                MessageBox.Show("注册失败("+res.Message+"),请重试", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
 
             if (res.Data == null)
             {
-                MessageBox.Show("服务器异常,请重试");
+                MessageBox.Show("注册失败(服务器异常,请重试),请重试", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
-            log.Info("注册成功");
+            MessageBox.Show("注册成功");
             return true;
         }
 

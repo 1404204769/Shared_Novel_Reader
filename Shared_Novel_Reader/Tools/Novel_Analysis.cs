@@ -14,7 +14,7 @@ namespace Shared_Novel_Reader.Tools
         
         private static Regex TitleRegex = new Regex(@"(?:^\s*|^\s*第.*?)(第[^\s,.，。]*?[章篇]\s?(?<ChapterTitle>.*))");
         private static Regex PartRegex = new Regex(@"(第[^\s,.，。]*?卷)");
-        private static Regex ChapterRegex = new Regex(@"(第[零一二三四五六七八九十百千万亿]+[章篇])");
+        private static Regex ChapterRegex = new Regex(@"(第[零一二三四五六七八九十百千万亿0123456789]+[章篇])");
         private static Regex ChineseNumRegex = new Regex(@"([零一二三四五六七八九十百千万亿]+)");
         private static Regex AlabNumRegex = new Regex(@"([0-9]+)");
         private static Regex BookNameRegex = new Regex(@"(?<BookName>[^<>/\\\|:""\*\?]+)\.\w+$");

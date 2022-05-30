@@ -40,6 +40,7 @@
             this.BtnCancelLogin = new System.Windows.Forms.Button();
             this.LabelAccountExplain = new System.Windows.Forms.Label();
             this.LabelPasswordExplain = new System.Windows.Forms.Label();
+            this.Label_Pwd_IMG = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,6 +86,7 @@
             // 
             this.TextPassword.Location = new System.Drawing.Point(338, 148);
             this.TextPassword.Name = "TextPassword";
+            this.TextPassword.PasswordChar = '*';
             this.TextPassword.Size = new System.Drawing.Size(144, 28);
             this.TextPassword.TabIndex = 5;
             this.TextPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextPassword_KeyPress);
@@ -156,11 +158,22 @@
             this.LabelPasswordExplain.Text = "请输入数字或字母";
             this.LabelPasswordExplain.Visible = false;
             // 
+            // Label_Pwd_IMG
+            // 
+            this.Label_Pwd_IMG.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Label_Pwd_IMG.Image = global::Shared_Novel_Reader.Properties.Resources.hide;
+            this.Label_Pwd_IMG.Location = new System.Drawing.Point(489, 152);
+            this.Label_Pwd_IMG.Name = "Label_Pwd_IMG";
+            this.Label_Pwd_IMG.Size = new System.Drawing.Size(28, 28);
+            this.Label_Pwd_IMG.TabIndex = 11;
+            this.Label_Pwd_IMG.Click += new System.EventHandler(this.Label_Pwd_IMG_Click);
+            // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(578, 344);
+            this.Controls.Add(this.Label_Pwd_IMG);
             this.Controls.Add(this.LabelPasswordExplain);
             this.Controls.Add(this.LabelAccountExplain);
             this.Controls.Add(this.BtnCancelLogin);
@@ -197,5 +210,6 @@
         private System.Windows.Forms.Button BtnCancelLogin;
         private System.Windows.Forms.Label LabelAccountExplain;
         private System.Windows.Forms.Label LabelPasswordExplain;
+        private System.Windows.Forms.Label Label_Pwd_IMG;
     }
 }

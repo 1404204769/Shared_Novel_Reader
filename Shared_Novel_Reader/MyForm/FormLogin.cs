@@ -149,5 +149,19 @@ namespace Shared_Novel_Reader.MyForm
             }
             
         }
+
+        private void Label_Pwd_IMG_Click(object sender, EventArgs e)
+        {
+            if (TextPassword.PasswordChar == '*')
+            {
+                TextPassword.PasswordChar = Char.MinValue;
+                this.Label_Pwd_IMG.Image = global::Shared_Novel_Reader.Properties.Resources.show;
+            }
+            else
+            {
+                TextPassword.PasswordChar = '*';
+                this.Label_Pwd_IMG.Image = global::Shared_Novel_Reader.Properties.Resources.hide;
+            }
+        }
     }
 }

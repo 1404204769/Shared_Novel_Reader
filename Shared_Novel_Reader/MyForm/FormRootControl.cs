@@ -35,6 +35,7 @@ namespace Shared_Novel_Reader.MyForm
             InitializeComponent();
             LevelInit();
             WebEchartInit();
+            LoadAllUser();
         }
 
 
