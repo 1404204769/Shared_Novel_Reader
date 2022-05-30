@@ -415,6 +415,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\ResourceForm\FormNoteComment.resx">
       <DependentUpon>FormNoteComment.cs</DependentUpon>
@@ -553,10 +554,18 @@
     <Content Include="echarts\echarts.html" />
     <Content Include="echarts\echarts.js" />
     <Content Include="echarts\echarts.min.js" />
+    <None Include="Resources\show1.ico" />
+    <None Include="Resources\hide1.ico" />
+    <None Include="Resources\show.ico" />
+    <None Include="Resources\hide.ico" />
+    <None Include="Resources\Max_mode1.ico" />
+    <None Include="Resources\Normal_mode1.ico" />
+    <None Include="Resources\Shut down.ico" />
+    <None Include="Resources\Mini_mode.ico" />
+    <None Include="Resources\Normal_mode.ico" />
+    <None Include="Resources\Max_mode.ico" />
     <None Include="Resources\back.ico" />
     <None Include="Resources\next.ico" />
-    <None Include="Resources\hide.ico" />
-    <None Include="Resources\show.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

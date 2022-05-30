@@ -115,6 +115,9 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelTipString.ForeColor = Color.AliceBlue;
             this.LabelTipString.Parent = this.TipPanel;
             this.LabelTipString.BackColor = SystemPens.ActiveCaption.Color;  // 设置滚动条背景色
+
+            // 设置最大化范围
+            this.MaximizedBounds = Screen.PrimaryScreen.WorkingArea;
         }
 
         /// <summary>
@@ -145,6 +148,25 @@ namespace Shared_Novel_Reader.MyForm
             Application.Exit();
         }
 
+        private void BtnMax_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+                //这里图片调用的时资源库中添加好的图片
+                this.BtnMax.Image = global::Shared_Novel_Reader.Properties.Resources.Max_mode;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Maximized;
+                this.BtnMax.Image = global::Shared_Novel_Reader.Properties.Resources.Normal_mode;
+            }
+        }
+
+        private void BtnMin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
 
         /// <summary>
         /// 页面顶端点击鼠标左键开始准备移动

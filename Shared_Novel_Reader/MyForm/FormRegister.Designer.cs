@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRegister));
             this.LabelAccount = new System.Windows.Forms.Label();
             this.LabelName = new System.Windows.Forms.Label();
             this.LabelSex = new System.Windows.Forms.Label();
@@ -45,8 +46,8 @@
             this.LabelPasswordAgainExplain = new System.Windows.Forms.Label();
             this.LabelErrorExpain = new System.Windows.Forms.Label();
             this.labelNameExplain = new System.Windows.Forms.Label();
-            this.Label_Pwd2_IMG = new System.Windows.Forms.Label();
             this.Label_Pwd1_IMG = new System.Windows.Forms.Label();
+            this.Label_Pwd2_IMG = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LabelAccount
@@ -245,16 +246,6 @@
             this.labelNameExplain.Text = "请输入昵称";
             this.labelNameExplain.Visible = false;
             // 
-            // Label_Pwd2_IMG
-            // 
-            this.Label_Pwd2_IMG.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Label_Pwd2_IMG.Image = global::Shared_Novel_Reader.Properties.Resources.hide;
-            this.Label_Pwd2_IMG.Location = new System.Drawing.Point(432, 259);
-            this.Label_Pwd2_IMG.Name = "Label_Pwd2_IMG";
-            this.Label_Pwd2_IMG.Size = new System.Drawing.Size(28, 28);
-            this.Label_Pwd2_IMG.TabIndex = 28;
-            this.Label_Pwd2_IMG.Click += new System.EventHandler(this.label_Pwd2_IMG_Click);
-            // 
             // Label_Pwd1_IMG
             // 
             this.Label_Pwd1_IMG.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -264,6 +255,16 @@
             this.Label_Pwd1_IMG.Size = new System.Drawing.Size(28, 28);
             this.Label_Pwd1_IMG.TabIndex = 29;
             this.Label_Pwd1_IMG.Click += new System.EventHandler(this.label_Pwd1_IMG_Click);
+            // 
+            // Label_Pwd2_IMG
+            // 
+            this.Label_Pwd2_IMG.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Label_Pwd2_IMG.Image = ((System.Drawing.Image)(resources.GetObject("Label_Pwd2_IMG.Image")));
+            this.Label_Pwd2_IMG.Location = new System.Drawing.Point(432, 259);
+            this.Label_Pwd2_IMG.Name = "Label_Pwd2_IMG";
+            this.Label_Pwd2_IMG.Size = new System.Drawing.Size(28, 28);
+            this.Label_Pwd2_IMG.TabIndex = 28;
+            this.Label_Pwd2_IMG.Click += new System.EventHandler(this.label_Pwd2_IMG_Click);
             // 
             // FormRegister
             // 
