@@ -28,7 +28,7 @@ namespace Shared_Novel_Reader.Tools.API
             ReqJson.Add("User_ID", User_ID);
             ReqJson.Add("User_Pwd", User_Pwd);
 
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
             int num = 0;
             MyResponse res = MyClient.NoTokenRequests("Gpi/Login", ReqJson.ToString(), CancelLogin);
             while ((res == null) && (num < 10) && !CancelLogin.IsCancellationRequested)

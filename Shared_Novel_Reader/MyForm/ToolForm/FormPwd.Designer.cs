@@ -33,6 +33,7 @@
             this.BtnYes = new System.Windows.Forms.Button();
             this.BtnNo = new System.Windows.Forms.Button();
             this.LabelPasswordExplain = new System.Windows.Forms.Label();
+            this.Label_Pwd_IMG = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label
@@ -90,11 +91,22 @@
             this.LabelPasswordExplain.Text = "请输入数字或字母";
             this.LabelPasswordExplain.Visible = false;
             // 
+            // Label_Pwd_IMG
+            // 
+            this.Label_Pwd_IMG.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Label_Pwd_IMG.Image = global::Shared_Novel_Reader.Properties.Resources.hide;
+            this.Label_Pwd_IMG.Location = new System.Drawing.Point(407, 122);
+            this.Label_Pwd_IMG.Name = "Label_Pwd_IMG";
+            this.Label_Pwd_IMG.Size = new System.Drawing.Size(40, 40);
+            this.Label_Pwd_IMG.TabIndex = 26;
+            this.Label_Pwd_IMG.Click += new System.EventHandler(this.Label_Pwd_Click);
+            // 
             // FormPwd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 300);
+            this.Controls.Add(this.Label_Pwd_IMG);
             this.Controls.Add(this.LabelPasswordExplain);
             this.Controls.Add(this.BtnNo);
             this.Controls.Add(this.BtnYes);
@@ -116,5 +128,6 @@
         private System.Windows.Forms.Button BtnNo;
         private System.Windows.Forms.Label LabelPasswordExplain;
         public System.Windows.Forms.TextBox TextPwd;
+        private System.Windows.Forms.Label Label_Pwd_IMG;
     }
 }

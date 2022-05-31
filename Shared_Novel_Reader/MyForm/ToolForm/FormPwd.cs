@@ -40,5 +40,20 @@ namespace Shared_Novel_Reader.MyForm.ToolForm
                 LabelPasswordExplain.Visible = false;
             }
         }
+
+        private void Label_Pwd_Click(object sender, EventArgs e)
+        {
+
+            if (TextPwd.PasswordChar == '*')
+            {
+                TextPwd.PasswordChar = Char.MinValue;
+                this.Label_Pwd_IMG.Image = global::Shared_Novel_Reader.Properties.Resources.show;
+            }
+            else
+            {
+                TextPwd.PasswordChar = '*';
+                this.Label_Pwd_IMG.Image = global::Shared_Novel_Reader.Properties.Resources.hide;
+            }
+        }
     }
 }

@@ -14,6 +14,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
         string BookName;
         int BookID, PartNum, ChapterNum;
         public FormChapterContent FormChapterContent = null;
+        JArray ChapterListJson = new JArray();
         public FormChapterAllVersion(string Book_Name,int Book_ID,int Part_Num,int Chapter_Num)
         {
             BookName = Book_Name;
@@ -52,6 +53,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
 
 
             // 加载前把残留的数据删除
+            ChapterListJson.Clear();
             DataGridViewResourceChapterAllVersion.Rows.Clear();
 
             if (res == null || !res.Result)
@@ -65,42 +67,41 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
             }
             else
             {
-                string[][] ChapterListStr;
-                JArray ChapterListJson = (JArray)res.Data["Chapter_List"];
+                string[] ChapterStr;
+                ChapterListJson = (JArray)res.Data["Chapter_List"];
                 // log.Info(ChapterListJson.ToString());
-                GetChapterList(in ChapterListJson, out ChapterListStr);
                 for (int i = 0; i < ChapterListJson.Count; i++)
                 {
-                    DataGridViewResourceChapterAllVersion.Rows.Add(ChapterListStr[i]);
+                    GetChapterList(in i, out ChapterStr);
+                    DataGridViewResourceChapterAllVersion.Rows.Add(ChapterStr);
                 }
                 log.Info("章节所有版本列表查询成功");
             }
         }
 
 
-        private void GetChapterList(in JArray ChapterListJson, out string[][] ChapterListStr)
+        private void GetChapterList(in int index, out string[] ChapterStr)
         {
             JObject MemoJson;
-            ChapterListStr = new string[ChapterListJson.Count][];
+            ChapterStr = new string[DataGridViewResourceChapterAllVersion.ColumnCount];
             string[] ColName = new string[DataGridViewResourceChapterAllVersion.ColumnCount];
             for (int i = 0; i < DataGridViewResourceChapterAllVersion.ColumnCount; i++)
             {
                 ColName[i] = DataGridViewResourceChapterAllVersion.Columns[i].Name;
             }
-
-            for (int i = 0; i < ChapterListJson.Count; i++)
+            
+            for (int j = 0; j < DataGridViewResourceChapterAllVersion.ColumnCount; j++)
             {
-                string[] RowData = new string[DataGridViewResourceChapterAllVersion.ColumnCount];
-                for (int j = 0; j < DataGridViewResourceChapterAllVersion.ColumnCount; j++)
+                ChapterStr[j] = ChapterListJson[index][ColName[j]].ToString();
+                if (ColName[j] == "Memo")
                 {
-                    RowData[j] = ChapterListJson[i][ColName[j]].ToString();
-                    if (ColName[j] == "Memo")
-                    {
-                        MemoJson = JObject.Parse(RowData[j]);
-                        RowData[j] = MemoJson.ToString();
-                    }
+                    MemoJson = JObject.Parse(ChapterStr[j]);
+                    ChapterStr[j] = MemoJson["Status"].ToString();
                 }
-                ChapterListStr[i] = RowData;
+                if (ColName[j] == "Content")
+                {
+                    ChapterStr[j] = "右键查看详情";
+                }
             }
             return;
         }
@@ -116,7 +117,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
             // 弹出确认框
             DisposeFormChapterContent();
             int VersionNum = Convert.ToInt32((string)DataGridViewResourceChapterAllVersion.Rows[RowIndex].Cells[8].Value);
-            JArray ContentArray = (JArray)JsonConvert.DeserializeObject((string)DataGridViewResourceChapterAllVersion.Rows[RowIndex].Cells[5].Value);
+            JArray ContentArray = (JArray)JsonConvert.DeserializeObject(ChapterListJson[RowIndex]["Content"].ToString());
             string ChapterTitle = (string)DataGridViewResourceChapterAllVersion.Rows[RowIndex].Cells[4].Value;
             FormChapterContent = new FormChapterContent(BookName, PartNum, ChapterNum, ChapterTitle, VersionNum,ContentArray);
             FormChapterContent.Visible = true;

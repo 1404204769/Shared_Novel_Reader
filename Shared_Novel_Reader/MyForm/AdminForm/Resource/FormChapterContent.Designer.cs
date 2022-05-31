@@ -32,7 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DataGridViewChapterContent = new System.Windows.Forms.DataGridView();
-            this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripTop = new System.Windows.Forms.ToolStrip();
             this.toolStripLabelBookName = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabelBookNameValue = new System.Windows.Forms.ToolStripLabel();
@@ -49,6 +48,7 @@
             this.toolStripLabelChineseNumValue = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabelVersionValue = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabelVersion = new System.Windows.Forms.ToolStripLabel();
+            this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewChapterContent)).BeginInit();
             this.toolStripTop.SuspendLayout();
             this.toolStripBottom.SuspendLayout();
@@ -87,19 +87,6 @@
             this.DataGridViewChapterContent.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DataGridViewChapterContent.Size = new System.Drawing.Size(928, 1086);
             this.DataGridViewChapterContent.TabIndex = 0;
-            // 
-            // Content
-            // 
-            this.Content.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Content.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Content.HeaderText = "内容";
-            this.Content.MinimumWidth = 8;
-            this.Content.Name = "Content";
-            this.Content.ReadOnly = true;
-            this.Content.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Content.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // toolStripTop
             // 
@@ -234,6 +221,21 @@
             this.toolStripLabelVersion.Text = "版本:";
             this.toolStripLabelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // Content
+            // 
+            this.Content.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Content.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Content.HeaderText = "内容";
+            this.Content.MinimumWidth = 8;
+            this.Content.Name = "Content";
+            this.Content.ReadOnly = true;
+            this.Content.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Content.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // FormChapterContent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -258,7 +260,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView DataGridViewChapterContent;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Content;
         private System.Windows.Forms.ToolStrip toolStripTop;
         private System.Windows.Forms.ToolStripLabel toolStripLabelPartNum;
         private System.Windows.Forms.ToolStripLabel toolStripLabelChapterNum;
@@ -275,5 +276,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabelChineseNumValue;
         private System.Windows.Forms.ToolStripLabel toolStripLabelVersionValue;
         private System.Windows.Forms.ToolStripLabel toolStripLabelVersion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Content;
     }
 }

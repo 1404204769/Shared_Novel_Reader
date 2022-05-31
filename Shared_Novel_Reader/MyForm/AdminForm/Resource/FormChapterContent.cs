@@ -18,7 +18,8 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
         int PartNum, ChapterNum, VersionNum;
         string BookName,ChapterTitle;
         JArray ContentArray = null;
-        
+        string TabStr = "    ";// 缩进空格数
+
         public FormChapterContent(string Book_Name,int Part_Num, int Chapter_Num, string Chapter_Title, int Version_Num,JArray Content_Array)
         {
             PartNum = Part_Num;
@@ -56,7 +57,7 @@ namespace Shared_Novel_Reader.MyForm.AdminForm.Resource
                 for (int i = 0; i < ContentArray.Count; i++)
                 {
                     ChineseNum += Tools.Novel_Analysis.GetHanNumFromString(ContentArray[i].ToString());
-                    DataGridViewChapterContent.Rows.Add(ContentArray[i].ToString());
+                    DataGridViewChapterContent.Rows.Add(TabStr+ContentArray[i].ToString());
                 }
                 log.Info("章节内容如下");
             }

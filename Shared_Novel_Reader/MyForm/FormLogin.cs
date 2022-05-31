@@ -36,11 +36,6 @@ namespace Shared_Novel_Reader.MyForm
                 MessageBox.Show("输入不完整，请检查", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if(TextAccount.Text.Length < 6 || TextAccount.Text.Length > 10)
-            {
-                LabelAccountExplain.Visible = true;
-                return;
-            }
 
             CancelLoginControl = new CancellationTokenSource();
             // 发送请求

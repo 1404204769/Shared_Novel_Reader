@@ -125,7 +125,7 @@ namespace Shared_Novel_Reader.Tools
             // 管理员权限
             // Authorization = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJMb2dpbl9TdGF0dXMiOiJhZG1pbiIsIlVzZXJfSUQiOiI5MTExMDgifQ.7ERq0WPlu6kVsBguiBQZny9F_lNkU4AGBUurazNwDrc";
             // 超级管理员权限
-             Authorization = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJMb2dpbl9TdGF0dXMiOiJyb290IiwiVXNlcl9JRCI6IjkxMTIyMiJ9.az6mKpUg74RM8WA0bsLJPvJ3ngK27sdvNGK3BlbCZek";
+            // Authorization = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJMb2dpbl9TdGF0dXMiOiJyb290IiwiVXNlcl9JRCI6IjkxMTIyMiJ9.az6mKpUg74RM8WA0bsLJPvJ3ngK27sdvNGK3BlbCZek";
         }
 
 
@@ -138,7 +138,8 @@ namespace Shared_Novel_Reader.Tools
         public static MyResponse NoTokenRequests(string url, string jsonStr,in CancellationToken CancelLogin)
         {
             init();
-            log.Info("地址：" + url + "调用api json:" + jsonStr);
+            log.Info("调用api地址：" + url);
+            //log.Info("地址：" + url + "调用api json:" + jsonStr);
             string resResult = string.Empty;
 
             if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(jsonStr))
@@ -152,19 +153,21 @@ namespace Shared_Novel_Reader.Tools
             // request.AddJsonBody(jobj);
             request.AddStringBody(jsonStr, DataFormat.Json);
             request.Timeout = TimeOut;
-            log.Info("请求数据如下:" + request.Parameters.ToString());
+            //log.Info("请求数据如下:" + request.Parameters.ToString());
             var response = client.ExecuteAsync(request, CancelLogin);
 
-            log.Info("接收数据如下:" + response.Result.Content);
+            //log.Info("接收数据如下:" + response.Result.Content);
             if (!CheckStatus(in response))
             {
                 if (!string.IsNullOrEmpty(response.Result.Content))
                 {
-                    log.Info("调用推送数据接口异常:" + response.Result.Content);
+                    log.Info("调用推送数据接口异常");
+                    //log.Info("调用推送数据接口异常:" + response.Result.Content);
                 }
                 else
                 {
-                    log.Info("调用推送数据接口异常:" + response.Result.ErrorMessage);
+                    log.Info("调用推送数据接口异常");
+                    //log.Info("调用推送数据接口异常:" + response.Result.ErrorMessage);
                 }
                 return null;
             }
@@ -190,7 +193,8 @@ namespace Shared_Novel_Reader.Tools
         {
             init();
             // if(!CheckOnline())return null;
-            log.Info("地址：" + url + "调用api json:" + jsonStr);
+            log.Info("调用api地址：" + url);
+            //log.Info("地址：" + url + "调用api json:" + jsonStr);
             string resResult = string.Empty;
 
             if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(jsonStr))
@@ -205,7 +209,7 @@ namespace Shared_Novel_Reader.Tools
             request.AddStringBody(jsonStr, DataFormat.Json);
             request.Timeout = TimeOut;
             request.AddHeader("Authorization", Authorization);
-            log.Info("请求数据如下:" + request.Parameters.ToString());
+            log.Info("请求数据如下:" + jsonStr);
 
             var response = client.ExecuteAsync(request);
             log.Info("接收数据如下:" + response.Result.Content);
@@ -214,11 +218,13 @@ namespace Shared_Novel_Reader.Tools
             {
                 if (!string.IsNullOrEmpty(response.Result.Content))
                 {
-                    log.Info("调用推送数据接口异常:" + response.Result.Content);
+                    log.Info("调用推送数据接口异常");
+                    //log.Info("调用推送数据接口异常:" + response.Result.Content);
                 }
                 else
                 {
-                    log.Info("调用推送数据接口异常:" + response.Result.ErrorMessage);
+                    log.Info("调用推送数据接口异常");
+                    //log.Info("调用推送数据接口异常:" + response.Result.ErrorMessage);
                 }
 
                 if(response.Result.Content != null)
