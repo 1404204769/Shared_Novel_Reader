@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             this.PictureLogo = new System.Windows.Forms.PictureBox();
             this.LabelAccount = new System.Windows.Forms.Label();
             this.LabelPassword = new System.Windows.Forms.Label();
@@ -142,9 +143,9 @@
             this.LabelAccountExplain.ForeColor = System.Drawing.Color.Red;
             this.LabelAccountExplain.Location = new System.Drawing.Point(335, 126);
             this.LabelAccountExplain.Name = "LabelAccountExplain";
-            this.LabelAccountExplain.Size = new System.Drawing.Size(179, 18);
+            this.LabelAccountExplain.Size = new System.Drawing.Size(170, 18);
             this.LabelAccountExplain.TabIndex = 9;
-            this.LabelAccountExplain.Text = "请输入数字,最多十位";
+            this.LabelAccountExplain.Text = "请输入数字(6-10位)";
             this.LabelAccountExplain.Visible = false;
             // 
             // LabelPasswordExplain
@@ -161,7 +162,7 @@
             // Label_Pwd_IMG
             // 
             this.Label_Pwd_IMG.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Label_Pwd_IMG.Image = global::Shared_Novel_Reader.Properties.Resources.hide;
+            this.Label_Pwd_IMG.Image = ((System.Drawing.Image)(resources.GetObject("Label_Pwd_IMG.Image")));
             this.Label_Pwd_IMG.Location = new System.Drawing.Point(489, 152);
             this.Label_Pwd_IMG.Name = "Label_Pwd_IMG";
             this.Label_Pwd_IMG.Size = new System.Drawing.Size(28, 28);

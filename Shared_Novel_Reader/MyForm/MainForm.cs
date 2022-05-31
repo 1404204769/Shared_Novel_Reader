@@ -500,7 +500,7 @@ namespace Shared_Novel_Reader.MyForm
 
         private void LabelTip_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(TipString);
+            MessageBox.Show(TipString,"免责声明");
         }
     }
 }

@@ -182,7 +182,7 @@ namespace Shared_Novel_Reader.models
                 break;
             }
 
-            if (index == InternetResUserArray.Count)
+            if (index>0&&index == InternetResUserArray.Count)
             {
                 log.Info("用户网络书架保存失败 : " + InternetResArray.ToString());
                 return false;

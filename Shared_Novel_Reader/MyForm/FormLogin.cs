@@ -1,4 +1,6 @@
 ﻿using log4net;
+using Newtonsoft.Json.Linq;
+using Shared_Novel_Reader.Tools;
 using System;
 using System.Drawing;
 using System.Threading;
@@ -34,7 +36,11 @@ namespace Shared_Novel_Reader.MyForm
                 MessageBox.Show("输入不完整，请检查", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
+            if(TextAccount.Text.Length < 6 || TextAccount.Text.Length > 10)
+            {
+                LabelAccountExplain.Visible = true;
+                return;
+            }
 
             CancelLoginControl = new CancellationTokenSource();
             // 发送请求
@@ -48,9 +54,39 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelPassword.Visible = false;
             this.TextAccount.Visible = false;
             this.TextPassword.Visible = false;
+            this.Label_Pwd_IMG.Visible = false;
 
+            MyResponse res = await LoginResult;
+            bool LoginRes = false;
+            string ErrorMsg = string.Empty;
+            if (res == null)
+            {
+                ErrorMsg="服务器异常,登入失败";
+            }
+            else if (!res.Result)
+            {
+                ErrorMsg = res.Message;
+            }
+            else if (res.Data == null)
+            {
+                ErrorMsg = "用户不存在,请注册";
+            }
+            else
+            {
+                MyClient.Token = res.Data["Token"].ToString();
+                if (!models.User.Init((JObject)res.Data["User_Data"]))
+                {
+                    log.Info("用户初始化失败");
+                    ErrorMsg = "用户初始化失败";
+                }
+                else
+                {
+                    log.Info("用户初始化成功");
+                    LoginRes = true;
+                }
+            }
 
-            if (!await LoginResult)
+            if (!LoginRes)
             {
                 if (CancelLoginControl.IsCancellationRequested)
                 {
@@ -58,7 +94,7 @@ namespace Shared_Novel_Reader.MyForm
                 }
                 else
                 {
-                    MessageBox.Show("登入失败,请重试", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("登入失败("+ ErrorMsg + "),请重试", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     this.BtnCancelLogin.PerformClick();
                 }
                 // 清除残留数据
@@ -67,7 +103,7 @@ namespace Shared_Novel_Reader.MyForm
             else
             {
                 this.DialogResult = DialogResult.OK;
-                this.Dispose();
+                //this.Dispose();
                 MessageBox.Show("登入成功");
             }
         }
@@ -113,6 +149,7 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelPassword.Visible = true;
             this.TextAccount.Visible = true;
             this.TextPassword.Visible = true;
+            this.Label_Pwd_IMG.Visible = true;
         }
 
         private void TextAccount_KeyPress(object sender, KeyPressEventArgs e)

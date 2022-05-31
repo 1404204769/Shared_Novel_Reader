@@ -48,7 +48,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             }
             if((bool)res.Data["Agree"])
             {
-                this.LabelAgree.Text = "取消点赞";
+                this.LabelAgree.Text = "取消";
             }else
             {
                 this.LabelAgree.Text = "点赞";

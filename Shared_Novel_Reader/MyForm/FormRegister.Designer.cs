@@ -43,7 +43,6 @@
             this.LabelPasswordAgain = new System.Windows.Forms.Label();
             this.LabelAccountExplain = new System.Windows.Forms.Label();
             this.LabelPasswordExplain = new System.Windows.Forms.Label();
-            this.LabelPasswordAgainExplain = new System.Windows.Forms.Label();
             this.LabelErrorExpain = new System.Windows.Forms.Label();
             this.labelNameExplain = new System.Windows.Forms.Label();
             this.Label_Pwd1_IMG = new System.Windows.Forms.Label();
@@ -197,9 +196,9 @@
             this.LabelAccountExplain.ForeColor = System.Drawing.Color.Red;
             this.LabelAccountExplain.Location = new System.Drawing.Point(172, 91);
             this.LabelAccountExplain.Name = "LabelAccountExplain";
-            this.LabelAccountExplain.Size = new System.Drawing.Size(179, 18);
+            this.LabelAccountExplain.Size = new System.Drawing.Size(170, 18);
             this.LabelAccountExplain.TabIndex = 23;
-            this.LabelAccountExplain.Text = "请输入数字,最多十位";
+            this.LabelAccountExplain.Text = "请输入数字(6-10位)";
             this.LabelAccountExplain.Visible = false;
             // 
             // LabelPasswordExplain
@@ -212,17 +211,6 @@
             this.LabelPasswordExplain.TabIndex = 24;
             this.LabelPasswordExplain.Text = "请输入数字或字母";
             this.LabelPasswordExplain.Visible = false;
-            // 
-            // LabelPasswordAgainExplain
-            // 
-            this.LabelPasswordAgainExplain.AutoSize = true;
-            this.LabelPasswordAgainExplain.ForeColor = System.Drawing.Color.Red;
-            this.LabelPasswordAgainExplain.Location = new System.Drawing.Point(172, 291);
-            this.LabelPasswordAgainExplain.Name = "LabelPasswordAgainExplain";
-            this.LabelPasswordAgainExplain.Size = new System.Drawing.Size(170, 18);
-            this.LabelPasswordAgainExplain.TabIndex = 25;
-            this.LabelPasswordAgainExplain.Text = "两次密码输入不一致";
-            this.LabelPasswordAgainExplain.Visible = false;
             // 
             // LabelErrorExpain
             // 
@@ -249,7 +237,7 @@
             // Label_Pwd1_IMG
             // 
             this.Label_Pwd1_IMG.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Label_Pwd1_IMG.Image = global::Shared_Novel_Reader.Properties.Resources.hide;
+            this.Label_Pwd1_IMG.Image = ((System.Drawing.Image)(resources.GetObject("Label_Pwd1_IMG.Image")));
             this.Label_Pwd1_IMG.Location = new System.Drawing.Point(432, 210);
             this.Label_Pwd1_IMG.Name = "Label_Pwd1_IMG";
             this.Label_Pwd1_IMG.Size = new System.Drawing.Size(28, 28);
@@ -275,7 +263,6 @@
             this.Controls.Add(this.Label_Pwd2_IMG);
             this.Controls.Add(this.labelNameExplain);
             this.Controls.Add(this.LabelErrorExpain);
-            this.Controls.Add(this.LabelPasswordAgainExplain);
             this.Controls.Add(this.LabelPasswordExplain);
             this.Controls.Add(this.LabelAccountExplain);
             this.Controls.Add(this.TextPasswordAgain);
@@ -316,7 +303,6 @@
         private System.Windows.Forms.Label LabelPasswordAgain;
         private System.Windows.Forms.Label LabelAccountExplain;
         private System.Windows.Forms.Label LabelPasswordExplain;
-        private System.Windows.Forms.Label LabelPasswordAgainExplain;
         private System.Windows.Forms.Label LabelErrorExpain;
         private System.Windows.Forms.Label labelNameExplain;
         private System.Windows.Forms.Label Label_Pwd2_IMG;

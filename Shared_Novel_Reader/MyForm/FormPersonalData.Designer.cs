@@ -52,6 +52,7 @@
             this.LabelFeedback = new System.Windows.Forms.Label();
             this.LabelHistoryAction = new System.Windows.Forms.Label();
             this.LabelRecharge = new System.Windows.Forms.Label();
+            this.LabelLevelTip = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LabelShow
@@ -355,12 +356,23 @@
             this.LabelRecharge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LabelRecharge.Click += new System.EventHandler(this.LabelRecharge_Click);
             // 
+            // LabelLevelTip
+            // 
+            this.LabelLevelTip.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LabelLevelTip.Image = global::Shared_Novel_Reader.Properties.Resources.more;
+            this.LabelLevelTip.Location = new System.Drawing.Point(1061, 124);
+            this.LabelLevelTip.Name = "LabelLevelTip";
+            this.LabelLevelTip.Size = new System.Drawing.Size(57, 57);
+            this.LabelLevelTip.TabIndex = 34;
+            this.LabelLevelTip.Click += new System.EventHandler(this.LabelLevelTip_Click);
+            // 
             // FormPersonalData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1150, 740);
+            this.Controls.Add(this.LabelLevelTip);
             this.Controls.Add(this.LabelRecharge);
             this.Controls.Add(this.LabelHistoryAction);
             this.Controls.Add(this.LabelFeedback);
@@ -419,5 +431,6 @@
         private System.Windows.Forms.Label LabelFeedback;
         private System.Windows.Forms.Label LabelHistoryAction;
         private System.Windows.Forms.Label LabelRecharge;
+        private System.Windows.Forms.Label LabelLevelTip;
     }
 }

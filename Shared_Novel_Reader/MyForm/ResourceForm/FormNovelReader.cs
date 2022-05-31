@@ -28,6 +28,8 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
         public int InternetChapterID = -1;// 在线章节ID
         public bool IsEditMode = false;// 内容是否处于编辑状态
         public List<string> content = null;
+
+        string TabStr = "    ";// 缩进空格数
         public FormNovelReader(string bookname,int keyNum,bool islocal)
         {
             IsLocal = islocal;
@@ -268,7 +270,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             this.DataGridViewContent.Rows.Clear();
             foreach (var str in chapter.ContentList[contentversion].ContentArray)
             {
-                this.DataGridViewContent.Rows.Add("    "+str);
+                this.DataGridViewContent.Rows.Add(TabStr+str);
             }
             Part_Num = volnum;
             Chapter_Num = chapnum;
@@ -319,7 +321,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 this.DataGridViewContent.Columns[0].HeaderText = ChapterName;
                 foreach (string content in ContentArray)
                 {
-                    this.DataGridViewContent.Rows.Add(content);
+                    this.DataGridViewContent.Rows.Add(TabStr + content);
                     Part_Num = volnum;
                     Chapter_Num = chapnum;
                 }
@@ -400,7 +402,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 chapter.ContentList[contentVersion].ContentArray.Clear();
                 foreach(string s in content)
                 {
-                    chapter.ContentList[contentVersion].ContentArray.Add(s);
+                    chapter.ContentList[contentVersion].ContentArray.Add(s.Trim());
                 }
                 chapter.Update_Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
@@ -452,6 +454,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 return false;
 
             // 询问是否退出编辑模式
+            /*            
             DialogResult result = MessageBox.Show("确定退出编辑模式吗？", "退出编辑模式", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
@@ -492,7 +495,33 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 //this.DataGridViewContent.CurrentCell.Value = this.DataGridViewContent.Rows[Row_Index].Cells[0].Value.ToString();    
                 return false;
             }
-
+            */
+            // 默认退出编辑模式
+            int count = this.DataGridViewContent.Rows.Count;// 由于允许编辑最后会多一行空行
+            content = new List<string>();
+            for (int i = 0; i < count; i++)
+            {
+                content.Add(this.DataGridViewContent.Rows[i].Cells[0].Value.ToString());
+            }
+            // 判断是否需要保存
+            if (!Update_ChapterContent(Part_Num, Chapter_Num, Content_Version))
+            {
+                this.DataGridViewList.Rows[Row_Index].Selected = true;
+                return false;  // 保存失败则不允许移动位置
+            }
+            else
+            {
+                // 成功则退出编辑模式
+                log.Info("退出编辑模式");
+                IsEditMode = false;// 禁止用户编辑
+                this.ContextMenuStripContent.Items[0].Visible = true;
+                this.ContextMenuStripContent.Items[1].Visible = false;
+                this.ContextMenuStripContent.Items[2].Visible = false;
+                this.ContextMenuStripContent.Items[3].Visible = false;
+                this.ContextMenuStripContent.Items[4].Visible = false;
+                this.ContextMenuStripContent.Items[5].Visible = false;
+                this.ContextMenuStripContent.Items[6].Visible = false;
+            }
             return true;// 一切正常可以展开新的内容替换当前编辑部分
         }
 
@@ -649,10 +678,12 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
         private void EditRow_Click(object sender, EventArgs e)
         {
             ToolForm.FormInput edit = new ToolForm.FormInput();
-            edit.setValue(DataGridViewContent.Rows[ContentRow_Index].Cells[0].Value.ToString());
+            string tempstr = DataGridViewContent.Rows[ContentRow_Index].Cells[0].Value.ToString();
+            edit.setValue(tempstr.Trim());
             if (edit.ShowDialog() == DialogResult.OK)
             {
-                DataGridViewContent.Rows[ContentRow_Index].Cells[0].Value = edit.getValue();
+                tempstr = edit.getValue();
+                DataGridViewContent.Rows[ContentRow_Index].Cells[0].Value = TabStr + tempstr;
             }
         }
 

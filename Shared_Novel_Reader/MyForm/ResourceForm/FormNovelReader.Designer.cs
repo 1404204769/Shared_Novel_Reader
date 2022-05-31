@@ -54,6 +54,7 @@
             this.ChooseChapter = new System.Windows.Forms.ToolStripMenuItem();
             this.UpdateChapter = new System.Windows.Forms.ToolStripMenuItem();
             this.DataGridViewContent = new System.Windows.Forms.DataGridView();
+            this.ChapContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ContextMenuStripContent = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.UpdateChapterContent = new System.Windows.Forms.ToolStripMenuItem();
             this.MoveUpRow = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,7 +64,6 @@
             this.DeleteRow = new System.Windows.Forms.ToolStripMenuItem();
             this.EditRow = new System.Windows.Forms.ToolStripMenuItem();
             this.Report = new System.Windows.Forms.ToolStripMenuItem();
-            this.ChapContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -103,12 +103,12 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGridViewList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridViewList.BackgroundColor = System.Drawing.Color.White;
-            this.DataGridViewList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            this.DataGridViewList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGridViewList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
@@ -266,7 +266,7 @@
             this.DataGridViewContent.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -309,6 +309,22 @@
             this.DataGridViewContent.TabIndex = 0;
             this.DataGridViewContent.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewContent_CellMouseDown);
             this.DataGridViewContent.SelectionChanged += new System.EventHandler(this.DataGridViewContent_SelectionChanged);
+            // 
+            // ChapContent
+            // 
+            this.ChapContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            this.ChapContent.DefaultCellStyle = dataGridViewCellStyle8;
+            this.ChapContent.HeaderText = "内容";
+            this.ChapContent.MinimumWidth = 8;
+            this.ChapContent.Name = "ChapContent";
+            this.ChapContent.ReadOnly = true;
+            this.ChapContent.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ChapContent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ContextMenuStripContent
             // 
@@ -387,22 +403,6 @@
             this.Report.Size = new System.Drawing.Size(206, 30);
             this.Report.Text = "报告此章节错误";
             this.Report.Click += new System.EventHandler(this.Report_Click);
-            // 
-            // ChapContent
-            // 
-            this.ChapContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            this.ChapContent.DefaultCellStyle = dataGridViewCellStyle8;
-            this.ChapContent.HeaderText = "内容";
-            this.ChapContent.MinimumWidth = 8;
-            this.ChapContent.Name = "ChapContent";
-            this.ChapContent.ReadOnly = true;
-            this.ChapContent.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ChapContent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // FormNovelReader
             // 

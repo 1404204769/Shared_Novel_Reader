@@ -33,7 +33,7 @@
             this.PictureBoxReturn = new System.Windows.Forms.PictureBox();
             this.LabelJoin = new System.Windows.Forms.Label();
             this.labelViewBook = new System.Windows.Forms.Label();
-            this.labelContent = new System.Windows.Forms.Label();
+            this.labelContent = new System.Windows.Forms.TextBox();
             this.labelTitle = new System.Windows.Forms.Label();
             this.PanelComment = new System.Windows.Forms.Panel();
             this.TextComment = new System.Windows.Forms.TextBox();
@@ -69,7 +69,7 @@
             // 
             // PictureBoxRefresh
             // 
-            this.PictureBoxRefresh.BackColor = System.Drawing.Color.White;
+            this.PictureBoxRefresh.BackColor = System.Drawing.Color.DimGray;
             this.PictureBoxRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.PictureBoxRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PictureBoxRefresh.Image = global::Shared_Novel_Reader.Properties.Resources.refresh;
@@ -133,10 +133,12 @@
             this.labelContent.Font = new System.Drawing.Font("Bookman Old Style", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelContent.ForeColor = System.Drawing.Color.Black;
             this.labelContent.Location = new System.Drawing.Point(22, 83);
+            this.labelContent.Multiline = true;
             this.labelContent.Name = "labelContent";
             this.labelContent.Size = new System.Drawing.Size(1101, 104);
             this.labelContent.TabIndex = 4;
             this.labelContent.Text = "帖子内容";
+            this.labelContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             // 
             // labelTitle
             // 
@@ -273,6 +275,7 @@
             this.Name = "FormNoteDetail";
             this.Text = "FormNoteDetail";
             this.Panel.ResumeLayout(false);
+            this.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxRefresh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxReturn)).EndInit();
             this.PanelComment.ResumeLayout(false);
@@ -287,7 +290,7 @@
 
         private System.Windows.Forms.Panel Panel;
         private System.Windows.Forms.Label labelViewBook;
-        private System.Windows.Forms.Label labelContent;
+        private System.Windows.Forms.TextBox labelContent;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Label LabelJoin;
         private System.Windows.Forms.PictureBox PictureBoxReturn;

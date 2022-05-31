@@ -554,6 +554,7 @@
     <Content Include="echarts\echarts.html" />
     <Content Include="echarts\echarts.js" />
     <Content Include="echarts\echarts.min.js" />
+    <None Include="Resources\more.ico" />
     <None Include="Resources\show1.ico" />
     <None Include="Resources\hide1.ico" />
     <None Include="Resources\show.ico" />

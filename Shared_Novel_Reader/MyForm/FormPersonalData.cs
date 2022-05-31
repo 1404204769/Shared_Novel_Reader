@@ -14,6 +14,19 @@ namespace Shared_Novel_Reader.MyForm
         ILog log = LogManager.GetLogger(typeof(FormPersonalData));
         UserForm.FormActionList FormActionList = null;
         public bool IsEdit = false;
+        string LevelTip = "每升一级增加全书上传次数1次、章节修改申请次数10次\n" +
+            "每次升级所需的积分数在上一级所需积分的基础上增加100\n\n" +
+            "例如:\n" +
+            "等级:1\t权限:1\t全书上传次数:1\t章节修改申请次数:10\t所需总积分:0\n" +
+            "等级:2\t权限:2\t全书上传次数:2\t章节修改申请次数:20\t所需总积分:100\n" +
+            "等级:3\t权限:3\t全书上传次数:3\t章节修改申请次数:30\t所需总积分:300\n" +
+            "等级:4\t权限:4\t全书上传次数:4\t章节修改申请次数:40\t所需总积分:600\n" +
+            "等级:5\t权限:5\t全书上传次数:5\t章节修改申请次数:50\t所需总积分:1000\n" +
+            "等级:6\t权限:6\t全书上传次数:6\t章节修改申请次数:60\t所需总积分:1500\n" +
+            "等级:7\t权限:7\t全书上传次数:7\t章节修改申请次数:70\t所需总积分:2100\n" +
+            ".........\n\n"+
+            "以此类推";
+
         public FormPersonalData()
         {
             InitializeComponent();
@@ -236,6 +249,11 @@ namespace Shared_Novel_Reader.MyForm
                 return;
             MessageBox.Show("积分充值成功");
             Refresh();
+        }
+
+        private void LabelLevelTip_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(LevelTip,"积分等级说明");
         }
     }
 }

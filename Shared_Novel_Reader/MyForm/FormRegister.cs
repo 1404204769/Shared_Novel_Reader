@@ -75,24 +75,9 @@ namespace Shared_Novel_Reader.MyForm
 
         private void TextBoxPasswordAgain_KeyPress(object sender, KeyPressEventArgs e)
         {
-            LabelPasswordAgainExplain.Visible = true;
-            if (e.KeyChar != '\b' && !(e.KeyChar >= '0' && e.KeyChar <= '9') && !(e.KeyChar >= 'A' && e.KeyChar <= 'Z') && !(e.KeyChar >= 'a' && e.KeyChar <= 'z'))
+            if (e.KeyChar != 0x08 && e.KeyChar != '\b' && !(e.KeyChar >= '0' && e.KeyChar <= '9') && !(e.KeyChar >= 'A' && e.KeyChar <= 'Z') && !(e.KeyChar >= 'a' && e.KeyChar <= 'z'))
             {
                 e.KeyChar = (char)0;   //处理非法字符  
-            }
-            else
-            {
-                // 输入正确则无需提示
-                LabelPasswordAgainExplain.Visible = false;
-            }
-            if(TextPassword.Text.Length <= TextPasswordAgain.Text.Length)
-            {
-                LabelPasswordAgainExplain.Text = "两次密码输入不一致";
-                LabelPasswordAgainExplain.Visible = true;
-            }
-            else
-            {
-                LabelPasswordAgainExplain.Text = "请输入数字或字母";
             }
         }
 
@@ -102,10 +87,18 @@ namespace Shared_Novel_Reader.MyForm
             string msg = "账户: " + UserID + "\n昵称: " + UserName +"\n性别: " + UserSex + "\n密码: " + TextPassword.Text + "\n确认密码: " + TextPasswordAgain.Text;
             log.Info(msg);
             // 先校验一遍数据是否合法
-            if (TextPassword.Text != TextPasswordAgain.Text)
+            if (TextAccount.Text.Length < 6)
             {
                 LabelErrorExpain.Visible = true;
-                LabelErrorExpain.Text = "输入的密码不一致,请确认密码";
+                LabelErrorExpain.Text = "账号不能小于6位,请重新输入";
+                return;
+            }
+            // 昵称是空的
+            if (TextName.Text == "")
+            {
+                this.labelNameExplain.Visible = true;
+                LabelErrorExpain.Visible = true;
+                LabelErrorExpain.Text = "请输入昵称";
                 return;
             }
             if (TextPassword.Text == "")
@@ -120,13 +113,17 @@ namespace Shared_Novel_Reader.MyForm
                 LabelErrorExpain.Text = "密码不能小于6位,请重新输入";
                 return;
             }
-            // 昵称是空的
-            if (TextName.Text == "")
+            if (TextPassword.Text != TextPasswordAgain.Text)
             {
-                this.labelNameExplain.Visible = true;
+                LabelErrorExpain.Visible = true;
+                LabelErrorExpain.Text = "输入的密码不一致,请确认密码";
                 return;
             }
 
+            this.LabelErrorExpain.Visible = false;
+            this.LabelAccountExplain.Visible = false;
+            this.LabelPasswordExplain.Visible = false;
+            this.labelNameExplain.Visible = false;
             CancelRegisterControl = new CancellationTokenSource();
             // 发送请求
             var RegisterResult = Task<bool>.Run(() => Tools.API.GPI.Register(this.UserID,this.Password,this.UserName,this.UserSex,CancelRegisterControl.Token));
@@ -153,7 +150,6 @@ namespace Shared_Novel_Reader.MyForm
             this.LabelErrorExpain.Visible=false;
             this.LabelAccountExplain.Visible=false;
             this.LabelPasswordExplain.Visible = false;
-            this.LabelPasswordAgainExplain.Visible = false;
             this.labelNameExplain.Visible = false;
         }
 
