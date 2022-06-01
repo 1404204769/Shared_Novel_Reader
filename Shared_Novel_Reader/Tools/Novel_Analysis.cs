@@ -231,14 +231,14 @@ namespace Shared_Novel_Reader.Tools
             catch (SystemException ex)
             {
                 newBook = null;
-                err = "解析本地资源发生异常";
+                err = "解析本地资源发生SystemException异常";
                 log.Info(err,ex);
                 return false;
             }
             catch (Exception ex)
             {
                 newBook = null;
-                err = "解析本地资源发生异常";
+                err = "解析本地资源发生Exception异常";
                 log.Info(err,ex);
                 return false;
             }

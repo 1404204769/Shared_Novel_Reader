@@ -121,8 +121,15 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
                     RowData[j] = BookListJson[i][ColName[j]].ToString();
                     if(ColName[j] == "Memo")
                     {
+                        string memostr = string.Empty;
                         MemoJson = JObject.Parse(RowData[j]);
-                        RowData[j] = MemoJson.ToString();
+                        JArray ChapObj = (JArray)MemoJson["Chapter"];
+                        memostr = "\n\t总章节数:" + ChapObj[0].ToString();
+                        for (int k = 1;k< ChapObj.Count();k++)
+                        {
+                            memostr += "\n\t第" + k+"卷章节数:" + ChapObj[k].ToString();
+                        }
+                        RowData[j] = memostr;
                     }
                 }
                 BookListStr[i] = RowData;

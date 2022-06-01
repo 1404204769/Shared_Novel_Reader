@@ -30,24 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.DataGridViewList = new System.Windows.Forms.DataGridView();
-            this.ChapterTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PartNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ChapterNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BookID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OringeTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContentVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ContextMenuStripList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.InsertChapter = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteChapter = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,6 +57,13 @@
             this.DeleteRow = new System.Windows.Forms.ToolStripMenuItem();
             this.EditRow = new System.Windows.Forms.ToolStripMenuItem();
             this.Report = new System.Windows.Forms.ToolStripMenuItem();
+            this.Read_Mode = new System.Windows.Forms.ToolStripMenuItem();
+            this.ChapterTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PartNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ChapterNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BookID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OringeTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContentVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -99,19 +99,10 @@
             this.DataGridViewList.AllowUserToDeleteRows = false;
             this.DataGridViewList.AllowUserToResizeColumns = false;
             this.DataGridViewList.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridViewList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridViewList.BackgroundColor = System.Drawing.Color.White;
             this.DataGridViewList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridViewList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.DataGridViewList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridViewList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ChapterTitle,
@@ -121,32 +112,33 @@
             this.OringeTitle,
             this.ContentVersion});
             this.DataGridViewList.ContextMenuStrip = this.ContextMenuStripList;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DataGridViewList.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DataGridViewList.DefaultCellStyle = dataGridViewCellStyle3;
             this.DataGridViewList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DataGridViewList.EnableHeadersVisualStyles = false;
             this.DataGridViewList.Location = new System.Drawing.Point(0, 0);
             this.DataGridViewList.MultiSelect = false;
             this.DataGridViewList.Name = "DataGridViewList";
             this.DataGridViewList.ReadOnly = true;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridViewList.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Empty;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Empty;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridViewList.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.DataGridViewList.RowHeadersVisible = false;
             this.DataGridViewList.RowHeadersWidth = 62;
             this.DataGridViewList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DataGridViewList.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Empty;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Empty;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridViewList.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.DataGridViewList.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.DataGridViewList.RowTemplate.Height = 30;
             this.DataGridViewList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -156,64 +148,6 @@
             this.DataGridViewList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewList_CellClick);
             this.DataGridViewList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewList_CellMouseDown);
             this.DataGridViewList.SelectionChanged += new System.EventHandler(this.DataGridViewList_SelectionChanged);
-            // 
-            // ChapterTitle
-            // 
-            this.ChapterTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ChapterTitle.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ChapterTitle.HeaderText = "章节名";
-            this.ChapterTitle.MinimumWidth = 8;
-            this.ChapterTitle.Name = "ChapterTitle";
-            this.ChapterTitle.ReadOnly = true;
-            this.ChapterTitle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // PartNum
-            // 
-            this.PartNum.HeaderText = "分卷数";
-            this.PartNum.MinimumWidth = 8;
-            this.PartNum.Name = "PartNum";
-            this.PartNum.ReadOnly = true;
-            this.PartNum.Visible = false;
-            this.PartNum.Width = 150;
-            // 
-            // ChapterNum
-            // 
-            this.ChapterNum.HeaderText = "章节数";
-            this.ChapterNum.MinimumWidth = 8;
-            this.ChapterNum.Name = "ChapterNum";
-            this.ChapterNum.ReadOnly = true;
-            this.ChapterNum.Visible = false;
-            this.ChapterNum.Width = 150;
-            // 
-            // BookID
-            // 
-            this.BookID.HeaderText = "图书ID";
-            this.BookID.MinimumWidth = 8;
-            this.BookID.Name = "BookID";
-            this.BookID.ReadOnly = true;
-            this.BookID.Visible = false;
-            this.BookID.Width = 150;
-            // 
-            // OringeTitle
-            // 
-            this.OringeTitle.HeaderText = "章节原始名";
-            this.OringeTitle.MinimumWidth = 8;
-            this.OringeTitle.Name = "OringeTitle";
-            this.OringeTitle.ReadOnly = true;
-            this.OringeTitle.Visible = false;
-            this.OringeTitle.Width = 150;
-            // 
-            // ContentVersion
-            // 
-            this.ContentVersion.HeaderText = "章节内容版本";
-            this.ContentVersion.MinimumWidth = 8;
-            this.ContentVersion.Name = "ContentVersion";
-            this.ContentVersion.ReadOnly = true;
-            this.ContentVersion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.ContentVersion.Visible = false;
-            this.ContentVersion.Width = 150;
             // 
             // ContextMenuStripList
             // 
@@ -264,46 +198,36 @@
             this.DataGridViewContent.BackgroundColor = System.Drawing.Color.White;
             this.DataGridViewContent.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.DataGridViewContent.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridViewContent.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.DataGridViewContent.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.DataGridViewContent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewContent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ChapContent});
             this.DataGridViewContent.ContextMenuStrip = this.ContextMenuStripContent;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridViewContent.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridViewContent.DefaultCellStyle = dataGridViewCellStyle8;
             this.DataGridViewContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DataGridViewContent.EnableHeadersVisualStyles = false;
             this.DataGridViewContent.GridColor = System.Drawing.SystemColors.ActiveBorder;
             this.DataGridViewContent.Location = new System.Drawing.Point(0, 0);
             this.DataGridViewContent.MultiSelect = false;
             this.DataGridViewContent.Name = "DataGridViewContent";
             this.DataGridViewContent.ReadOnly = true;
             this.DataGridViewContent.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridViewContent.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridViewContent.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.DataGridViewContent.RowHeadersVisible = false;
             this.DataGridViewContent.RowHeadersWidth = 62;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridViewContent.RowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridViewContent.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.DataGridViewContent.RowTemplate.Height = 30;
             this.DataGridViewContent.Size = new System.Drawing.Size(896, 1044);
             this.DataGridViewContent.TabIndex = 0;
@@ -313,12 +237,10 @@
             // ChapContent
             // 
             this.ChapContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            this.ChapContent.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.ChapContent.DefaultCellStyle = dataGridViewCellStyle7;
             this.ChapContent.HeaderText = "内容";
             this.ChapContent.MinimumWidth = 8;
             this.ChapContent.Name = "ChapContent";
@@ -337,9 +259,10 @@
             this.InsertDownRow,
             this.DeleteRow,
             this.EditRow,
-            this.Report});
+            this.Report,
+            this.Read_Mode});
             this.ContextMenuStripContent.Name = "ContextMenuStripContent";
-            this.ContextMenuStripContent.Size = new System.Drawing.Size(207, 244);
+            this.ContextMenuStripContent.Size = new System.Drawing.Size(207, 274);
             // 
             // UpdateChapterContent
             // 
@@ -404,6 +327,71 @@
             this.Report.Text = "报告此章节错误";
             this.Report.Click += new System.EventHandler(this.Report_Click);
             // 
+            // Read_Mode
+            // 
+            this.Read_Mode.Name = "Read_Mode";
+            this.Read_Mode.Size = new System.Drawing.Size(206, 30);
+            this.Read_Mode.Text = "夜间模式";
+            this.Read_Mode.Click += new System.EventHandler(this.Read_Mode_Click);
+            // 
+            // ChapterTitle
+            // 
+            this.ChapterTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ChapterTitle.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ChapterTitle.HeaderText = "章节名";
+            this.ChapterTitle.MinimumWidth = 8;
+            this.ChapterTitle.Name = "ChapterTitle";
+            this.ChapterTitle.ReadOnly = true;
+            this.ChapterTitle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // PartNum
+            // 
+            this.PartNum.HeaderText = "分卷数";
+            this.PartNum.MinimumWidth = 8;
+            this.PartNum.Name = "PartNum";
+            this.PartNum.ReadOnly = true;
+            this.PartNum.Visible = false;
+            this.PartNum.Width = 150;
+            // 
+            // ChapterNum
+            // 
+            this.ChapterNum.HeaderText = "章节数";
+            this.ChapterNum.MinimumWidth = 8;
+            this.ChapterNum.Name = "ChapterNum";
+            this.ChapterNum.ReadOnly = true;
+            this.ChapterNum.Visible = false;
+            this.ChapterNum.Width = 150;
+            // 
+            // BookID
+            // 
+            this.BookID.HeaderText = "图书ID";
+            this.BookID.MinimumWidth = 8;
+            this.BookID.Name = "BookID";
+            this.BookID.ReadOnly = true;
+            this.BookID.Visible = false;
+            this.BookID.Width = 150;
+            // 
+            // OringeTitle
+            // 
+            this.OringeTitle.HeaderText = "章节原始名";
+            this.OringeTitle.MinimumWidth = 8;
+            this.OringeTitle.Name = "OringeTitle";
+            this.OringeTitle.ReadOnly = true;
+            this.OringeTitle.Visible = false;
+            this.OringeTitle.Width = 150;
+            // 
+            // ContentVersion
+            // 
+            this.ContentVersion.HeaderText = "章节内容版本";
+            this.ContentVersion.MinimumWidth = 8;
+            this.ContentVersion.Name = "ContentVersion";
+            this.ContentVersion.ReadOnly = true;
+            this.ContentVersion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.ContentVersion.Visible = false;
+            this.ContentVersion.Width = 150;
+            // 
             // FormNovelReader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -445,13 +433,14 @@
         private System.Windows.Forms.ToolStripMenuItem EditRow;
         private System.Windows.Forms.ToolStripMenuItem InsertChapter;
         private System.Windows.Forms.ToolStripMenuItem ChooseChapter;
+        private System.Windows.Forms.ToolStripMenuItem Report;
+        private System.Windows.Forms.ToolStripMenuItem Read_Mode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ChapContent;
         private System.Windows.Forms.DataGridViewTextBoxColumn ChapterTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn PartNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn ChapterNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn BookID;
         private System.Windows.Forms.DataGridViewTextBoxColumn OringeTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn ContentVersion;
-        private System.Windows.Forms.ToolStripMenuItem Report;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ChapContent;
     }
 }

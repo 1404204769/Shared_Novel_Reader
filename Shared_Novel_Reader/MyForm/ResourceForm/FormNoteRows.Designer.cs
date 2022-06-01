@@ -37,6 +37,7 @@
             // 
             this.labelTitle.BackColor = System.Drawing.Color.White;
             this.labelTitle.Font = new System.Drawing.Font("Bookman Old Style", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTitle.ForeColor = System.Drawing.Color.Black;
             this.labelTitle.Location = new System.Drawing.Point(12, 9);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(451, 32);
@@ -47,6 +48,7 @@
             // labelContent
             // 
             this.labelContent.BackColor = System.Drawing.Color.Gainsboro;
+            this.labelContent.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelContent.ForeColor = System.Drawing.Color.Black;
             this.labelContent.Location = new System.Drawing.Point(110, 62);
             this.labelContent.Name = "labelContent";

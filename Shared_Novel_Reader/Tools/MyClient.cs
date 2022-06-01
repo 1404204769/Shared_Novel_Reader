@@ -209,10 +209,10 @@ namespace Shared_Novel_Reader.Tools
             request.AddStringBody(jsonStr, DataFormat.Json);
             request.Timeout = TimeOut;
             request.AddHeader("Authorization", Authorization);
-            log.Info("请求数据如下:" + jsonStr);
+            //log.Info("请求数据如下:" + jsonStr);
 
             var response = client.ExecuteAsync(request);
-            log.Info("接收数据如下:" + response.Result.Content);
+            //log.Info("接收数据如下:" + response.Result.Content);
 
             if (!CheckStatus(in response))
             {

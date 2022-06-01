@@ -48,7 +48,47 @@ namespace Shared_Novel_Reader.Tools.API.User
 
         }
 
+        
+        /// <summary>
+        /// 查询图书资源的目录
+        /// </summary>
+        /// <param name="ResJson"></param>
+        /// <returns></returns>
+        public static MyResponse SearchTopNote(in JObject ReqJson)
+        {
+            // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
 
+
+            int num = 0;
+            MyResponse res = MyClient.PushRequests("User/Resource/Search/Top", ReqJson.ToString());
+            while ((res == null) && (num < 10))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("User/Resource/Search/Top", ReqJson.ToString());
+            }
+
+            if (res == null)
+            {
+                log.Info("查询帖子资源失败");
+                return null;
+            }
+
+            if (res.Result == false)
+            {
+                log.Info(res.Message);
+                return null;
+            }
+
+            if (res.Data == null)
+            {
+                log.Info("目前还没有帖子资源");
+                return null;
+            }
+
+            log.Info("查询帖子资源成功");
+            return res;
+
+        }
 
         /// <summary>
         /// 查询帖子评论

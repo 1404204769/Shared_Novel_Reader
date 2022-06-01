@@ -925,5 +925,62 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             }
 
         }
+
+        private void Read_Mode_Click(object sender, EventArgs e)
+        {
+            this.DataGridViewContent.BackgroundColor = System.Drawing.Color.Black;
+            this.Read_Mode.Text = "白天模式";
+
+            ChangeColor(System.Drawing.Color.Black,System.Drawing.Color.White);
+        }
+
+        private void ChangeColor(System.Drawing.Color Back, System.Drawing.Color Fore)
+        {
+            // 修改内容
+            this.DataGridViewContent.RowsDefaultCellStyle.ForeColor = Fore;
+            this.DataGridViewContent.RowsDefaultCellStyle.BackColor = Back;
+            this.DataGridViewContent.RowHeadersDefaultCellStyle.ForeColor = Fore;
+            this.DataGridViewContent.RowHeadersDefaultCellStyle.BackColor = Back;
+            this.DataGridViewContent.ColumnHeadersDefaultCellStyle.ForeColor = Fore;
+            this.DataGridViewContent.ColumnHeadersDefaultCellStyle.BackColor = Back;
+            this.DataGridViewContent.DefaultCellStyle.ForeColor = Fore;
+            this.DataGridViewContent.DefaultCellStyle.BackColor = Back;
+            this.DataGridViewContent.RowsDefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            this.DataGridViewContent.RowsDefaultCellStyle.SelectionBackColor = System.Drawing.Color.Black;
+
+
+            this.DataGridViewList.BackgroundColor = System.Drawing.Color.Black;
+            // 修改章节列表
+            this.DataGridViewList.DefaultCellStyle.BackColor = System.Drawing.Color.Green;
+            this.DataGridViewList.DefaultCellStyle.ForeColor = System.Drawing.Color.Yellow;
+            this.DataGridViewList.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Green;
+            this.DataGridViewList.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+
+            this.DataGridViewList.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.Green;
+            this.DataGridViewList.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.Yellow;
+            this.DataGridViewList.ColumnHeadersDefaultCellStyle.SelectionBackColor = System.Drawing.Color.Green;
+            this.DataGridViewList.ColumnHeadersDefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+
+            this.DataGridViewList.RowHeadersDefaultCellStyle.BackColor = System.Drawing.Color.Green;
+            this.DataGridViewList.RowHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.Yellow;
+            this.DataGridViewList.RowHeadersDefaultCellStyle.SelectionBackColor = System.Drawing.Color.Green;
+            this.DataGridViewList.RowHeadersDefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+
+
+            this.DataGridViewList.RowsDefaultCellStyle.BackColor = System.Drawing.Color.Green;
+            this.DataGridViewList.RowsDefaultCellStyle.ForeColor = System.Drawing.Color.Yellow;
+            this.DataGridViewList.RowsDefaultCellStyle.SelectionBackColor = System.Drawing.Color.Green;
+            this.DataGridViewList.RowsDefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+
+            this.DataGridViewList.Columns[0].DefaultCellStyle.BackColor = System.Drawing.Color.Green;
+            this.DataGridViewList.Columns[0].DefaultCellStyle.ForeColor = System.Drawing.Color.Yellow;
+            this.DataGridViewList.Columns[0].DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Green;
+            this.DataGridViewList.Columns[0].DefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+
+            this.ChapterTitle.DefaultCellStyle.BackColor = System.Drawing.Color.Green;
+            this.ChapterTitle.DefaultCellStyle.ForeColor = System.Drawing.Color.Yellow;
+            this.ChapterTitle.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Green;
+            this.ChapterTitle.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+        }
     }
 }

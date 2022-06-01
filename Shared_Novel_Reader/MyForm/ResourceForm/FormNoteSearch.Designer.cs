@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.PanelTop = new System.Windows.Forms.Panel();
             this.BtnCreate = new System.Windows.Forms.Button();
             this.LabelKey = new System.Windows.Forms.Label();
@@ -35,7 +36,12 @@
             this.BtnSearch = new System.Windows.Forms.Button();
             this.TextSearch = new System.Windows.Forms.TextBox();
             this.FlowLayoutPanelNote = new System.Windows.Forms.FlowLayoutPanel();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.View_New_Help_Top = new System.Windows.Forms.ToolStripMenuItem();
+            this.View_New_Res_Top = new System.Windows.Forms.ToolStripMenuItem();
+            this.Refresh = new System.Windows.Forms.ToolStripMenuItem();
             this.PanelTop.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // PanelTop
@@ -125,12 +131,44 @@
             // 
             this.FlowLayoutPanelNote.AutoScroll = true;
             this.FlowLayoutPanelNote.BackColor = System.Drawing.Color.Gainsboro;
+            this.FlowLayoutPanelNote.ContextMenuStrip = this.contextMenuStrip;
             this.FlowLayoutPanelNote.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FlowLayoutPanelNote.Location = new System.Drawing.Point(0, 100);
             this.FlowLayoutPanelNote.Margin = new System.Windows.Forms.Padding(0);
             this.FlowLayoutPanelNote.Name = "FlowLayoutPanelNote";
             this.FlowLayoutPanelNote.Size = new System.Drawing.Size(1150, 640);
             this.FlowLayoutPanelNote.TabIndex = 2;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.View_New_Help_Top,
+            this.View_New_Res_Top,
+            this.Refresh});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(207, 94);
+            // 
+            // View_New_Help_Top
+            // 
+            this.View_New_Help_Top.Name = "View_New_Help_Top";
+            this.View_New_Help_Top.Size = new System.Drawing.Size(240, 30);
+            this.View_New_Help_Top.Text = "查看最新求助帖";
+            this.View_New_Help_Top.Click += new System.EventHandler(this.View_New_Help_Top_Click);
+            // 
+            // View_New_Res_Top
+            // 
+            this.View_New_Res_Top.Name = "View_New_Res_Top";
+            this.View_New_Res_Top.Size = new System.Drawing.Size(240, 30);
+            this.View_New_Res_Top.Text = "查看最新资源贴";
+            this.View_New_Res_Top.Click += new System.EventHandler(this.View_New_Res_Top_Click);
+            // 
+            // Refresh
+            // 
+            this.Refresh.Name = "Refresh";
+            this.Refresh.Size = new System.Drawing.Size(240, 30);
+            this.Refresh.Text = "刷新";
+            this.Refresh.Click += new System.EventHandler(this.Refresh_Click);
             // 
             // FormNoteSearch
             // 
@@ -145,6 +183,7 @@
             this.Text = "FormNoteSearch";
             this.PanelTop.ResumeLayout(false);
             this.PanelTop.PerformLayout();
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -158,5 +197,9 @@
         private System.Windows.Forms.FlowLayoutPanel FlowLayoutPanelNote;
         private System.Windows.Forms.Label LabelKey;
         private System.Windows.Forms.Button BtnCreate;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem View_New_Help_Top;
+        private System.Windows.Forms.ToolStripMenuItem View_New_Res_Top;
+        private System.Windows.Forms.ToolStripMenuItem Refresh;
     }
 }

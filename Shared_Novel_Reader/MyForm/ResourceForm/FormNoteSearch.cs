@@ -16,54 +16,39 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
     public partial class FormNoteSearch : Form
     {
         ILog log = LogManager.GetLogger(typeof(FormNoteSearch));
+        string SearchMode = string.Empty;
         string SearchKey = "";
         string SearchType = "";
         public FormNoteSearch()
         {
             InitializeComponent();
             this.ComboBoxNoteType.SelectedIndex = 0;
+
+            // 默认显示最新求助帖
+            SearchMode = "Help";
+            // 给服务器发送请求
+
+            JObject ReqJson = new JObject();
+            ReqJson["Note_Type"] = "Help";
+            MyRefresh(ReqJson);
         }
 
-        private async void BtnSearch_Click(object sender, EventArgs e)
+        private void BtnSearch_Click(object sender, EventArgs e)
         { 
-            if(SearchKey == "")
+            if(SearchKey.Trim() == "")
             {
-                log.Info("搜索关键字不能为空");
+                MessageBox.Show("搜索关键字不能为空");
                 return;
             }
 
-            this.FlowLayoutPanelNote.Controls.Clear();
             // 给服务器发送请求
 
             JObject ReqJson = new JObject();
             ReqJson["Note_KeyWord"] = SearchKey;
             ReqJson["Note_Type"] = SearchType;
-            // 发送请求
-            var MenuResult = Task<MyResponse>.Run(() => Tools.API.User.Note.SearchNote(ReqJson));
 
-            MyResponse res = await MenuResult;
-            /// 返回格式
-            if (res == null || !res.Result)
-            {
-                // 清除残留数据
-                log.Info("搜索帖子失败");
-            }
-            else if (res.Data["Note_List"].ToString() == "")
-            {
-                log.Info("搜索的帖子为空");
-            }
-            else
-            {
-                JArray NoteListJson = (JArray)res.Data["Note_List"];
-                foreach (JObject note in NoteListJson)
-                {
-                    FormNoteRows noteView = new FormNoteRows(note);
-                    noteView.TopLevel = false;
-                    this.FlowLayoutPanelNote.Controls.Add(noteView);
-                    noteView.Show();
-                }
-            }
-
+            SearchMode = string.Empty;
+            MyRefresh(ReqJson);
         }
 
         private void ComboBoxNoteType_SelectedIndexChanged(object sender, EventArgs e)
@@ -134,6 +119,87 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             else
             {
                 MessageBox.Show("发布求助帖成功");
+            }
+        }
+
+        private void View_New_Help_Top_Click(object sender, EventArgs e)
+        {
+            SearchMode = "Help";
+            // 给服务器发送请求
+
+            JObject ReqJson = new JObject();
+            ReqJson["Note_Type"] = "Help";
+            MyRefresh(ReqJson);
+        }
+
+        private void View_New_Res_Top_Click(object sender, EventArgs e)
+        {
+            SearchMode = "Resource";
+            JObject ReqJson = new JObject();
+            ReqJson["Note_Type"] = "Resource";
+            MyRefresh(ReqJson);
+        }
+
+        private void Refresh_Click(object sender, EventArgs e)
+        {
+            JObject ReqJson = new JObject();
+            if (SearchMode != string.Empty)
+            {
+                ReqJson["Note_Type"] = SearchMode;
+            }
+            else
+            {
+                if (SearchKey.Trim() == "")
+                {
+                    MessageBox.Show("搜索关键字不能为空");
+                    return;
+                }
+
+                // 给服务器发送请求
+                ReqJson["Note_KeyWord"] = SearchKey;
+                ReqJson["Note_Type"] = SearchType;
+            }
+            MyRefresh(ReqJson);
+        }
+
+        private async void MyRefresh(JObject ReqJson)
+        {
+            MyResponse res = null;
+            this.FlowLayoutPanelNote.Controls.Clear();
+
+            if (SearchMode != string.Empty)
+            {
+                // 发送请求
+                var NoteRes = Task<MyResponse>.Run(() => Tools.API.User.Note.SearchTopNote(ReqJson));
+                res = await NoteRes;
+            }
+            else
+            {
+                // 发送请求
+                var MenuResult = Task<MyResponse>.Run(() => Tools.API.User.Note.SearchNote(ReqJson));
+                res = await MenuResult;
+            }
+
+            /// 返回格式
+            if (res == null || !res.Result)
+            {
+                // 清除残留数据
+                log.Info("搜索帖子失败");
+            }
+            else if (res.Data["Note_List"].ToString() == "")
+            {
+                log.Info("搜索的帖子为空");
+            }
+            else
+            {
+                JArray NoteListJson = (JArray)res.Data["Note_List"];
+                foreach (JObject note in NoteListJson)
+                {
+                    FormNoteRows noteView = new FormNoteRows(note);
+                    noteView.TopLevel = false;
+                    this.FlowLayoutPanelNote.Controls.Add(noteView);
+                    noteView.Show();
+                }
             }
         }
     }
