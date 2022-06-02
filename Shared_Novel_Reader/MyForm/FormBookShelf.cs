@@ -87,6 +87,20 @@ namespace Shared_Novel_Reader.MyForm
                 string[] col = new string[5];
                 col[0] = (string)book["Book_Name"];
                 col[1] = (string)book["Link_Num"];
+
+                col[2] = Convert.ToString(book["PartNum"]);
+                col[3] = Convert.ToString(book["ChapterNum"]);
+                int tempPartNum = Convert.ToInt32(Convert.ToString(book["PartNum"]));
+                int tempChapterNum = Convert.ToInt32(Convert.ToString(book["ChapterNum"]));
+
+                if (tempPartNum == 0 && tempChapterNum == 0)
+                {
+                    col[4] = "还未阅读过此书";
+                }
+                else
+                {
+                    col[4] = "上次阅读到第" + tempPartNum + "卷第" + tempChapterNum + "章";
+                }
                 this.DataGridViewLocal.Rows.Add(col);
             }
             log.Info("本地书架加载成功");
@@ -107,9 +121,23 @@ namespace Shared_Novel_Reader.MyForm
             this.DataGridViewInternet.Rows.Clear();
             foreach (var book in InternetBookShelf.InternetResArray)
             {
-                string[] col = new string[2];
+                string[] col = new string[5];
                 col[0] = (string)book["Book_Name"];
                 col[1] = Convert.ToString(book["Book_ID"]);
+
+                col[2] = Convert.ToString(book["PartNum"]);
+                col[3] = Convert.ToString(book["ChapterNum"]);
+                int tempPartNum = Convert.ToInt32(Convert.ToString(book["PartNum"]));
+                int tempChapterNum = Convert.ToInt32(Convert.ToString(book["ChapterNum"]));
+
+                if (tempPartNum == 0 && tempChapterNum == 0)
+                {
+                    col[4] = "还未阅读过此书";
+                }
+                else
+                {
+                    col[4] = "上次阅读到第"+tempPartNum+"卷第"+tempChapterNum+"章";
+                }
                 this.DataGridViewInternet.Rows.Add(col);
             }
             log.Info("网络书架加载成功");
@@ -121,9 +149,27 @@ namespace Shared_Novel_Reader.MyForm
             {
                 FormNovelReader.Dispose();
             }
-            FormNovelReader = new FormNovelReader(this.DataGridViewLocal.Rows[e.RowIndex].Cells[0].Value.ToString(), Convert.ToInt32(this.DataGridViewLocal.Rows[e.RowIndex].Cells[1].Value.ToString()), true);
+            int keynum = Convert.ToInt32(this.DataGridViewLocal.Rows[e.RowIndex].Cells[1].Value.ToString());
+            string bookname = this.DataGridViewLocal.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+            for (int i = 0; i < LocalBookShelf.LocalResArray.Count; i++)
+            {
+                if (Convert.ToInt32(LocalBookShelf.LocalResArray[i]["Link_Num"]) == keynum)
+                {
+                    this.DataGridViewLocal.Rows[e.RowIndex].Cells[2].Value = 
+                        Convert.ToInt32(LocalBookShelf.LocalResArray[i]["PartNum"]);
+                    this.DataGridViewLocal.Rows[e.RowIndex].Cells[3].Value =
+                        Convert.ToInt32(LocalBookShelf.LocalResArray[i]["ChapterNum"]);
+                    break;
+                }
+            }
+            FormNovelReader = new FormNovelReader(bookname, keynum,
+                Convert.ToInt32(this.DataGridViewLocal.Rows[e.RowIndex].Cells[2].Value.ToString()),
+                Convert.ToInt32(this.DataGridViewLocal.Rows[e.RowIndex].Cells[3].Value.ToString()),true);
             //FormNovelReader = new FormNovelReader("次元论坛", 17, false);
+            FormNovelReader.Owner = this;
             FormNovelReader.Show();
+
         }
 
 
@@ -134,9 +180,23 @@ namespace Shared_Novel_Reader.MyForm
                 this.DataGridViewInternet.Rows.Clear();
                 foreach (var book in InternetBookShelf.InternetResArray)
                 {
-                    string[] col = new string[2];
+                    string[] col = new string[5];
                     col[0] = (string)book["Book_Name"];
                     col[1] = Convert.ToString(book["Book_ID"]);
+
+                    col[2] = Convert.ToString(book["PartNum"]);
+                    col[3] = Convert.ToString(book["ChapterNum"]);
+                    int tempPartNum = Convert.ToInt32(Convert.ToString(book["PartNum"]));
+                    int tempChapterNum = Convert.ToInt32(Convert.ToString(book["ChapterNum"]));
+
+                    if (tempPartNum == 0 && tempChapterNum == 0)
+                    {
+                        col[4] = "还未阅读过此书";
+                    }
+                    else
+                    {
+                        col[4] = "上次阅读到第" + tempPartNum + "卷第" + tempChapterNum + "章";
+                    }
                     this.DataGridViewInternet.Rows.Add(col);
                 }
                 log.Info("网络书架刷新成功");
@@ -149,6 +209,21 @@ namespace Shared_Novel_Reader.MyForm
                     string[] col = new string[5];
                     col[0] = (string)book["Book_Name"];
                     col[1] = (string)book["Link_Num"];
+
+
+                    col[2] = Convert.ToString(book["PartNum"]);
+                    col[3] = Convert.ToString(book["ChapterNum"]);
+                    int tempPartNum = Convert.ToInt32(Convert.ToString(book["PartNum"]));
+                    int tempChapterNum = Convert.ToInt32(Convert.ToString(book["ChapterNum"]));
+
+                    if (tempPartNum == 0 && tempChapterNum == 0)
+                    {
+                        col[4] = "还未阅读过此书";
+                    }
+                    else
+                    {
+                        col[4] = "上次阅读到第" + tempPartNum + "卷第" + tempChapterNum + "章";
+                    }
                     this.DataGridViewLocal.Rows.Add(col);
                 }
                 log.Info("本地书架刷新成功");
@@ -162,8 +237,25 @@ namespace Shared_Novel_Reader.MyForm
             {
                 FormNovelReader.Dispose();
             }
-            FormNovelReader = new FormNovelReader(this.DataGridViewInternet.Rows[e.RowIndex].Cells[0].Value.ToString(), Convert.ToInt32(this.DataGridViewInternet.Rows[e.RowIndex].Cells[1].Value.ToString()), false);
+            int keynum = Convert.ToInt32(this.DataGridViewInternet.Rows[e.RowIndex].Cells[1].Value.ToString());
+            string bookname = this.DataGridViewInternet.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+            for (int i = 0; i < InternetBookShelf.InternetResArray.Count; i++)
+            {
+                if (Convert.ToInt32(InternetBookShelf.InternetResArray[i]["Book_ID"]) == keynum)
+                {
+                    this.DataGridViewInternet.Rows[e.RowIndex].Cells[2].Value =
+                        Convert.ToInt32(InternetBookShelf.InternetResArray[i]["PartNum"]);
+                    this.DataGridViewInternet.Rows[e.RowIndex].Cells[3].Value =
+                        Convert.ToInt32(InternetBookShelf.InternetResArray[i]["ChapterNum"]);
+                    break;
+                }
+            }
+            FormNovelReader = new FormNovelReader(bookname,keynum,
+                Convert.ToInt32(this.DataGridViewInternet.Rows[e.RowIndex].Cells[2].Value.ToString()),
+                Convert.ToInt32(this.DataGridViewInternet.Rows[e.RowIndex].Cells[3].Value.ToString()), false);
             //FormNovelReader = new FormNovelReader("次元论坛", 17, false);
+            FormNovelReader.Owner = this;
             FormNovelReader.Show();
         }
 
@@ -204,6 +296,21 @@ namespace Shared_Novel_Reader.MyForm
                 string[] col = new string[5];
                 col[0] = (string)book["Book_Name"];
                 col[1] = (string)book["Link_Num"];
+
+
+                col[2] = Convert.ToString(book["PartNum"]);
+                col[3] = Convert.ToString(book["ChapterNum"]);
+                int tempPartNum = Convert.ToInt32(Convert.ToString(book["PartNum"]));
+                int tempChapterNum = Convert.ToInt32(Convert.ToString(book["ChapterNum"]));
+
+                if (tempPartNum == 0 && tempChapterNum == 0)
+                {
+                    col[4] = "还未阅读过此书";
+                }
+                else
+                {
+                    col[4] = "上次阅读到第" + tempPartNum + "卷第" + tempChapterNum + "章";
+                }
                 this.DataGridViewLocal.Rows.Add(col);
             }
             log.Info("本地书架刷新成功");
@@ -386,6 +493,21 @@ namespace Shared_Novel_Reader.MyForm
                 string[] col = new string[5];
                 col[0] = (string)obj["Book_Name"];
                 col[1] = (string)obj["Link_Num"];
+
+
+                col[2] = Convert.ToString(obj["PartNum"]);
+                col[3] = Convert.ToString(obj["ChapterNum"]);
+                int tempPartNum = Convert.ToInt32(Convert.ToString(obj["PartNum"]));
+                int tempChapterNum = Convert.ToInt32(Convert.ToString(obj["ChapterNum"]));
+
+                if (tempPartNum == 0 && tempChapterNum == 0)
+                {
+                    col[4] = "还未阅读过此书";
+                }
+                else
+                {
+                    col[4] = "上次阅读到第" + tempPartNum + "卷第" + tempChapterNum + "章";
+                }
                 this.DataGridViewLocal.Rows.Add(col);
             }
             log.Info("本地书架刷新成功");
@@ -415,6 +537,20 @@ namespace Shared_Novel_Reader.MyForm
                             string[] col = new string[5];
                             col[0] = (string)obj["Book_Name"];
                             col[1] = (string)obj["Link_Num"];
+
+                            col[2] = Convert.ToString(obj["PartNum"]);
+                            col[3] = Convert.ToString(obj["ChapterNum"]);
+                            int tempPartNum = Convert.ToInt32(Convert.ToString(obj["PartNum"]));
+                            int tempChapterNum = Convert.ToInt32(Convert.ToString(obj["ChapterNum"]));
+
+                            if (tempPartNum == 0 && tempChapterNum == 0)
+                            {
+                                col[4] = "还未阅读过此书";
+                            }
+                            else
+                            {
+                                col[4] = "上次阅读到第" + tempPartNum + "卷第" + tempChapterNum + "章";
+                            }
                             this.DataGridViewLocal.Rows.Add(col);
                         }
                         log.Info("本地书架刷新成功");

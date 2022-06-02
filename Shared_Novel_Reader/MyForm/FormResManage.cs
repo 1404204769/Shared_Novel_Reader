@@ -1,5 +1,6 @@
 ﻿using log4net;
 using Shared_Novel_Reader.models;
+using System;
 using System.Windows.Forms;
 
 namespace Shared_Novel_Reader.MyForm
@@ -40,6 +41,21 @@ namespace Shared_Novel_Reader.MyForm
                 string[] col = new string[5];
                 col[0] = (string)book["Book_Name"];
                 col[1] = (string)book["Link_Num"];
+
+
+                col[2] = Convert.ToString(book["PartNum"]);
+                col[3] = Convert.ToString(book["ChapterNum"]);
+                int tempPartNum = Convert.ToInt32(Convert.ToString(book["PartNum"]));
+                int tempChapterNum = Convert.ToInt32(Convert.ToString(book["ChapterNum"]));
+
+                if (tempPartNum == 0 && tempChapterNum == 0)
+                {
+                    col[4] = "还未阅读过此书";
+                }
+                else
+                {
+                    col[4] = "上次阅读到第" + tempPartNum + "卷第" + tempChapterNum + "章";
+                }
                 this.DataGridViewLocal.Rows.Add(col);
             }
             log.Info("本地书架加载成功");

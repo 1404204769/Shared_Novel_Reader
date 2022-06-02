@@ -83,6 +83,8 @@ namespace Shared_Novel_Reader.models
             Dictionary<string, JTokenType> map = new Dictionary<string, JTokenType>();
             map.Add("Book_Name", JTokenType.String);
             map.Add("Book_ID", JTokenType.Integer);
+            map.Add("PartNum", JTokenType.Integer);
+            map.Add("ChapterNum", JTokenType.Integer);
 
             // 获取数组内容
             var users = from user in InternetRes["User_Array"] select JObject.FromObject(user);
@@ -229,6 +231,8 @@ namespace Shared_Novel_Reader.models
             JObject jBook = new JObject();
             jBook.Add("Book_Name", bookname);
             jBook.Add("Book_ID", bookid);
+            jBook.Add("PartNum", 0);
+            jBook.Add("ChapterNum", 0);
 
             // 将图书记录保存到数组中
             InternetResArray.Add(jBook);
@@ -294,7 +298,6 @@ namespace Shared_Novel_Reader.models
             int index = -1;// 在内存中的位置
             foreach (var name in LocalBookShelf.LocalResArray)
             {
-                if ((string)name["Book_Name"] == bookname)
                 {
                     // 开始在内存中查找图书信息
                     index = LocalBookShelf.FindBookInMemoryByName(bookname);

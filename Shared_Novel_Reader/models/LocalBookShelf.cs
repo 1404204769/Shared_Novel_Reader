@@ -167,7 +167,9 @@ namespace Shared_Novel_Reader.models
             Dictionary<string, JTokenType> map = new Dictionary<string, JTokenType>();
             map.Add("Book_Name", JTokenType.String);
             map.Add("Link_Num", JTokenType.Integer);
-            map.Add("Valid", JTokenType.Boolean); 
+            map.Add("PartNum", JTokenType.Integer);
+            map.Add("ChapterNum", JTokenType.Integer);
+            map.Add("Valid", JTokenType.Boolean);
             map.Add("IsChanged", JTokenType.Boolean);
             foreach (var book in books)
             {
@@ -290,6 +292,8 @@ namespace Shared_Novel_Reader.models
             jobj.Add("Book_Name", book.Book_Name);
             int booksize = LocalResArray.Count + 1;
             jobj.Add("Link_Num", booksize );
+            jobj.Add("PartNum", 0);
+            jobj.Add("ChapterNum", 0);
             jobj.Add("Valid", true);
             jobj.Add("IsChanged", false);
 

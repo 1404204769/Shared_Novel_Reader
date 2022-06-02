@@ -127,22 +127,17 @@
             this.DataGridViewList.Name = "DataGridViewList";
             this.DataGridViewList.ReadOnly = true;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Empty;
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Empty;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGridViewList.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.DataGridViewList.RowHeadersVisible = false;
             this.DataGridViewList.RowHeadersWidth = 62;
             this.DataGridViewList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Empty;
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Empty;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGridViewList.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.DataGridViewList.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.DataGridViewList.RowTemplate.Height = 30;
             this.DataGridViewList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.DataGridViewList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DataGridViewList.Size = new System.Drawing.Size(328, 1044);
             this.DataGridViewList.TabIndex = 0;
             this.DataGridViewList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewList_CellClick);
@@ -338,6 +333,8 @@
             // 
             this.ChapterTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.ChapterTitle.DefaultCellStyle = dataGridViewCellStyle2;
             this.ChapterTitle.HeaderText = "章节名";
@@ -402,6 +399,7 @@
             this.Name = "FormNovelReader";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "小说阅读器";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormNovelReader_FormClosing);
             this.Load += new System.EventHandler(this.FormNovelReader_Load);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
@@ -418,7 +416,6 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer;
-        private System.Windows.Forms.DataGridView DataGridViewList;
         private System.Windows.Forms.DataGridView DataGridViewContent;
         private System.Windows.Forms.ContextMenuStrip ContextMenuStripList;
         private System.Windows.Forms.ToolStripMenuItem UpdateChapter;
@@ -436,6 +433,7 @@
         private System.Windows.Forms.ToolStripMenuItem Report;
         private System.Windows.Forms.ToolStripMenuItem Read_Mode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ChapContent;
+        public System.Windows.Forms.DataGridView DataGridViewList;
         private System.Windows.Forms.DataGridViewTextBoxColumn ChapterTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn PartNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn ChapterNum;
