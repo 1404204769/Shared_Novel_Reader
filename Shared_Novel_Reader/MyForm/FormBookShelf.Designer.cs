@@ -64,6 +64,7 @@
             this.PartNum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ChapterNum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipStr2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RemoveInternetBookShelf = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLocal)).BeginInit();
             this.ContextMenuStripLocal.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -296,14 +297,15 @@
             // 
             this.ContextMenuStripInternet.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.ContextMenuStripInternet.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.DownloadResourse});
+            this.DownloadResourse,
+            this.RemoveInternetBookShelf});
             this.ContextMenuStripInternet.Name = "ContextMenuStripInternet";
-            this.ContextMenuStripInternet.Size = new System.Drawing.Size(153, 34);
+            this.ContextMenuStripInternet.Size = new System.Drawing.Size(241, 97);
             // 
             // DownloadResourse
             // 
             this.DownloadResourse.Name = "DownloadResourse";
-            this.DownloadResourse.Size = new System.Drawing.Size(152, 30);
+            this.DownloadResourse.Size = new System.Drawing.Size(240, 30);
             this.DownloadResourse.Text = "下载此书";
             this.DownloadResourse.Click += new System.EventHandler(this.DownloadResourse_Click);
             // 
@@ -414,6 +416,13 @@
             this.TipStr2.Name = "TipStr2";
             this.TipStr2.ReadOnly = true;
             // 
+            // RemoveInternetBookShelf
+            // 
+            this.RemoveInternetBookShelf.Name = "RemoveInternetBookShelf";
+            this.RemoveInternetBookShelf.Size = new System.Drawing.Size(240, 30);
+            this.RemoveInternetBookShelf.Text = "移出书架";
+            this.RemoveInternetBookShelf.Click += new System.EventHandler(this.RemoveInternetBookShelf_Click);
+            // 
             // FormBookShelf
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -461,5 +470,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PartNum2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ChapterNum2;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipStr2;
+        private System.Windows.Forms.ToolStripMenuItem RemoveInternetBookShelf;
     }
 }

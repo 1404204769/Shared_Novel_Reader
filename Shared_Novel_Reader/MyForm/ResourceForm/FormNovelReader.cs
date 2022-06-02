@@ -27,6 +27,8 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
         public int ContentRow_Index = 0;
         public int InternetChapterID = -1;// 在线章节ID
         public bool IsEditMode = false;// 内容是否处于编辑状态
+
+        public bool InternetBookStatus = true;// 在线图书状态
         public List<string> content = null;
 
         string TabStr = "    ";// 缩进空格数
@@ -164,6 +166,20 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             }
             else
             {
+                string status = res.Data["BookData"]["Status"].ToString();
+                if(status == "下架")
+                {
+                    InternetBookStatus = false;
+                    this.Hide();
+                    MessageBox.Show("此图书已下架，请到正版网站阅读!", "提示");
+                    FormBookShelf parent = (FormBookShelf)this.Owner;
+                    if (parent == null)
+                        return;
+                    parent.FormNovelReader = null;
+                    this.Dispose();
+                    parent.RemoveInternetBook(bookname);
+                    return;
+                }
                 JArray ChapterListJson = (JArray)res.Data["ChapterList"];
                 this.DataGridViewList.Rows.Clear();
                 int index = 0,num = 0;
@@ -910,6 +926,11 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 {
                     this.ContextMenuStripContent.Items[0].Visible = false;
                 }
+                else
+                {
+                    // 不是在线资源则不需要报告错误
+                    this.ContextMenuStripContent.Items[7].Visible = false;
+                }
             }
         }
 
@@ -1020,7 +1041,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
 
         private void FormNovelReader_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MessageBox.Show("Book_ID:"+Book_ID+" Vol:"+Part_Num+" Chap:"+Chapter_Num);
+            //MessageBox.Show("Book_ID:"+Book_ID+" Vol:"+Part_Num+" Chap:"+Chapter_Num);
 
             if (IsLocal)
             {

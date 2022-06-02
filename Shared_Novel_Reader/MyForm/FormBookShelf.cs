@@ -11,7 +11,7 @@ namespace Shared_Novel_Reader.MyForm
     {
         ILog log = LogManager.GetLogger(typeof(FormBookShelf));
         public bool IsInternetBookShelfOpen = false;
-        FormNovelReader FormNovelReader = null;
+        public FormNovelReader FormNovelReader = null;
         public FormBookShelf()
         {
             log.Info("调用了FormBookShelf的构造函数");
@@ -230,6 +230,11 @@ namespace Shared_Novel_Reader.MyForm
             }
         }
 
+        /// <summary>
+        /// 打开在线阅读器
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataGridViewInternet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -255,6 +260,7 @@ namespace Shared_Novel_Reader.MyForm
                 Convert.ToInt32(this.DataGridViewInternet.Rows[e.RowIndex].Cells[2].Value.ToString()),
                 Convert.ToInt32(this.DataGridViewInternet.Rows[e.RowIndex].Cells[3].Value.ToString()), false);
             //FormNovelReader = new FormNovelReader("次元论坛", 17, false);
+
             FormNovelReader.Owner = this;
             FormNovelReader.Show();
         }
@@ -565,5 +571,68 @@ namespace Shared_Novel_Reader.MyForm
             MessageBox.Show("不存在选中项");
         }
 
+        private void RemoveInternetBookShelf_Click(object sender, EventArgs e)
+        {
+
+            foreach (DataGridViewRow row in this.DataGridViewLocal.Rows)
+            {
+                if (row.Selected)
+                {
+                    string bookname = row.Cells[0].Value.ToString();
+                    DialogResult result = MessageBox.Show("确定要删除此资源(" + bookname + ")移出书架吗？", "移出书架", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.No)
+                    {
+                        return;
+                    }
+                    RemoveInternetBook(bookname);
+                    return;
+                }
+            }
+            MessageBox.Show("不存在选中项");
+        }
+
+        /// <summary>
+        /// 移除在线书架
+        /// </summary>
+        /// <param name="bookName"></param>
+        /// <returns></returns>
+        public bool RemoveInternetBook(string bookName)
+        {
+            bool res = InternetBookShelf.RemoveFromBookshelf(bookName);
+            if (res)
+            {
+                MessageBox.Show("图书移除成功");
+                // 刷新书架
+                this.DataGridViewInternet.Rows.Clear();
+                foreach (var obj in InternetBookShelf.InternetResArray)
+                {
+                    string[] col = new string[5];
+                    col[0] = (string)obj["Book_Name"];
+                    col[1] = (string)obj["Book_ID"];
+
+                    col[2] = Convert.ToString(obj["PartNum"]);
+                    col[3] = Convert.ToString(obj["ChapterNum"]);
+                    int tempPartNum = Convert.ToInt32(Convert.ToString(obj["PartNum"]));
+                    int tempChapterNum = Convert.ToInt32(Convert.ToString(obj["ChapterNum"]));
+
+                    if (tempPartNum == 0 && tempChapterNum == 0)
+                    {
+                        col[4] = "还未阅读过此书";
+                    }
+                    else
+                    {
+                        col[4] = "上次阅读到第" + tempPartNum + "卷第" + tempChapterNum + "章";
+                    }
+                    this.DataGridViewInternet.Rows.Add(col);
+                }
+                log.Info("在线书架刷新成功");
+            }
+            else
+            {
+                MessageBox.Show("图书移除失败");
+            }
+            return res;
+        }
     }
+
 }

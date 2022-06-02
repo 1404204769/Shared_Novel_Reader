@@ -79,5 +79,39 @@ namespace Shared_Novel_Reader.Tools.API.Admin
             log.Info("查询资源成功");
             return res;
         }
+
+
+        /// <summary>
+        /// 管理员修改图书资源状态信息
+        /// </summary>
+        /// <returns></returns>
+        public static MyResponse UpdateBookStatus(in int Book_ID,in string Status,in string Explain)
+        {
+            // client.OptionsAsync(new RestRequest() { RequestFormat = DataFormat.Json, });
+
+            JObject ReqJson = new JObject();
+            ReqJson["Book_ID"] = Book_ID;
+            ReqJson["Status"] = Status;
+            ReqJson["Explain"] = Explain;
+
+            int num = 0;
+            MyResponse res = MyClient.PushRequests("Admin/Resource/Update/Book/Status", ReqJson.ToString());
+            while ((res == null) && (num < 10))
+            {
+                log.Info("第" + (++num) + "次重试");
+                res = MyClient.PushRequests("Admin/Resource/Update/Book/Status", ReqJson.ToString());
+            }
+
+            if (res == null)
+            {
+                log.Info("网络异常,请重试");
+                return null;
+            }
+
+            log.Info("图书资源资源状态更新成功");
+            return res;
+        }
+
+
     }
 }

@@ -420,6 +420,33 @@ namespace Shared_Novel_Reader.models
         }
 
 
+        /// <summary>
+        /// 将指定图书从书架中删除
+        /// </summary>
+        /// <param name="BookName"></param>
+        /// <returns></returns>
+        static public bool RemoveFromBookshelf(in string BookName)
+        {
+            for (int i = 0; i < InternetResArray.Count; i++)
+            {
+                if ((string)InternetResArray[i]["Book_Name"] == BookName)
+                {
+                    // 直接从目录中移除
+                    InternetResArray.RemoveAt(i);
+                    return true;
+                }
+            }
+
+            // 检查
+            for (int i = 0; i < InternetResArray.Count; i++)
+            {
+                if ((string)InternetResArray[i]["Book_Name"] == BookName)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
 
 

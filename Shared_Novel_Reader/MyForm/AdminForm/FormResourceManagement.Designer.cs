@@ -54,6 +54,7 @@
             this.ReFind = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewChapters = new System.Windows.Forms.ToolStripMenuItem();
+            this.Manage = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewResourceBook)).BeginInit();
             this.ContextMenuStripFindResourceBook.SuspendLayout();
             this.SuspendLayout();
@@ -96,6 +97,7 @@
             this.DataGridViewResourceBook.GridColor = System.Drawing.Color.Peru;
             this.DataGridViewResourceBook.Location = new System.Drawing.Point(0, 0);
             this.DataGridViewResourceBook.Margin = new System.Windows.Forms.Padding(0);
+            this.DataGridViewResourceBook.MultiSelect = false;
             this.DataGridViewResourceBook.Name = "DataGridViewResourceBook";
             this.DataGridViewResourceBook.ReadOnly = true;
             this.DataGridViewResourceBook.RowHeadersVisible = false;
@@ -108,6 +110,7 @@
             this.DataGridViewResourceBook.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DataGridViewResourceBook.Size = new System.Drawing.Size(1150, 690);
             this.DataGridViewResourceBook.TabIndex = 3;
+            this.DataGridViewResourceBook.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewResourceBook_CellMouseDown);
             // 
             // Book_ID
             // 
@@ -202,9 +205,10 @@
             this.ContextMenuStripFindResourceBook.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ReFind,
             this.ViewDetails,
-            this.ViewChapters});
+            this.ViewChapters,
+            this.Manage});
             this.ContextMenuStripFindResourceBook.Name = "ContextMenuStripFindUser";
-            this.ContextMenuStripFindResourceBook.Size = new System.Drawing.Size(189, 94);
+            this.ContextMenuStripFindResourceBook.Size = new System.Drawing.Size(189, 124);
             // 
             // ReFind
             // 
@@ -226,6 +230,13 @@
             this.ViewChapters.Size = new System.Drawing.Size(188, 30);
             this.ViewChapters.Text = "查看章节信息";
             this.ViewChapters.Click += new System.EventHandler(this.ViewChapters_Click);
+            // 
+            // Manage
+            // 
+            this.Manage.Name = "Manage";
+            this.Manage.Size = new System.Drawing.Size(188, 30);
+            this.Manage.Text = "下架";
+            this.Manage.Click += new System.EventHandler(this.Manage_Click);
             // 
             // FormResourceManagement
             // 
@@ -259,5 +270,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Create_Time;
         private System.Windows.Forms.DataGridViewTextBoxColumn Update_Time;
         private System.Windows.Forms.ToolStripMenuItem ViewChapters;
+        private System.Windows.Forms.ToolStripMenuItem Manage;
     }
 }

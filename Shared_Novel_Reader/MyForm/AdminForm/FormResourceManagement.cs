@@ -203,5 +203,60 @@ namespace Shared_Novel_Reader.MyForm.AdminForm
             FormBookAllChapter = new FormBookAllChapter(BookName,BookID);
             FormBookAllChapter.Visible = true;
         }
+
+        private async void Manage_Click(object sender, EventArgs e)
+        {
+            string Status = this.ContextMenuStripFindResourceBook.Items[3].Text;
+            string Explain = string.Empty;
+            int Book_ID = Convert.ToInt32(DataGridViewResourceBook.CurrentRow.Cells[0].Value);
+
+            ToolForm.FormInput formInput = new ToolForm.FormInput();
+            formInput.Text = "图书状态变更:请输入"+ Status + "的原因";
+            formInput.setValue("");
+            DialogResult DiaRes = formInput.ShowDialog();
+
+            if (DiaRes == DialogResult.Cancel)
+                return;
+
+            Explain = formInput.getValue();
+            // 发送请求
+            var BookResult = Task<MyResponse>.Run(() => Tools.API.Admin.Resource.UpdateBookStatus(Book_ID, Status, Explain));
+
+            MyResponse res = await BookResult;
+
+            if (res == null)
+            {
+                MessageBox.Show("网络异常，请重试");
+            }
+            else if(!res.Result)
+            {
+                MessageBox.Show("图书资源状态修改失败:"+res.Message);
+            }
+            else if (res.Data["Book_Status"].ToString() == "")
+            {
+                MessageBox.Show("图书资源状态为空");
+            }
+            else
+            {
+                DataGridViewResourceBook.CurrentRow.Cells[6].Value = res.Data["Book_Status"].ToString();
+                MessageBox.Show("图书资源状态修改成功");
+            }
+        }
+
+        private void DataGridViewResourceBook_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.DataGridViewResourceBook.Rows[e.RowIndex].Selected = true;
+                string status = (string)DataGridViewResourceBook.Rows[e.RowIndex].Cells[6].Value;
+                if(status == "下架")
+                {
+                    this.ContextMenuStripFindResourceBook.Items[3].Text = "上架";
+                }else
+                {
+                    this.ContextMenuStripFindResourceBook.Items[3].Text = "下架";
+                }
+            }
+        }
     }
 }
