@@ -28,14 +28,6 @@ namespace Shared_Novel_Reader.MyForm
         /// </summary>
         private Point Difference;
 
-
-        private string TipString = "免责声明:\n"
-            + "1.本软件书籍信息全部来自于用户上传或管理员修改，本软件不会修改任何书籍信息。\n"
-            + "2.书籍版本属于原作者，本软件只提供信息存储服务，任何信息均由用户自主上传，若侵犯了您的权益，请联系我们删除此信息。\n"
-            + "3.因本服务搜索结果根据您键入的关键字自动搜索其余用户上传的内容，不代表本软件赞成用户上传的所有信息。\n"
-            + "4.您应对使用搜索的结果自行承担风险。\n"
-            + "本软件不做任何形式的保证：不保证搜索结果满足您的要求，不保证搜索服务不中断，不保证搜索结果的安全性、准确性、及时性、合法性。\n"
-            + "因网络状况、通讯故障、第三方网站等任何原因而导致您不能正常使用本服务的，本软件不承担任何法律责任。";
         private int TipPosX = 0; // 定义全局变量
         public MainForm()
         {
@@ -107,7 +99,7 @@ namespace Shared_Novel_Reader.MyForm
 
             this.TipPosX = this.TipPanel.Width;  // 获取初始位置
             this.LabelTipString.Location = new Point(this.TipPosX, this.TipPanel.Top+10);  // 设置label开始滚动的位置
-            string tip = TipString.Replace("\n", "");
+            string tip = Properties.Settings.Default.TipString.Replace("\n", "");
             this.LabelTipString.Text = tip;  // 设置滚动字幕内容，如内容需要变化，也可以设置变量，将变量赋值给label.Text，
             this.LabelTipString.AutoSize = true;
             //this.LabelTipString.Visible = true;
@@ -500,7 +492,7 @@ namespace Shared_Novel_Reader.MyForm
 
         private void LabelTip_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(TipString,"免责声明");
+            MessageBox.Show(Properties.Settings.Default.TipString, "免责声明");
         }
     }
 }

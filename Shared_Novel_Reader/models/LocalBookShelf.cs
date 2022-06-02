@@ -169,6 +169,7 @@ namespace Shared_Novel_Reader.models
             map.Add("Link_Num", JTokenType.Integer);
             map.Add("PartNum", JTokenType.Integer);
             map.Add("ChapterNum", JTokenType.Integer);
+            map.Add("ContentNum", JTokenType.Integer);
             map.Add("Valid", JTokenType.Boolean);
             map.Add("IsChanged", JTokenType.Boolean);
             foreach (var book in books)
@@ -294,6 +295,7 @@ namespace Shared_Novel_Reader.models
             jobj.Add("Link_Num", booksize );
             jobj.Add("PartNum", 0);
             jobj.Add("ChapterNum", 0);
+            jobj.Add("ContentNum", 0);
             jobj.Add("Valid", true);
             jobj.Add("IsChanged", false);
 

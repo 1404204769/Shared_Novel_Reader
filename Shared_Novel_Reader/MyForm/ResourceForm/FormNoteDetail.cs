@@ -121,7 +121,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             {
                 FormNovelReader.Dispose();
             }
-            FormNovelReader = new FormNovelReader(BookName, note.Book_ID,-1,-1, false);
+            FormNovelReader = new FormNovelReader(BookName, note.Book_ID,-1,-1,0, false);
             FormNovelReader.Show();
         }
 

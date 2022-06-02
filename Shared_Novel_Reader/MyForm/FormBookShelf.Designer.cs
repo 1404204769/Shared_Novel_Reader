@@ -37,9 +37,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DataGridViewLocal = new System.Windows.Forms.DataGridView();
             this.ContextMenuStripLocal = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CreateRes = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,19 +52,20 @@
             this.tabPageLocalBook = new System.Windows.Forms.TabPage();
             this.tabPageInternetBook = new System.Windows.Forms.TabPage();
             this.DataGridViewInternet = new System.Windows.Forms.DataGridView();
-            this.ContextMenuStripInternet = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.DownloadResourse = new System.Windows.Forms.ToolStripMenuItem();
-            this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.KeyNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PartNum1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ChapterNum1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipStr1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PartNum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ChapterNum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipStr2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContextMenuStripInternet = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.DownloadResourse = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveInternetBookShelf = new System.Windows.Forms.ToolStripMenuItem();
+            this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.KeyNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PartNum1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ChapterNum1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContentNum1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipStr1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLocal)).BeginInit();
             this.ContextMenuStripLocal.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -98,6 +99,7 @@
             this.KeyNum,
             this.PartNum1,
             this.ChapterNum1,
+            this.ContentNum1,
             this.TipStr1});
             this.DataGridViewLocal.ContextMenuStrip = this.ContextMenuStripLocal;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -293,79 +295,6 @@
             this.DataGridViewInternet.TabIndex = 2;
             this.DataGridViewInternet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewInternet_CellDoubleClick);
             // 
-            // ContextMenuStripInternet
-            // 
-            this.ContextMenuStripInternet.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.ContextMenuStripInternet.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.DownloadResourse,
-            this.RemoveInternetBookShelf});
-            this.ContextMenuStripInternet.Name = "ContextMenuStripInternet";
-            this.ContextMenuStripInternet.Size = new System.Drawing.Size(241, 97);
-            // 
-            // DownloadResourse
-            // 
-            this.DownloadResourse.Name = "DownloadResourse";
-            this.DownloadResourse.Size = new System.Drawing.Size(240, 30);
-            this.DownloadResourse.Text = "下载此书";
-            this.DownloadResourse.Click += new System.EventHandler(this.DownloadResourse_Click);
-            // 
-            // Content
-            // 
-            this.Content.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Content.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Content.FillWeight = 50F;
-            this.Content.HeaderText = "书名";
-            this.Content.MinimumWidth = 8;
-            this.Content.Name = "Content";
-            this.Content.ReadOnly = true;
-            this.Content.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Content.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // KeyNum
-            // 
-            this.KeyNum.HeaderText = "关键字";
-            this.KeyNum.MinimumWidth = 8;
-            this.KeyNum.Name = "KeyNum";
-            this.KeyNum.ReadOnly = true;
-            this.KeyNum.Visible = false;
-            this.KeyNum.Width = 8;
-            // 
-            // PartNum1
-            // 
-            this.PartNum1.HeaderText = "分卷数";
-            this.PartNum1.MinimumWidth = 8;
-            this.PartNum1.Name = "PartNum1";
-            this.PartNum1.ReadOnly = true;
-            this.PartNum1.Visible = false;
-            this.PartNum1.Width = 8;
-            // 
-            // ChapterNum1
-            // 
-            this.ChapterNum1.HeaderText = "章节数";
-            this.ChapterNum1.MinimumWidth = 8;
-            this.ChapterNum1.Name = "ChapterNum1";
-            this.ChapterNum1.ReadOnly = true;
-            this.ChapterNum1.Visible = false;
-            this.ChapterNum1.Width = 8;
-            // 
-            // TipStr1
-            // 
-            this.TipStr1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            this.TipStr1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.TipStr1.FillWeight = 50F;
-            this.TipStr1.HeaderText = "状态";
-            this.TipStr1.MinimumWidth = 8;
-            this.TipStr1.Name = "TipStr1";
-            this.TipStr1.ReadOnly = true;
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -416,12 +345,94 @@
             this.TipStr2.Name = "TipStr2";
             this.TipStr2.ReadOnly = true;
             // 
+            // ContextMenuStripInternet
+            // 
+            this.ContextMenuStripInternet.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.ContextMenuStripInternet.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DownloadResourse,
+            this.RemoveInternetBookShelf});
+            this.ContextMenuStripInternet.Name = "ContextMenuStripInternet";
+            this.ContextMenuStripInternet.Size = new System.Drawing.Size(153, 64);
+            // 
+            // DownloadResourse
+            // 
+            this.DownloadResourse.Name = "DownloadResourse";
+            this.DownloadResourse.Size = new System.Drawing.Size(152, 30);
+            this.DownloadResourse.Text = "下载此书";
+            this.DownloadResourse.Click += new System.EventHandler(this.DownloadResourse_Click);
+            // 
             // RemoveInternetBookShelf
             // 
             this.RemoveInternetBookShelf.Name = "RemoveInternetBookShelf";
-            this.RemoveInternetBookShelf.Size = new System.Drawing.Size(240, 30);
+            this.RemoveInternetBookShelf.Size = new System.Drawing.Size(152, 30);
             this.RemoveInternetBookShelf.Text = "移出书架";
             this.RemoveInternetBookShelf.Click += new System.EventHandler(this.RemoveInternetBookShelf_Click);
+            // 
+            // Content
+            // 
+            this.Content.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Content.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Content.FillWeight = 50F;
+            this.Content.HeaderText = "书名";
+            this.Content.MinimumWidth = 8;
+            this.Content.Name = "Content";
+            this.Content.ReadOnly = true;
+            this.Content.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Content.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // KeyNum
+            // 
+            this.KeyNum.HeaderText = "关键字";
+            this.KeyNum.MinimumWidth = 8;
+            this.KeyNum.Name = "KeyNum";
+            this.KeyNum.ReadOnly = true;
+            this.KeyNum.Visible = false;
+            this.KeyNum.Width = 8;
+            // 
+            // PartNum1
+            // 
+            this.PartNum1.HeaderText = "分卷数";
+            this.PartNum1.MinimumWidth = 8;
+            this.PartNum1.Name = "PartNum1";
+            this.PartNum1.ReadOnly = true;
+            this.PartNum1.Visible = false;
+            this.PartNum1.Width = 8;
+            // 
+            // ChapterNum1
+            // 
+            this.ChapterNum1.HeaderText = "章节数";
+            this.ChapterNum1.MinimumWidth = 8;
+            this.ChapterNum1.Name = "ChapterNum1";
+            this.ChapterNum1.ReadOnly = true;
+            this.ChapterNum1.Visible = false;
+            this.ChapterNum1.Width = 8;
+            // 
+            // ContentNum1
+            // 
+            this.ContentNum1.HeaderText = "行数";
+            this.ContentNum1.MinimumWidth = 8;
+            this.ContentNum1.Name = "ContentNum1";
+            this.ContentNum1.ReadOnly = true;
+            this.ContentNum1.Visible = false;
+            this.ContentNum1.Width = 8;
+            // 
+            // TipStr1
+            // 
+            this.TipStr1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            this.TipStr1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.TipStr1.FillWeight = 50F;
+            this.TipStr1.HeaderText = "状态";
+            this.TipStr1.MinimumWidth = 8;
+            this.TipStr1.Name = "TipStr1";
+            this.TipStr1.ReadOnly = true;
             // 
             // FormBookShelf
             // 
@@ -459,11 +470,6 @@
         private System.Windows.Forms.ToolStripMenuItem DeleteRes;
         public System.Windows.Forms.DataGridView DataGridViewLocal;
         public System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Content;
-        private System.Windows.Forms.DataGridViewTextBoxColumn KeyNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PartNum1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ChapterNum1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TipStr1;
         public System.Windows.Forms.DataGridView DataGridViewInternet;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -471,5 +477,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ChapterNum2;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipStr2;
         private System.Windows.Forms.ToolStripMenuItem RemoveInternetBookShelf;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Content;
+        private System.Windows.Forms.DataGridViewTextBoxColumn KeyNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PartNum1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ChapterNum1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ContentNum1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipStr1;
     }
 }

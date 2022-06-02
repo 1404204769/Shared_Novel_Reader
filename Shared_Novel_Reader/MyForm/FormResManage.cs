@@ -45,16 +45,18 @@ namespace Shared_Novel_Reader.MyForm
 
                 col[2] = Convert.ToString(book["PartNum"]);
                 col[3] = Convert.ToString(book["ChapterNum"]);
+                col[4] = Convert.ToString(book["ContentNum"]);
                 int tempPartNum = Convert.ToInt32(Convert.ToString(book["PartNum"]));
                 int tempChapterNum = Convert.ToInt32(Convert.ToString(book["ChapterNum"]));
+                int tempContentNum = Convert.ToInt32(Convert.ToString(book["ContentNum"]));
 
                 if (tempPartNum == 0 && tempChapterNum == 0)
                 {
-                    col[4] = "还未阅读过此书";
+                    col[5] = "还未阅读过此书";
                 }
                 else
                 {
-                    col[4] = "上次阅读到第" + tempPartNum + "卷第" + tempChapterNum + "章";
+                    col[5] = "上次阅读到第" + tempPartNum + "卷第" + tempChapterNum + "章第"+ tempContentNum + "行";
                 }
                 this.DataGridViewLocal.Rows.Add(col);
             }

@@ -25,7 +25,7 @@ namespace Shared_Novel_Reader.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
         public string Local_Res_Path {
             get {
                 return ((string)(this["Local_Res_Path"]));
@@ -37,13 +37,25 @@ namespace Shared_Novel_Reader.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
         public string App_Path {
             get {
                 return ((string)(this["App_Path"]));
             }
             set {
                 this["App_Path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TipString {
+            get {
+                return ((string)(this["TipString"]));
+            }
+            set {
+                this["TipString"] = value;
             }
         }
     }

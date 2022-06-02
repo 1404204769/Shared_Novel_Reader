@@ -20,6 +20,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
         public int Book_ID = 0;// 网络图书的ID
         public int Part_Num = 0;// 卷数
         public int Chapter_Num = 0;// 章节数
+        public int Content_Num = 0;// 内容行
         public int Content_Version = 0;// 章节版本
         public int BookTarget = -1;// 内存中资源的位置
         public int Row_Index = 0;
@@ -32,12 +33,12 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
         public List<string> content = null;
 
         string TabStr = "    ";// 缩进空格数
-        public FormNovelReader(string bookname,int keyNum,int volNum,int chapNum, bool islocal)
+        public FormNovelReader(string bookname,int keyNum,int volNum,int chapNum, int contentNum,bool islocal)
         {
             IsLocal = islocal;
             InitializeComponent();
             if (islocal)
-                LoadLocalBook(bookname, keyNum, volNum, chapNum);
+                LoadLocalBook(bookname, keyNum, volNum, chapNum, contentNum);
             else
                 LoadInternetBook(bookname, keyNum, volNum, chapNum);
         }
@@ -48,7 +49,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
         /// </summary>
         /// <param name="bookname">书名</param>
         /// <param name="linknum">保存的文件名</param>
-        public void LoadLocalBook(string bookname, int linknum, int volNum, int chapNum)
+        public void LoadLocalBook(string bookname, int linknum, int volNum, int chapNum,int contentNum)
         {
             if (!IsLocal) return;
             int index = -1;
@@ -95,7 +96,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             // 若书签无效且则初始化书签
             if (volNum>=0 && chapNum>=0)
                 bookmark(Convert.ToInt32(this.DataGridViewList.Rows[0].Cells[1].Value),
-                    Convert.ToInt32(this.DataGridViewList.Rows[0].Cells[2].Value));
+                    Convert.ToInt32(this.DataGridViewList.Rows[0].Cells[2].Value),0);
         }
 
         public void LoadLocalList()
@@ -207,7 +208,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                     // 若书签无效且则初始化书签
                     if (volNum >= 0 && chapNum >= 0)
                         bookmark(Convert.ToInt32(this.DataGridViewList.Rows[0].Cells[1].Value),
-                            Convert.ToInt32(this.DataGridViewList.Rows[0].Cells[2].Value));
+                            Convert.ToInt32(this.DataGridViewList.Rows[0].Cells[2].Value),0);
                     LoadContent(Convert.ToInt32(this.DataGridViewList.Rows[0].Cells[1].Value), Convert.ToInt32(this.DataGridViewList.Rows[0].Cells[2].Value));
                     return;
                 }
@@ -216,8 +217,8 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 // 若书签有效则记录书签
                 if (volNum >= 0 && chapNum >= 0)
                     bookmark(Convert.ToInt32(this.DataGridViewList.Rows[index].Cells[1].Value),
-                        Convert.ToInt32(this.DataGridViewList.Rows[index].Cells[2].Value));
-                LoadContent(volNum, chapNum, bookid);
+                        Convert.ToInt32(this.DataGridViewList.Rows[index].Cells[2].Value),Content_Num);
+                LoadContent(Part_Num, Chapter_Num, Content_Num,bookid);
             }
 
             // 给服务器发送请求
@@ -230,10 +231,10 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
         /// <param name="chapnum">章节数</param>
         /// <param name="bookid">图书ID,在线阅读时需要的参数，默认为1</param>
         /// <param name="chapTitle">章节标题,在线阅读时需要的参数，默认为空</param>
-        public void LoadContent(int volnum, int chapnum,int bookid = 1,string chapTitle = "")
+        public void LoadContent(int volnum, int chapnum,int bookid = 1,int contentNum = 0, string chapTitle = "")
         {
             if (IsLocal)
-                LoadLocalContent(volnum, chapnum,bookid);
+                LoadLocalContent(volnum, chapnum, contentNum,bookid);
             else
                 LoadInternetContent(bookid,volnum, chapnum , chapTitle);
         }
@@ -295,7 +296,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
         /// <param name="volnum">分卷数</param>
         /// <param name="chapnum">章节数</param>
         /// <param name="contentversion">章节内容版本数</param>
-        public void LoadLocalContent(int volnum,int chapnum,int contentversion)
+        public void LoadLocalContent(int volnum,int chapnum,int contentNum,int contentversion)
         {
             if (!IsTargetExist(volnum, chapnum, contentversion)) return;
             //this.DataGridViewContent.Rows[0].Cells[0].Value = chapter.ChapTitle;
@@ -308,14 +309,16 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 return;
             }
             this.DataGridViewContent.Rows.Clear();
+            this.DataGridViewContent.Rows.Add(Properties.Settings.Default.TipString);
+            this.DataGridViewContent.Rows[0].DefaultCellStyle.BackColor = System.Drawing.Color.AliceBlue;
             foreach (var str in chapter.ContentList[contentversion].ContentArray)
             {
                 this.DataGridViewContent.Rows.Add(TabStr+str);
             }
 
-            Part_Num = volnum;
-            Chapter_Num = chapnum;
-            Content_Version = contentversion;
+            this.DataGridViewContent.Rows[contentNum].Selected = true;
+            this.DataGridViewContent.CurrentCell = this.DataGridViewContent.Rows[contentNum].Cells[0];
+
             return;
         }
 
@@ -338,7 +341,6 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
 
             // 发送请求
             var ContentResult = Task<MyResponse>.Run(() => Tools.API.User.Resource.SearchContent(ReqJson));
-
             MyResponse res = await ContentResult;
             /// 返回格式
             if (res == null || !res.Result)
@@ -360,6 +362,8 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 //this.DataGridViewContent.Rows[0].Cells[0].Value = chapter.ChapTitle;
                 string ChapterName = "第" + volnum + "卷" + "  第" + chapnum + "章  " + chapTitle;
                 this.DataGridViewContent.Columns[0].HeaderText = ChapterName;
+                this.DataGridViewContent.Rows.Add(Properties.Settings.Default.TipString);
+                this.DataGridViewContent.Rows[0].DefaultCellStyle.BackColor = System.Drawing.Color.AliceBlue;
                 foreach (string content in ContentArray)
                 {
                     this.DataGridViewContent.Rows.Add(TabStr + content);
@@ -385,7 +389,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             else
                 bookid = Convert.ToInt32(this.DataGridViewList.Rows[target].Cells[3].Value);
             string chaptitle = Convert.ToString(this.DataGridViewList.Rows[target].Cells[4].Value);
-            LoadContent(volNum, chapNum, bookid, chaptitle);
+            LoadContent(volNum, chapNum, bookid,Content_Num, chaptitle);
             return true ;
         }
 
@@ -481,6 +485,7 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                 Row_Index = this.DataGridViewList.SelectedRows[0].Index;
 
             log.Info("所选行发生了更改，当前行为：" + Row_Index);
+            Content_Num = 0;
             if (Open_New)
                 List_Open(Row_Index);
         }
@@ -578,6 +583,20 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             else
                 index = this.DataGridViewList.SelectedRows[0].Index;
             log.Info("所选章节列表行发生了更改，当前行为：" + index);
+            for (int i = 0; i < LocalBookShelf.LocalResArray.Count; i++)
+            {
+                if (Convert.ToInt32(LocalBookShelf.LocalResArray[i]["Link_Num"]) == Link_Num)
+                {
+                    int num1 = Convert.ToInt32(this.DataGridViewList.Rows[index].Cells[1].Value.ToString());
+                    int num2 = Convert.ToInt32(this.DataGridViewList.Rows[index].Cells[2].Value.ToString());
+                    if((num1 == Convert.ToInt32(LocalBookShelf.LocalResArray[i]["PartNum"]))
+                        && (num2 == Convert.ToInt32(LocalBookShelf.LocalResArray[i]["ChapterNum"])))
+                    {
+                        Content_Num = Convert.ToInt32(LocalBookShelf.LocalResArray[i]["ContentNum"]);
+                    }
+                    break;
+                }
+            }
             List_Open(index);
         }
 
@@ -676,6 +695,12 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             log.Info("所选内容行发生了更改，当前行为：" + ContentRow_Index);
             //if ( DataGridViewContent.Rows[ContentRow_Index].ReadOnly == false)
             //    DataGridViewContent.Rows[ContentRow_Index].ReadOnly = true ;// 关闭编辑模式
+
+            // 添加书签记录
+
+            bookmark(Convert.ToInt32(this.DataGridViewList.Rows[ContentRow_Index].Cells[1].Value),
+                Convert.ToInt32(this.DataGridViewList.Rows[ContentRow_Index].Cells[2].Value),
+                ContentRow_Index);
         }
 
         private void DeleteRow_Click(object sender, EventArgs e)
@@ -1041,8 +1066,8 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
 
         private void FormNovelReader_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //MessageBox.Show("Book_ID:"+Book_ID+" Vol:"+Part_Num+" Chap:"+Chapter_Num);
-
+            string show = "Book_ID:" + Book_ID + " Vol:" + Part_Num + " Chap:" + Chapter_Num + " Cont:" + Content_Num;
+            
             if (IsLocal)
             {
                 for (int i = 0; i < LocalBookShelf.LocalResArray.Count; i++)
@@ -1050,9 +1075,20 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                     if (Convert.ToInt32(LocalBookShelf.LocalResArray[i]["Link_Num"]) == Link_Num)
                     {
                         Console.WriteLine("准备开始记录本地书签");
-                        LocalBookShelf.LocalResArray[i]["PartNum"] = Part_Num;
-                        LocalBookShelf.LocalResArray[i]["ChapterNum"] = Chapter_Num;
+                        show += "\nPartNum:" + LocalBookShelf.LocalResArray[i]["PartNum"].ToString() +
+                        " ChapterNum:" + LocalBookShelf.LocalResArray[i]["ChapterNum"].ToString() +
+                        " ContentNum:" + LocalBookShelf.LocalResArray[i]["ContentNum"].ToString();
 
+                        show += "\nCurrentRow 1 vol:" + this.DataGridViewList.CurrentRow.Cells[1].Value.ToString() +
+                        "\nCurrentRow 2 chap:" + this.DataGridViewList.CurrentRow.Cells[2].Value.ToString()+
+                        "\nCurrentRow 3 row:" + this.DataGridViewContent.CurrentRow.Index;
+                        //MessageBox.Show(show);
+                        int num1 = Convert.ToInt32(this.DataGridViewList.CurrentRow.Cells[1].Value.ToString());
+                        int num2 = Convert.ToInt32(this.DataGridViewList.CurrentRow.Cells[2].Value.ToString());
+                        int num3 = this.DataGridViewContent.CurrentRow.Index;
+                        LocalBookShelf.LocalResArray[i]["PartNum"] = num1;
+                        LocalBookShelf.LocalResArray[i]["ChapterNum"] = num2;
+                        LocalBookShelf.LocalResArray[i]["ContentNum"] = num3;
                         // 更新书架数据
                         FormBookShelf parent = (FormBookShelf)this.Owner;
                         for(int j = 0;j < parent.DataGridViewLocal.Rows.Count; j++)
@@ -1062,11 +1098,11 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
                             {
                                 if (Part_Num == 0 && Chapter_Num == 0)
                                 {
-                                    parent.DataGridViewLocal.Rows[j].Cells[4].Value = "还未阅读过此书";
+                                    parent.DataGridViewLocal.Rows[j].Cells[5].Value = "还未阅读过此书";
                                 }
                                 else
                                 {
-                                    parent.DataGridViewLocal.Rows[j].Cells[4].Value  = "上次阅读到第" + Part_Num + "卷第" + Chapter_Num + "章";
+                                    parent.DataGridViewLocal.Rows[j].Cells[5].Value  = "上次阅读到第" + num1 + "卷第" + num2 + "章第"+ num3 + "行";
                                 }
                                 break;
                             }
@@ -1111,10 +1147,11 @@ namespace Shared_Novel_Reader.MyForm.ResourceForm
             }
         }
 
-        private void bookmark(int volNum, int chapNum)
+        private void bookmark(int volNum, int chapNum,int contentNum)
         {
             Part_Num = volNum;
             Chapter_Num = chapNum;
+            Content_Num = contentNum;
         }
     }
 }
